@@ -1,4 +1,4 @@
-import Routing from './routes/routing'
+import Routing from '../Routes/routing'
 
 const App = () => {
   return (
