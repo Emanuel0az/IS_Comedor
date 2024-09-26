@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
-import ToDo from '../Pages/ToDo'
+import FormRegister from '../components/FormRegister/FormRegister'
 import Home from '../Pages/Home'
 
 const Routing = () => {
@@ -7,7 +7,7 @@ const Routing = () => {
     <>
     <Routes>
         <Route path='/' element={<Home/>} />
-        <Route path="todo/" element={<ToDo/>} />
+        <Route path="register/" element={<FormRegister/>} />
     </Routes>
     </>
   )
