@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './registros.css';
+import '../FormLogin/FormLogin.css'
 import { useNavigate } from "react-router-dom";
-const Login = () => {
+const FormLogin = () => {
   const [formData, setFormData] = useState({
     email: '',
     contraseña: '',
@@ -67,4 +67,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default FormLogin;

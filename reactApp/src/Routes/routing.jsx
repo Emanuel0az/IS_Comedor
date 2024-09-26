@@ -1,22 +1,15 @@
-import { BrowserRouter as Router,Routes,Route } from "react-router-dom"
-import Register from '../Pages/register'
-import Logins from "../Pages/login"
-import  Home  from "../pages/home"
+import { Route, Routes } from 'react-router-dom'
+import ToDo from '../Pages/ToDo'
+import Home from '../Pages/Home'
 
-
-function Routing() {
+const Routing = () => {
   return (
-    <div>
-
-        <Router>
-            <Routes>
-                <Route path='/register' element={<Register/>}   />
-                <Route path='' element={<Home/>}   />
-                <Route path='/login' element={<Logins/>} />
-            </Routes>
-        </Router>
-      
-    </div>
+    <>
+    <Routes>
+        <Route path='/' element={<Home/>} />
+        <Route path="todo/" element={<ToDo/>} />
+    </Routes>
+    </>
   )
 }
 

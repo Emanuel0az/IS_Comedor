@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import './registros.css';
+import '../FormRegister/FormRegister.css'
 import { useNavigate } from "react-router-dom";
-const Register = () => {
+
+
+const FormRegister = () => {
   const [formData, setFormData] = useState({
     nombre: '',
     email: '',
@@ -93,4 +95,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default FormRegister;
