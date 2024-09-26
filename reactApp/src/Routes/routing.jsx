@@ -1,13 +1,16 @@
 import { Route, Routes } from 'react-router-dom'
-import FormRegister from '../components/FormRegister/FormRegister'
-import Home from '../Pages/Home'
+
+import Home from '../Pages/Home_/Home'
+import Estadisticas from '../Pages/Estadisticas/Estadisticas'
+
 
 const Routing = () => {
   return (
     <>
     <Routes>
-        <Route path='/' element={<Home/>} />
-        <Route path="register/" element={<FormRegister/>} />
+
+        <Route path='*' element={<Home/>} />
+        <Route path='estadisticas/' element={<Estadisticas/>} />
     </Routes>
     </>
   )

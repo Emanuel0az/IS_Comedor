@@ -1,9 +1,10 @@
 import React from 'react'
+import NavPC from '../../components/NavPC/NavPC'
 
 const Home = () => {
   return (
     <>
-    <h1>HAHHAaaaaaaa</h1>
+    <NavPC/>
     </>
   )
 }
