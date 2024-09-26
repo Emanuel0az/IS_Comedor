@@ -1,4 +1,4 @@
-const url = 'http://localhost:8000/api/toys/';
+const url = 'http://localhost:8000/api/users/';
 
 const getDataToys = async () => {
   try {

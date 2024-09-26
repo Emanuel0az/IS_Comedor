@@ -1,14 +1,46 @@
 from rest_framework import serializers
 from .models import Users
-from .models import Toys
+from .models import Recetas
+from .models import Compras
+from .models import Ingredientes
+from .models import Hist_ingredientes
+from .models import Donaciones
+from .models import Proveedores
 
-class userSerializer(serializers.ModelSerializer):
+
+
+
+class UsersSerializer(serializers.ModelSerializer):
     class Meta:
         model = Users
-        fields = ['id', 'name', 'age', 'mail', 'password'] #Aquí va lo que uno quiere ver en la api 
-                                                                    #Solo es visual (No afecta nada).
+        fields = ['__all__']
                                                                     
-class toysSerializer(serializers.ModelSerializer):
+class RecetasSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Toys
-        fields = ['id', 'name', 'price']
+        model = Recetas
+        fields = ['__all__']
+
+class ComprasSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Compras
+        fields = ['__all__']
+
+class IngredientesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ingredientes
+        fields = ['__all__']
+
+class Hist_ingredientesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Hist_ingredientes
+        fields = ['__all__']
+
+class DonacionesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Donaciones
+        fields = ['__all__']
+
+class ProveedoresSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Proveedores
+        fields = ['__all__']

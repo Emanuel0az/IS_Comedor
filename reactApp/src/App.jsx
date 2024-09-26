@@ -1,12 +1,10 @@
-import Routing from './routes/routing'
+import Routing from "./Routes/Routing"
+import NavPC from "./components/NavPC/NavPC"
+
 const App = () => {
   return (
     <>
-    <a href="http://localhost:5173/">Home</a>
-
-    <br />
-    <a href="http://localhost:5173/todo/">Ir</a>
-    <br />
+    <NavPC/>
     <Routing/>
     </>
   )
