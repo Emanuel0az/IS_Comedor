@@ -4,7 +4,7 @@ const getDataToys = async () => {
   try {
     const response = await fetch(url);
     const data = await response.json();
-    return data // Hay que traer de una vez el nombre del array, PERROS!!!
+    return data
   } catch (error) {
     console.error("Error fetching data:", error);
   }
