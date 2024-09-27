@@ -1,4 +1,15 @@
 
+<<<<<<< HEAD
+const getDataToys = async () => {
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
+=======
 // const url = 'http://localhost:8000/api/toys/';
 
 // const getDataToys = async () => {
@@ -10,6 +21,7 @@
 //     console.error("Error fetching data:", error);
 //   }
 // };
+>>>>>>> 6443896f4f7a9d38223ccc1380c56670da7986e5
 
 
 // //////////////////////////////////////////////////////////////////////////////
