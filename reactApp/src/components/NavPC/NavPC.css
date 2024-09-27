@@ -1,0 +1,14 @@
+nav {
+    display: grid;
+    grid-template-columns: 89% 10%;
+    background-color: rgba(0, 0, 255, 0.288);
+    min-height: 8vh;
+}
+
+nav > div {
+    color: white;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    margin-left: 4vh;
+}

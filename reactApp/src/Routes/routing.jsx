@@ -1,22 +1,18 @@
-import { BrowserRouter as Router,Routes,Route } from "react-router-dom"
-import Register from '../Pages/register'
-import Logins from "../Pages/login"
-import  Home  from "../pages/home"
+import { Route, Routes } from 'react-router-dom'
+
+import Home from '../Pages/Home_/Home'
+import Estadisticas from '../Pages/Estadisticas/Estadisticas'
 
 
-function Routing() {
+const Routing = () => {
   return (
-    <div>
+    <>
+    <Routes>
 
-        <Router>
-            <Routes>
-                <Route path='/register' element={<Register/>}   />
-                <Route path='' element={<Home/>}   />
-                <Route path='/login' element={<Logins/>} />
-            </Routes>
-        </Router>
-      
-    </div>
+        <Route path='*' element={<Home/>} />
+        <Route path='estadisticas/' element={<Estadisticas/>} />
+    </Routes>
+    </>
   )
 }
 
