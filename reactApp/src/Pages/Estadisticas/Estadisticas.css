@@ -75,3 +75,14 @@
     display: grid;
     place-items: center;
 }
+
+.containerBarChart {
+    margin-top: 8vh;
+    margin-left: 3%;
+    min-width: 94%;
+    max-width: 80%;
+    min-height: 46vh;
+    max-height: 46vh;
+    background-color: chocolate;
+    border-radius: 10px;
+}
