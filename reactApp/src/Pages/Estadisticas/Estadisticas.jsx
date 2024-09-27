@@ -1,6 +1,7 @@
 import React from 'react'
 import NavPC from '../../components/NavPC/NavPC'
 import '../Estadisticas/Estadisticas.css'
+import Donut from '../../components/Donut/Donut'
 
 const Estadisticas = () => {
 
@@ -66,7 +67,9 @@ const Estadisticas = () => {
                   <div className='tittleDonut'>Nombre</div>
                   <div className='imgDonut'>img</div>
                 </div>
-                <div className='donutRight'></div>
+                <div className='donutRight'>
+                  <Donut/>
+                </div>
               </div>
               <div className='containerButtomDonut'>
                 <div className="textoDonut">Aquí va el texto</div>

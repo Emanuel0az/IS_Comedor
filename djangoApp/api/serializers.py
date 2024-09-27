@@ -28,7 +28,7 @@ class ComprasSerializer(serializers.ModelSerializer):
 class IngredientesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ingredientes
-        fields = ['__all__']
+        fields = ['ingredientes_id', 'nombre', 'cantidad', 'fecha_compra', 'fecha_vencimiento']
 
 class Hist_ingredientesSerializer(serializers.ModelSerializer):
     class Meta:

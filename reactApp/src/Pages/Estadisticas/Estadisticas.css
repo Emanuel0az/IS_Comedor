@@ -34,7 +34,7 @@
     margin-top: 3%;
     display: grid;
     grid-template-rows: 80% 20%;
-    background-color: rgb(119, 104, 104);
+    background-color: rgb(255, 255, 255);
     border-radius: 7px;
     font-size: 10px;
     padding: 0.6%;
@@ -57,6 +57,9 @@
 
 .donutRight {
     border-left: 1px white solid;
+}.donutRight > div > div > div {
+    height: 20vh;
+    width: 20vw;
 }
 
 .containerButtomDonut {
