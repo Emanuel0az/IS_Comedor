@@ -34,7 +34,7 @@
     margin-top: 3%;
     display: grid;
     grid-template-rows: 80% 20%;
-    background-color: rgb(119, 104, 104);
+    background-color: rgb(0, 0, 0);
     border-radius: 7px;
     font-size: 10px;
     padding: 0.6%;
@@ -50,6 +50,8 @@
     grid-template-rows: 20% 80%;
 }.tittleDonut {
     border-bottom: 1px white solid;
+    display: grid;
+    place-items: center;
 }.imgDonut {
     display: grid;
     place-items: center;
@@ -57,6 +59,7 @@
 
 .donutRight {
     border-left: 1px white solid;
+    place-items: center;
 }
 
 .containerButtomDonut {
@@ -86,3 +89,4 @@
     background-color: chocolate;
     border-radius: 10px;
 }
+
