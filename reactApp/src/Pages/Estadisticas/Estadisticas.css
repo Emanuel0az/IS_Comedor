@@ -55,6 +55,8 @@
     grid-template-rows: 20% 80%;
 }.tittleDonut {
     border-bottom: 1px white solid;
+    display: grid;
+    place-items: center;
 }.imgDonut {
     display: grid;
     place-items: center;
