@@ -2,6 +2,7 @@ import React from 'react'
 import NavPC from '../../components/NavPC/NavPC'
 import '../Estadisticas/Estadisticas.css'
 import Donut from '../../components/Donut/Donut'
+import SessionsChart from '../../components/Grafica/Grafica'
 
 const Estadisticas = () => {
 
@@ -79,7 +80,9 @@ const Estadisticas = () => {
           </div>
           {/* /////// */}
           <div className="apartOfCharts">
-            <div className="containerBarChart"></div>
+            <div className="containerBarChart">
+              <SessionsChart/>
+            </div>
             <div className="containerChartLine"></div>
           </div>
           
