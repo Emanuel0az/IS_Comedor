@@ -56,11 +56,13 @@ class Hist_ingredientes(models.Model):
     nombre = models.CharField(max_length=255, null=True, blank=True)
     cantidad = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
 
-
-# class Hist_admin_elim(models.Model):
-#     hist_id = int
-#     Users.id
-#     agg
+class Students(models.Model):
+    id = models.AutoField(primary_key=True)
+    cedula = models.CharField(max_length=255, null=True, blank=True)
+    name = models.CharField(max_length=255, null=True, blank=True)
+    seccion = models.CharField(max_length=255, null=True, blank=True)
+    
+    
 
 
 # Cuando se guarda manual, elimina manual o se edita manual, se requiere un guardado, un registro.

@@ -6,6 +6,7 @@
 .mainLeft {
     background-color: rgba(130, 91, 167, 0.507);
     min-height: 92vh;
+    max-height: 92vh;
     display: flex;
     flex-direction: column;
 }
@@ -17,6 +18,10 @@
 .mainLeftBottom {
     min-height: 11vh;
     background-color: aqua;
+}
+
+.mainRight {
+    overflow: auto;
 }
 
 .mainRightDonutGraphics {
@@ -59,7 +64,11 @@
 
 .donutRight {
     border-left: 1px white solid;
-    place-items: center;
+}.donutRight > div > div > div {
+    height: 80%;
+    width: 80%;
+    margin-left: 19%;
+    margin-top: 5%;
 }
 
 .containerButtomDonut {
@@ -82,8 +91,8 @@
 .containerBarChart {
     margin-top: 8vh;
     margin-left: 3%;
-    min-width: 94%;
-    max-width: 80%;
+    min-width: 90%;
+    max-width: 90%;
     min-height: 46vh;
     max-height: 46vh;
     background-color: chocolate;

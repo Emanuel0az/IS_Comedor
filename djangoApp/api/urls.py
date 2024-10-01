@@ -22,4 +22,7 @@ urlpatterns = [
     
     path('ingredientes/', views.ingredientes_list, name='ingredientes_list'),
     path('ingredientes/<int:pk>/', views.ingredientes_list, name='ingredientes_list'),
+    
+    path('students/', views.students_list, name='students_list'),
+    path('students/<int:pk>/', views.students_list, name='students_list'),
 ]
