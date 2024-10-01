@@ -3,6 +3,7 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, Title } from "chart.js";
 import React, { useState, useEffect } from 'react';
 import { Doughnut } from 'react-chartjs-2';
+import '../Donut/Donut.css'
 
 
 const CenterTextPlugin = {
@@ -174,7 +175,7 @@ export default function DoughnutChart() {
           ? `${productos[selectedIndex].cantidad} / ${stockMaximo}\n${((productos[selectedIndex].cantidad / stockMaximo) * 100).toFixed(2)}%`
           : `${calcularPorcentajeTotal()}%`,
         color: 'white',
-        font: '16px Arial',
+        font: '12px Arial',
       },
     },
     onClick: handleClick,
@@ -189,12 +190,28 @@ export default function DoughnutChart() {
   }
 
   return (
-    <div className="w-full max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-md">
-      <div className="flex items-center justify-center mb-4" style={{ display: 'flex', alignItems: 'center', width: '10vw' }}>
-        <div className="w-[400px] h-[400px] relative">
-          {chartData && <Doughnut data={chartData} options={chartOptions} />}
+    <>
+      <div className="containerDonut">
+        <div className="containerTopDonut">
+          <div className='donutLeft'>
+            <div className='tittleDonut'>Nombre</div>
+            <div className='imgDonut'>img</div>
+          </div>
+          <div className='donutRight'>
+            <div className="w-full max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-md">
+              <div className="flex items-center justify-center mb-4" style={{ display: 'flex', alignItems: 'center', width: '10vw' }}>
+                <div className="w-[80%] h-[80%]">
+                  {chartData && <Doughnut data={chartData} options={chartOptions} />}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className='containerButtomDonut'>
+          <div className="textoDonut">Aquí va el texto</div>
+          <div className="estadoStock">Bajo</div>
         </div>
       </div>
-    </div>
-  );
+    </>
+  )
 }

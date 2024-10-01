@@ -5,7 +5,57 @@ from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+
 from .serializers import UsersSerializer, RecetasSerializer, IngredientesSerializer, Hist_ingredientesSerializer, AsistenciasSerializer
+
+from rest_framework import status
+from .models import Users, Recetas, Compras, Donaciones, Hist_ingredientes, Ingredientes, Proveedores, Students
+from .serializers import UsersSerializer, ComprasSerializer, RecetasSerializer, IngredientesSerializer, Hist_ingredientesSerializer, DonacionesSerializer, ProveedoresSerializer, StudentsSerializer
+
+
+@api_view(['GET', 'POST', 'PUT', 'DELETE'])
+def users_list(request, pk=None):
+     # Si hay un ID en la URL, intenta obtener ese juguete en particular
+    if pk:
+        try:
+            user = Users.objects.get(pk=pk)
+        except Users.DoesNotExist:
+            return Response({"error": "Toy not found"}, status=status.HTTP_404_NOT_FOUND)
+        
+    if request.method == 'GET':
+        if pk:
+            # Devolver solo el juguete con el `pk` proporcionado
+            serializer = UsersSerializer(user)
+            user = Users.objects.get(pk=pk)
+            return Response(serializer.data)
+
+        else:
+            # Si no hay `pk`, devolver todos los juguetes
+            user = Users.objects.all()
+            serializer = UsersSerializer(user, many=True)
+            return Response(serializer.data)
+        
+    elif request.method == 'POST':
+        print(request.data)
+        serializer = UsersSerializer(data=request.data)  # Crear una nueva instancia del serializador
+        if serializer.is_valid():  # Verificar que los datos son válidos
+            serializer.save()  # Guardar el nuevo juguete en la base de datos
+            return Response(serializer.data, status=status.HTTP_201_CREATED)  # Retornar datos del nuevo juguete
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  # Retornar errores sihay
+    
+    elif request.method == 'PUT':
+        serializer = UsersSerializer(user, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    elif request.method == 'DELETE':
+        user.delete()
+        return Response({"message": "User deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
+    
+# ////////////////////////////////////////////////////////////////
+
 
 # Función para la asistencia diaria
 def asistencia_diaria(request):
@@ -179,5 +229,47 @@ def asistencias_detail(request, pk):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
+
         asistencia.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+        proveedor.delete()
+        return Response({"message": "Proveedor deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
+
+
+
+@api_view(['GET', 'POST', 'PUT', 'DELETE'])
+def students_list(request, pk=None):
+    if pk:
+        try:
+            students = Students.objects.get(pk=pk)
+        except Students.DoesNotExist:
+            return Response({"error": "Proveedor not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        if pk:
+            serializer = StudentsSerializer(students)
+            return Response(serializer.data)
+        else:
+            students = Students.objects.all()
+            serializer = StudentsSerializer(students, many=True)
+            return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = StudentsSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'PUT':
+        serializer = StudentsSerializer(students, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        students.delete()
+        return Response({"message": "Proveedor deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
+

@@ -42,6 +42,7 @@ class Hist_ingredientes(models.Model):
     nombre = models.CharField(max_length=255, null=True, blank=True)
     cantidad = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
 
+
 # Filtro para verificar si un estudiante tiene beca
 def filtro_estudiantes_con_beca():
     return Estudiantes.objects.filter(tiene_beca=True)

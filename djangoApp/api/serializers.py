@@ -1,5 +1,7 @@
 from rest_framework import serializers
+
 from .models import Users, Recetas, Ingredientes, Hist_ingredientes, Asistencias,Estudiantes
+
 
 class UsersSerializer(serializers.ModelSerializer):
     class Meta:
@@ -29,8 +31,17 @@ class EstudiantesSerializer(serializers.ModelSerializer):
 
 class AsistenciasSerializer(serializers.ModelSerializer):
     class Meta:
+
         model = Asistencias
         fields = ['asistencia_id', 'estudiante_id', 'fecha_asistencia']
 class Meta:
         model = Asistencias
         fields = ['asistencia_id', 'estudiante_id', 'fecha_asistencia']
+
+        model = Proveedores
+        fields = ['id', 'nombre', 'telefono', 'direccion']
+
+class StudentsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Students
+        fields = ['id', 'cedula', 'name', 'seccion']

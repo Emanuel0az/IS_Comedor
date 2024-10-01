@@ -2,11 +2,14 @@ import React from 'react'
 import NavPC from '../../components/NavPC/NavPC'
 import '../Estadisticas/Estadisticas.css'
 import Donut from '../../components/Donut/Donut'
+
 import SessionsChart from '../../components/Grafica/Grafica'
+
+import SessionsChart from '../../components/LineChart/LineChart'
+
 
 const Estadisticas = () => {
 
-  
   return (
     <>
       <NavPC/>
@@ -16,74 +19,37 @@ const Estadisticas = () => {
           <div className='mainLeftBottom'>Celeste</div>
         </div>
         <div className='mainRight'>
-          {/* Aquí va el top ese de Home > Estadísticas */}
-
           <div className='mainRightDonutGraphics'>
-
-          <div className="containerDonut">
-              <div className="containerTopDonut">
-                <div className='donutLeft'>
-                  <div className='tittleDonut'>Nombre</div>
-                  <div className='imgDonut'>img</div>
-                </div>
-                <div className='donutRight'></div>
-              </div>
-              <div className='containerButtomDonut'>
-                <div className="textoDonut">Aquí va el texto</div>
-                <div className="estadoStock">Bajo</div>
-              </div>
-            </div>            
-
-            <div className="containerDonut">
-              <div className="containerTopDonut">
-                <div className='donutLeft'>
-                  <div className='tittleDonut'>Nombre</div>
-                  <div className='imgDonut'>img</div>
-                </div>
-                <div className='donutRight'></div>
-              </div>
-              <div className='containerButtomDonut'>
-                <div className="textoDonut">Aquí va el texto</div>
-                <div className="estadoStock">Alto</div>
-              </div>
-            </div>
-
-            <div className="containerDonut">
-              <div className="containerTopDonut">
-                <div className='donutLeft'>
-                  <div className='tittleDonut'>Nombre</div>
-                  <div className='imgDonut'>img</div>
-                </div>
-                <div className='donutRight'></div>
-              </div>
-              <div className='containerButtomDonut'>
-                <div className="textoDonut">Aquí va el texto</div>
-                <div className="estadoStock">Bajo</div>
-              </div>
-            </div>
-
-            <div className="containerDonut">
-              <div className="containerTopDonut">
-                <div className='donutLeft'>
-                  <div className='tittleDonut'>Nombre</div>
-                  <div className='imgDonut'>img</div>
-                </div>
-                <div className='donutRight'>
-                  <Donut/>
-                </div>
-              </div>
-              <div className='containerButtomDonut'>
-                <div className="textoDonut">Aquí va el texto</div>
-                <div className="estadoStock">Medio</div>
-              </div>
-            </div>
+          <Donut/>
+          <Donut/>
+          <Donut/>
+          <Donut/>
+          <Donut/>
+          <Donut/>
+          <Donut/>
+          <Donut/>
+          <Donut/>
+          <Donut/>
+          <Donut/>
+          <Donut/>
+          <Donut/>
+          <Donut/>
+          <Donut/>
           </div>
           {/* /////// */}
           <div className="apartOfCharts">
             <div className="containerBarChart">
+
               <SessionsChart/>
             </div>
             <div className="containerChartLine"></div>
+
+            <SessionsChart/>
+            </div>
+            <div className="containerChartLine">
+              
+            </div>
+
           </div>
           
         </div>

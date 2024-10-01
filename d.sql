@@ -1,4 +1,4 @@
--- Active: 1727123670512@@127.0.0.1@3307@django-react
+
 
 use `django-react`
 
@@ -10,6 +10,7 @@ VALUES
 (2, 'Azúcar', 200, '2023-02-01'), 
 (3, 'Leche', 1000, '2023-03-01')
     
+
 
 
 SELECT * FROM api_ingredientes
@@ -84,3 +85,13 @@ INSERT INTO api_asistencias (estudiante_id_id, fecha_asistencia) VALUES
 (5, '2024-09-27'),
 (6, '2024-09-27'),
 (7, '2024-09-27');
+
+SELECT * FROM api_students
+
+
+INSERT INTO api_students (name, cedula, seccion)
+VALUES
+('Juan Pérez', '123456789','11-3'),
+('María García', '987654321', '7-1'),
+('Pedro López', '111111111', '8-2');
+
