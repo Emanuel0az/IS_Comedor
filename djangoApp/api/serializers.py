@@ -1,46 +1,36 @@
 from rest_framework import serializers
-from .models import Users
-from .models import Recetas
-from .models import Compras
-from .models import Ingredientes
-from .models import Hist_ingredientes
-from .models import Donaciones
-from .models import Proveedores
-
-
-
+from .models import Users, Recetas, Ingredientes, Hist_ingredientes, Asistencias,Estudiantes
 
 class UsersSerializer(serializers.ModelSerializer):
     class Meta:
         model = Users
-        fields = ['__all__']
-                                                                    
+        fields = ['users_id', 'name', 'mail', 'password', 'rol']
+
 class RecetasSerializer(serializers.ModelSerializer):
     class Meta:
         model = Recetas
-        fields = ['__all__']
+        fields = ['id', 'nombre', 'descripcion', 'cantidad_uso']
 
-class ComprasSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Compras
-        fields = ['__all__']
 
 class IngredientesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ingredientes
-        fields = ['ingredientes_id', 'nombre', 'cantidad', 'fecha_compra', 'fecha_vencimiento']
+        fields = ['ingredientes_id', 'nombre', 'cantidad', 'fecha_vencimiento']
 
 class Hist_ingredientesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Hist_ingredientes
-        fields = ['__all__']
+        fields = ['hist_p_id', 'users_id', 'nombre', 'cantidad']
 
-class DonacionesSerializer(serializers.ModelSerializer):
+class EstudiantesSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Donaciones
-        fields = ['__all__']
+        model = Estudiantes
+        fields = ['estudiante_id', 'nombre', 'edad', 'grado', 'tiene_beca']
 
-class ProveedoresSerializer(serializers.ModelSerializer):
+class AsistenciasSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Proveedores
-        fields = ['__all__']
+        model = Asistencias
+        fields = ['asistencia_id', 'estudiante_id', 'fecha_asistencia']
+class Meta:
+        model = Asistencias
+        fields = ['asistencia_id', 'estudiante_id', 'fecha_asistencia']
