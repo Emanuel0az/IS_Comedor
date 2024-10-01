@@ -2,8 +2,8 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Users, Recetas, Compras, Donaciones, Hist_ingredientes, Ingredientes, Proveedores
-from .serializers import UsersSerializer, ComprasSerializer, RecetasSerializer, IngredientesSerializer, Hist_ingredientesSerializer, DonacionesSerializer, ProveedoresSerializer
+from .models import Users, Recetas, Compras, Donaciones, Hist_ingredientes, Ingredientes, Proveedores, Students
+from .serializers import UsersSerializer, ComprasSerializer, RecetasSerializer, IngredientesSerializer, Hist_ingredientesSerializer, DonacionesSerializer, ProveedoresSerializer, StudentsSerializer
 
 
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
@@ -267,4 +267,41 @@ def proveedores_list(request, pk=None):
 
     elif request.method == 'DELETE':
         proveedor.delete()
+        return Response({"message": "Proveedor deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
+
+
+
+@api_view(['GET', 'POST', 'PUT', 'DELETE'])
+def students_list(request, pk=None):
+    if pk:
+        try:
+            students = Students.objects.get(pk=pk)
+        except Students.DoesNotExist:
+            return Response({"error": "Proveedor not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        if pk:
+            serializer = StudentsSerializer(students)
+            return Response(serializer.data)
+        else:
+            students = Students.objects.all()
+            serializer = StudentsSerializer(students, many=True)
+            return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = StudentsSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'PUT':
+        serializer = StudentsSerializer(students, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        students.delete()
         return Response({"message": "Proveedor deleted successfully"}, status=status.HTTP_204_NO_CONTENT)

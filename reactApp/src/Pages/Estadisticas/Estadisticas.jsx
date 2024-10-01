@@ -19,6 +19,18 @@ const Estadisticas = () => {
           <Donut/>
           <Donut/>
           <Donut/>
+          <Donut/>
+          <Donut/>
+          <Donut/>
+          <Donut/>
+          <Donut/>
+          <Donut/>
+          <Donut/>
+          <Donut/>
+          <Donut/>
+          <Donut/>
+          <Donut/>
+          <Donut/>
           </div>
           {/* /////// */}
           <div className="apartOfCharts">

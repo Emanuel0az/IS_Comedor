@@ -1,4 +1,4 @@
--- Active: 1727123670512@@127.0.0.1@3307@django-react
+-- Active: 1726682044862@@127.0.0.1@3307@django-react
 
 use `django-react`
 
@@ -12,4 +12,11 @@ VALUES
     
 
 
-SELECT * FROM api_ingredientes
+SELECT * FROM api_students
+
+
+INSERT INTO api_students (name, cedula, seccion)
+VALUES
+('Juan Pérez', '123456789','11-3'),
+('María García', '987654321', '7-1'),
+('Pedro López', '111111111', '8-2');

@@ -6,6 +6,7 @@ from .models import Ingredientes
 from .models import Hist_ingredientes
 from .models import Donaciones
 from .models import Proveedores
+from .models import Students
 
 
 
@@ -43,4 +44,9 @@ class DonacionesSerializer(serializers.ModelSerializer):
 class ProveedoresSerializer(serializers.ModelSerializer):
     class Meta:
         model = Proveedores
-        fields = ['__all__']
+        fields = ['id', 'nombre', 'telefono', 'direccion']
+
+class StudentsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Students
+        fields = ['id', 'cedula', 'name', 'seccion']
