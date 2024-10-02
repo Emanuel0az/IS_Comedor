@@ -1,5 +1,4 @@
 import React from 'react'
-import NavPC from '../../components/NavPC/NavPC'
 import '../Estadisticas/Estadisticas.css'
 import Donut from '../../components/Donut/Donut'
 
@@ -36,9 +35,6 @@ const Estadisticas = () => {
             </div>
 
           </div>
-          
-        </div>
-
     </>
   )
 }

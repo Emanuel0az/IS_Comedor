@@ -1,4 +1,4 @@
-const url = ('http://localhost:8000/api/students/')
+const url = ('http://localhost:8000/api/estudiantes/')
 
 const getStudents = async () => {
   try {
@@ -23,7 +23,7 @@ const postStudents = async (newStudent) => {
       headers: {
         'Content-Type': 'application/json',  // Asegúrate de este encabezado
       },
-      body: JSON.stringify({ cedula: newStudent.cedula, name: newStudent.name, seccion: newStudent.seccion })
+      body: JSON.stringify({ estudiante_id: newStudent.estudiante_id, nombre: newStudent.nombre, seccion: newStudent.seccion })
 
     });
     if (!response.ok) {

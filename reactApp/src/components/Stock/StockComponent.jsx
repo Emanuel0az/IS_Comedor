@@ -44,8 +44,8 @@ const StockComponent = () => {
             <div className="students">
               {students.map((student, index) => (
                 <div key={index} className="student">
-                  <div className='cedula_s'>{student.cedula}</div>
-                  <div className='name_s'>{student.name}</div>
+                  <div className='cedula_s'>{student.estudiante_id}</div>
+                  <div className='name_s'>{student.nombre}</div>
                   <div className='seccion_s'>{student.seccion}</div>
                 </div>
               ))}

@@ -27,7 +27,7 @@ class Hist_ingredientesSerializer(serializers.ModelSerializer):
 class EstudiantesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Estudiantes
-        fields = ['estudiante_id', 'nombre', 'edad', 'grado', 'tiene_beca']
+        fields = ['estudiante_id', 'nombre', 'edad', 'seccion', 'becado']
 
 class AsistenciasSerializer(serializers.ModelSerializer):
     class Meta:
