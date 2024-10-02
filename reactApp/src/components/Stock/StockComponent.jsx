@@ -33,7 +33,7 @@ const StockComponent = () => {
   return (
     <>
     <div className="containerAll">
-      <div>Alertas</div>
+      
         <div className="containerFormStock"></div>
         <div className="containerStock">
             <div className="tittles">

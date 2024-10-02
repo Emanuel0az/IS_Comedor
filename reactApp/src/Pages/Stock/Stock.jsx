@@ -1,10 +1,15 @@
 import React from 'react'
 import StockComponent from '../../components/Stock/StockComponent'
+import AlertaAsistencia from '../../components/Alertas/Alertas'
 
 const Stock = () => {
   return (
     <>
-    <StockComponent/>
+    <div>
+      <div className='Alert_Container'><AlertaAsistencia/></div>
+      <StockComponent/>
+    </div>
+    
     </>
   )
 }

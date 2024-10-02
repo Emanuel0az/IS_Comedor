@@ -16,7 +16,7 @@ VALUES
 SELECT * FROM api_ingredientes
 
 -- Insertar estudiantes de ejemplo
-INSERT INTO api_estudiantes (nombre, edad, grado, tiene_beca) VALUES 
+INSERT INTO api_estudiantes (nombre, edad, seccion, becado) VALUES 
 ('Juan Perez', 10, '5A', true),
 ('Maria Gomez', 9, '4B', false),
 ('Pedro Rodriguez', 11, '6A', true),
@@ -28,7 +28,7 @@ INSERT INTO api_estudiantes (nombre, edad, grado, tiene_beca) VALUES
 ('Mateo Diaz', 11, '6B', true),
 ('Lucia Alvarez', 10, '5A', true);
 
-INSERT INTO api_estudiantes (nombre, edad, grado, tiene_beca) VALUES 
+INSERT INTO api_estudiantes (nombre, edad, seccion, becado) VALUES 
 ('Juan Pérez', 10, '5to', TRUE),
 ('María Gómez', 9, '4to', FALSE),
 ('Carlos Sánchez', 11, '6to', TRUE),
@@ -46,7 +46,7 @@ INSERT INTO api_estudiantes (nombre, edad, grado, tiene_beca) VALUES
 
 -- Lunes (fecha: 2024-09-23)
 INSERT INTO api_asistencias (estudiante_id_id, fecha_asistencia) VALUES
-(1, '2024-09-23'),
+(1, '2024-09-01'),
 (2, '2024-09-23'),
 (3, '2024-09-23'),
 (4, '2024-09-23'),
@@ -56,7 +56,7 @@ SELECT * FROM api_asistencias
 
 -- Martes (fecha: 2024-09-24)
 INSERT INTO api_asistencias (estudiante_id_id, fecha_asistencia) VALUES
-(1, '2024-09-24'),
+(1, '2024-09-31'),
 (3, '2024-09-24'),
 (6, '2024-09-24'),
 (7, '2024-09-24'),
@@ -72,19 +72,43 @@ INSERT INTO api_asistencias (estudiante_id_id, fecha_asistencia) VALUES
 
 -- Jueves (fecha: 2024-09-26)
 INSERT INTO api_asistencias (estudiante_id_id, fecha_asistencia) VALUES
-(16, '2024-09-26'),
-(17, '2024-09-26'),
-(18, '2024-09-26'),
-(19, '2024-09-26'),
-(20, '2024-09-26');
+(16, '2024-09-02'),
+(17, '2024-09-02'),
+(18, '2024-09-02'),
+(19, '2024-09-02'),
+(20, '2024-09-02');
 
 -- Viernes (fecha: 2024-09-27)
 INSERT INTO api_asistencias (estudiante_id_id, fecha_asistencia) VALUES
-(1, '2024-09-27'),
-(3, '2024-09-27'),
-(5, '2024-09-27'),
-(6, '2024-09-27'),
-(7, '2024-09-27');
+(1, '2024-09-30'),
+(3, '2024-09-30'),
+(5, '2024-09-30'),
+(6, '2024-09-30'),
+(7, '2024-09-30');
 
 
-SELECT * FROM api_estudiantes
+
+-- Insertar estudiantes de prueba
+INSERT INTO api_estudiantes (nombre, edad, seccion, becado) VALUES
+('Ana García', 18, 'A', true),
+('Carlos Rodríguez', 19, 'B', false),
+('María López', 18, 'A', true),
+('Juan Martínez', 20, 'C', false),
+('Laura Sánchez', 19, 'B', true);
+
+-- Insertar asistencias para la semana actual
+-- Asumimos que hoy es miércoles, 2 de octubre de 2024
+INSERT INTO api_asistencias (estudiante_id_id, fecha_asistencia) VALUES
+-- Ana García (5 asistencias)
+(1, '2024-09-30'), (1, '2024-10-01'), (1, '2024-10-02'), (1, '2024-10-03'), (1, '2024-10-04'),
+-- Carlos Rodríguez (1 asistencia - debería generar alerta)
+(2, '2024-10-02'),
+-- María López (3 asistencias - justo en el límite)
+(3, '2024-09-30'), (3, '2024-10-01'), (3, '2024-10-02'),
+-- Juan Martínez (0 asistencias - debería generar alerta)
+-- Laura Sánchez (2 asistencias - debería generar alerta)
+(5, '2024-10-01'), (5, '2024-10-03');
+
+-- Insertar algunas asistencias fuera de la semana actual para probar el filtro
+INSERT INTO api_asistencias (estudiante_id_id, fecha_asistencia) VALUES
+(1, '2024-09-25'), (2, '2024-09-26'), (3, '2024-09-27'), (4, '2024-09-28'), (5, '2024-09-29');
