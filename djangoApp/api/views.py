@@ -6,11 +6,8 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from .serializers import UsersSerializer, RecetasSerializer, IngredientesSerializer, Hist_ingredientesSerializer, AsistenciasSerializer
+from .serializers import UsersSerializer, RecetasSerializer, IngredientesSerializer, Hist_ingredientesSerializer, AsistenciasSerializer, EstudiantesSerializer
 
-from rest_framework import status
-from .models import Users, Recetas, Compras, Donaciones, Hist_ingredientes, Ingredientes, Proveedores, Students
-from .serializers import UsersSerializer, ComprasSerializer, RecetasSerializer, IngredientesSerializer, Hist_ingredientesSerializer, DonacionesSerializer, ProveedoresSerializer, StudentsSerializer
 
 
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
@@ -239,37 +236,36 @@ def asistencias_detail(request, pk):
 
 
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
-def students_list(request, pk=None):
+def estudiantes_list(request, pk=None):
     if pk:
         try:
-            students = Students.objects.get(pk=pk)
-        except Students.DoesNotExist:
-            return Response({"error": "Proveedor not found"}, status=status.HTTP_404_NOT_FOUND)
+            estudiante = Estudiantes.objects.get(pk=pk)
+        except Estudiantes.DoesNotExist:
+            return Response({"error": "Estudiante no encontrado"}, status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
         if pk:
-            serializer = StudentsSerializer(students)
+            serializer = EstudiantesSerializer(estudiante)
             return Response(serializer.data)
         else:
-            students = Students.objects.all()
-            serializer = StudentsSerializer(students, many=True)
+            estudiantes = Estudiantes.objects.all()
+            serializer = EstudiantesSerializer(estudiantes, many=True)
             return Response(serializer.data)
 
     elif request.method == 'POST':
-        serializer = StudentsSerializer(data=request.data)
+        serializer = EstudiantesSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'PUT':
-        serializer = StudentsSerializer(students, data=request.data)
+        serializer = EstudiantesSerializer(estudiante, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
-        students.delete()
-        return Response({"message": "Proveedor deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
-
+        estudiante.delete()
+        return Response({"message": "Estudiante eliminado exitosamente"}, status=status.HTTP_204_NO_CONTENT)
