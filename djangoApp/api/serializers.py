@@ -38,10 +38,5 @@ class Meta:
         model = Asistencias
         fields = ['asistencia_id', 'estudiante_id', 'fecha_asistencia']
 
-        model = Proveedores
-        fields = ['id', 'nombre', 'telefono', 'direccion']
 
-class StudentsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Students
-        fields = ['id', 'cedula', 'name', 'seccion']
+

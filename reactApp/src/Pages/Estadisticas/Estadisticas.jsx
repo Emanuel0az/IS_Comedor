@@ -5,7 +5,7 @@ import Donut from '../../components/Donut/Donut'
 
 import SessionsChart from '../../components/Grafica/Grafica'
 
-import SessionsChart from '../../components/LineChart/LineChart'
+
 
 
 const Estadisticas = () => {
@@ -24,36 +24,26 @@ const Estadisticas = () => {
           <Donut/>
           <Donut/>
           <Donut/>
-          <Donut/>
-          <Donut/>
-          <Donut/>
-          <Donut/>
-          <Donut/>
-          <Donut/>
-          <Donut/>
-          <Donut/>
-          <Donut/>
-          <Donut/>
-          <Donut/>
+          
           </div>
           {/* /////// */}
           <div className="apartOfCharts">
             <div className="containerBarChart">
+            <SessionsChart/>
 
-              <SessionsChart/>
             </div>
             <div className="containerChartLine"></div>
 
-            <SessionsChart/>
+            
             </div>
             <div className="containerChartLine">
-              
+            
             </div>
 
           </div>
           
         </div>
-      </div>
+      
     </>
   )
 }
