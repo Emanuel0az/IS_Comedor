@@ -11,8 +11,8 @@ class Estudiantes(models.Model):
     estudiante_id = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=255, null=True, blank=True)
     edad = models.IntegerField(null=True, blank=True)
-    grado = models.CharField(max_length=50, null=True, blank=True)
-    tiene_beca = models.BooleanField(default=False)
+    seccion = models.CharField(max_length=50, null=True, blank=True)
+    becado = models.BooleanField(default=False)
 
 class Asistencias(models.Model):
     asistencia_id = models.AutoField(primary_key=True)
