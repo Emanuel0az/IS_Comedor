@@ -74,7 +74,7 @@ export default function DoughnutChart() {
     try {
       const response = await fetch('http://localhost:8000/api/ingredientes/1/');
       if (!response.ok) {
-        throw new Error('No se pudo obtener los datos de la API');
+        throw new Error('_');
       }
       const data = await response.json();
       const productoConColor = {

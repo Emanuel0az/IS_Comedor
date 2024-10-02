@@ -12,16 +12,11 @@ const Estadisticas = () => {
 
   return (
     <>
-      <NavPC/>
-      <div className='main'>
-        <div className='mainLeft'>
-          <div className='mainLeftTop'>Morado</div>
-          <div className='mainLeftBottom'>Celeste</div>
-        </div>
         <div className='mainRight'>
           <div className='mainRightDonutGraphics'>
           <Donut/>
           <Donut/>
+
           <Donut/>
           <Donut/>
           
@@ -43,7 +38,7 @@ const Estadisticas = () => {
           </div>
           
         </div>
-      
+
     </>
   )
 }

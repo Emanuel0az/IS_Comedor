@@ -5,28 +5,7 @@ body {
   margin: 0;
 }
 
-#containerUserCards {
+main {
   display: grid;
-  grid-template-columns: 30% 30% 30%;
-}
-
-#userCard {
-  width: 20vw;
-  height: 20vh;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  font-family: Arial, sans-serif;
-  text-align: center;
-  transition: transform 0.3s ease;
-  font-size: 13px;
-  color: rgba(0, 0, 0, 0.844);
-  margin-top: 10px;
-  margin-bottom: 30px;
-  margin-left: 26%;
-}
-
-#userCard:hover {
-  transform: scale(1.05);
+  grid-template-columns: 17% 83%;
 }
