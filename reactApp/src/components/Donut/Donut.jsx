@@ -44,7 +44,7 @@ ChartJS.register(CenterTextPlugin);
 const stockMaximo = 1000;
 
 const coloresPredefinidos = [
-  'rgb(255, 0, 255)',
+  'rgb(210,105,30)',
   'rgb(255, 159, 64)',
   'rgb(255, 205, 86)',
   'rgb(75, 192, 192)',
