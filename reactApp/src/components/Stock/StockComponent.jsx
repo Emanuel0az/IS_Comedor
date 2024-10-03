@@ -46,7 +46,7 @@ const StockComponent = () => {
                 <div key={index} className="student">
                   <div className='cedula_s'>{student.estudiante_id}</div>
                   <div className='name_s'>{student.nombre}</div>
-                  <div className='seccion_s'>{student.seccion}</div>
+                  <div className='seccion_s'>{student.seccion}</div> 
                 </div>
               ))}
             </div>
