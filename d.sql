@@ -12,103 +12,49 @@ VALUES
     
 
 
-
-SELECT * FROM api_ingredientes
-
--- Insertar estudiantes de ejemplo
-INSERT INTO api_estudiantes (nombre, edad, seccion, becado) VALUES 
-('Juan Perez', 10, '5A', true),
-('Maria Gomez', 9, '4B', false),
-('Pedro Rodriguez', 11, '6A', true),
-('Ana Martinez', 10, '5A', true),
-('Luis Fernandez', 9, '4B', false),
-('Sofia Lopez', 11, '6A', true),
-('Carlos Ruiz', 10, '5B', false),
-('Elena Garcia', 9, '4A', true),
-('Mateo Diaz', 11, '6B', true),
-('Lucia Alvarez', 10, '5A', true);
-
-INSERT INTO api_estudiantes (nombre, edad, seccion, becado) VALUES 
-('Juan Pérez', 10, '5to', TRUE),
-('María Gómez', 9, '4to', FALSE),
-('Carlos Sánchez', 11, '6to', TRUE),
-('Ana Ramírez', 8, '3ro', FALSE),
-('Luis Fernández', 12, '6to', TRUE),
-('Sofía Martínez', 7, '2do', FALSE),
-('Diego Torres', 9, '4to', TRUE),
-('Valentina Ruiz', 10, '5to', FALSE),
-('Andrés Castillo', 11, '6to', TRUE),
-('Camila Morales', 8, '3ro', FALSE);
+INSERT INTO api_estudiantes (nombre, edad, seccion, becado)
+VALUES 
+('Juan Pérez', 12, '6A', true),
+('Ana Gómez', 11, '5B', false),
+('Luis Martínez', 10, '4C', true),
+('Carla Rodríguez', 12, '6B', false),
+('Pedro López', 11, '5A', true),
+('Lucía Hernández', 12, '6C', true),
+('Jorge García', 10, '4B', false),
+('María González', 9, '3A', true),
+('Sofía Morales', 12, '6A', false),
+('Ricardo Vargas', 11, '5B', true),
+('Valeria Rivera', 12, '6C', false),
+('Tomás Ríos', 10, '4A', true),
+('Mateo Cruz', 11, '5C', false),
+('Diana Fernández', 9, '3B', true),
+('Camila Torres', 12, '6B', false),
+('David Suárez', 10, '4A', true),
+('Emilio Medina', 11, '5A', false),
+('Elena Vega', 12, '6C', true),
+('Álvaro Jiménez', 10, '4C', true),
+('Patricia Salas', 11, '5B', false);
 
 
--- Insertar asistencias de ejemplo
--- Datos para cada día de la semana (lunes a viernes)
-
--- Lunes (fecha: 2024-09-23)
-INSERT INTO api_asistencias (estudiante_id_id, fecha_asistencia) VALUES
-(1, '2024-09-01'),
-(2, '2024-09-23'),
-(3, '2024-09-23'),
-(4, '2024-09-23'),
-(5, '2024-09-23');
-
-SELECT * FROM api_asistencias
-
--- Martes (fecha: 2024-09-24)
-INSERT INTO api_asistencias (estudiante_id_id, fecha_asistencia) VALUES
-(1, '2024-09-31'),
-(3, '2024-09-24'),
-(6, '2024-09-24'),
-(7, '2024-09-24'),
-(8, '2024-09-24');
-
--- Miércoles (fecha: 2024-09-25)
-INSERT INTO api_asistencias (estudiante_id_id, fecha_asistencia) VALUES
-(2, '2024-09-25'),
-(3, '2024-09-25'),
-(4, '2024-09-25'),
-(5, '2024-09-25'),
-(9, '2024-09-25');
-
--- Jueves (fecha: 2024-09-26)
-INSERT INTO api_asistencias (estudiante_id_id, fecha_asistencia) VALUES
-(16, '2024-09-02'),
-(17, '2024-09-02'),
-(18, '2024-09-02'),
-(19, '2024-09-02'),
-(20, '2024-09-02');
-
--- Viernes (fecha: 2024-09-27)
-INSERT INTO api_asistencias (estudiante_id_id, fecha_asistencia) VALUES
-(1, '2024-09-30'),
-(3, '2024-09-30'),
-(5, '2024-09-30'),
-(6, '2024-09-30'),
-(7, '2024-09-30');
-
-
-
--- Insertar estudiantes de prueba
-INSERT INTO api_estudiantes (nombre, edad, seccion, becado) VALUES
-('Ana García', 18, 'A', true),
-('Carlos Rodríguez', 19, 'B', false),
-('María López', 18, 'A', true),
-('Juan Martínez', 20, 'C', false),
-('Laura Sánchez', 19, 'B', true);
-
--- Insertar asistencias para la semana actual
--- Asumimos que hoy es miércoles, 2 de octubre de 2024
-INSERT INTO api_asistencias (estudiante_id_id, fecha_asistencia) VALUES
--- Ana García (5 asistencias)
-(1, '2024-09-30'), (1, '2024-10-01'), (1, '2024-10-02'), (1, '2024-10-03'), (1, '2024-10-04'),
--- Carlos Rodríguez (1 asistencia - debería generar alerta)
-(2, '2024-10-02'),
--- María López (3 asistencias - justo en el límite)
-(3, '2024-09-30'), (3, '2024-10-01'), (3, '2024-10-02'),
--- Juan Martínez (0 asistencias - debería generar alerta)
--- Laura Sánchez (2 asistencias - debería generar alerta)
-(5, '2024-10-01'), (5, '2024-10-03');
-
--- Insertar algunas asistencias fuera de la semana actual para probar el filtro
-INSERT INTO api_asistencias (estudiante_id_id, fecha_asistencia) VALUES
-(1, '2024-09-25'), (2, '2024-09-26'), (3, '2024-09-27'), (4, '2024-09-28'), (5, '2024-09-29');
+INSERT INTO api_asistencias (estudiante_id_id, fecha_asistencia)
+VALUES
+(83, '2024-09-30'), (83, '2024-10-01'), (83, '2024-10-02'), (83, '2024-10-03'), (83, '2024-10-04'), 
+(84, '2024-09-30'), (84, '2024-10-01'), (84, '2024-10-02'), (84, '2024-10-03'), (84, '2024-10-04'), 
+(85, '2024-09-30'), (85, '2024-10-01'), (85, '2024-10-02'), (85, '2024-10-03'), (85, '2024-10-04'), 
+(86, '2024-09-30'), (86, '2024-10-01'), (86, '2024-10-02'), (86, '2024-10-03'), (86, '2024-10-04'), 
+(87, '2024-09-30'), (87, '2024-10-01'), (87, '2024-10-02'), (87, '2024-10-03'), (87, '2024-10-04'), 
+(88, '2024-09-30'), (88, '2024-10-01'), (88, '2024-10-02'), (88, '2024-10-03'), (88, '2024-10-04'), 
+(89, '2024-09-30'), (89, '2024-10-01'), (89, '2024-10-02'), (89, '2024-10-03'), (89, '2024-10-04'), 
+(90, '2024-09-30'), (90, '2024-10-01'), (90, '2024-10-02'), (90, '2024-10-03'), (90, '2024-10-04'), 
+(91, '2024-09-30'), (91, '2024-10-01'), (91, '2024-10-02'), (91, '2024-10-03'), (91, '2024-10-04'), 
+(92, '2024-09-30'), (92, '2024-10-01'), (92, '2024-10-02'), (92, '2024-10-03'), (92, '2024-10-04'), 
+(93, '2024-09-30'), (93, '2024-10-01'), (93, '2024-10-02'), (93, '2024-10-03'), (93, '2024-10-04'), 
+(94, '2024-09-30'), (94, '2024-10-01'), (94, '2024-10-02'), (94, '2024-10-03'), (94, '2024-10-04'), 
+(95, '2024-09-30'), (95, '2024-10-01'), (95, '2024-10-02'), (95, '2024-10-03'), (95, '2024-10-04'), 
+(96, '2024-09-30'), (96, '2024-10-01'), (96, '2024-10-02'), (96, '2024-10-03'), (96, '2024-10-04'), 
+(97, '2024-09-30'), (97, '2024-10-01'), (97, '2024-10-02'), (97, '2024-10-03'), (97, '2024-10-04'), 
+(98, '2024-09-30'), (98, '2024-10-01'), (98, '2024-10-02'), (98, '2024-10-03'), (98, '2024-10-04'), 
+(99, '2024-09-30'), (99, '2024-10-01'), (99, '2024-10-02'), (99, '2024-10-03'), (99, '2024-10-04'), 
+(100, '2024-09-30'), (100, '2024-10-01'), (100, '2024-10-02'), (100, '2024-10-03'), (100, '2024-10-04'), 
+(101, '2024-09-30'), (101, '2024-10-01'), (101, '2024-10-02'), (101, '2024-10-03'), (101, '2024-10-04'), 
+(102, '2024-09-30'), (102, '2024-10-01'), (102, '2024-10-02'), (102, '2024-10-03'), (102, '2024-10-04');
