@@ -13,13 +13,13 @@
 }
 
 .sideBarBottom {
-    min-height: 11vh;
+    min-height: 9vh;
     background-color: aqua;
 }
 
 .sideBarTop {
     display: grid;
-    grid-template-rows: 7% 7% 7%;
+    grid-template-rows: 7% 7% 7% 7% 7%;
     margin-top: 5%;
 }
 

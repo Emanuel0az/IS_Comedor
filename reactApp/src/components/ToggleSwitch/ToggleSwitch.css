@@ -1,6 +1,6 @@
 .toggle_switch_container_night {
-    width: 5vw;
-    height: 5vh;
+    width: 4vw;
+    height: 4vh;
     border-radius: 3vw;
     border: 1px solid white;
     background-color: rgb(34, 34, 34);
@@ -10,8 +10,8 @@
 }
 
 .toggle_switch_container_day {
-    width: 5vw;
-    height: 5vh;
+    width: 4vw;
+    height: 4vh;
     border-radius: 3vw;
     border: 1px solid white;
     background-color: rgb(92, 92, 92);
@@ -21,39 +21,38 @@
 }
 
 .circleSwitchNight {
-    height: 30px;
-    width: 30px;
+    height: 18px;
+    width: 18px;
     border-radius: 50%;
     background-color: white;
-    margin-left: 5px;
     transition: all 0.3s ease-in-out;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-left: 7%;
 }
 
 .circleSwitchDay {
-    height: 30px;
-    width: 30px;
+    height: 18px;
+    width: 18px;
     border-radius: 50%;
     background-color: black;
-    margin-left: 50px;
     transition: all 0.3s ease-in-out;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-left: 60%;
 }
 
-.imgNight {
-    height: 100%;
-    width: 100%;
-    color: white;
-    animation: reverse 1s linear infinite;
-}
-
-.imgDay {
-    height: 100%;
-    width: 100%;
+.circleSwitchNight > div{
+    display: grid;
+    place-items: center;
     color: black;
-    animation: reverse 1s linear infinite;
+    margin-right: 7%;
+}
+
+.circleSwitchDay > div{
+    display: grid;
+    place-items: center;
+    color: white;
 }
