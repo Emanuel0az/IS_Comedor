@@ -21,6 +21,11 @@
     margin-left: 1vw;
 }
 
+.students {
+    max-height: 75vh;
+    overflow: auto;
+}
+
 .student {
     display: grid;
     grid-template-columns: repeat(4, 1fr);

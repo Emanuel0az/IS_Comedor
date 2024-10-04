@@ -21,7 +21,7 @@ const Stock = () => {
     </div>
     
     <div className='StockPage'>
-      <StockComponent/>
+      
     </div>  
     </>
   )

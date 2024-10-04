@@ -72,7 +72,6 @@ const StockComponent = () => {
 
   return (
     <div className="containerAll">
-
       <div className="containerFormStock">
         <SearchIcon className="lupa" onClick={focusSearchInput}/> {/* Asocia el evento onClick */}
         <input
@@ -102,21 +101,6 @@ const StockComponent = () => {
                 <div className='seccion_s'>{student.seccion}</div>
                 <div className={`asistencia_s ${getAttendanceColor(attendanceInfo.attended)}`}>
                   Asistió {attendanceInfo.attended} días, Faltó {attendanceInfo.absent} días
-
-      <div>Alertas</div>
-        <div className="containerFormStock"></div>
-        <div className="containerStock">
-            <div className="tittles">
-              <div>Cédula</div>
-              <div>Nombre</div>
-              <div>Sección</div>
-            </div>
-            <div className="students">
-              {students.map((student, index) => (
-                <div key={index} className="student">
-                  <div className='cedula_s'>{student.estudiante_id}</div>
-                  <div className='name_s'>{student.nombre}</div>
-                  <div className='seccion_s'>{student.seccion}</div> 
                 </div>
               </div>
             )
