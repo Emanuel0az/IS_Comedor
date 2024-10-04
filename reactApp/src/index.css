@@ -1,9 +1,26 @@
+* {
+  user-select: none;
+}
+
 body {
-  background-color: rgb(32, 29, 35);
+  padding: 0;
+  margin: 0;
+}
+
+.bodyDay {
+  background-color: rgb(77, 74, 81);
   color: white;
   padding: 0;
   margin: 0;
 }
+
+.bodyNight {
+  background-color: rgb(38, 36, 40);
+  color: white;
+  padding: 0;
+  margin: 0;
+}
+
 
 main {
   display: grid;
