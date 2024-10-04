@@ -1,6 +1,6 @@
 nav {
     display: grid;
-    grid-template-columns: 89% 10%;
+    grid-template-columns: 79% 11% 10%;
     background-color: rgba(0, 0, 255, 0.288);
     min-height: 8vh;
 }

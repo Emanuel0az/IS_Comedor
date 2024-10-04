@@ -1,9 +1,14 @@
 import React from 'react'
 import StockComponent from '../../components/Stock/StockComponent'
+
 import AlertaAsistencia from '../../components/Alertas/Alertas'
 import { CustomModal  } from '../../components/Modal/Modal'
 
+import '../Stock/Stock.css'
+
+
 const Stock = () => {
+  
   return (
     <>
     
@@ -15,6 +20,9 @@ const Stock = () => {
 
     </div>
     
+    <div className='StockPage'>
+      <StockComponent/>
+    </div>  
     </>
   )
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../NavPC/NavPC.css'
+import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
 
 const NavPC = () => {
     const horaConCero = ['1:', '2:', '3:', '4:', '5:', '6:', '7:', '8:', '9:'];
@@ -28,6 +29,7 @@ useEffect(() => {
       <>
       <nav>
         <div onClick={() => navigate('estadisticas/')}>7l Back to Home</div>
+        <div><ToggleSwitch /></div>
         <div>{currentTime}</div>
       </nav>
     </>
