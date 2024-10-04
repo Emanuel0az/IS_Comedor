@@ -26,6 +26,10 @@ const SideBar = () => {
             <BarChartIcon style={{ fontSize: 26 }} />
             <div>Estadísticas</div>
           </div>
+          <div onClick={(() => navigate('email/'))}>
+            <MailIcon style={{ fontSize: 23 }} />
+            <div>Email</div>
+          </div>
 
         </div>
         <div className='sideBarBottom'>
