@@ -3,7 +3,7 @@
     height: 5vh;
     border-radius: 3vw;
     border: 1px solid white;
-    background-color: rgb(44, 43, 43);
+    background-color: rgb(34, 34, 34);
     transition: all 0.3s ease-in-out;
     display: flex;
     align-items: center;
@@ -13,8 +13,8 @@
     width: 5vw;
     height: 5vh;
     border-radius: 3vw;
-    border: 1px solid gray;
-    background-color: white(44, 43, 43);
+    border: 1px solid white;
+    background-color: rgb(92, 92, 92);
     transition: all 0.3s ease-in-out;
     display: flex;
     align-items: center;
@@ -27,6 +27,9 @@
     background-color: white;
     margin-left: 5px;
     transition: all 0.3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .circleSwitchDay {
@@ -36,14 +39,21 @@
     background-color: black;
     margin-left: 50px;
     transition: all 0.3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .imgNight {
     height: 100%;
     width: 100%;
+    color: white;
+    animation: reverse 1s linear infinite;
 }
 
 .imgDay {
     height: 100%;
     width: 100%;
+    color: black;
+    animation: reverse 1s linear infinite;
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import '../ToggleSwitch/ToggleSwitch.css'
-import dayLogo from '../../assets/sun.png'
-import nightLogo from '../../assets/moon.png'
+import ModeNightIcon from '@mui/icons-material/ModeNight';
+import LightModeIcon from '@mui/icons-material/LightMode';
 
 const ToggleSwitch = () => {
     const [colorState, setColorState] = useState(false)
@@ -15,9 +15,10 @@ const ToggleSwitch = () => {
   return (
     <div onClick={(() => handleColorState())} className={`toggle_switch_container_${colorState ? 'day' : 'night'}`}>
         <div className={`circleSwitch${colorState ? 'Day' : 'Night'}`}>
-            {colorState ?
-            <img className='imgNight' src={nightLogo}></img> :
-            <img className='imgDay' src={dayLogo}></img>}
+            {colorState ? 
+            <ModeNightIcon className='imgNight'/> :
+            <LightModeIcon className='imgDay' />
+            }
         </div>
     </div>
   )

@@ -1,10 +1,14 @@
 import React from 'react'
 import StockComponent from '../../components/Stock/StockComponent'
+import '../Stock/Stock.css'
 
 const Stock = () => {
+  
   return (
     <>
-    <StockComponent/>
+    <div className='StockPage'>
+      <StockComponent/>
+    </div>  
     </>
   )
 }
