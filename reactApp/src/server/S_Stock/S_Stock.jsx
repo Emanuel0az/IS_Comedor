@@ -1,41 +1,34 @@
-const url = ('http://localhost:8000/api/estudiantes/')
+import axios from 'axios';
 
-const getStudents = async () => {
+export const getStudents = async () => {
   try {
-    const response = await fetch(url);
-    const data = await response.json();
-    return data
+    const response = await axios.get('http://localhost:8000/api/estudiantes/');
+    return response.data;
   } catch (error) {
-    console.error("Error fetching data:", error);
+    console.error('Error fetching students:', error);
+    return [];
   }
 };
 
-
-// //////////////////////////////////////////////////////////////////////////////
-
-
-
-
-const postStudents = async (newStudent) => {
+export const getAttendance = async () => {
   try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',  // Asegúrate de este encabezado
-      },
-      body: JSON.stringify({ estudiante_id: newStudent.estudiante_id, nombre: newStudent.nombre, seccion: newStudent.seccion })
-
-    });
-    if (!response.ok) {
-      throw new Error('Error en la solicitud POST');
-    }
-    const data = await response.json();
-    console.log(data);
+    const response = await axios.get('http://localhost:8000/api/asistencias/');
+    return response.data;
   } catch (error) {
-    console.error('ERROR POST:', error);
+    console.error('Error fetching attendance:', error);
+    return [];
   }
 };
 
+export const postStudents = async (studentData) => {
+  try {
+    const response = await axios.post('http://localhost:8000/api/estudiantes/', studentData);
+    return response.data;
+  } catch (error) {
+    console.error('Error posting student:', error);
+    throw error;
+  }
+};
 
 
 ////////////////////////////////////////////////////////////////////////////
@@ -92,4 +85,4 @@ const deleteStudents = async (id) => {
 // Ejemplo de uso
 // deleteToy(1);  // Elimina el juguete con ID 1
 
-export { getStudents, postStudents, updateStudents, deleteStudents }
+export { updateStudents, deleteStudents }
