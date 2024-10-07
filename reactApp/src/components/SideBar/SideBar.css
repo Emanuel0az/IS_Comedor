@@ -1,4 +1,4 @@
-.sideBarContainer {
+.sideBarContainerNight {
     background-color: #0c1017;
     min-height: 92vh;
     max-height: 92vh;
@@ -7,6 +7,18 @@
     border-right: 1px solid rgb(73, 73, 73);
     padding: calc(1 * var(--template-spacing));
 }
+
+.sideBarContainerDay {
+    background-color: #ffffff;
+    /* color: rgba(0, 0, 0, 0.689); */
+    min-height: 92vh;
+    max-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgb(73, 73, 73);
+    padding: calc(1 * var(--template-spacing));
+}
+
 
 .sideBarTop {
     min-height: 81vh;
@@ -19,7 +31,7 @@
 
 .sideBarTop {
     display: grid;
-    grid-template-rows: 7% 7% 7% 7% 7%;
+    grid-template-rows: 7% 7% 7% 7%;
     margin-top: 5%;
 }
 
@@ -27,7 +39,7 @@
     height: 100%;
     width: 85%;
     padding-left: 5%;
-    color: rgb(154, 153, 153);
+    /* color: rgb(154, 153, 153); */
     border-radius: 9px;
 
     display: grid;
@@ -46,7 +58,7 @@
     height: 100%;
     width: 85%;
     padding-left: 5%;
-    color: rgb(226, 226, 226);
+    /* color: rgb(226, 226, 226); */
     border-radius: 9px;
 
     display: grid;
@@ -66,7 +78,7 @@
     height: 100%;
     width: 85%;
     padding-left: 5%;
-    color: rgb(255, 255, 255);
+    /* color: rgb(255, 255, 255);    */
     border-radius: 9px;
 
     display: grid;
