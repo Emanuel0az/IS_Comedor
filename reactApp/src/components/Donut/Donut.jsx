@@ -198,9 +198,10 @@ export default function DoughnutChart() {
             <div className='imgDonut'>img</div>
           </div>
           <div className='donutRight'>
-            <div className="w-full max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-md">
+            <div className="div_donut">
+
               <div className="flex items-center justify-center mb-4" style={{ display: 'flex', alignItems: 'center', width: '10vw' }}>
-                <div className="w-[80%] h-[80%]">
+                <div className="w-[80%] h-[80%]"> 
                   {chartData && <Doughnut data={chartData} options={chartOptions} />}
                 </div>
               </div>

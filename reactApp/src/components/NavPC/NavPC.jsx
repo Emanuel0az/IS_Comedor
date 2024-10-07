@@ -28,7 +28,7 @@ useEffect(() => {
     return (
       <>
       <nav>
-        <div onClick={() => navigate('estadisticas/')}>7l Back to Home</div>
+        <div>LOGO</div>
         <div><ToggleSwitch /></div>
         <div>{currentTime}</div>
       </nav>
