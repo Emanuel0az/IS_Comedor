@@ -1,10 +1,15 @@
 .containerStock {
-    min-width: 50%;
-    max-width: 85%;
-    max-height: 90vh;
-    min-height: 70vh;
+    min-width: 92%;
+    max-width: 92%;
+    max-height: 80vh;
+    min-height: 80vh;
     margin-left: 5%;
     border-radius: 5px;
+}
+
+.containerAll {
+    display: grid;
+    grid-template-rows: 12% 88%;
 }
 
 .tittles {
@@ -24,70 +29,22 @@
 .students {
     max-height: 75vh;
     overflow: auto;
+    overflow: transparent;
 }
+
 
 .student {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: 20% 30% 20% 20%; /* Ya que se van a implementar más cosas, no es necesario cambiar esto (Por el momento.) */
     height: 10vh;
-    align-items: center;
+    border-bottom: 1px solid white;
 }
 
 .student > div {
     height: 100%;
     display: grid;
-    place-items: center;
-    box-shadow: 0px 0.2px 1px white;
-    font-size: 18px;
-}
-
-.asistencia_s {
-    padding: 10px;
-}
-
-
-.search_input {
-    border-radius: 30px;
-    height: 5vh;
-    width: 22vw;
-    padding: 10px 20px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    outline: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.search_input:focus {
-    border-color: #007BFF;
-    box-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
-}
-
-.search_input::placeholder {
-    color: #aaa;
-    font-style: italic;
-}
-
-.lupa {
-    color: #007BFF;
-    font-size: 24px;
-    cursor: pointer;
-    transition: color 0.3s ease, transform 0.3s ease;
-    margin-right: 10px;
-}
-
-.lupa:hover {
-    color: #0056b3;
-    transform: scale(1.1);
-}
-
-.containerFormStock {
-    display: flex;
     align-items: center;
-    background-color: rgb(32, 29, 35);
-    border-bottom: 1px solid #68727d;
-    padding: 8px 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-size: 18px;
 }
 
 /* .rojo{
@@ -124,3 +81,87 @@
 }.cont > div {
     transition: all  0.5s ease;
 } */
+
+
+.asistencia_s {
+    padding: 10px;
+}
+
+
+.search_input {
+    border-radius: 30px;
+    height: 5vh;
+    width: 18vw;
+    padding: 7px 18px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0);
+    color: unset;
+}
+
+
+.search_input:hover {
+    border-color: #007BFF;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
+}
+
+.search_input::placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+
+.lupa {
+    color: #007BFF;
+    font-size: 22px;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+    margin-right: 10px;
+}
+
+.lupa:hover {
+    color: #0056b3;
+    transform: scale(1.1);
+}
+
+.containerFormStock {
+    display: flex;
+    align-items: center;
+    background-color: rgba(32, 29, 35, 0);
+    border-bottom: 1px solid #68727d;
+    padding: 8px 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.estuIcon {
+    color: blueviolet;
+}
+
+.profIcon {
+    color: greenyellow;
+}
+
+.becado_no {
+    place-items: center;
+    border-radius: 20px;
+    background-color: rgb(77, 16, 16);
+    width: 40px;
+    max-height: 25px;
+    margin-top: 9%;
+    color: white;
+    font-family: Inter, sans-serif;
+}
+
+.becado_yes {
+    place-items: center;
+    border-radius: 20px;
+    background-color: rgb(28, 103, 45);
+    width: 40px;
+    max-height: 25px;
+    margin-top: 9%;
+    /* color: rgb(74, 203, 74); */
+    color: white;
+    font-family: Inter, sans-serif;
+}

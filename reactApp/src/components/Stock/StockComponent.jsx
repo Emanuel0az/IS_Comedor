@@ -3,14 +3,19 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { getStudents, getAttendance } from '../../server/S_Stock/S_Stock'
 import { parseISO, isSameWeek } from 'date-fns'
+import { updateStateStudents } from '../../server/S_Stock/S_Stock'
+
+
+// Styles
 import '../Stock/StockComponent.css'
 import SearchIcon from '@mui/icons-material/Search';
+import PersonIcon from '@mui/icons-material/Person';
+import AdbIcon from '@mui/icons-material/Adb';
 
 const StockComponent = () => {
   const [students, setStudents] = useState([])
   const [attendance, setAttendance] = useState({})
   const [searchTerm, setSearchTerm] = useState('')
-  
   const searchInputRef = useRef(null) // Crear la referencia
 
   useEffect(() => {
@@ -30,14 +35,14 @@ const StockComponent = () => {
           attended: 0,
           absent: 5
         }
-      })
+      });
 
       attendanceData.forEach(record => {
         const recordDate = parseISO(record.fecha_asistencia)
         if (isSameWeek(recordDate, referenceDate, { weekStartsOn: 1 })) {
           if (attendanceMap[record.estudiante_id]) {
             attendanceMap[record.estudiante_id].attended++
-            attendanceMap[record.estudiante_id].absent--
+            attendanceMap[record.estudiante_id].absent--  
           }
         }
       })
@@ -78,30 +83,30 @@ const StockComponent = () => {
           type="text"
           placeholder="Buscar por nombre o sección..."
           value={searchTerm}
-          onChange={handleSearch}
+          onChange={handleSearch} 
           className="search_input"
           aria-label="Buscar por nombre o sección"
-          ref={searchInputRef}  // Asocia la referencia al input
+          ref={searchInputRef}  // Asocia la referencia al input.
         />
       </div>
       <div className="containerStock">
         <div className="tittles">
-          <div>Cédula</div>
-          <div>Nombre</div>
+          <div>Rol</div>
+          <div>Identidad</div>
           <div>Sección</div>
-          <div>Asistencia</div>
+          <div>Becado</div>
         </div>
         <div className="students">
           {filteredStudents.map((student) => {
-            const attendanceInfo = attendance[student.estudiante_id] || { attended: 0, absent: 5 }
             return (
               <div key={student.estudiante_id} className="student">
-                <div className='cedula_s'>{student.estudiante_id}</div>
-                <div className='name_s'>{student.nombre}</div>
-                <div className='seccion_s'>{student.seccion}</div>
-                <div className={`asistencia_s ${getAttendanceColor(attendanceInfo.attended)}`}>
-                  Asistió {attendanceInfo.attended} días, Faltó {attendanceInfo.absent} días
+                <div>{student.rol == 'prof' ? <AdbIcon className='profIcon' style={{ fontSize: 22 }} /> : <PersonIcon className='estuIcon' style={{ fontSize: 22 }} /> }</div>
+                <div>
+                  <div className='name_s'>{student.nombre}</div>
+                  <div className='cedula_s'>{student.estudiante_id}</div> 
                 </div>
+                <div className='seccion_s'>{student.seccion}</div>
+                <div className={`becado_${student.becado ? 'yes' : 'no'}`}>{student.becado ? <div>Sí</div> : <div>No</div>}</div>
               </div>
             )
           })}

@@ -10,7 +10,7 @@
 
 .sideBarContainerDay {
     background-color: #ffffff;
-    /* color: rgba(0, 0, 0, 0.689); */
+    color: rgba(0, 0, 0, 0.689);
     min-height: 92vh;
     max-height: 92vh;
     display: flex;

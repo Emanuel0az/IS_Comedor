@@ -8,19 +8,17 @@ const ToggleSwitch = () => {
     // Inicializa el estado a partir de localStorage
     return localStorage.getItem('colorState') === 'true'; // Convierte a booleano
   });
-  
+
   const handleColorState = () => {
-    const newColorState = !colorState; // Calcula el nuevo estado
+    const newColorState = !colorState; // Calcula el nuevo estado.
     setColorState(newColorState);
-    localStorage.setItem('colorState', newColorState); // Guarda el nuevo estado
+    localStorage.setItem('colorState', newColorState); // Guarda el nuevo estado.
   };
 
   useEffect(() => {
-    // Actualiza el localStorage cuando colorState cambie
+    // Actualiza el localStorage cuando colorState cambie.
     localStorage.setItem('colorState', colorState);
   }, [colorState]);
-
-
 
   return (
     <>

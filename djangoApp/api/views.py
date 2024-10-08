@@ -1,12 +1,12 @@
 from django.http import JsonResponse
 from django.db.models import Count
-from .models import Asistencias, Estudiantes, Users, Recetas, Ingredientes, Hist_ingredientes,Asistencias
+from .models import Asistencias, Estudiantes, Users, Recetas, Ingredientes, Hist_ingredientes,Asistencias, Hist_pagos
 from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from .serializers import UsersSerializer, RecetasSerializer, IngredientesSerializer, Hist_ingredientesSerializer, AsistenciasSerializer, EstudiantesSerializer
+from .serializers import UsersSerializer, RecetasSerializer, IngredientesSerializer, Hist_ingredientesSerializer, AsistenciasSerializer, EstudiantesSerializer, Hist_pagos_Serializer
 
 
 
@@ -230,9 +230,6 @@ def asistencias_detail(request, pk):
         asistencia.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-        proveedor.delete()
-        return Response({"message": "Proveedor deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
-
 
 
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
@@ -269,3 +266,42 @@ def estudiantes_list(request, pk=None):
     elif request.method == 'DELETE':
         estudiante.delete()
         return Response({"message": "Estudiante eliminado exitosamente"}, status=status.HTTP_204_NO_CONTENT)
+    
+    
+# ////////////////////////////////////////////////////////////////////////////
+
+
+@api_view(['GET', 'POST', 'PUT', 'DELETE'])
+def pagos_list(request, pk=None):
+    if pk:
+        try:
+            var = Hist_pagos.objects.get(pk=pk)
+        except Hist_pagos.DoesNotExist:
+            return Response({"error": "Pago no encontrado"}, status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        if pk:
+            serializer = Hist_pagos_Serializer(var)
+            return Response(serializer.data)
+        else:
+            var = Hist_pagos.objects.all()
+            serializer = Hist_pagos_Serializer(var, many=True)
+            return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = Hist_pagos_Serializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'PUT':
+        serializer = Hist_pagos_Serializer(var, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        var.delete()
+        return Response({"message": "Pago eliminado exitosamente"}, status=status.HTTP_204_NO_CONTENT)
