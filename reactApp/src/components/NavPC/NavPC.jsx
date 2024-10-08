@@ -28,7 +28,7 @@ useEffect(() => {
     return (
       <>
       <nav>
-        <div>LOGO</div>
+        <div>LEGO</div>
         <div><ToggleSwitch /></div>
         <div>{currentTime}</div>
       </nav>

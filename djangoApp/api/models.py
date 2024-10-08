@@ -13,6 +13,7 @@ class Estudiantes(models.Model):
     edad = models.IntegerField(null=True, blank=True)
     seccion = models.CharField(max_length=50, null=True, blank=True)
     becado = models.BooleanField(default=False)
+    rol = models.CharField(max_length=50, choices=[("estudiante", "Estudiante"), ("profesor", "Profesor")], null=True, blank=True)
 
 class Asistencias(models.Model):
     asistencia_id = models.AutoField(primary_key=True)
@@ -42,8 +43,8 @@ class Hist_ingredientes(models.Model):
     nombre = models.CharField(max_length=255, null=True, blank=True)
     cantidad = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
 
-
-# Filtro para verificar si un estudiante tiene beca
-def filtro_estudiantes_con_beca():
-    return Estudiantes.objects.filter(tiene_beca=True)
-
+class  Hist_pagos(models.Model):
+    id_pago = models.AutoField(primary_key=True)
+    estudiante_id = models.ForeignKey(Estudiantes, on_delete=models.CASCADE)
+    fecha_pago = models.DateField(auto_now_add=True)
+    monto = models.DecimalField(max_digits=10, decimal_places=2)
