@@ -72,7 +72,8 @@ export default function DoughnutChart() {
 
   const fetchProductos = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/ingredientes/2/');
+      const randomId = Math.floor(Math.random() * 10) + 2;
+      const response = await fetch(`http://localhost:8000/api/ingredientes/${randomId}/`);
       if (!response.ok) {
         throw new Error('_');
       }

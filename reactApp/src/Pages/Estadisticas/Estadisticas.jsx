@@ -15,7 +15,6 @@ const Estadisticas = () => {
           <div className='mainRightDonutGraphics'>
           <Donut/>
           <Donut/>
-
           <Donut/>
           <Donut/>
           
