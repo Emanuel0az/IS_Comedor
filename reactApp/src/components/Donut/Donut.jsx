@@ -72,7 +72,7 @@ export default function DoughnutChart() {
 
   const fetchProductos = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/ingredientes/1/');
+      const response = await fetch('http://localhost:8000/api/ingredientes/2/');
       if (!response.ok) {
         throw new Error('_');
       }

@@ -1,69 +1,84 @@
 import React, { useState } from 'react';
-import '../FormLogin/FormLogin.css'
-import { useNavigate } from "react-router-dom";
-const FormLogin = () => {
-  const [formData, setFormData] = useState({
-    email: '',
-    contraseña: '',
-  });
+import { useNavigate } from 'react-router-dom';
+import '../FormLogin/FormLogin.css';
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+const FormLogin = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errors, setErrors] = useState({});
 
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // Datos de credenciales permitidas
+  const adminCredentials = {
+    correo: "admin@gmail.com",
+    clave: "1234"
+  };
 
-    try {
-      const response = await fetch('http://localhost:3000/usuarios/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+  const validate = () => {
+    let inputErrors = {};
+    if (!email) inputErrors.email = 'Por favor, ingrese su correo electrónico.';
+    if (!password) inputErrors.password = 'Por favor, ingrese su contraseña.';
+    return inputErrors;
+  };
 
-      if (response.ok) {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const inputErrors = validate();
+    if (Object.keys(inputErrors).length === 0) {
+      // Verificación de credenciales
+      if (adminCredentials.correo === email && adminCredentials.clave === password) {
         alert('Inicio de sesión exitoso');
-        navigate('/');
+        localStorage.setItem('user', true); // Guarda 'admin' en localStorage
+        navigate('/home'); // Redirige a la ruta privada
       } else {
         alert('Credenciales incorrectas');
       }
-    } catch (error) {
-      console.error('Error en el inicio de sesión:', error);
+    } else {
+      setErrors(inputErrors);
+      alert('Ingrese datos');
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Inicio de Sesión</h2>
-      <div>
-        <label>Email:</label>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
+    <div className="form2">
+      <div className="title">
+        <h2 className="title-login">Inicio de Sesión</h2>
       </div>
-      <div>
-        <label>Contraseña:</label>
-        <input
-          type="password"
-          name="contraseña"
-          value={formData.contraseña}
-          onChange={handleChange}
-          required
-        />
+      <div className="login_css">
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label><strong>Correo electrónico</strong></label><br />
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder='Ingrese su Correo'
+              required
+            />
+            <br />
+            <br />
+            {errors.email && <span>{errors.email}</span>}
+          </div>
+          <div>
+            <label><strong>Contraseña</strong></label><br />
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder='Ingrese su Contraseña'
+              required
+            />
+            <br />
+            <br />
+            {errors.password && <span>{errors.password}</span>}
+          </div>
+          <button type="submit">Iniciar Sesión</button>
+          <br />
+          <br />
+        </form>
       </div>
-      <button type="submit">Iniciar Sesión</button>
-    </form>
+    </div>
   );
 };
 
