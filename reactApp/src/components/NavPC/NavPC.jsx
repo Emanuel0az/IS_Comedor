@@ -23,12 +23,18 @@ useEffect(() => {
   return () => clearInterval(intervalId);
 }, [horaConCero]);
 
+  function log () {
+    localStorage.removeItem('user');
+  navigate('/login');
+  }
+    
+  
 
   
     return (
       <>
       <nav>
-        <div>LOGO</div>
+        <div onClick={log}>LOGO</div>
         <div><ToggleSwitch /></div>
         <div>{currentTime}</div>
       </nav>
