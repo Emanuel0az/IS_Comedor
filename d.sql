@@ -3,15 +3,6 @@
 use `django-react`
 
 
-INSERT INTO api_ingredientes
-    (ingredientes_id, nombre, cantidad,fecha_vencimiento)
-VALUES
-(1, 'Harina', 500, '2023-01-01'), 
-(2, 'Azúcar', 200, '2023-02-01'), 
-(3, 'Leche', 1000, '2023-03-01')
-    
-
-
 INSERT INTO api_estudiantes (nombre, edad, seccion, becado)
 VALUES 
 ('Juan Pérez', 12, '6A', true),
@@ -63,12 +54,15 @@ VALUES
 INSERT INTO api_ingredientes (nombre, cantidad, fecha_vencimiento) 
 VALUES 
 ('Arroz', 50.00, '2024-12-31'),
-('Leche', 30.50, '2024-10-15'),
 ('Huevos', 200.00, '2024-11-05'),
 ('Frijoles', 25.75, '2024-12-10'),
 ('Aceite de cocina', 15.00, '2024-11-20'),
-('Azúcar', 40.00, '2025-01-01'),
-('Harina', 10.50, '2024-12-25'),
 ('Sal', 5.00, '2026-02-01'),
 ('Mantequilla', 8.00, '2024-11-10'),
-('Pasta', 20.00, '2024-12-05');
+('Pasta', 20.00, '2024-12-05'),
+('Harina', 500, '2023-01-01'), 
+('Azúcar', 200, '2023-02-01'), 
+('Leche', 1000, '2023-03-01');
+
+
+SELECT * from api_ingredientes 
