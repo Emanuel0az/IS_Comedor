@@ -1,0 +1,78 @@
+/* FormLogin.css */
+.login-container2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  .login-form2 {
+    padding: 2rem;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    border: solid 1px black;
+    box-shadow: 0 4px 5px 4px #1b1a66; 
+  }
+  
+  .login-title2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-group2 {
+    margin-bottom: 1rem;
+  }
+  
+  .form-label2 {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  
+  .form-input2 {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    transition: border-color 0.15s ease-in-out;
+  }
+  
+  .form-input2:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+  
+  .error-message2 {
+    color: #ef4444;
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+  }
+  
+  .submit-button2 {
+    width: 104%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: white;
+    background-color: #3b82f6;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out;
+  }
+  
+  .submit-button2:hover {
+    background-color: #2563eb;
+  }
+  
+  .submit-button2:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+  }
+  

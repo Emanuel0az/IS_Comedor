@@ -27,6 +27,10 @@ useEffect(() => {
     localStorage.removeItem('user');
   navigate('/login');
   }
+  function log2 () {
+    localStorage.removeItem('chef');
+  navigate('/access');
+  }
     
   
 
@@ -36,7 +40,7 @@ useEffect(() => {
       <nav>
         <div onClick={log}>LOGO</div>
         <div><ToggleSwitch /></div>
-        <div>{currentTime}</div>
+        <div onClick={log2}>{currentTime}</div>
       </nav>
     </>
     );

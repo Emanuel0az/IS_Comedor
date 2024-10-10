@@ -3,6 +3,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import MailIcon from '@mui/icons-material/Mail';
 import InventoryIcon from '@mui/icons-material/Inventory';
+import RestaurantIcon from '@mui/icons-material/Restaurant';
 import { useNavigate } from 'react-router-dom';
 import './SideBar.css';
 
@@ -47,6 +48,10 @@ const SideBar = () => {
           <div onClick={() => navigate('email/')}>
             <MailIcon style={{ fontSize: 20 }} />
             <div>Email</div>
+          </div>
+          <div onClick={() => navigate('ingredientes/')}>
+            <RestaurantIcon style={{ fontSize: 20 }} />
+            <div>Ingredientes</div>
           </div>
         </div>
         <div className='sideBarBottom'>
