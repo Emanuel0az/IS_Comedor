@@ -47,4 +47,5 @@ class  Hist_pagos(models.Model):
     id_pago = models.AutoField(primary_key=True)
     estudiante_id = models.ForeignKey(Estudiantes, on_delete=models.CASCADE)
     fecha_pago = models.DateField(auto_now_add=True)
+    fecha_pago_prueba = models.DateField(null=True, blank=True)
     monto = models.DecimalField(max_digits=10, decimal_places=2)

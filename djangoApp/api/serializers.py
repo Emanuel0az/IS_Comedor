@@ -6,7 +6,7 @@ from .models import Users, Recetas, Ingredientes, Hist_ingredientes, Asistencias
 class UsersSerializer(serializers.ModelSerializer):
     class Meta:
         model = Users
-        fields = ['users_id', 'name', 'mail', 'password', 'rol']
+        fields = '__All__'
 
 class RecetasSerializer(serializers.ModelSerializer):
     class Meta:
@@ -40,4 +40,4 @@ class Meta:
 class Hist_pagos_Serializer(serializers.ModelSerializer):
     class Meta:
         model = Hist_pagos
-        fields = ['id_pago', 'estudiante_id', 'fecha_pago', 'monto']
+        fields = ['id_pago', 'estudiante_id', 'fecha_pago', 'monto', 'fecha_pago_prueba']

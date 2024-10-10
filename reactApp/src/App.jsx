@@ -36,7 +36,10 @@ const App = () => {
           </main>
         </>
       ) : (
-        <Routing />
+        <>
+          <NavPC />
+          <Routing />
+        </>
       )}
     </>
   )
