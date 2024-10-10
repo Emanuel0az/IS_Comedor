@@ -4,7 +4,28 @@ use `django-react`
 
 
 
-INSERT INTO api_estudiantes (nombre, edad, seccion, becado)
+INSERT INTO api_estudiantes (nombre, edad, seccion, becado, rol)
+VALUES 
+('Juan Pérez', 12, '6A', true, 'estu'),
+('Ana Gómez', 11, '5B', false, 'estu'),
+('Luis Martínez', 10, '4C', true, 'estu'),
+('Carla Rodríguez', 12, '6B', false, 'estu'),
+('Pedro López', 11, '5A', true, 'estu'),
+('Lucía Hernández', 12, '6C', true, 'estu'),
+('Jorge García', 10, '4B', false, 'estu'),
+('María González', 9, '3A', true, 'estu'),
+('Sofía Morales', 12, '6A', false, 'estu'),
+('Ricardo Vargas', 11, '5B', true, 'estu'),
+('Valeria Rivera', 12, '6C', false, 'estu'),
+('Tomás Ríos', 10, '4A', true, 'estu'),
+('Mateo Cruz', 11, '5C', false, 'estu'),
+('Diana Fernández', 9, '3B', true, 'estu'),
+('Camila Torres', 12, '6B', false, 'estu'),
+('David Suárez', 10, '4A', true, 'estu'),
+('Emilio Medina', 11, '5A', false, 'estu'),
+('Elena Vega', 12, '6C', true, 'estu'),
+('Álvaro Jiménez', 10, '4C', true, 'estu'),
+('Patricia Salas', 11, '5B', false, 'estu');
 
 INSERT INTO api_ingredientes
     (ingredientes_id, nombre, cantidad,fecha_vencimiento)
@@ -16,32 +37,12 @@ VALUES
 
 
 INSERT INTO api_estudiantes (nombre, edad, seccion, becado, rol)
-
 VALUES 
-('Jocksan', 29, 'Prof', false, 'prof')
+('Jackson', 29, 'Prof', false, 'prof')
 
 
 
-('Juan Pérez', 12, '6A', true),
-('Ana Gómez', 11, '5B', false),
-('Luis Martínez', 10, '4C', true),
-('Carla Rodríguez', 12, '6B', false),
-('Pedro López', 11, '5A', true),
-('Lucía Hernández', 12, '6C', true),
-('Jorge García', 10, '4B', false),
-('María González', 9, '3A', true),
-('Sofía Morales', 12, '6A', false),
-('Ricardo Vargas', 11, '5B', true),
-('Valeria Rivera', 12, '6C', false),
-('Tomás Ríos', 10, '4A', true),
-('Mateo Cruz', 11, '5C', false),
-('Diana Fernández', 9, '3B', true),
-('Camila Torres', 12, '6B', false),
-('David Suárez', 10, '4A', true),
-('Emilio Medina', 11, '5A', false),
-('Elena Vega', 12, '6C', true),
-('Álvaro Jiménez', 10, '4C', true),
-('Patricia Salas', 11, '5B', false);
+
 
 
 INSERT INTO api_asistencias (estudiante_id_id, fecha_asistencia)
@@ -87,8 +88,6 @@ UPDATE api_estudiantes SET rol = 'estu' WHERE estudiante_id = 2
 (100, '2024-09-30'), (100, '2024-10-01'), (100, '2024-10-02'), (100, '2024-10-03'), (100, '2024-10-04'), 
 (101, '2024-09-30'), (101, '2024-10-01'), (101, '2024-10-02'), (101, '2024-10-03'), (101, '2024-10-04'), 
 (102, '2024-09-30'), (102, '2024-10-01'), (102, '2024-10-02'), (102, '2024-10-03'), (102, '2024-10-04');
-
-
 (1, '2024-09-30'), (1, '2024-10-01'), (1, '2024-10-02'), (1, '2024-10-03'), (1, '2024-10-04'), 
 (2, '2024-09-30'), (2, '2024-10-01'), (2, '2024-10-02'), (2, '2024-10-03'), (2, '2024-10-04'), 
 (3, '2024-09-30'), (3, '2024-10-01'), (3, '2024-10-02'), (3, '2024-10-03'), (3, '2024-10-04'), 
@@ -112,6 +111,9 @@ UPDATE api_estudiantes SET rol = 'estu' WHERE estudiante_id = 2
 
 
 INSERT INTO api_ingredientes (nombre, cantidad, fecha_vencimiento) 
+INSERT INTO api_ingredientes (nombre, cantidad, fecha_vencimiento) 
+
+INSERT INTO api_ingredientes (nombre, cantidad, fecha_vencimiento) 
 VALUES 
 ('Arroz', 50.00, '2024-12-31'),
 ('Huevos', 200.00, '2024-11-05'),
@@ -119,9 +121,6 @@ VALUES
 ('Aceite de cocina', 15.00, '2024-11-20'),
 ('Sal', 5.00, '2026-02-01'),
 ('Mantequilla', 8.00, '2024-11-10'),
-
-SELECT * from api_ingredientes 
-
 ('Pasta', 20.00, '2024-12-05');
 
 
@@ -153,3 +152,5 @@ VALUES
 
 
 SELECT * FROM api_hist_pagos
+
+-- delete fecha_pago_prueba from api_hist_pagos
