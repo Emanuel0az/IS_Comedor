@@ -36,15 +36,14 @@
     background-color: black;
     margin-left: 60%;
     transition: all 0.3s ease-in-out;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 .imgNight {
-    display: grid;
-    place-items: center;
     color: white;
+    margin-top: 16%;
+    margin-left: 16%;
 }
 .imgDay {
     color: black;
+    margin-top: 35%;
+    margin-left: 1%;
 }

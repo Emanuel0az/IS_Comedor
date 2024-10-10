@@ -38,7 +38,7 @@ const SideBar = () => {
           </div>
           <div onClick={() => navigate('stock/')}>
             <InventoryIcon style={{ fontSize: 19 }} />
-            <div>Inventario</div>
+            <div>Asistencia</div>
           </div>
           <div onClick={() => navigate('estadisticas/')}>
             <BarChartIcon style={{ fontSize: 21 }} />
