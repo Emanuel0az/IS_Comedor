@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './Ingredientes.css'; // Asegúrate de que la ruta sea correcta
+import './Ingredientes.css';
 
-const IngredientComponent = () => {
+export default function Component() {
   const [ingredients, setIngredients] = useState([]);
   const [newIngredient, setNewIngredient] = useState({ nombre: '', cantidad: 0, fecha_vencimiento: '' });
   const [editingIngredient, setEditingIngredient] = useState(null);
 
-  // Fetch ingredients
   useEffect(() => {
     fetchIngredients();
   }, []);
@@ -21,7 +20,6 @@ const IngredientComponent = () => {
     }
   };
 
-  // Add Ingredient
   const addIngredient = async () => {
     if (newIngredient.nombre && newIngredient.cantidad && newIngredient.fecha_vencimiento) {
       await axios.post('http://localhost:8000/api/ingredientes/', newIngredient);
@@ -30,83 +28,83 @@ const IngredientComponent = () => {
     }
   };
 
-  // Update Ingredient
   const updateIngredient = async (ingrediente) => {
     await axios.put(`http://localhost:8000/api/ingredientes/${ingrediente.ingredientes_id}/`, ingrediente);
     setEditingIngredient(null);
     fetchIngredients();
   };
 
-  // Delete Ingredient
   const deleteIngredient = async (id) => {
     await axios.delete(`http://localhost:8000/api/ingredientes/${id}/`);
     fetchIngredients();
   };
 
   return (
-    <div className="ingredient-container">
-      <h1 className="ingredient-title">Inventory Management</h1>
+    <div className="container">
+      <h1 className="title">Inventory Management</h1>
       
-      {/* Form to add/edit ingredients */}
-      <div className="ingredient-form">
-        <h3>{editingIngredient ? 'Edit Ingredient' : 'Add New Ingredient'}</h3>
+      <div className="form">
+        <h3 className="title">{editingIngredient ? 'Edit Ingredient' : 'Add New Ingredient'}</h3>
         <input
           type="text"
-          className="ingredient-input"
+          className="input"
           placeholder="Ingredient Name"
           value={newIngredient.nombre}
           onChange={(e) => setNewIngredient({ ...newIngredient, nombre: e.target.value })}
         />
         <input
           type="number"
-          className="ingredient-input"
+          className="input"
           placeholder="Quantity"
           value={newIngredient.cantidad}
           onChange={(e) => setNewIngredient({ ...newIngredient, cantidad: parseFloat(e.target.value) })}
         />
         <input
           type="date"
-          className="ingredient-input"
+          className="input"
           placeholder="Expiration Date"
           value={newIngredient.fecha_vencimiento}
           onChange={(e) => setNewIngredient({ ...newIngredient, fecha_vencimiento: e.target.value })}
         />
-        <button className="add-button" onClick={addIngredient}>Add Ingredient</button>
+        <button className="button button-primary" onClick={addIngredient}>Add Ingredient</button>
       </div>
 
-      {/* List of ingredients */}
-      <h2 className="ingredient-list-title">Ingredient List</h2>
-      <ul className="ingredient-list">
+      <h2 className="title">Ingredient List</h2>
+      <ul className="list">
         {ingredients.map((ingredient) => (
-          <li key={ingredient.ingredientes_id} className="ingredient-item">
+          <li key={ingredient.ingredientes_id} className="list-item">
             {editingIngredient?.ingredientes_id === ingredient.ingredientes_id ? (
               <>
                 <input
                   type="text"
-                  className="ingredient-input"
+                  className="input"
                   value={editingIngredient.nombre}
                   onChange={(e) => setEditingIngredient({ ...editingIngredient, nombre: e.target.value })}
                 />
                 <input
                   type="number"
-                  className="ingredient-input"
+                  className="input"
                   value={editingIngredient.cantidad}
                   onChange={(e) => setEditingIngredient({ ...editingIngredient, cantidad: parseFloat(e.target.value) })}
                 />
                 <input
                   type="date"
-                  className="ingredient-input"
+                  className="input"
                   value={editingIngredient.fecha_vencimiento}
                   onChange={(e) => setEditingIngredient({ ...editingIngredient, fecha_vencimiento: e.target.value })}
                 />
-                <button className="update-button" onClick={() => updateIngredient(editingIngredient)}>Update</button>
-                <button className="cancel-button" onClick={() => setEditingIngredient(null)}>Cancel</button>
+                <div className="button-group">
+                  <button className="button button-primary" onClick={() => updateIngredient(editingIngredient)}>Update</button>
+                  <button className="button button-secondary" onClick={() => setEditingIngredient(null)}>Cancel</button>
+                </div>
               </>
             ) : (
               <>
-                <span>{ingredient.nombre} - {ingredient.cantidad} - {ingredient.fecha_vencimiento}</span>
-                <button className="edit-button" onClick={() => setEditingIngredient(ingredient)}>Edit</button>
-                <button className="delete-button" onClick={() => deleteIngredient(ingredient.ingredientes_id)}>Delete</button>
+                <span className="item-info">{ingredient.nombre} - {ingredient.cantidad} - {ingredient.fecha_vencimiento}</span>
+                <div className="button-group">
+                  <button className="button button-secondary" onClick={() => setEditingIngredient(ingredient)}>Edit</button>
+                  <button className="button button-danger" onClick={() => deleteIngredient(ingredient.ingredientes_id)}>Delete</button>
+                </div>
               </>
             )}
           </li>
@@ -114,6 +112,4 @@ const IngredientComponent = () => {
       </ul>
     </div>
   );
-};
-
-export default IngredientComponent;
+}

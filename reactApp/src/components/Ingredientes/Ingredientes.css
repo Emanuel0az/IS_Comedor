@@ -1,147 +1,78 @@
-/* Ingredientes.css */
-
-.ingredient-container {
-    max-width: 1000px;
+.container {
+    max-width: 600px;
     margin: 0 auto;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
   }
   
-  .ingredient-title {
-    text-align: center;
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 20px;
+  .title {
     color: #333;
-  }
-  
-  .ingredient-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 30px;
-  }
-  
-  .ingredient-form h3 {
     text-align: center;
-    font-size: 20px;
-    margin-bottom: 10px;
   }
   
-  .ingredient-input {
-    padding: 10px;
-    font-size: 16px;
+  .form {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    outline: none;
-    transition: border-color 0.3s ease;
-    max-width: 8vw;
   }
   
-  .ingredient-input:focus {
-    border-color: #007bff;
-  }
-  
-  .add-button {
-    padding: 10px 15px;
-    font-size: 16px;
-    background-color: #28a745;
-    color: white;
+  .button {
+    padding: 8px 16px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    font-size: 14px;
+    transition: background-color 0.3s;
   }
   
-  .add-button:hover {
-    background-color: #218838;
+  .button-primary {
+    background-color: #007bff;
+    color: white;
   }
   
-  .ingredient-list-title {
-    font-size: 20px;
-    margin-bottom: 15px;
-    text-align: center;
-    color: #333;
+  .button-secondary {
+    background-color: #6c757d;
+    color: white;
   }
   
-  .ingredient-list {
-    list-style: none;
+  .button-danger {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .list {
+    list-style-type: none;
     padding: 0;
-    margin: 0;
+    display: grid;
+    justify-content: center;
   }
   
-  .ingredient-item {
+  .list-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    transition: box-shadow 0.3s ease;
+    min-width: 55vw;
   }
   
-  .ingredient-item:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  .item-info {
+    flex-grow: 1;
   }
   
-  .ingredient-item span {
-    font-size: 16px;
-    color: #333;
+  .button-group {
+    display: flex;
+    gap: 5px;
   }
-  
-  .edit-button, .delete-button, .update-button, .cancel-button {
-    padding: 5px 10px;
-    font-size: 14px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .edit-button {
-    background-color: #007bff;
-    color: white;
-    max-width: 10vw;
-    padding: 12px;
-  }
-  
-  .edit-button:hover {
-    background-color: #0069d9;
-  }
-  
-  .delete-button {
-    background-color: #dc3545;
-    color: white;
-    max-width: 10vw;
-    padding: 12px;
-  }
-  
-  .delete-button:hover {
-    background-color: #c82333;
-  }
-  
-  .update-button {
-    background-color: #28a745;
-    color: white;
-    max-width: 10vw;
-    padding: 12px;
-  }
-  
-  .update-button:hover {
-    background-color: #218838;
-  }
-  
-  .cancel-button {
-    background-color: #6c757d;
-    color: white;
-    max-width: 10vw;
-    padding: 12px;
-  }
-  
-  .cancel-button:hover {
-    background-color: #5a6268;
-  }
-  
