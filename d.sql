@@ -3,6 +3,9 @@
 use `django-react`
 
 
+
+INSERT INTO api_estudiantes (nombre, edad, seccion, becado)
+
 INSERT INTO api_ingredientes
     (ingredientes_id, nombre, cantidad,fecha_vencimiento)
 VALUES
@@ -13,6 +16,7 @@ VALUES
 
 
 INSERT INTO api_estudiantes (nombre, edad, seccion, becado, rol)
+
 VALUES 
 ('Jocksan', 29, 'Prof', false, 'prof')
 
@@ -65,11 +69,15 @@ VALUES
 (19, '2024-09-30'),
 (20, '2024-09-30')
 
+
 SELECT * FROM api_estudiantes
+
 
 UPDATE api_estudiantes SET rol = 'prof' WHERE estudiante_id = 1
 
+
 UPDATE api_estudiantes SET rol = 'estu' WHERE estudiante_id = 2
+
 
 (95, '2024-09-30'), (95, '2024-10-01'), (95, '2024-10-02'), (95, '2024-10-03'), (95, '2024-10-04'), 
 (96, '2024-09-30'), (96, '2024-10-01'), (96, '2024-10-02'), (96, '2024-10-03'), (96, '2024-10-04'), 
@@ -106,13 +114,42 @@ UPDATE api_estudiantes SET rol = 'estu' WHERE estudiante_id = 2
 INSERT INTO api_ingredientes (nombre, cantidad, fecha_vencimiento) 
 VALUES 
 ('Arroz', 50.00, '2024-12-31'),
-('Leche', 30.50, '2024-10-15'),
 ('Huevos', 200.00, '2024-11-05'),
 ('Frijoles', 25.75, '2024-12-10'),
 ('Aceite de cocina', 15.00, '2024-11-20'),
-('Azúcar', 40.00, '2025-01-01'),
-('Harina', 10.50, '2024-12-25'),
 ('Sal', 5.00, '2026-02-01'),
 ('Mantequilla', 8.00, '2024-11-10'),
+
+SELECT * from api_ingredientes 
+
 ('Pasta', 20.00, '2024-12-05');
 
+
+SELECT * FROM api_hist_pagos
+
+
+INSERT INTO api_hist_pagos (fecha_pago, monto, estudiante_id_id, fecha_pago_prueba)
+VALUES
+('2024-10-09', 100, 1, '2024-10-04'), 
+('2024-10-09', 200, 2, '2024-10-04'),
+('2024-10-09', 50, 3, '2024-10-04'),
+('2024-10-09', 150, 4, '2024-10-05'),
+('2024-10-09', 250, 5, '2024-10-05'),
+('2024-10-09', 300, 6, '2024-10-05'),
+('2024-10-09', 400, 7, '2024-10-05'),
+('2024-10-09', 500, 8, '2024-10-06'),
+('2024-10-09', 600, 9, '2024-10-06'),
+('2024-10-09', 700, 10, '2024-10-06'),
+('2024-10-09', 800, 11, '2024-10-06'),
+('2024-10-09', 900, 12, '2024-10-07'),
+('2024-10-09', 1000, 13, '2024-10-07'),
+('2024-10-09', 1100, 14, '2024-10-07'),
+('2024-10-09', 1200, 15, '2024-10-07'),
+('2024-10-09', 1300, 16, '2024-10-08'),
+('2024-10-09', 1400, 17, '2024-10-08'),
+('2024-10-09', 1500, 18, '2024-10-08'),
+('2024-10-09', 1600, 19, '2024-10-08'),
+('2024-10-09', 1700, 20, '2024-10-09');
+
+
+SELECT * FROM api_hist_pagos

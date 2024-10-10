@@ -55,6 +55,7 @@ const FormLogin = () => {
               onChange={(e) => setEmail(e.target.value)}
               placeholder='Ingrese su Correo'
               required
+              autoFocus
             />
             <br />
             <br />

@@ -15,25 +15,25 @@ const getDataToys = async () => {
 
 
 
-// const postToys = async (newToy) => {
-//   try {
-//     const response = await fetch(url, {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',  // Asegúrate de este encabezado
-//       },
-//       body: JSON.stringify({ name: newToy.name, price: newToy.price })
+const postToys = async (newToy) => {
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',  // Asegúrate de este encabezado
+      },
+      body: JSON.stringify({ name: newToy.name, price: newToy.price })
 
-//     });
-//     if (!response.ok) {
-//       throw new Error('Error en la solicitud POST');
-//     }
-//     const data = await response.json();
-//     console.log(data);
-//   } catch (error) {
-//     console.error('ERROR POST:', error);
-//   }
-// };
+    });
+    if (!response.ok) {
+      throw new Error('Error en la solicitud POST');
+    }
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error('ERROR POST:', error);
+  }
+};
 
 
 

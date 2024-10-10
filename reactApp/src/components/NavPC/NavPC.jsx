@@ -34,7 +34,6 @@ useEffect(() => {
     return (
       <>
       <nav>
-        <div>LEGO</div>
         <div onClick={log}>LOGO</div>
         <div><ToggleSwitch /></div>
         <div>{currentTime}</div>

@@ -5,7 +5,6 @@ import React, { useState, useEffect } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import '../Donut/Donut.css'
 
-
 const CenterTextPlugin = {
   id: 'centerText',
   afterDraw(chart, args, options) {
@@ -59,9 +58,14 @@ export default function DoughnutChart() {
   const [productos, setProductos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [nombreProducto, setNombreProducto] = useState(''); // Nombre del producto
+  const [cantidadProducto, setCantidadProducto] = useState(0); // Cantidad del producto
+  const [ultimoId, setUltimoId] = useState(null); // Último ID generado
 
   useEffect(() => {
     fetchProductos();
+    const intervalId = setInterval(fetchProductos, 10000); // Actualizar cada 10 segundos
+    return () => clearInterval(intervalId); // Limpiar el intervalo al desmontar el componente
   }, []);
 
   useEffect(() => {
@@ -72,16 +76,29 @@ export default function DoughnutChart() {
 
   const fetchProductos = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/ingredientes/2/');
+      let randomId;
+
+      // Generar un nuevo ID que no sea igual al último
+      do {
+        randomId = Math.floor(Math.random() * 10) + 1;
+      } while (randomId === ultimoId); // Verificar que no sea igual al anterior
+
+      // Actualizar el último ID
+      setUltimoId(randomId);
+
+      const response = await fetch(`http://localhost:8000/api/ingredientes/${randomId}/`);
       if (!response.ok) {
-        throw new Error('_');
+        throw new Error('Error al obtener los datos');
       }
+
       const data = await response.json();
       const productoConColor = {
         ...data,
         color: data.color || coloresPredefinidos[0],
       };
       setProductos([productoConColor]);
+      setNombreProducto(productoConColor.nombre); // Actualizar el nombre del producto
+      setCantidadProducto(productoConColor.cantidad); // Actualizar la cantidad del producto
       setIsLoading(false);
     } catch (error) {
       setError(error.message);
@@ -139,6 +156,30 @@ export default function DoughnutChart() {
     }
   };
 
+  const determinarEstadoStock = (cantidad) => {
+    const porcentaje = (cantidad / stockMaximo) * 100;
+    if (porcentaje >= 71) {
+      return 'Alto';
+    } else if (porcentaje >= 31) {
+      return 'Medio';
+    } else {
+      return 'Bajo';
+    }
+  };
+
+  const getEstadoClass = (estado) => {
+    switch (estado) {
+      case 'Alto':
+        return 'estadoAlto'; // Clase para alto
+      case 'Medio':
+        return 'estadoMedio'; // Clase para medio
+      case 'Bajo':
+        return 'estadoBajo'; // Clase para bajo
+      default:
+        return '';
+    }
+  };
+
   const chartOptions = {
     responsive: true,
     plugins: {
@@ -164,8 +205,6 @@ export default function DoughnutChart() {
             return `${label}: ${value} (${percentage}%)`;
           }
         },
-        
-
       },
       title: {
         display: false,
@@ -194,12 +233,11 @@ export default function DoughnutChart() {
       <div className="containerDonut">
         <div className="containerTopDonut">
           <div className='donutLeft'>
-            <div className='tittleDonut'>Nombre</div>
+            <div className='tittleDonut'>{nombreProducto}</div> {/* Mostrar el nombre del producto aquí */}
             <div className='imgDonut'>img</div>
           </div>
           <div className='donutRight'>
             <div className="div_donut">
-
               <div className="flex items-center justify-center mb-4" style={{ display: 'flex', alignItems: 'center', width: '10vw' }}>
                 <div className="w-[80%] h-[80%]"> 
                   {chartData && <Doughnut data={chartData} options={chartOptions} />}
@@ -209,10 +247,14 @@ export default function DoughnutChart() {
           </div>
         </div>
         <div className='containerButtomDonut'>
-          <div className="textoDonut">Aquí va el texto</div>
-          <div className="estadoStock">Bajo</div>
+          <div className="textoDonut">
+            {`Producto: ${nombreProducto}, Cantidad: ${cantidadProducto}`} {/* Mostrar nombre y cantidad */}
+          </div>
+          <div className={`estadoStock ${getEstadoClass(determinarEstadoStock(cantidadProducto))}`}>
+            {determinarEstadoStock(cantidadProducto)}
+          </div> {/* Cambia aquí el estado según la cantidad */}
         </div>
       </div>
     </>
-  )
+  );
 }
