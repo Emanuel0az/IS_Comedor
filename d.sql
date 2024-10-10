@@ -3,6 +3,9 @@
 use `django-react`
 
 
+
+INSERT INTO api_estudiantes (nombre, edad, seccion, becado)
+
 INSERT INTO api_ingredientes
     (ingredientes_id, nombre, cantidad,fecha_vencimiento)
 VALUES
@@ -13,6 +16,7 @@ VALUES
 
 
 INSERT INTO api_estudiantes (nombre, edad, seccion, becado, rol)
+
 VALUES 
 ('Jocksan', 29, 'Prof', false, 'prof')
 
@@ -110,14 +114,14 @@ UPDATE api_estudiantes SET rol = 'estu' WHERE estudiante_id = 2
 INSERT INTO api_ingredientes (nombre, cantidad, fecha_vencimiento) 
 VALUES 
 ('Arroz', 50.00, '2024-12-31'),
-('Leche', 30.50, '2024-10-15'),
 ('Huevos', 200.00, '2024-11-05'),
 ('Frijoles', 25.75, '2024-12-10'),
 ('Aceite de cocina', 15.00, '2024-11-20'),
-('Azúcar', 40.00, '2025-01-01'),
-('Harina', 10.50, '2024-12-25'),
 ('Sal', 5.00, '2026-02-01'),
 ('Mantequilla', 8.00, '2024-11-10'),
+
+SELECT * from api_ingredientes 
+
 ('Pasta', 20.00, '2024-12-05');
 
 
