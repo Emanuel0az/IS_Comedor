@@ -14,15 +14,15 @@ const Routing = () => {
   return (
     <>
     <Routes>
-        {/* <Route path='' element={<Home/>} />
-        <Route path='home/' element={<Home/>} />
-        <Route path='estadisticas/' element={<Estadisticas/>} />
-        <Route path='stock/' element={<Stock/>} />
-        <Route path='email/' element={<Email/>} />
-        <Route path='ingredientes/' element={<Ingredientes/>} />
-        <Route path='login/' element={<Login/>} /> */}
         <Route path="/login" element={<Login />} />
-        <Route path="/access" element={<Login2 />} />
+
+
+        <Route path="/access" element={ 
+          <PrivateRoutes>
+            <Login2 /> 
+          </PrivateRoutes>
+        } />
+
         <Route path='' element={
             <PrivateRoutes>
                <Home />
