@@ -1,7 +1,8 @@
-import Routing from "./Routes/Routing"
+import Routing from "./Routes/Routing.jsx"
 import NavPC from "./components/NavPC/NavPC"
 import SideBar from "./components/SideBar/SideBar"
 import { useState, useEffect } from "react"
+import CalendarioModal from "./components/Calendario/Calendario.jsx"
 
 const App = () => {
   const [users, setUsers] = useState(() => {
@@ -32,7 +33,10 @@ const App = () => {
           <NavPC />
           <main>
             <SideBar />
-            <Routing />
+            <div>
+              <CalendarioModal/>
+              <Routing />
+            </div>
           </main>
         </>
       ) : (
