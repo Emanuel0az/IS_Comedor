@@ -25,6 +25,7 @@ main {
   display: grid;
   grid-template-columns: 17% 83%;
 }
+
 .oculto {
   display: none;
 }

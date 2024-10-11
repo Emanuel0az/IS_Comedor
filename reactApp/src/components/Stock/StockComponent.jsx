@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect, useRef } from 'react'
 import { getStudents } from '../../server/S_Stock/S_Stock'
-import { parseISO, isSameWeek } from 'date-fns'
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import { postAsistencia } from '../../server/Asistencia/PostAsistencia'
 
 
@@ -16,6 +17,7 @@ const StockComponent = () => {
   const [students, setStudents] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
   const searchInputRef = useRef(null) // Crear la referencia
+  const [fecha, setFecha] = useState(new Date)
 
   useEffect(() => {
     extractData()
@@ -32,10 +34,20 @@ const StockComponent = () => {
         monto = 600;
     }
 
+    const selectedDate = localStorage.getItem('selectedDate');
+      if (selectedDate) {
+        const fecha = new Date(selectedDate);
+        setFecha(fecha);
+      } else {
+        setFecha(new Date());
+      }
+    const fecha = selectedDate ? new Date(selectedDate) : new Date();
+    setFecha(fecha);
+
     const newRegistro = {
-        estudiante_id: estudiante_id_id, // ID del estudiante
-        fecha_pago_prueba: fecha_pago_prueba, // Puede ser null o una fecha válida
-        monto: monto // Asegúrate de que sea un número
+      estudiante_id: estudiante_id_id,
+      fecha_pago_prueba: fecha.toLocaleDateString('en-CA'), // Convertir la fecha a formato YYYY-MM-DD
+      monto: monto
     };
 
     await postAsistencia(newRegistro); // Llama a la función con el objeto correcto
@@ -102,7 +114,7 @@ const StockComponent = () => {
                 </div>
                 <div className='seccion_s'>{student.seccion}</div>
                 <div className={`becado_${student.becado ? 'yes' : 'no'}`}>{student.becado ? <div>Sí</div> : <div>No</div>}</div>
-                <div className='aprobarAsistencia' onClick={() => envAsistencia(student, student.estudiante_id, '2024-10-04')}>si o no</div>
+                <div className='aprobarAsistencia' onClick={() => envAsistencia(student, student.estudiante_id)}>si o no</div>
               </div>
             )
           })}
