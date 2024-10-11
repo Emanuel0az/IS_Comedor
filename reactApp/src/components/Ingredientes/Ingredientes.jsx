@@ -4,7 +4,7 @@ import './Ingredientes.css';
 
 export default function Component() {
   const [ingredients, setIngredients] = useState([]);
-  const [newIngredient, setNewIngredient] = useState({ nombre: '', cantidad: 0, fecha_vencimiento: '' });
+  const [newIngredient, setNewIngredient] = useState({ nombre: '', cantidad: null, fecha_vencimiento: '' });
   const [editingIngredient, setEditingIngredient] = useState(null);
 
   useEffect(() => {
@@ -23,7 +23,7 @@ export default function Component() {
   const addIngredient = async () => {
     if (newIngredient.nombre && newIngredient.cantidad && newIngredient.fecha_vencimiento) {
       await axios.post('http://localhost:8000/api/ingredientes/', newIngredient);
-      setNewIngredient({ nombre: '', cantidad: 0, fecha_vencimiento: '' });
+      setNewIngredient({ nombre: '', cantidad: null, fecha_vencimiento: '' });
       fetchIngredients();
     }
   };
@@ -43,19 +43,19 @@ export default function Component() {
     <div className="container">
       <h1 className="title">Inventory Management</h1>
       
-      <div className="form">
-        <h3 className="title">{editingIngredient ? 'Edit Ingredient' : 'Add New Ingredient'}</h3>
+      <h3 className="title">{editingIngredient ? 'Edit Ingredient' : 'Add New Ingredient'}</h3>
+      <form className='form'>
         <input
           type="text"
           className="input"
-          placeholder="Ingredient Name"
+          placeholder='Nombre'
           value={newIngredient.nombre}
           onChange={(e) => setNewIngredient({ ...newIngredient, nombre: e.target.value })}
         />
         <input
           type="number"
           className="input"
-          placeholder="Quantity"
+          placeholder="Cantidad"
           value={newIngredient.cantidad}
           onChange={(e) => setNewIngredient({ ...newIngredient, cantidad: parseFloat(e.target.value) })}
         />
@@ -66,8 +66,8 @@ export default function Component() {
           value={newIngredient.fecha_vencimiento}
           onChange={(e) => setNewIngredient({ ...newIngredient, fecha_vencimiento: e.target.value })}
         />
-        <button className="button button-primary" onClick={addIngredient}>Add Ingredient</button>
-      </div>
+      </form>
+      <button className="button button-primary" onClick={addIngredient}>Add Ingredient</button>
 
       <h2 className="title">Ingredient List</h2>
       <ul className="list">
@@ -75,28 +75,28 @@ export default function Component() {
           <li key={ingredient.ingredientes_id} className="list-item">
             {editingIngredient?.ingredientes_id === ingredient.ingredientes_id ? (
               <>
-                <input
-                  type="text"
-                  className="input"
-                  value={editingIngredient.nombre}
-                  onChange={(e) => setEditingIngredient({ ...editingIngredient, nombre: e.target.value })}
-                />
-                <input
-                  type="number"
-                  className="input"
-                  value={editingIngredient.cantidad}
-                  onChange={(e) => setEditingIngredient({ ...editingIngredient, cantidad: parseFloat(e.target.value) })}
-                />
-                <input
-                  type="date"
-                  className="input"
-                  value={editingIngredient.fecha_vencimiento}
-                  onChange={(e) => setEditingIngredient({ ...editingIngredient, fecha_vencimiento: e.target.value })}
-                />
-                <div className="button-group">
-                  <button className="button button-primary" onClick={() => updateIngredient(editingIngredient)}>Update</button>
-                  <button className="button button-secondary" onClick={() => setEditingIngredient(null)}>Cancel</button>
-                </div>
+                  <input
+                    type="text"
+                    className="input"
+                    value={editingIngredient.nombre}
+                    onChange={(e) => setEditingIngredient({ ...editingIngredient, nombre: e.target.value })}
+                  />
+                  <input
+                    type="number"
+                    className="input"
+                    value={editingIngredient.cantidad}
+                    onChange={(e) => setEditingIngredient({ ...editingIngredient, cantidad: parseFloat(e.target.value) })}
+                  />
+                  <input
+                    type="date"
+                    className="input"
+                    value={editingIngredient.fecha_vencimiento}
+                    onChange={(e) => setEditingIngredient({ ...editingIngredient, fecha_vencimiento: e.target.value })}
+                  />
+                  <div className="button-group">
+                    <button className="button button-primary" onClick={() => updateIngredient(editingIngredient)}>Update</button>
+                    <button className="button button-secondary" onClick={() => setEditingIngredient(null)}>Cancel</button>
+                  </div>
               </>
             ) : (
               <>
