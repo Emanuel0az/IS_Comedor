@@ -7,7 +7,8 @@ import Email from '../Pages/Email_/Email'
 import { Ingredientes } from '../Pages/Ingredientes/Ingredientes'
 import { Login } from '../Pages/Login/Login'
 import { Login2 } from '../Pages/Login/Login2'
-import { PrivateRoutes, PrivateRoutes2 } from "./privateRoutes"
+import { Login3 } from '../Pages/Login/Login3'
+import { PrivateRoutes, PrivateRoutes2, PrivateRoutes3 } from "./privateRoutes"
 
 
 const Routing = () => {
@@ -20,6 +21,11 @@ const Routing = () => {
         <Route path="/access" element={ 
           <PrivateRoutes>
             <Login2 /> 
+          </PrivateRoutes>
+        } />
+        <Route path="/accesss" element={ 
+          <PrivateRoutes>
+            <Login3 /> 
           </PrivateRoutes>
         } />
 
@@ -38,10 +44,10 @@ const Routing = () => {
                <Estadisticas />
             </PrivateRoutes>
           } />
-        <Route path='stock/' element={
-            <PrivateRoutes>
+        <Route path='asistencias/' element={
+            <PrivateRoutes3>
                <Stock />
-            </PrivateRoutes>
+            </PrivateRoutes3>
           } />
         <Route path='email/' element={
             <PrivateRoutes>

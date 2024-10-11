@@ -22,3 +22,14 @@ export const PrivateRoutes2 = ({ children }) => {
 
     return children;
 }
+export const PrivateRoutes3 = ({ children }) => {
+    const user = localStorage.getItem('asistir');
+    const location = useLocation();
+
+    if (!user) {
+        // Redirige al login y guarda la ubicación actual
+        return <Navigate to="/accesss" state={{ from: location }} replace />;
+    }
+
+    return children;
+}

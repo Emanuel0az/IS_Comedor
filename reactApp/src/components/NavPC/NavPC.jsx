@@ -26,6 +26,7 @@ useEffect(() => {
 
   function log () {
     localStorage.removeItem('user');
+    localStorage.removeItem('chef');
   navigate('/login');
   }
   function log2 () {
