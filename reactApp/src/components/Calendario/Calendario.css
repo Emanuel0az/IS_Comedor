@@ -1,91 +1,90 @@
 .container {
-    position: relative;
+  position: relative;
 }
   
-  .button {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-bottom: 1%;
-    margin-top: 1%;
+.button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 1%;
+  margin-top: 1%;
 }
   
-  .modalOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(60, 58, 68, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
   
-  .modalContent {
-    background-color: white;
-    padding: 10px;
-    border-radius: 5px;
-    width: 20vw;
-    height: 45vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: auto;
+.modalContent {
+  background-color: #0f0e4a;
+  border-radius: 5px;
+  width: 20vw;
+  height: 45vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
 }
   
-  .customHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 5px;
+.customHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;    
 }
   
-  .customHeader button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 2px 5px;
-    font-size: 0.8em;
+.customHeader button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 5px;
+  font-size: 0.8em;
 }
   
-  /* Estilos adicionales para hacer que el calendario se ajuste al tamaño del modal */
-  .modalContent :global(.react-datepicker) {
-    font-size: 0.7em;
-    width: 100%;
+/* Estilos adicionales para hacer que el calendario se ajuste al tamaño del modal */
+.modalContent :global(.react-datepicker) {
+  font-size: 0.7em;
+  width: 100%;
 }
   
-  .modalContent :global(.react-datepicker__month-container) {
-    float: none;
-    width: 100%;
+.modalContent :global(.react-datepicker__month-container) {
+  float: none;
+  width: 100%;
 }
   
-  .modalContent :global(.react-datepicker__day-name), 
-  .modalContent :global(.react-datepicker__day),
-  .modalContent :global(.react-datepicker__time-name) {
-    width: 1.5em;
-    line-height: 1.5em;
-    margin: 0.1em;
+.modalContent :global(.react-datepicker__day-name), 
+.modalContent :global(.react-datepicker__day),
+.modalContent :global(.react-datepicker__time-name) {
+  width: 1.5em;
+  line-height: 1.5em;
+  margin: 0.1em;
 }
   
-  .modalContent :global(.react-datepicker__month-year-dropdown-container) {
-    font-size: 0.8em;
+.modalContent :global(.react-datepicker__month-year-dropdown-container) {
+  font-size: 0.8em;
 }
   
-  .modalContent :global(.react-datepicker__year-wrapper) {
-    max-width: 100%;
-    justify-content: center;
+.modalContent :global(.react-datepicker__year-wrapper) {
+  max-width: 100%;
+  justify-content: center;
 }
   
-  .modalContent :global(.react-datepicker__year-text) {
-    padding: 2px;
-    margin: 1px;
+.modalContent :global(.react-datepicker__year-text) {
+  padding: 2px;
+  margin: 1px;
 }
   
-  .modalContent :global(.react-datepicker__month-text) {
-    padding: 2px;
-    margin: 1px;
+.modalContent :global(.react-datepicker__month-text) {
+  padding: 2px;
+  margin: 1px;
 }

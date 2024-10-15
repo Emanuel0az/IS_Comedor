@@ -36,9 +36,6 @@
   margin-bottom: 0.5rem;
 }
   
-.contact-info p {
-  color: #a0aec0;
-}
   
 .social-icons {
   display: flex;
@@ -51,7 +48,7 @@
 }
   
 .social-icons a:hover {
-  color: #ffffff;
+  color: skyblue;
 }
   
 .copyright {

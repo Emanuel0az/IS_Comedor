@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { format, startOfWeek, isSameDay, addDays, differenceInCalendarDays } from 'date-fns';
 import './Grafica.css';
@@ -12,8 +12,13 @@ const SessionsChart = () => {
       .then(response => response.json())
       .then(asistenciaData => {
         const asistenciaCount = {};
-        const today = new Date();
-        const startOfThisWeek = startOfWeek(today, { weekStartsOn: 1 }); // Lunes de esta semana
+
+
+        const today = new Date();  // Esto es lo que hay que cambiar para tomar una fecha. XD
+
+
+
+        const startOfThisWeek = startOfWeek(new Date('2024-10-12'), { weekStartsOn: 0 }); // Lunes de esta semana
 
         // Inicializar todos los días de la semana con 0
         const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
