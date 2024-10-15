@@ -64,7 +64,7 @@ export default function Component() {
           type="number"
           className="input"
           placeholder="Cantidad"
-          value={newIngredient.cantidad || ''}
+          value={newIngredient.cantidad || null}
           onChange={(e) => setNewIngredient({ ...newIngredient, cantidad: parseFloat(e.target.value) || '' })}
           required
         />
