@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import axios from 'axios';
 import './NodeMailer.css';
+
+const containerStyle = {
+  width: '100%',
+  height: '500px',
+};
+
+const center = {
+  lat: 9.981382394121916, // Latitud para centrar el mapa (San José, Costa Rica en este caso)
+  lng: -84.7570828674284, // Longitud
+};
 
 const NodeMailer = () => {
   const [formData, setFormData] = useState({
@@ -30,28 +41,14 @@ const NodeMailer = () => {
       });
       if (response.ok) {
         setStatus('Correo enviado exitosamente.');
-        setFormData({
-          name: '',
-          email: '',
-          message: ''
-        });
-
-        // Hacer que el mensaje desaparezca después de 5 segundos
-        setTimeout(() => {
-          setStatus('');
-        }, 5000);
+        setTimeout(() => setStatus(''), 5000);
+        setFormData({ name: '', email: '', message: '' }); // Limpia los campos después de enviar
       } else {
         setStatus('Hubo un error al enviar el correo.');
-        setTimeout(() => {
-          setStatus('');
-        }, 5000);
       }
     } catch (error) {
       console.error(error);
       setStatus('Hubo un error al enviar el correo.');
-      setTimeout(() => {
-        setStatus('');
-      }, 5000);
     }
   };
 
@@ -66,7 +63,7 @@ const NodeMailer = () => {
             id="name"
             name="name"
             className="form-input"
-            value={formData.name}
+            value={formData.name || ''}
             onChange={handleChange}
             required
           />
@@ -77,7 +74,7 @@ const NodeMailer = () => {
             id="email"
             name="email"
             className="form-input"
-            value={formData.email}
+            value={formData.email || ''}
             onChange={handleChange}
             required
           />
@@ -87,7 +84,7 @@ const NodeMailer = () => {
             id="message"
             name="message"
             className="form-textarea"
-            value={formData.message}
+            value={formData.message || ''}
             onChange={handleChange}
             required
           ></textarea>
@@ -97,7 +94,19 @@ const NodeMailer = () => {
         
         {status && <p className="form-status">{status}</p>}
       </div>
-      <div>Lorem ipsum dolor sit, amet consectetur adipisicing elit...</div>
+      
+      {/* Aquí se reemplaza el "Lorem ipsum" con el mapa */}
+      <div>
+        <LoadScript googleMapsApiKey="AIzaSyDTf-6xMvlajez4UHvXTBu3WIUIi6pMTiQ">
+          <GoogleMap
+            mapContainerStyle={containerStyle}
+            center={center}
+            zoom={15}
+          >
+            <Marker position={center} />
+          </GoogleMap>
+        </LoadScript>
+      </div>
     </div>
   );
 };
