@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import './Ingredientes.css';
-
 export default function Component() {
   const [ingredients, setIngredients] = useState([]);
   const [newIngredient, setNewIngredient] = useState({ nombre: '', cantidad: null, fecha_vencimiento: '' });
   const [editingIngredient, setEditingIngredient] = useState(null);
-
   useEffect(() => {
     fetchIngredients();
   }, []);
-
   const fetchIngredients = async () => {
     try {
       const response = await fetch('http://localhost:8000/api/ingredientes/');
@@ -19,7 +16,6 @@ export default function Component() {
       console.error('Error fetching ingredients:', error);
     }
   };
-
   const addIngredient = async () => {
     if (newIngredient.nombre && newIngredient.cantidad && newIngredient.fecha_vencimiento) {
       await fetch('http://localhost:8000/api/ingredientes/', {
@@ -33,7 +29,6 @@ export default function Component() {
       fetchIngredients();
     }
   };
-
   const updateIngredient = async (ingrediente) => {
     await fetch(`http://localhost:8000/api/ingredientes/${ingrediente.ingredientes_id}/`, {
       method: 'PUT',
@@ -45,18 +40,15 @@ export default function Component() {
     setEditingIngredient(null);
     fetchIngredients();
   };
-
   const deleteIngredient = async (id) => {
     await fetch(`http://localhost:8000/api/ingredientes/${id}/`, {
       method: 'DELETE',
     });
     fetchIngredients();
   };
-
   return (
     <div className="container">
       <h1 className="title">Inventory Management</h1>
-      
        <form action="" className='form'>
         <h3 className="title">{editingIngredient ? 'Edit Ingredient' : 'Add New Ingredient'}</h3>
         <input
@@ -86,7 +78,6 @@ export default function Component() {
         />
         <button className="button button-primary" onClick={addIngredient}>Add Ingredient</button>
         </form>
-
       <h2 className="title">Ingredient List</h2>
       <ul className="list">
         {ingredients.map((ingredient) => (
@@ -102,7 +93,7 @@ export default function Component() {
                 <input
                   type="number"
                   className="input"
-                  value={editingIngredient.cantidad || ''}
+                  value={editingIngredient.cantidad || null}
                   onChange={(e) => setEditingIngredient({ ...editingIngredient, cantidad: parseFloat(e.target.value) || '' })}
                 />
                 <input
