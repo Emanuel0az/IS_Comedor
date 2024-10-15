@@ -1,11 +1,11 @@
 import React from 'react'
 import '../Email_/Email.css'
-import EmailOpenAI from '../../components/EmailOpenAI/EmailOpenAI'
+import NodeMailer from '../../components/Email/NodeMailer.jsx'
 
 const Email = () => {
   return (
     <>
-    <EmailOpenAI/>
+    <NodeMailer/>
     </>
   )
 }

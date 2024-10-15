@@ -1,3 +1,5 @@
+version: '3'
+
 services:
   react:
     container_name: react_app
@@ -11,6 +13,9 @@ services:
       - "5173:5173"
     environment:
       - CHOKIDAR_USEPOLLING=true
+    depends_on:
+      - node
+
   django:
     image: django_app
     container_name: django_app
@@ -23,9 +28,27 @@ services:
     command: ["./wait-for-it.sh", "-t", "30", "mysql:3306", "--", "python", "manage.py", "runserver", "0.0.0.0:8000"]
     depends_on:
       - mysql
-  mysql:
 
+  node:
+    container_name: node_app
+    image: node_app
+    build:
+      context: ./node
+    volumes:
+      - ./node:/app
+    ports:
+      - "3000:3000"
+    environment:
+      - EMAIL_USER=emanuelabarcazuniga@gmail.com         # Correo del remitente
+      - EMAIL_PASS=faum lxtv xdcr xzju                # Contraseña del correo
+      - RECIPIENT_EMAIL=emanuelabarcazuniga@gmail.com  # Correo del destinatario
+    depends_on:
+      - django
+    command: ["node", "NodeMailer2.js"]  # Si usas "npm start" para iniciar el servidor Node.js
+
+  mysql:
     image: mysql:latest
+    container_name: mysql
     ports:
       - "3307:3306"
     environment:
@@ -34,5 +57,6 @@ services:
     volumes:
       - django_react_data:/data/db
       - ./dumps:/docker-entrypoint-initdb.d:ro
+
 volumes:
   django_react_data:
