@@ -1,8 +1,8 @@
 /* styles.css */
 .form-container {
-    min-width: 500px;
-    margin: 0 auto;
-    padding: 20px;
+    /* min-width: 500px; */
+    max-width: 500px;
+    padding: 30px;
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -59,3 +59,8 @@
     color: #d9534f;
   }
   
+  .division {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 55px;
+  }
