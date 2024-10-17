@@ -3,33 +3,33 @@
 use `django-react`
 
 -- Inserción de estudiantes
-INSERT INTO api_estudiantes (nombre, edad, seccion, becado, rol)
-VALUES 
-('Juan Pérez', 12, '6A', true, 'estu'),
-('Ana Gómez', 11, '5B', false, 'estu'),
-('Luis Martínez', 10, '4C', true, 'estu'),
-('Carla Rodríguez', 12, '6B', false, 'estu'),
-('Pedro López', 11, '5A', true, 'estu'),
-('Lucía Hernández', 12, '6C', true, 'estu'),
-('Jorge García', 10, '4B', false, 'estu'),
-('María González', 9, '3A', true, 'estu'),
-('Sofía Morales', 12, '6A', false, 'estu'),
-('Ricardo Vargas', 11, '5B', true, 'estu'),
-('Valeria Rivera', 12, '6C', false, 'estu'),
-('Tomás Ríos', 10, '4A', true, 'estu'),
-('Mateo Cruz', 11, '5C', false, 'estu'),
-('Diana Fernández', 9, '3B', true, 'estu'),
-('Camila Torres', 12, '6B', false, 'estu'),
-('David Suárez', 10, '4A', true, 'estu'),
-('Emilio Medina', 11, '5A', false, 'estu'),
-('Elena Vega', 12, '6C', true, 'estu'),
-('Álvaro Jiménez', 10, '4C', true, 'estu'),
-('Patricia Salas', 11, '5B', false, 'estu');
+-- INSERT INTO api_estudiantes (nombre, edad, seccion, becado, rol)
+-- VALUES 
+-- ('Juan Pérez', 12, '6A', true, 'estu'),
+-- ('Ana Gómez', 11, '5B', false, 'estu'),
+-- ('Luis Martínez', 10, '4C', true, 'estu'),
+-- ('Carla Rodríguez', 12, '6B', false, 'estu'),
+-- ('Pedro López', 11, '5A', true, 'estu'),
+-- ('Lucía Hernández', 12, '6C', true, 'estu'),
+-- ('Jorge García', 10, '4B', false, 'estu'),
+-- ('María González', 9, '3A', true, 'estu'),
+-- ('Sofía Morales', 12, '6A', false, 'estu'),
+-- ('Ricardo Vargas', 11, '5B', true, 'estu'),
+-- ('Valeria Rivera', 12, '6C', false, 'estu'),
+-- ('Tomás Ríos', 10, '4A', true, 'estu'),
+-- ('Mateo Cruz', 11, '5C', false, 'estu'),
+-- ('Diana Fernández', 9, '3B', true, 'estu'),
+-- ('Camila Torres', 12, '6B', false, 'estu'),
+-- ('David Suárez', 10, '4A', true, 'estu'),
+-- ('Emilio Medina', 11, '5A', false, 'estu'),
+-- ('Elena Vega', 12, '6C', true, 'estu'),
+-- ('Álvaro Jiménez', 10, '4C', true, 'estu'),
+-- ('Patricia Salas', 11, '5B', false, 'estu');
 
--- Inserción de profesores
-INSERT INTO api_estudiantes (nombre, edad, seccion, becado, rol)
-VALUES 
-('Jackson', 29, 'Prof', false, 'prof');
+-- -- Inserción de profesores
+-- INSERT INTO api_estudiantes (nombre, edad, seccion, becado, rol)
+-- VALUES 
+-- ('Jackson', 29, 'Prof', false, 'prof');
 
 -- Inserción de ingredientes
 INSERT INTO api_ingredientes (ingredientes_id, nombre, cantidad, fecha_vencimiento)
@@ -104,3 +104,45 @@ VALUES
 ('2024-10-09', 1100, 14, '2024-10-07'),
 ('2024-10-09', 1200, 15, '2024-10-07'),
 ('2024-10-09', 1300, 16, '2024-10-08');
+
+
+CREATE TABLE Estudiantes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    cedula VARCHAR(20) NOT NULL,
+    apellidos VARCHAR(70) NOT NULL,
+    nombre VARCHAR(70) NOT NULL,
+    seccion VARCHAR(10) DEFAULT NULL, 
+    fecha_nacimiento VARCHAR(70) NOT NULL,
+    edad VARCHAR(50) NOT NULL,
+    telefono VARCHAR(15),
+    rol ENUM('estu', 'prof') NOT NULL, 
+    becado BOOLEAN DEFAULT False, 
+    UNIQUE (cedula)
+);
+
+
+select * from `Estudiantes` LIMIT 1000
+
+drop Table `Estudiantes`
+
+LOAD DATA INFILE '/var/lib/mysql-files/Estudiantes_definitivo.csv'
+INTO TABLE Estudiantes
+CHARACTER SET utf8mb4
+FIELDS TERMINATED BY ';' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 5 LINES
+(cedula, apellidos, nombre, seccion, fecha_nacimiento, edad, telefono);
+
+
+
+
+
+SHOW VARIABLES LIKE 'secure_file_priv';
+
+SHOW TABLE STATUS LIKE 'Estudiantes';
+
+ALTER TABLE Estudiantes CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+
+docker cp Estudiantes_sin_ñ.csv 946b410a0be377f6abfc681a9c235c73d14d6a81dc593eda7671193888241062:/Estudiantes_sin_ñ.csv
