@@ -8,8 +8,7 @@
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: #1b1a66ab;
-  border-radius: 10px;
+  background-color: #1b1a668a;
 }
 
 *::-webkit-scrollbar-track {
@@ -24,6 +23,18 @@ body {
 main {
   display: grid;
   grid-template-columns: 17% 83%;
+  max-height: 100%;
+}
+
+.structureHeader {
+  display: grid;
+  grid-template-columns: 86% 10%;
+  border-bottom: 1px solid grey;
+  height: 11vh;
+}
+
+.Routing {
+  overflow: auto;
 }
 
 .oculto {

@@ -8,17 +8,14 @@ const SessionsChart = () => {
   const [lastUpdate, setLastUpdate] = useState(new Date()); // Última fecha de actualización
 
   const fetchData = () => {
-    fetch('http://localhost:8000/api/asistencias/')
+    fetch('http://localhost:8000/api/hist_pagos/')
       .then(response => response.json())
       .then(asistenciaData => {
         const asistenciaCount = {};
 
-
         const today = new Date();  // Esto es lo que hay que cambiar para tomar una fecha. XD
 
-
-
-        const startOfThisWeek = startOfWeek(new Date('2024-10-12'), { weekStartsOn: 0 }); // Lunes de esta semana
+        const startOfThisWeek = startOfWeek(new Date(localStorage.getItem('selectedDate')), { weekStartsOn: 0 }); // Lunes de esta semana
 
         // Inicializar todos los días de la semana con 0
         const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
@@ -27,7 +24,8 @@ const SessionsChart = () => {
         });
 
         asistenciaData.forEach(item => {
-          const asistenciaDate = new Date(item.fecha_asistencia);
+          const asistenciaDate = new Date(item.fecha_pago);  // ITEM              🔴            🔴           🔴            🔴            🔴
+
           const asistenciaDatePlusOne = addDays(asistenciaDate, 1);
 
           // Verificar si la fecha de asistencia pertenece a esta semana

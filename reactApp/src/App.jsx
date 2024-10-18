@@ -34,8 +34,13 @@ const App = () => {
           <main>
             <SideBar />
             <div>
-              <CalendarioModal/>
-              <Routing />
+              <div className="structureHeader">
+                <div></div>
+                <CalendarioModal/>
+              </div>
+              <div className="Routing">
+                <Routing/>
+              </div>
             </div>
           </main>
         </>

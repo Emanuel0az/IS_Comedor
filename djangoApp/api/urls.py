@@ -18,10 +18,6 @@ urlpatterns = [
     path('ingredientes/', views.ingredientes_list, name='ingredientes_list'),
     path('ingredientes/<int:pk>/', views.ingredientes_list, name='ingredientes_list'),
 
-    # Asistencias
-    path('asistencias/', views.asistencias_list, name='asistencias_list'),
-    path('asistencias/<int:pk>/', views.asistencias_detail, name='asistencias_detail'),
-
     # Lista Estudiante
     path('estudiantes/', views.estudiantes_list, name='students_list'),
     path('estudiantes/<int:pk>/', views.estudiantes_list, name='students_list'),
