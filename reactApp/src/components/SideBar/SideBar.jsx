@@ -34,23 +34,23 @@ const SideBar = () => {
     <>
       <div className={`sideBarContainer${colorState ? 'Day' : 'Night '}`}>
         <div className='sideBarTop'>
-            <div onClick={() => { navigate('home/'); localStorage.removeItem('chef'); Cookies.remove('token'); }}>           
+            <div onClick={() => { navigate('home/');  Cookies.remove('token'); }}>           
                <HomeIcon style={{ fontSize: 20 }} />
             <div>Home</div>
           </div>
-          <div onClick={() => {navigate('asistencias/'); localStorage.removeItem('chef'); Cookies.remove('token');}}>
+          <div onClick={() => {navigate('asistencias/');  Cookies.remove('token');}}>
             <InventoryIcon style={{ fontSize: 19 }} />
             <div>Asistencia</div>
           </div>
-          <div onClick={() => {navigate('estadisticas/'); localStorage.removeItem('chef'); Cookies.remove('token');}}>
+          <div onClick={() => {navigate('estadisticas/');  Cookies.remove('token');}}>
             <BarChartIcon style={{ fontSize: 21 }} />
             <div>Estadísticas</div>
           </div>
-          <div onClick={() => {navigate('email/'); localStorage.removeItem('chef'); Cookies.remove('token');}}>
+          <div onClick={() => {navigate('email/');  Cookies.remove('token');}}>
             <MailIcon style={{ fontSize: 20 }} />
             <div>Email</div>
           </div>
-          <div onClick={() => {navigate('ingredientes/'); localStorage.removeItem('chef'); Cookies.remove('token');}}>
+          <div onClick={() => {navigate('ingredientes/');  Cookies.remove('token');}}>
             <RestaurantIcon style={{ fontSize: 20 }} />
             <div>Ingredientes</div>
           </div>
