@@ -35,13 +35,10 @@ services:
       - ./node:/app
     ports:
       - "3000:3000"
-    environment:
-      - EMAIL_USER=emanuelabarcazuniga@gmail.com         # Correo del remitente
-      - EMAIL_PASS=faum lxtv xdcr xzju                # Contraseña del correo
-      - RECIPIENT_EMAIL=emanuelabarcazuniga@gmail.com  # Correo del destinatario
     depends_on:
       - django
-    command: ["node", "NodeMailer2.js"]  # Si usas "npm start" para iniciar el servidor Node.js
+    command: ["node", "NodeMailer2.js"] 
+
   mysql:
     image: mysql:latest
     container_name: mysql
@@ -53,5 +50,6 @@ services:
     volumes:
       - django_react_data:/data/db
       - ./dumps:/docker-entrypoint-initdb.d:ro
+
 volumes:
   django_react_data:
