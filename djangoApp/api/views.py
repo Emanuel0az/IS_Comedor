@@ -325,3 +325,25 @@ class LoginView(APIView):
             })
         else:
             return Response({"error": "Invalid password"}, status=status.HTTP_401_UNAUTHORIZED)
+        
+        
+        
+class LoginView2(APIView):
+    def post(self, request, *args, **kwargs):
+        # Aquí defines la contraseña y el correo predefinidos
+        predefinido_email = "admin@gmail.com"  # Reemplaza con tu correo
+        predefinida_password = "1234"
+        
+        email = request.data.get('email')
+        password = request.data.get('password')
+
+        # Verificar si el correo y la contraseña son correctos
+        if email == predefinido_email and password == predefinida_password:
+            # Si ambos son correctos, generar el token
+            refresh = RefreshToken()
+            return Response({
+                'refresh': str(refresh),
+                'access': str(refresh.access_token),
+            })
+        else:
+            return Response({"error": "Invalid email or password"}, status=status.HTTP_401_UNAUTHORIZED)
