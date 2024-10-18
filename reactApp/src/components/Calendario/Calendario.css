@@ -1,16 +1,23 @@
-.container {
-  position: relative;
-}
-  
-.button {
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 5px;
+.calendaryButton {
+  display: grid;
+  grid-template-columns: 70% 10% 20%;
+  background-color: #ffffff00;  
+  border: 1.5px solid #a7a7a7;
+  border-radius: 8px;
+  min-width: 9vw;
+  max-width: 12vw;
+  height: 7vh;
   cursor: pointer;
-  margin-bottom: 1%;
-  margin-top: 1%;
+  align-items: center;
+  color: unset;
+  opacity: 0.8;
+  outline: none;
+  transition: border-color 0.3s ease-in-out,  box-shadow 0.3s ease-in-out;
+
+  margin-top: 10%;
+}.calendaryButton:hover {
+  border-color: #007BFF;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
 }
   
 .modalOverlay {
@@ -23,8 +30,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 2;
 }
-  
+
 .modalContent {
   background-color: #0f0e4a;
   border-radius: 5px;
@@ -41,14 +49,6 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 5px;    
-}
-  
-.customHeader button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 2px 5px;
-  font-size: 0.8em;
 }
   
 /* Estilos adicionales para hacer que el calendario se ajuste al tamaño del modal */

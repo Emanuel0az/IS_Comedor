@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './Calendario.css';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+
 
 export default function CalendarioModal() {
   const [fechaLocaltorage, setFechaLocaltorage] = useState()
@@ -30,9 +32,11 @@ export default function CalendarioModal() {
   };
 
   return (
-    <div className='container'>
-      <button onClick={() => setIsOpen(true)} className='button'>
+    <div className='containerCalendary'>
+      <button onClick={() => setIsOpen(true)} className='calendaryButton'>
       {selectedDate.toISOString().split('T')[0]}
+      <div> </div>
+      <CalendarTodayIcon style={{fontSize: 17}}/>
       </button>
       {isOpen && (
         <div className='modalOverlay' onClick={() => setIsOpen(false)}>

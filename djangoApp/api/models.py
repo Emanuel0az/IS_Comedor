@@ -14,6 +14,8 @@ class Estudiantes(models.Model):
     seccion = models.CharField(max_length=50, null=True, blank=True)
     becado = models.BooleanField(default=False)
     rol = models.CharField(max_length=50, choices=[("estudiante", "Estudiante"), ("profesor", "Profesor")], null=True, blank=True)
+    almuerzo =  models.BooleanField(default=False)
+
 
     def __str__(self):
         return self.nombre
@@ -27,11 +29,6 @@ class Hist_pagos(models.Model):
 
     def __str__(self):
         return f'Pago {self.id_pago} - {self.estudiante_id.nombre}'
-
-class Asistencias(models.Model):
-    asistencia_id = models.AutoField(primary_key=True)
-    estudiante_id = models.ForeignKey(Estudiantes, on_delete=models.CASCADE)
-    fecha_asistencia = models.DateField(auto_now_add=True)
 
 class Ingredientes(models.Model):
     ingredientes_id = models.AutoField(primary_key=True)
