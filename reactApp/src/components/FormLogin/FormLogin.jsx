@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './FormLogin.css';
+import axios from 'axios';
+import Cookies from 'js-cookie'; // Importa la librería de cookies
 
 export default function FormLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
-
-  const adminCredentials = {
-    correo: "admin@gmail.com",
-    clave: "1234"
-  };
 
   const validate = () => {
     let inputErrors = {};
@@ -20,15 +17,22 @@ export default function FormLogin() {
     return inputErrors;
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const inputErrors = validate();
     if (Object.keys(inputErrors).length === 0) {
-      if (adminCredentials.correo === email && adminCredentials.clave === password) {
+      try {
+        // Cambiar la URL de acuerdo a tu API
+        const response = await axios.post('http://localhost:8000/api/login2/', { 
+          email: "admin@gmail.com",
+          password: "1234" 
+        });
+
+        // Guardar el token en una cookie
+        Cookies.set('token2', response.data.access, { expires: 1 }); // Expira en 1 día
         alert('Inicio de sesión exitoso');
-        localStorage.setItem('user', 'true');
         navigate('/home');
-      } else {
+      } catch (error) {
         alert('Credenciales incorrectas');
       }
     } else {
