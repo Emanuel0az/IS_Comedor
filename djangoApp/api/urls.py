@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .views import LoginView
 
 urlpatterns = [
     # Usuarios
@@ -29,5 +30,7 @@ urlpatterns = [
     # Lista Pagos   
     path('hist_pagos/', views.pagos_list, name='pagos_list'),
     path('hist_pagos/<int:pk>/', views.pagos_list, name='pagos_list'),
+    
+    path('login/', LoginView.as_view(), name='login'),
 ]
 

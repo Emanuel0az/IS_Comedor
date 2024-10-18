@@ -33,23 +33,23 @@ const SideBar = () => {
     <>
       <div className={`sideBarContainer${colorState ? 'Day' : 'Night '}`}>
         <div className='sideBarTop'>
-            <div onClick={() => { navigate('home/'); localStorage.removeItem('chef'); localStorage.removeItem('asistir'); }}>           
+            <div onClick={() => { navigate('home/'); localStorage.removeItem('chef'); localStorage.removeItem('token'); }}>           
                <HomeIcon style={{ fontSize: 20 }} />
             <div>Home</div>
           </div>
-          <div onClick={() => {navigate('asistencias/'); localStorage.removeItem('chef'); localStorage.removeItem('asistir');}}>
+          <div onClick={() => {navigate('asistencias/'); localStorage.removeItem('chef'); localStorage.removeItem('token');}}>
             <InventoryIcon style={{ fontSize: 19 }} />
             <div>Asistencia</div>
           </div>
-          <div onClick={() => {navigate('estadisticas/'); localStorage.removeItem('chef'); localStorage.removeItem('asistir');}}>
+          <div onClick={() => {navigate('estadisticas/'); localStorage.removeItem('chef'); localStorage.removeItem('token');}}>
             <BarChartIcon style={{ fontSize: 21 }} />
             <div>Estadísticas</div>
           </div>
-          <div onClick={() => {navigate('email/'); localStorage.removeItem('chef'); localStorage.removeItem('asistir');}}>
+          <div onClick={() => {navigate('email/'); localStorage.removeItem('chef'); localStorage.removeItem('token');}}>
             <MailIcon style={{ fontSize: 20 }} />
             <div>Email</div>
           </div>
-          <div onClick={() => {navigate('ingredientes/'); localStorage.removeItem('chef'); localStorage.removeItem('asistir');}}>
+          <div onClick={() => {navigate('ingredientes/'); localStorage.removeItem('chef'); localStorage.removeItem('token');}}>
             <RestaurantIcon style={{ fontSize: 20 }} />
             <div>Ingredientes</div>
           </div>

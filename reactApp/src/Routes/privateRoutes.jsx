@@ -23,7 +23,7 @@ export const PrivateRoutes2 = ({ children }) => {
     return children;
 }
 export const PrivateRoutes3 = ({ children }) => {
-    const user = localStorage.getItem('asistir');
+    const user = localStorage.getItem('token');
     const location = useLocation();
 
     if (!user) {

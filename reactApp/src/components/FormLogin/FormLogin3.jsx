@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './FormLogin2.css';
+import axios from 'axios'; // Asegúrate de tener axios instalado
+
 
 export default function FormLogin() {
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
-
-  const adminCredentials = {
-    clave: "1234"
-  };
 
   const validate = () => {
     let inputErrors = {};
@@ -17,14 +15,16 @@ export default function FormLogin() {
     return inputErrors;
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const inputErrors = validate();
     if (Object.keys(inputErrors).length === 0) {
-      if (adminCredentials.clave === password) {
-        localStorage.setItem('asistir', 'true');
+      try {
+        const response = await axios.post('http://localhost:8000/api/login/', { password: '1234' });
+        // Guardar el token en localStorage
+        localStorage.setItem('token', response.data.access);
         navigate('/asistencias');
-      } else {
+      } catch (error) {
         alert('Contraseña incorrecta');
       }
     } else {
