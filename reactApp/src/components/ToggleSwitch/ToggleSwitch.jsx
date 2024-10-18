@@ -32,8 +32,8 @@ const ToggleSwitch = () => {
       <div onClick={(() => handleColorState())} className={`toggle_switch_container_${colorState ? 'day' : 'night'}`}>
           <div className={`circleSwitch${colorState ? 'Day' : 'Night'}`} >
               {colorState ? 
-              <div><ModeNightIcon style={{ fontSize: 15 }} className='imgNight'/></div> :
-              <div><LightModeIcon style={{ fontSize: 15 }} className='imgDay' /></div>
+              <div><LightModeIcon style={{ fontSize: 15 }} className='imgDay'/></div> :
+              <div><ModeNightIcon style={{ fontSize: 18 }} className='imgNight' /></div>
               }
           </div>
       </div>

@@ -40,7 +40,7 @@ useEffect(() => {
     return (
       <>
       <nav>
-        <div onClick={log}>LOGO</div>
+        <div onClick={log}>Líceo de Chacarita</div>
         <div><ToggleSwitch /></div>
         <div onClick={log2}>{currentTime}</div>
       </nav>

@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from django.db.models import Count
-from .models import Asistencias, Estudiantes, Users, Recetas, Ingredientes, Hist_ingredientes,Asistencias, Hist_pagos
+from .models import Estudiantes, Users, Recetas, Ingredientes, Hist_ingredientes, Hist_pagos
 from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from .serializers import UsersSerializer, RecetasSerializer, IngredientesSerializer, Hist_ingredientesSerializer, AsistenciasSerializer, EstudiantesSerializer, Hist_pagos_Serializer
+from .serializers import UsersSerializer, RecetasSerializer, IngredientesSerializer, Hist_ingredientesSerializer, EstudiantesSerializer, Hist_pagos_Serializer
 
 
 
@@ -195,43 +195,6 @@ def hist_ingredientes_detail(request, pk):
     return Response(serializer.data)
 
 
-@api_view(['GET', 'POST'])
-def asistencias_list(request):
-    if request.method == 'GET':
-        asistencias = Asistencias.objects.all()
-        serializer = AsistenciasSerializer(asistencias, many=True)
-        return Response(serializer.data)
-
-    elif request.method == 'POST':
-        serializer = AsistenciasSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-@api_view(['GET', 'PUT', 'DELETE'])
-def asistencias_detail(request, pk):
-    try:
-        asistencia = Asistencias.objects.get(pk=pk)
-    except Asistencias.DoesNotExist:
-        return Response({'error': 'Asistencia no encontrada'}, status=status.HTTP_404_NOT_FOUND)
-
-    if request.method == 'GET':
-        serializer = AsistenciasSerializer(asistencia)
-        return Response(serializer.data)
-
-    elif request.method == 'PUT':
-        serializer = AsistenciasSerializer(asistencia, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    elif request.method == 'DELETE':
-
-        asistencia.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-
 
 
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
@@ -309,6 +272,7 @@ def pagos_list(request, pk=None):
         return Response({"message": "Pago eliminado exitosamente"}, status=status.HTTP_204_NO_CONTENT)
     
 
+
 class LoginView(APIView):
     def post(self, request, *args, **kwargs):
         # Aquí defines la contraseña predefinida
@@ -347,3 +311,8 @@ class LoginView2(APIView):
             })
         else:
             return Response({"error": "Invalid email or password"}, status=status.HTTP_401_UNAUTHORIZED)
+
+    
+    
+# //////////////////////////////////////////////////////////////////////////
+

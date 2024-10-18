@@ -1,10 +1,11 @@
 .containerStock {
-    min-width: 92%;
-    max-width: 92%;
-    max-height: 80vh;
-    min-height: 80vh;
-    margin-left: 5%;
+    min-width: 94%;
+    max-width: 94%;
+    max-height: 70vh;
+    min-height: 70vh;
+    margin-left: 3%;
     border-radius: 5px;
+    font-family: sans-serif;
 }
 
 .containerAll {
@@ -14,17 +15,31 @@
 
 .tittles {
     display: grid;
-    grid-template-columns: 8% 20% 20% 20% 20%;
-    border-bottom: 1px solid rgb(61, 55, 55);
+    grid-template-columns: 5% 22% 10% 12% 12% 15% 13% 10%;
+    border-bottom: 1.5px solid rgba(101, 97, 97, 0.416);
     width: 100%;
     height: 6vh;
-    align-items: center;
-    font-family: 'Times New Roman', Times, serif;
-    font-weight: 200;
-    font-size: 22px;
+    font-size: 14px;
 }.tittles > div {
-    margin-left: 1vw;
+    /* border-right: 1px solid red;
+    border-left: 1px solid red; */
+    display: grid;
+    place-items: center;
 }
+
+.student {
+    display: grid;
+    grid-template-columns: 5% 22.3% 10.1% 12% 12.3% 15.1% 13.1% 10%;
+    width: 100%;
+    height: 10vh;
+    border-bottom: 1px solid rgba(108, 108, 108, 0.412);
+}.student > div {
+    /* border-right: 1px solid red;
+    border-left: 1px solid red; */
+    padding-left: 30%;
+}
+
+/* Tengo que poner id y almuerzo en text align center. */
 
 .students {
     max-height: 75vh;
@@ -36,136 +51,75 @@
     cursor: pointer;
 }
 
-
-.student {
-    display: grid;
-    grid-template-columns: 10% 20% 20% 20% 20%; /* Ya que se van a implementar más cosas, no es necesario cambiar esto (Por el momento.) */
-    height: 12vh;
-    border-bottom: 1px solid rgb(61, 55, 55);
-}
-
 .student > div {
     height: 100%;
     display: grid;
     align-items: center;
-    font-size: 18px;
+    font-size: 14px;
 }
 
-/* .rojo{
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: red;
-}.rojo2 {
-    width: 500px;
-    height: 500px;
-    border-radius: 50%;
-    background-color: red;
-}
-
-.verde {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: green;
-}.verde2 {
-    width: 500px;
-    height: 500px;
-    border-radius: 50%;
-    background-color: green;
-}
-
-.cont {
-    height: 500px;
-    display: grid;
-    grid-template-columns: 50% 50%;
-    display: grid;
-    place-items: center;
-    margin-top: 5%;
-}.cont > div {
-    transition: all  0.5s ease;
-} */
-
-
-.asistencia_s {
-    padding: 10px;
-}
-
-
-.search_input {
-    border-radius: 30px;
-    height: 5vh;
-    width: 18vw;
-    padding: 7px 18px;
-    font-size: 16px;
+.search-container {
+    display: flex;
+    width: 40vw;
+    justify-content: space-around;
+  }
+  
+  .search_input {
+    border-radius: 20px;
+    height: 4.5vh;
+    width: 14vw;
+    padding: 7px 30px; /* Aumenté el padding a la derecha para hacer espacio para la lupa */
+    font-size: 13px;
     border: 1px solid #ccc;
     outline: none;
     transition: all 0.3s ease;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     background-color: rgba(0, 0, 0, 0);
     color: unset;
-}
-
-
-.search_input:hover {
+  }
+  
+  .search_input:hover {
     border-color: #007BFF;
     box-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
-}
-
-.search_input::placeholder {
+  }
+  
+  .search_input::placeholder {
     color: #aaa;
     font-style: italic;
-}
-
-.lupa {
-    color: #007BFF;
-    font-size: 22px;
+  }
+  
+  .lupa {
+    color: #007bffb3;
     cursor: pointer;
     transition: color 0.3s ease, transform 0.3s ease;
-    margin-right: 10px;
-}
-
-.lupa:hover {
+  }
+  
+  .lupa:hover {
     color: #0056b3;
-    transform: scale(1.1);
-}
-
+  }
 .containerFormStock {
     display: flex;
     align-items: center;
     background-color: rgba(32, 29, 35, 0);
     border-bottom: 1px solid #68727d;
-    padding: 8px 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 8px 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0);
 }
 
-.estuIcon {
-    color: blueviolet;
-}
-
-.profIcon {
-    color: greenyellow;
-}
-
-.becado_no {
-    place-items: center;
+.selectBeca {
+    width: 9vw;
+    height: 7vh;
+    padding: 10px 7px;
     border-radius: 20px;
-    background-color: rgb(77, 16, 16);
-    width: 40px;
-    max-height: 25px;
-    margin-top: 9%;
-    color: white;
-    font-family: Inter, sans-serif;
-}
-
-.becado_yes {
-    place-items: center;
-    border-radius: 20px;
-    background-color: rgb(28, 103, 45);
-    width: 40px;
-    max-height: 25px;
-    margin-top: 9%;
-    /* color: rgb(74, 203, 74); */
-    color: white;
-    font-family: Inter, sans-serif;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: unset;
+    color: unset;
+    cursor: pointer;
+}.selectBeca:hover {
+    border-color: #007BFF;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
+}option {
+    color: black;
 }

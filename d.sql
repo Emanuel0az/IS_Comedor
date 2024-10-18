@@ -49,41 +49,13 @@ VALUES
 ('Mantequilla', 8.00, '2024-11-10'),
 ('Pasta', 20.00, '2024-12-05');
 
--- Inserción de asistencias
-INSERT INTO api_asistencias (estudiante_id_id, fecha_asistencia)
-VALUES
-(1, '2024-09-30'), (2, '2024-09-30'), (3, '2024-09-30'), 
-(4, '2024-09-30'), (5, '2024-09-30'), (6, '2024-09-30'),
-(7, '2024-09-30'), (8, '2024-09-30'), (9, '2024-09-30'), 
-(10, '2024-09-30'), (11, '2024-09-30'), (12, '2024-09-30'),
-(13, '2024-09-30'), (14, '2024-09-30'), (15, '2024-09-30'), 
-(16, '2024-09-30'), (17, '2024-09-30'), (18, '2024-09-30'),
-(19, '2024-09-30'), (20, '2024-09-30');
 
--- Inserción de asistencias para estudiantes del 95 al 102
-INSERT INTO api_asistencias (estudiante_id_id, fecha_asistencia)
-VALUES
-(4, '2024-10-14'),
-(5, '2024-10-14'),
-(6, '2024-10-14'),
-(7, '2024-10-14'),
-(8, '2024-10-14'),
-(9, '2024-10-14'),
-(10, '2024-10-14'),
-(11, '2024-10-14'),
-(12, '2024-10-14'),
-(13, '2024-10-14'),
-(14, '2024-10-14'),
-(15, '2024-10-14'),
-(16, '2024-10-14'),
-(17, '2024-10-14'),
-(18, '2024-10-14'),
-(19, '2024-10-14'),
-(20, '2024-10-14');
 
 -- Actualización de roles de estudiantes
 UPDATE api_estudiantes SET rol = 'prof' WHERE estudiante_id = 1;
 UPDATE api_estudiantes SET rol = 'estu' WHERE estudiante_id = 2;
+
+
 
 -- Inserción de historial de pagos
 INSERT INTO api_hist_pagos (fecha_pago, monto, estudiante_id_id, fecha_pago_prueba)
@@ -146,3 +118,4 @@ ALTER TABLE Estudiantes CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode
 
 
 docker cp Estudiantes_sin_ñ.csv 946b410a0be377f6abfc681a9c235c73d14d6a81dc593eda7671193888241062:/Estudiantes_sin_ñ.csv
+
