@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './FormLogin2.css';
-import axios from 'axios'; // Asegúrate de tener axios instalado
-
+import axios from 'axios';
+import Cookies from 'js-cookie'; // Importa la librería de cookies
 
 export default function FormLogin() {
   const [password, setPassword] = useState('');
@@ -21,8 +21,8 @@ export default function FormLogin() {
     if (Object.keys(inputErrors).length === 0) {
       try {
         const response = await axios.post('http://localhost:8000/api/login/', { password: '1234' });
-        // Guardar el token en localStorage
-        localStorage.setItem('token', response.data.access);
+        // Guardar el token en una cookie en lugar de localStorage
+        Cookies.set('token', response.data.access, { expires: 1 }); // Expira en 1 día
         navigate('/asistencias');
       } catch (error) {
         alert('Contraseña incorrecta');
