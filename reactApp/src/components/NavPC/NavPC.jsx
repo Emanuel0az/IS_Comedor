@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../NavPC/NavPC.css'
 import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
-
+import Cookies from 'js-cookie';
 
 const NavPC = () => {
     const horaConCero = ['1:', '2:', '3:', '4:', '5:', '6:', '7:', '8:', '9:'];
@@ -25,7 +25,7 @@ useEffect(() => {
 }, [horaConCero]);
 
   function log () {
-    localStorage.removeItem('user');
+    Cookies.remove('token2');
     localStorage.removeItem('chef');
   navigate('/login');
   }

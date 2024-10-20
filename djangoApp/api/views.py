@@ -5,6 +5,8 @@ from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework_simplejwt.tokens import RefreshToken
 
 from .serializers import UsersSerializer, RecetasSerializer, IngredientesSerializer, Hist_ingredientesSerializer, EstudiantesSerializer, Hist_pagos_Serializer
 
@@ -269,6 +271,48 @@ def pagos_list(request, pk=None):
         var.delete()
         return Response({"message": "Pago eliminado exitosamente"}, status=status.HTTP_204_NO_CONTENT)
     
+
+
+class LoginView(APIView):
+    def post(self, request, *args, **kwargs):
+        # Aquí defines la contraseña predefinida
+        predefinida = "1234"
+        password = request.data.get('password')
+
+        # Verificar si la contraseña es correcta
+        if password == predefinida:
+            # Si la contraseña es correcta, generar el token sin necesidad de usuario
+            refresh = RefreshToken()
+            return Response({
+                'refresh': str(refresh),
+                'access': str(refresh.access_token),
+            })
+        else:
+            return Response({"error": "Invalid password"}, status=status.HTTP_401_UNAUTHORIZED)
+        
+        
+        
+class LoginView2(APIView):
+    def post(self, request, *args, **kwargs):
+        # Aquí defines la contraseña y el correo predefinidos
+        predefinido_email = "admin@gmail.com"  # Reemplaza con tu correo
+        predefinida_password = "1234"
+        
+        email = request.data.get('email')
+        password = request.data.get('password')
+
+        # Verificar si el correo y la contraseña son correctos
+        if email == predefinido_email and password == predefinida_password:
+            # Si ambos son correctos, generar el token
+            refresh = RefreshToken()
+            return Response({
+                'refresh': str(refresh),
+                'access': str(refresh.access_token),
+            })
+        else:
+            return Response({"error": "Invalid email or password"}, status=status.HTTP_401_UNAUTHORIZED)
+
     
     
 # //////////////////////////////////////////////////////////////////////////
+
