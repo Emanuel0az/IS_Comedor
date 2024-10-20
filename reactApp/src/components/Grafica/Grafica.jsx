@@ -24,7 +24,7 @@ const SessionsChart = () => {
         });
 
         asistenciaData.forEach(item => {
-          const asistenciaDate = new Date(item.fecha_pago);  // ITEM              🔴            🔴           🔴            🔴            🔴
+          const asistenciaDate = new Date(item.fecha_pago_prueba);  // ITEM              🔴            🔴           🔴            🔴            🔴
 
           const asistenciaDatePlusOne = addDays(asistenciaDate, 1);
 

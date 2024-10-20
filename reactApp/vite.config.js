@@ -6,5 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     usePolling: true,
+    hot: true, 
+    host: '0.0.0.0',
   }
 })

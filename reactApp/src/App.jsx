@@ -21,7 +21,7 @@ const App = () => {
     };
 
     // Revisar cada segundo si el valor en el localStorage cambió
-    const intervalId = setInterval(checkUsersState, 1000);
+    const intervalId = setInterval(checkUsersState, 100);
 
      // Limpiar el intervalo cuando el componente se desmonta
     return () => clearInterval(intervalId);
