@@ -47,3 +47,154 @@
     margin-top: 30%;
     margin-left: 1%;
 }
+
+@media (min-width: 220px) and (max-width: 374px) {
+    .toggle_switch_container_night {
+        min-width: 60px;
+        height: 30px;
+        border-radius: 16px;
+    }
+    .toggle_switch_container_day {
+        min-width: 60px;
+        height: 30px;
+        border-radius: 16px;
+    }
+    .circleSwitchNight {
+        height: 20px;
+        width: 20px;
+        margin-left: 5%;
+    }
+    .circleSwitchDay {
+        height: 20px;
+        width: 20px;
+        margin-left: 62%;
+    }
+}
+
+@media (min-width: 375px) and (max-width: 424px) { 
+    .toggle_switch_container_night {
+        min-width: 60px;
+        height: 30px;
+        border-radius: 16px;
+    }
+    .toggle_switch_container_day {
+        min-width: 60px;
+        height: 30px;
+        border-radius: 16px;
+    }
+    .circleSwitchNight {
+        height: 20px;
+        width: 20px;
+        margin-left: 5%;
+    }
+    .circleSwitchDay {
+        height: 20px;
+        width: 20px;
+        margin-left: 62%;
+    }
+}
+
+@media (min-width: 425px) and (max-width: 767px) {
+    .toggle_switch_container_night {
+        min-width: 62px;
+        height: 31px;
+        border-radius: 18px;
+    }
+    .toggle_switch_container_day {
+        min-width: 62px;
+        height: 31px;
+        border-radius: 18px;
+    }
+    .circleSwitchNight {
+        height: 23px;
+        width: 23px;
+        margin-left: 4%;
+    }
+    .circleSwitchDay {
+        height: 23px;
+        width: 23px;
+        margin-left: 57%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .toggle_switch_container_night {
+        min-width: 62px;
+        height: 31px;
+        border-radius: 18px;
+    }
+    .toggle_switch_container_day {
+        min-width: 62px;
+        height: 31px;
+        border-radius: 18px;
+    }
+    .circleSwitchNight {
+        height: 23px;
+        width: 23px;
+        margin-left: 4%;
+    }
+    .circleSwitchDay {
+        height: 23px;
+        width: 23px;
+        margin-left: 57%;
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+    .toggle_switch_container_night {
+        min-width: 62px;
+        height: 31px;
+        border-radius: 18px;
+    }
+    .toggle_switch_container_day {
+        min-width: 62px;
+        height: 31px;
+        border-radius: 18px;
+    }
+    .circleSwitchNight {
+        height: 24px;
+        width: 24px;
+        margin-left: 4%;
+    }
+    .circleSwitchDay {
+        height: 24px;
+        width: 24px;
+        margin-left: 57%;
+    }
+}
+
+@media (min-width: 1440px) and (max-width: 3000px) {
+    .toggle_switch_container_night {
+        min-width: 62px;
+        height: 31px;
+        border-radius: 18px;
+    }
+    .toggle_switch_container_day {
+        min-width: 62px;
+        height: 31px;
+        border-radius: 18px;
+    }
+    .circleSwitchNight {
+        height: 24px;
+        width: 24px;
+        margin-left: 4%;
+    }
+    .circleSwitchDay {
+        height: 24px;
+        width: 24px;
+        margin-left: 57%;
+    }
+}
+
+
+
+/* 
+@media (max-width: 425px) { ... }
+
+@media (max-width: 768px) { ... }
+
+@media (max-width: 1024px) { ... }
+
+@media (max-width: 1440px) { ... }
+
+@media (max-width: 1920px) { ... } */

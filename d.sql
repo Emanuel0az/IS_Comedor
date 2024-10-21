@@ -97,6 +97,8 @@ select * from `Estudiantes` LIMIT 1000
 
 drop Table `Estudiantes`
 
+
+
 LOAD DATA INFILE '/var/lib/mysql-files/Estudiantes_definitivo.csv'
 INTO TABLE Estudiantes
 CHARACTER SET utf8mb4
