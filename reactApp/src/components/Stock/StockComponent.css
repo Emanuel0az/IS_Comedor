@@ -8,6 +8,10 @@
     font-family: sans-serif;
 }
 
+.almuerzoIcon {
+    cursor: pointer;
+}
+
 .containerAll {
     display: grid;
     grid-template-rows: 12% 88%;

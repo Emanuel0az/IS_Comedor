@@ -34,7 +34,7 @@ export default function CalendarioModal() {
   return (
     <div className='containerCalendary'>
       <button onClick={() => setIsOpen(true)} className='calendaryButton'>
-      {selectedDate.toISOString().split('T')[0]}
+      {selectedDate.toLocaleString('default', { month: 'short', day: 'numeric', year: 'numeric' }).replace(',', ' de')}
       <div> </div>
       <CalendarTodayIcon style={{fontSize: 17}}/>
       </button>
