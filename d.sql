@@ -100,13 +100,16 @@ drop Table `Estudiantes`
 
 
 LOAD DATA INFILE '/var/lib/mysql-files/Estudiantes_definitivo.csv'
-INTO TABLE Estudiantes
+INTO TABLE api_estudiantes
 CHARACTER SET utf8mb4
 FIELDS TERMINATED BY ';' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
-IGNORE 5 LINES
+IGNORE 6 LINES
 (cedula, apellidos, nombre, seccion, fecha_nacimiento, edad, telefono);
+
+
+UPDATE api_estudiantes SET rol = 'estu';
 
 
 
