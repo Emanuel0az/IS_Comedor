@@ -8,17 +8,19 @@ class Users(models.Model):
     rol = models.CharField(max_length=50, choices=[("admin", "Administrador"), ("cook", "Cocinero"), ("vol", "Voluntario")], null=True, blank=True)
     
 class Estudiantes(models.Model):
-    estudiante_id = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=255, null=True, blank=True)
-    edad = models.IntegerField(null=True, blank=True)
-    seccion = models.CharField(max_length=50, null=True, blank=True)
-    becado = models.BooleanField(default=False)
-    rol = models.CharField(max_length=50, choices=[("estudiante", "Estudiante"), ("profesor", "Profesor")], null=True, blank=True)
-    almuerzo =  models.BooleanField(default=False)
-
+    id = models.AutoField(primary_key=True)
+    cedula = models.CharField(max_length=20, unique=True, null=True)
+    apellidos = models.CharField(max_length=70, null=True, blank=True)
+    nombre = models.CharField(max_length=70, null=True)
+    seccion = models.CharField(max_length=10, null=True, blank=True)
+    fecha_nacimiento = models.CharField(max_length=70, null=True)
+    edad = models.CharField(max_length=50, null=True)
+    telefono = models.CharField(max_length=15, null=True, blank=True)
+    rol = models.CharField(max_length=5, choices=[("estu", "Estudiante"), ("prof", "Profesor")], default="estu", null=True)
+    becado = models.BooleanField(default=False, null=True)
 
     def __str__(self):
-        return self.nombre
+        return f"{self.nombre} {self.apellidos}"
 
 class Hist_pagos(models.Model):
     id_pago = models.AutoField(primary_key=True)

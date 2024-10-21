@@ -80,10 +80,10 @@ const StockComponent = () => {
         <div className="students">
           {filteredStudents.map((student) => (
             <div key={student.estudiante_id} className="student">
-              <div>{student.estudiante_id}</div>
+              <div>{student.id}</div>
               <div>
                 <div className='name_s'>{student.nombre}</div>
-                <div className='cedula_s'>{student.estudiante_id}</div>
+                <div className='cedula_s'>{student.cedula}</div>
               </div>
               <div className='seccion_s'>{student.seccion}</div>
               {student.becado ? <div className='becado_yes'>Sí</div> : <div className='becado_no'>No</div>}
