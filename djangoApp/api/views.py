@@ -199,12 +199,14 @@ def hist_ingredientes_detail(request, pk):
 
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
 def estudiantes_list(request, pk=None):
+    # Si se recibe un `pk`, buscar el estudiante correspondiente
     if pk:
         try:
             estudiante = Estudiantes.objects.get(pk=pk)
         except Estudiantes.DoesNotExist:
             return Response({"error": "Estudiante no encontrado"}, status=status.HTTP_404_NOT_FOUND)
 
+    # Manejar la solicitud GET
     if request.method == 'GET':
         if pk:
             serializer = EstudiantesSerializer(estudiante)
@@ -214,6 +216,7 @@ def estudiantes_list(request, pk=None):
             serializer = EstudiantesSerializer(estudiantes, many=True)
             return Response(serializer.data)
 
+    # Manejar la solicitud POST
     elif request.method == 'POST':
         serializer = EstudiantesSerializer(data=request.data)
         if serializer.is_valid():
@@ -221,17 +224,18 @@ def estudiantes_list(request, pk=None):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    # Manejar la solicitud PUT
     elif request.method == 'PUT':
-        serializer = EstudiantesSerializer(estudiante, data=request.data)
+        serializer = EstudiantesSerializer(estudiante, data=request.data, partial=True)  # Se permite actualizaciones parciales
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    # Manejar la solicitud DELETE
     elif request.method == 'DELETE':
         estudiante.delete()
-        return Response({"message": "Estudiante eliminado exitosamente"}, status=status.HTTP_204_NO_CONTENT)
-    
+        return Response({"message": "Estudiante eliminado exitosamente"}, status=status.HTTP_204_NO_CONTENT) 
     
 # ////////////////////////////////////////////////////////////////////////////
 
