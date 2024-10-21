@@ -13,9 +13,10 @@
   opacity: 0.8;
   outline: none;
   transition: border-color 0.3s ease-in-out,  box-shadow 0.3s ease-in-out;
-
   margin-top: 10%;
-}.calendaryButton:hover {
+}
+
+.calendaryButton:hover {
   border-color: #007BFF;
   box-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
 }
@@ -34,7 +35,7 @@
 }
 
 .modalContent {
-  background-color: #0f0e4a;
+  /* background-color: #0f0e4a; */
   border-radius: 5px;
   width: 20vw;
   height: 45vh;
@@ -50,41 +51,77 @@
   align-items: center;
   margin-bottom: 5px;    
 }
-  
-/* Estilos adicionales para hacer que el calendario se ajuste al tamaño del modal */
-.modalContent :global(.react-datepicker) {
-  font-size: 0.7em;
-  width: 100%;
+
+
+/* ---------------------------------------------------------------------------------------------------------------- */
+
+/* Calendario.css */
+
+.containerCalendary {
+  position: relative;
+  display: inline-block;
 }
-  
-.modalContent :global(.react-datepicker__month-container) {
-  float: none;
-  width: 100%;
+
+.modalOverlay {
+  position: fixed; /* Fija la posición del overlay */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+  display: flex; /* Flexbox para centrar el modal */
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
 }
-  
-.modalContent :global(.react-datepicker__day-name), 
-.modalContent :global(.react-datepicker__day),
-.modalContent :global(.react-datepicker__time-name) {
-  width: 1.5em;
-  line-height: 1.5em;
-  margin: 0.1em;
+
+.modalContent {
+  background-color: white; /* Fondo blanco para el modal */
+  border-radius: 10px; /* Bordes redondeados */
+  padding: 20px; /* Espaciado interno */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para el modal */
+  width: 300px; /* Ancho del modal */
 }
-  
-.modalContent :global(.react-datepicker__month-year-dropdown-container) {
-  font-size: 0.8em;
+
+.customHeader {
+  display: flex; /* Flexbox para el encabezado */
+  justify-content: space-around; /* Espaciado entre los botones */
+  align-items: center; /* Centrar verticalmente */
+  margin-bottom: 10px; /* Espacio inferior */
 }
-  
-.modalContent :global(.react-datepicker__year-wrapper) {
-  max-width: 100%;
-  justify-content: center;
+
+.customHeader button {
+  background-color: transparent; /* Fondo transparente para los botones */
+  cursor: pointer; /* Cambia el cursor al pasar el mouse */
+  font-size: 16px; /* Tamaño de fuente */ /* Color del texto */
+  border-radius: 7px;
+  border: none;
 }
-  
-.modalContent :global(.react-datepicker__year-text) {
-  padding: 2px;
-  margin: 1px;
+
+.customHeader button:hover {
+  background-color: #319e34;
 }
-  
-.modalContent :global(.react-datepicker__month-text) {
-  padding: 2px;
-  margin: 1px;
+
+/* Estilo adicional para el DatePicker */
+.react-datepicker {
+  border: 1px solid #ddd; /* Borde del calendario */
+  border-radius: 5px; /* Bordes redondeados */
+}
+
+.react-datepicker__header {
+  background-color: #4caf4c; /* Color de fondo del encabezado del calendario */
+  color: white; /* Color del texto del encabezado */
+}
+
+.react-datepicker__day {
+  font-size: 14px; /* Tamaño de fuente de los días */
+}
+
+.react-datepicker__day:hover {
+  background-color: #f0f0f0; /* Color de fondo al pasar el mouse sobre los días */
+  border-radius: 50%; /* Bordes redondeados al pasar el mouse */
+}
+
+.react-datepicker__day--selected {
+  background-color: #4caf4c; /* Color de fondo para el día seleccionado */
+  color: white; /* Color del texto para el día seleccionado */
 }

@@ -18,7 +18,7 @@ const CenterTextPlugin = {
 
       ctx.beginPath();
       ctx.arc(textX, textY, Math.min(width, height) / 4, 0, Math.PI * 2);
-      ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
+      ctx.fillStyle = "rgba(0, 0, 0, 0)";
       ctx.fill();
 
       ctx.font = options.font || '16px Arial';
@@ -43,13 +43,7 @@ ChartJS.register(CenterTextPlugin);
 const stockMaximo = 1000;
 
 const coloresPredefinidos = [
-  'rgb(210,105,30)',
-  'rgb(255, 159, 64)',
-  'rgb(255, 205, 86)',
-  'rgb(75, 192, 192)',
-  'rgb(54, 162, 235)',
-  'rgb(153, 102, 255)',
-  'rgb(201, 203, 207)'
+  '#2c2b90'
 ];
 
 export default function DoughnutChart() {
@@ -115,7 +109,7 @@ export default function DoughnutChart() {
     labels = productos.map(p => p.nombre);
     data = productos.map(p => p.cantidad);
     colors = productos.map(p => p.color);
-    borderColors = productos.map(() => 'black');
+    borderColors = productos.map(() => '#4a5887a6');
 
     const totalOcupado = data.reduce((sum, cantidad) => sum + cantidad, 0);
     const disponible = Math.max(0, stockMaximo - totalOcupado);
@@ -124,7 +118,7 @@ export default function DoughnutChart() {
       labels.push('Disponible');
       data.push(disponible);
       colors.push('rgb(200, 200, 200)');
-      borderColors.push('black');
+      borderColors.push('#4d64afa6');
     }
 
     setChartData({
@@ -133,7 +127,7 @@ export default function DoughnutChart() {
         data: data,
         backgroundColor: colors,
         borderColor: borderColors,
-        borderWidth: 2,
+        borderWidth: 1.5,
       }]
     });
   };
@@ -194,7 +188,7 @@ export default function DoughnutChart() {
         bodyColor: 'white',
         padding: 10,
         cornerRadius: 5,
-        zIndex: 9999,
+        zIndex: 3,
         displayColors: false,
         callbacks: {
           label: (context) => {
@@ -214,7 +208,7 @@ export default function DoughnutChart() {
           ? `${productos[selectedIndex].cantidad} / ${stockMaximo}\n${((productos[selectedIndex].cantidad / stockMaximo) * 100).toFixed(2)}%`
           : `${calcularPorcentajeTotal()}%`,
         color: 'white',
-        font: '12px Arial',
+        font: '9px Arial',
       },
     },
     onClick: handleClick,

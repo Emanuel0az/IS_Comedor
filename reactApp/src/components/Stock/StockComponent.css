@@ -6,41 +6,98 @@
     margin-left: 3%;
     border-radius: 5px;
     font-family: sans-serif;
-}
-
+}   
+/*  */
 .almuerzoIcon {
-    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2%;
+}.almuerzoIcon > div:hover {
+    background-color: rgba(117, 117, 117, 0.187);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-bottom: 7%;
+}.almuerzoIcon > div {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-bottom: 7%;
+}
+/*  */
+.actionsIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}.actionsIcon > div:hover {
+    background-color: rgba(117, 117, 117, 0.187);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-bottom: 7%;
+}.actionsIcon > div {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-bottom: 7%;
+}
+/*  */
+.studentId_stok {
+    place-items: center;
+    opacity: 0.8;
+    padding-right: 30%;
 }
 
+/*  */
 .containerAll {
     display: grid;
     grid-template-rows: 12% 88%;
+    height: 440px;
 }
 
 .tittles {
     display: grid;
-    grid-template-columns: 5% 22% 10% 12% 12% 15% 13% 10%;
-    border-bottom: 1.5px solid rgba(101, 97, 97, 0.416);
+    grid-template-columns: 5% 20% 15% 19% 13% 15% 16% 10%;
+    border-bottom: 1.2px solid rgba(101, 97, 97, 0.329);
     width: 100%;
     height: 6vh;
     font-size: 14px;
+    opacity: 0.6;
 }.tittles > div {
-    /* border-right: 1px solid red;
-    border-left: 1px solid red; */
+    border-right: 1px solid rgba(0, 0, 0, 0.13);
+    border-left: 1px solid rgba(0, 0, 0, 0.169);
     display: grid;
     place-items: center;
 }
 
 .student {
     display: grid;
-    grid-template-columns: 5% 22.3% 10.1% 12% 12.3% 15.1% 13.1% 10%;
+    grid-template-columns: 5% 20.3% 15.1% 19% 13.3% 15.1% 16.1% 10%;
     width: 100%;
     height: 10vh;
-    border-bottom: 1px solid rgba(108, 108, 108, 0.412);
-}.student > div {
+    border-bottom: 1px solid rgba(108, 108, 108, 0.194);
+    transition: background-color 0.2s ease;
+}.student:hover {
+    background-color: #7d7d7d11;
+}
+
+.student > div {
     /* border-right: 1px solid red;
     border-left: 1px solid red; */
-    padding-left: 30%;
+    /* padding-left: 30%; */
 }
 
 /* Tengo que poner id y almuerzo en text align center. */
@@ -66,7 +123,7 @@
     display: flex;
     width: 40vw;
     justify-content: space-around;
-  }
+}
   
   .search_input {
     border-radius: 20px;

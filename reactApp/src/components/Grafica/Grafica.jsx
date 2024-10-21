@@ -25,7 +25,6 @@ const SessionsChart = () => {
 
         asistenciaData.forEach(item => {
           const asistenciaDate = new Date(item.fecha_pago_prueba);  // ITEM              🔴            🔴           🔴            🔴            🔴
-
           const asistenciaDatePlusOne = addDays(asistenciaDate, 1);
 
           // Verificar si la fecha de asistencia pertenece a esta semana
@@ -89,4 +88,4 @@ const SessionsChart = () => {
   );
 };
 
-export default SessionsChart;
+export default SessionsChart

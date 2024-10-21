@@ -25,34 +25,36 @@
     min-height: 25vh;
     min-width: 16.66vw;
     max-width: 16.66vw;
-    margin-left: 3%;
+    margin-left: 3%;    
     margin-top: 3%;
     display: grid;
     grid-template-rows: 80% 20%;
-    background-color: rgb(0, 0, 0);
+    background-color: rgba(98, 98, 98, 0.443);
     border-radius: 7px;
     font-size: 10px;
     padding: 0.6%;
+    color: unset;
 }
 .containerTopDonut {
     display: grid;
     grid-template-columns: 30% 70%;
 }
+
 .donutLeft {
     display: grid;
     grid-template-rows: 20% 80%;
 }.tittleDonut {
-    border-bottom: 1px white solid;
+    border-bottom: 1px rgba(255, 255, 255, 0.354) solid;
 }.imgDonut {
     display: grid;
     place-items: center;
 }
 
 .donutRight {
-    border-left: 1px white solid;
+    border-left: 1px rgba(255, 255, 255, 0.434) solid;
 }.donutRight > div > div > div > div > div{
-    height: 80%;
-    width: 80%;
+    height: 100%;
+    width: 100%;
     margin-left: 19%;
     margin-top: 5%;
     
@@ -61,14 +63,13 @@
 .containerButtomDonut {
     display: grid;
     grid-template-columns: 85% 15%;
-    border-top: 1px white solid;
 }
 .textoDonut {
     display: flex;
     align-items: center;
 }
 .estadoStock {
-    border-left: 1px white solid;
+    border-left: 1px rgba(255, 255, 255, 0.434) solid;
     display: grid;
     place-items: center;
 }
@@ -79,25 +80,25 @@
     max-width: 80%;
     min-height: 46vh;
     max-height: 46vh;
-    background-color: chocolate;
+    background-color: rgb(210, 30, 30);
     border-radius: 10px;
 }
 
 .estadoStock {
     font-weight: bold;
     padding: 10px;
-    border-radius: 5px;
   }
   
   .estadoAlto {
-    color: green;
+    color: rgba(19, 192, 19, 0.74);
   }
   
   .estadoMedio {
-    color: yellow;
+    color: rgba(255, 255, 0, 0.785);
+    margin-left: -20%;
   }
   
   .estadoBajo {
-    color: red;
+    color: rgba(255, 0, 0, 0.856);
   }
   

@@ -128,11 +128,13 @@ export default function StockComponent() {
           <div>Sección</div>
           <div>Rol</div>
           <div>Almuerzo</div>
-          <div>Acción</div>
+          <div></div>
+          <div>Perfil</div>
         </div>
         <div className="students">
           {filteredStudents.map((student) => (
             <div key={student.estudiante_id} className="student">
+              <div className='studentId_stok'>{student.estudiante_id}</div>
               <div>{student.id}</div>
               <div>
                 <div className='name_s'>{student.nombre}</div>
@@ -140,14 +142,15 @@ export default function StockComponent() {
               </div>
               <div className='seccion_s'>{student.seccion}</div>
               <div>{student.rol}</div>
-              <div onClick={() => envAsistencia(student, student.estudiante_id)} className='almuerzoIcon'>
+              <div className='almuerzoIcon'>
                 {almorzados[student.estudiante_id] ? 
-                  <LocalDiningIcon style={{ color: '#3b82f6', fontSize: 25 }} /> : 
-                  <NoMealsIcon style={{ color: 'grey', fontSize: 25 }} />
+                  <div onClick={() => envAsistencia(student, student.estudiante_id)}><LocalDiningIcon style={{ color: '#3b82f6', fontSize: 27 }} /></div> : 
+                  <div onClick={() => envAsistencia(student, student.estudiante_id)}><NoMealsIcon style={{ color: 'grey', fontSize: 27 }} /></div>
                 }
               </div>
-              <div>
-                <MoreVertIcon style={{ color: 'gray' }} />
+              <div>   </div>
+              <div className="actionsIcon">
+                <div><MoreVertIcon style={{ color: 'gray' }} /></div>
               </div>
             </div>
           ))}
