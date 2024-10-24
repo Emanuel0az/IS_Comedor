@@ -9,14 +9,14 @@ class Users(models.Model):
     
 class Estudiantes(models.Model):
     id = models.AutoField(primary_key=True)
-    cedula = models.CharField(max_length=20, unique=True, null=True)
+    cedula = models.CharField(max_length=50, unique=True, null=True)
     apellidos = models.CharField(max_length=70, null=True, blank=True)
     nombre = models.CharField(max_length=70, null=True)
-    seccion = models.CharField(max_length=10, null=True, blank=True)
+    seccion = models.CharField(max_length=50, null=True, blank=True)
     fecha_nacimiento = models.CharField(max_length=70, null=True)
     edad = models.CharField(max_length=50, null=True)
-    telefono = models.CharField(max_length=15, null=True, blank=True)
-    rol = models.CharField(max_length=5, choices=[("estu", "Estudiante"), ("prof", "Profesor")], default="estu", null=True)
+    telefono = models.CharField(max_length=50, null=True, blank=True)
+    rol = models.CharField(max_length=50, choices=[("estu", "Estudiante"), ("prof", "Profesor")], default="estu", null=True)
     becado = models.BooleanField(default=False, null=True)
 
     def __str__(self):

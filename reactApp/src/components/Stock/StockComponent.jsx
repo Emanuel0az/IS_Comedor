@@ -6,7 +6,6 @@ import NoMealsIcon from '@mui/icons-material/NoMeals';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import LocalDiningIcon from '@mui/icons-material/LocalDining';
 import { postAsistencia } from '../../server/Asistencia/PostAsistencia';
-
 export default function StockComponent() {
   const [searchTerm, setSearchTerm] = useState('');
   const [filtroBeca, setFiltroBeca] = useState('');
@@ -14,10 +13,8 @@ export default function StockComponent() {
   const [students, setStudents] = useState([]);
   const [almorzados, setAlmorzados] = useState({});
   const [selectedDate, setSelectedDate] = useState(new Date(localStorage.getItem('selectedDate') || new Date()).toISOString().split('T')[0]);
-
   useEffect(() => {
     extractData();
-
     // Add event listener for storage changes
     const handleStorageChange = (e) => {
       if (e.key === localStorage.getItem('selectedDate')) { // Corregido aquí
@@ -27,35 +24,29 @@ export default function StockComponent() {
         console.log('Fecha actualizada desde localStorage');
       }
     };
-
     window.addEventListener('storage', handleStorageChange);
-
     // Cleanup function to remove the event listener
     return () => {
       window.removeEventListener('storage', handleStorageChange);
     };
   }, [students]);
-
   useEffect(() => {
     if (students.length > 0) {
       verificarAlmuerzos(students); // Verifica almuerzos al cambiar students
     }
   }, [students]);
-
   const traerAlmorzados = (student) => {
-    return student.pagos.some(pago => 
+    return student.pagos.some(pago =>
       pago.fecha_pago_prueba === selectedDate
     );
   };
-
   const verificarAlmuerzos = (studentsData) => {
     let almuerzoStatus = {};
     studentsData.forEach(student => {
-      almuerzoStatus[student.estudiante_id] = traerAlmorzados(student);
+      almuerzoStatus[student.id] = traerAlmorzados(student);
     });
     setAlmorzados(almuerzoStatus);
   };
-
   const envAsistencia = async (student, estudiante_id_id) => {
     let monto;
     if (student.rol === 'prof') {
@@ -74,32 +65,25 @@ export default function StockComponent() {
     await postAsistencia(newRegistro);
     extractData(); // Recarga los datos después de registrar la asistencia
   };
-
   const extractData = async () => {
     const newSelectedDate = new Date(localStorage.getItem('selectedDate') || new Date()).toISOString().split('T')[0];
     setSelectedDate(newSelectedDate);
     const studentsData = await getStudents();
     setStudents(studentsData);
   };
-
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
-
   const handleChangeBecaFilter = (event) => {
     setFiltroBeca(event.target.value);
   };
-
   const filteredStudents = students.filter((student) => {
     const matchesSearch = student.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
       student.seccion.toLowerCase().includes(searchTerm.toLowerCase());
-
     const matchesFilter = filtroBeca === 'estu' ? !student.rol.includes('prof') :
       filtroBeca === 'prof' ? student.rol.includes('prof') : true;
-
     return matchesSearch && matchesFilter;
   });
-
   return (
     <div className="containerAll">
       <div className="containerFormStock">
@@ -133,19 +117,18 @@ export default function StockComponent() {
         </div>
         <div className="students">
           {filteredStudents.map((student) => (
-            <div key={student.estudiante_id} className="student">
-              <div className='studentId_stok'>{student.estudiante_id}</div>
-              <div>{student.id}</div>
+            <div key={student.id} className="student">
+              <div className='studentId_stok'>{student.id}</div>
               <div>
                 <div className='name_s'>{student.nombre}</div>
-                <div className='cedula_s'>{student.cedula}</div>
+                <div className='cedula_s'>{student.id}</div>
               </div>
               <div className='seccion_s'>{student.seccion}</div>
               <div>{student.rol}</div>
               <div className='almuerzoIcon'>
-                {almorzados[student.estudiante_id] ? 
-                  <div onClick={() => envAsistencia(student, student.estudiante_id)}><LocalDiningIcon style={{ color: '#3b82f6', fontSize: 27 }} /></div> : 
-                  <div onClick={() => envAsistencia(student, student.estudiante_id)}><NoMealsIcon style={{ color: 'grey', fontSize: 27 }} /></div>
+                {almorzados[student.id] ?
+                  <div onClick={() => envAsistencia(student, student.id)}><LocalDiningIcon style={{ color: '#3B82F6', fontSize: 27 }} /></div> :
+                  <div onClick={() => envAsistencia(student, student.id)}><NoMealsIcon style={{ color: 'grey', fontSize: 27 }} /></div>
                 }
               </div>
               <div>   </div>
