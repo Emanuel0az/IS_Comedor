@@ -1,144 +1,152 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getStudents } from '../../server/S_Stock/S_Stock';
-import 'react-datepicker/dist/react-datepicker.css';
-import '../Stock/StockComponent.css';
 import NoMealsIcon from '@mui/icons-material/NoMeals';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import LocalDiningIcon from '@mui/icons-material/LocalDining';
 import { postAsistencia } from '../../server/Asistencia/PostAsistencia';
-export default function StockComponent() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filtroBeca, setFiltroBeca] = useState('');
-  const searchInputRef = useRef(null);
-  const [students, setStudents] = useState([]);
-  const [almorzados, setAlmorzados] = useState({});
-  const [selectedDate, setSelectedDate] = useState(new Date(localStorage.getItem('selectedDate') || new Date()).toISOString().split('T')[0]);
-  useEffect(() => {
-    extractData();
-    // Add event listener for storage changes
-    const handleStorageChange = (e) => {
-      if (e.key === localStorage.getItem('selectedDate')) { // Corregido aquí
-        setSelectedDate(new Date(e.newValue).toISOString().split('T')[0]);
-        extractData(); // Llama a extractData al cambiar la fecha
-        verificarAlmuerzos(students)
-        console.log('Fecha actualizada desde localStorage');
-      }
+import '../Stock/StockComponent.css'
+const StockComponent = () => {
+    const [Students, setStudents] = useState([]);
+    const [allStudents, setAllStudents] = useState([]);
+    const [InputFiltro, setInputFiltro] = useState('');
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const studentsPerPage = 50;
+    const [selectedDate, setSelectedDate] = useState(new Date(localStorage.getItem('selectedDate') || new Date()).toISOString().split('T')[0]);
+    const [OpenModal, setOpenModal] = useState(false)
+    const obtainStudents = async () => {
+        try {
+            const data = await getStudents();
+            setStudents(data);
+            setAllStudents(data);
+            setLoading(false);
+        } catch (error) {
+            setError(error.message);
+            setLoading(false);
+        }
     };
-    window.addEventListener('storage', handleStorageChange);
-    // Cleanup function to remove the event listener
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-    };
-  }, [students]);
-  useEffect(() => {
-    if (students.length > 0) {
-      verificarAlmuerzos(students); // Verifica almuerzos al cambiar students
+    function validAlmuerzo(student) {
+        return student.pagos.some(pago => pago.fecha_pago_prueba === selectedDate);
     }
-  }, [students]);
-  const traerAlmorzados = (student) => {
-    return student.pagos.some(pago =>
-      pago.fecha_pago_prueba === selectedDate
-    );
-  };
-  const verificarAlmuerzos = (studentsData) => {
-    let almuerzoStatus = {};
-    studentsData.forEach(student => {
-      almuerzoStatus[student.id] = traerAlmorzados(student);
-    });
-    setAlmorzados(almuerzoStatus);
-  };
-  const envAsistencia = async (student, estudiante_id_id) => {
-    let monto;
-    if (student.rol === 'prof') {
-      monto = 1000;
-    } else if (student.becado) {
-      monto = 0;
-    } else {
-      monto = 600;
+    const openingModal = () => {
+        setOpenModal(!OpenModal)
     }
-    const fecha = new Date(localStorage.getItem('selectedDate'));
-    const newRegistro = {
-      estudiante_id: estudiante_id_id,
-      fecha_pago_prueba: fecha.toLocaleDateString('en-CA'),
-      monto: monto
+    const envAsistencia = async (student, estudiante_id_id) => {
+        let monto;
+        if (student.rol === 'prof') {
+            monto = 1000;
+        } else if (student.becado) {
+            monto = 0;
+        } else {
+            monto = 600;
+        }
+        const fecha = new Date(localStorage.getItem('selectedDate'));
+        const newRegistro = {
+            estudiante_id: estudiante_id_id,
+            fecha_pago_prueba: fecha.toLocaleDateString('en-CA'),
+            monto: monto
+        };
+        await postAsistencia(newRegistro);
+        // Actualizar el estado local del estudiante para reflejar el pago sin esperar la recarga del servidor
+        const updatedStudents = Students.map(s =>
+            s.id === student.id ? {
+                ...s,
+                pagos: [...s.pagos, { fecha_pago_prueba: fecha.toLocaleDateString('en-CA') }]
+            } : s
+        );
+        setStudents(updatedStudents); // Actualizamos los estudiantes localmente
     };
-    await postAsistencia(newRegistro);
-    extractData(); // Recarga los datos después de registrar la asistencia
-  };
-  const extractData = async () => {
-    const newSelectedDate = new Date(localStorage.getItem('selectedDate') || new Date()).toISOString().split('T')[0];
-    setSelectedDate(newSelectedDate);
-    const studentsData = await getStudents();
-    setStudents(studentsData);
-  };
-  const handleSearch = (event) => {
-    setSearchTerm(event.target.value);
-  };
-  const handleChangeBecaFilter = (event) => {
-    setFiltroBeca(event.target.value);
-  };
-  const filteredStudents = students.filter((student) => {
-    const matchesSearch = student.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      student.seccion.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesFilter = filtroBeca === 'estu' ? !student.rol.includes('prof') :
-      filtroBeca === 'prof' ? student.rol.includes('prof') : true;
-    return matchesSearch && matchesFilter;
-  });
-  return (
-    <div className="containerAll">
-      <div className="containerFormStock">
-        <div className="search-container">
-          <input
-            type="text"
-            placeholder="Buscar por nombre o sección..."
-            value={searchTerm}
-            onChange={handleSearch}
-            className="search_input"
-            ref={searchInputRef}
-          />
-          <div>
-            <select className='selectBeca' value={filtroBeca} onChange={handleChangeBecaFilter}>
-              <option value="">Todos</option>
-              <option value="estu">Estudiantes</option>
-              <option value="prof">Profesores</option>
-            </select>
-          </div>
-        </div>
-      </div>
-      <div className="containerStock">
-        <div className="tittles">
-          <div>ID</div>
-          <div>Nombre</div>
-          <div>Sección</div>
-          <div>Rol</div>
-          <div>Almuerzo</div>
-          <div></div>
-          <div>Perfil</div>
-        </div>
-        <div className="students">
-          {filteredStudents.map((student) => (
-            <div key={student.id} className="student">
-              <div className='studentId_stok'>{student.id}</div>
-              <div>
-                <div className='name_s'>{student.nombre}</div>
-                <div className='cedula_s'>{student.id}</div>
-              </div>
-              <div className='seccion_s'>{student.seccion}</div>
-              <div>{student.rol}</div>
-              <div className='almuerzoIcon'>
-                {almorzados[student.id] ?
-                  <div onClick={() => envAsistencia(student, student.id)}><LocalDiningIcon style={{ color: '#3B82F6', fontSize: 27 }} /></div> :
-                  <div onClick={() => envAsistencia(student, student.id)}><NoMealsIcon style={{ color: 'grey', fontSize: 27 }} /></div>
-                }
-              </div>
-              <div>   </div>
-              <div className="actionsIcon">
-                <div><MoreVertIcon style={{ color: 'gray' }} /></div>
-              </div>
+    const filterStudents = () => {
+        if (InputFiltro === '') {
+            setStudents(allStudents);
+        } else {
+            const filtro = allStudents.filter(student => student.nombre.toLowerCase().includes(InputFiltro.toLowerCase()));
+            setStudents(filtro);
+        }
+        setCurrentPage(1); // Resetear a la primera página al filtrar
+    };
+    useEffect(() => {
+        obtainStudents();
+    }, []);
+    useEffect(() => {
+        const interval = setInterval(() => {
+            const newDate = new Date(localStorage.getItem('selectedDate')).toISOString().split('T')[0];
+            if (newDate !== selectedDate) {
+                setSelectedDate(newDate);
+                obtainStudents(); // Recargar estudiantes si la fecha ha cambiado
+            }
+        }, 30);
+        return () => clearInterval(interval); // Limpiar el intervalo al desmontar el componente
+    }, [selectedDate]);
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            filterStudents();
+        }
+    };
+    // Calcular los estudiantes a mostrar según la página actual
+    const indexOfLastStudent = currentPage * studentsPerPage;
+    const indexOfFirstStudent = indexOfLastStudent - studentsPerPage;
+    const currentStudents = Students.slice(indexOfFirstStudent, indexOfLastStudent);
+    // Cambiar de página
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    // Número total de páginas
+    const totalPages = Math.ceil(Students.length / studentsPerPage);
+    return (
+        <div className='containerAll'>
+            <div className='containerFormStock'>
+                <input
+                    className="search_input"
+                    type="text"
+                    value={InputFiltro}
+                    onChange={(e) => setInputFiltro(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                />
             </div>
-          ))}
+            <div className="containerStock">
+            <div className="tittles">
+                <div>ID</div>
+                <div>Nombre</div>
+                <div>Sección</div>
+                <div>Rol</div>
+                <div>Almuerzo</div>
+                <div></div>
+                <div>Perfil</div>
+            </div>
+                <div className='students'>
+                    {loading ? (
+                        <div>Loading...</div>
+                    ) : error ? (
+                        <div>Error: {error}</div>
+                    ) : (
+                        currentStudents.map((student) => (
+                            <div key={student.id} className="student">
+                                <div>{student.id}</div>
+                                <div>
+                                    <div className="name_s">{student.nombre}</div>
+                                    <div className="cedula_s">{student.cedula}</div>
+                                </div>
+                                <div className='seccion_s'>{student.seccion}</div>
+                                <div>{student.rol}Rol</div>
+                                <div className='almuerzoIcon'>{validAlmuerzo(student) ?
+                                    <div onClick={() => envAsistencia(student, student.id)}><LocalDiningIcon className='almorzado_S' style={{ fontSize: 27 }} /></div> :
+                                    <div onClick={() => envAsistencia(student, student.id)}><NoMealsIcon className='almorzado_N' style={{ fontSize: 27 }} /></div>}
+                                </div>
+                                <div></div>
+                                <div><MoreVertIcon style={{ color: 'gray' }} /></div>
+                            </div>
+                        ))
+                    )}
+                </div>
+                <div className="pagination">
+                    {Array.from({ length: totalPages }, (_, index) => (
+                        <button key={index + 1} onClick={() => paginate(index + 1)}>
+                            {index + 1}
+                        </button>
+                    ))}
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
-}
+    );
+};
+export default StockComponent;
