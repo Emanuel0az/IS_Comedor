@@ -48,8 +48,9 @@ services:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=django-react
     volumes:
-      - django_react_data:/data/db
+      - django_react_data:/var/lib/mysql  # Cambia a /var/lib/mysql para que persista los datos correctamente
       - ./dumps:/docker-entrypoint-initdb.d:ro
 
 volumes:
   django_react_data:
+
