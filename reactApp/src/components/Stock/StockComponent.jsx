@@ -101,6 +101,7 @@ const StockComponent = () => {
                     value={InputFiltro}
                     onChange={(e) => setInputFiltro(e.target.value)}
                     onKeyDown={handleKeyDown}
+                    placeholder='Buscar Estudiantes ...'
                 />
             </div>
             <div className="containerStock">
@@ -127,7 +128,7 @@ const StockComponent = () => {
                                     <div className="cedula_s">{student.cedula}</div>
                                 </div>
                                 <div className='seccion_s'>{student.seccion}</div>
-                                <div>{student.rol}Rol</div>
+                                <div>{student.rol}</div>
                                 <div className='almuerzoIcon'>{validAlmuerzo(student) ?
                                     <div onClick={() => envAsistencia(student, student.id)}><LocalDiningIcon className='almorzado_S' style={{ fontSize: 27 }} /></div> :
                                     <div onClick={() => envAsistencia(student, student.id)}><NoMealsIcon className='almorzado_N' style={{ fontSize: 27 }} /></div>}

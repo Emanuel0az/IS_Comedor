@@ -1,7 +1,12 @@
 from django.urls import path
 from . import views
 from .views import LoginView
-from .views import LoginView2
+# from .views import AdminLoginView
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+    TokenBlacklistView,
+)
 
 urlpatterns = [
     # Usuarios
@@ -29,6 +34,10 @@ urlpatterns = [
     path('hist_pagos/<int:pk>/', views.pagos_list, name='pagos_list'),
     
     path('login/', LoginView.as_view(), name='login'),
-    path('login2/', LoginView2.as_view(), name='login'),
+    # path('admin-login/', AdminLoginView.as_view(), name='admin'),
+    
+    path('login_admin/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('token/blacklist/', TokenBlacklistView.as_view(), name='token_blacklist'),
 ]
 

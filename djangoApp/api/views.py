@@ -7,6 +7,9 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.permissions import AllowAny
+from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
 
 from .serializers import UsersSerializer, RecetasSerializer, IngredientesSerializer, Hist_ingredientesSerializer, EstudiantesSerializer, Hist_pagos_Serializer
 
@@ -296,26 +299,34 @@ class LoginView(APIView):
         
         
         
-class LoginView2(APIView):
-    def post(self, request, *args, **kwargs):
-        # Aquí defines la contraseña y el correo predefinidos
-        predefinido_email = "admin@gmail.com"  # Reemplaza con tu correo
-        predefinida_password = "1234"
-        
-        email = request.data.get('email')
-        password = request.data.get('password')
+# class AdminLoginView(APIView):
+#     permission_classes = [AllowAny]  # Permitir acceso a cualquier usuario
 
-        # Verificar si el correo y la contraseña son correctos
-        if email == predefinido_email and password == predefinida_password:
-            # Si ambos son correctos, generar el token
-            refresh = RefreshToken()
-            return Response({
-                'refresh': str(refresh),
-                'access': str(refresh.access_token),
-            })
-        else:
-            return Response({"error": "Invalid email or password"}, status=status.HTTP_401_UNAUTHORIZED)
+#     def post(self, request, *args, **kwargs):
+#         # Obtener el "identificador" (correo o nombre de usuario) y la contraseña
+#         identifier = request.data.get('email')
+#         password = request.data.get('password')
 
+#         # Intentar autenticación con nombre de usuario
+#         user = authenticate(request, username=identifier, password=password)
+
+#         # Si falla, intentamos buscar por email y autenticamos con nombre de usuario
+#         if user is None:
+#             try:
+#                 user_instance = User.objects.get(email=identifier)
+#                 user = authenticate(request, username=user_instance.username, password=password)
+#             except User.DoesNotExist:
+#                 return Response({"error": "Usuario no encontrado"}, status=status.HTTP_404_NOT_FOUND)
+
+#         # Generar tokens si el usuario fue autenticado
+#         if user is not None:
+#             refresh = RefreshToken.for_user(user)
+#             return Response({
+#                 'refresh': str(refresh),
+#                 'access': str(refresh.access_token),
+#             })
+#         else:
+#             return Response({"error": "Credenciales incorrectas"}, status=status.HTTP_401_UNAUTHORIZED)
     
     
 # //////////////////////////////////////////////////////////////////////////
