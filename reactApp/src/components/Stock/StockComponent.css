@@ -178,28 +178,10 @@
 .modalInfoStudent {
 }
 
-.custom-amount-input {
+.loading {
     display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 8px;
-}
+    margin-top: 150px;
 
-.amount-input {
-    width: 80px;
-    padding: 4px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.submit-amount {
-    padding: 4px 8px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.submit-amount:hover {
-    background-color: #45a049;
 }

@@ -21,7 +21,7 @@ export default function FormLogin() {
       });
 
       // Guardar el token en una cookie
-      Cookies.set('token2', response.data.access, { expires: 1 });  // Expira en 1 día
+      Cookies.set('token2', response.data.access, { expires: 0.0625 });  // Expira en 1 hora y media
       alert('Inicio de sesión exitoso');
       navigate('/home');  // Navega a la página de inicio o a la ruta protegida
     } catch (error) {
@@ -44,6 +44,7 @@ export default function FormLogin() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Ingrese su Correo"
               required
+              className='form-input'
             />
           </div>
           <div className="form-group">
@@ -55,9 +56,10 @@ export default function FormLogin() {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Ingrese su Contraseña"
               required
+              className='form-input'
             />
           </div>
-          <button type="submit">Iniciar Sesión</button>
+          <button type="submit" className='submit-button'>Iniciar Sesión</button>
           {errors.login && <p className="error-message">{errors.login}</p>}
         </form>
       </div>

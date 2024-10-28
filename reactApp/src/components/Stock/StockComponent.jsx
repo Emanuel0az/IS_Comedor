@@ -4,6 +4,8 @@ import NoMealsIcon from '@mui/icons-material/NoMeals';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import LocalDiningIcon from '@mui/icons-material/LocalDining';
 import { postAsistencia } from '../../server/Asistencia/PostAsistencia';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 import '../Stock/StockComponent.css';
 
 const StockComponent = () => {
@@ -148,12 +150,16 @@ const StockComponent = () => {
                     <div>Sección</div>
                     <div>Rol</div>
                     <div>Almuerzo</div>
-                    <div></div>
+                    <div>Becado</div>
                     <div>Perfil</div>
                 </div>
                 <div className="students">
                     {loading ? (
-                        <div>Loading...</div>
+                        <div className='loading'>
+                            <Box sx={{ display: 'flex' }} >
+                            <CircularProgress size="80px"/>
+                            </Box>
+                        </div>
                     ) : error ? (
                         <div>Error: {error}</div>
                     ) : (
