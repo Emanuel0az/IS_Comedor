@@ -1,0 +1,127 @@
+.calendaryButton {
+  display: grid;
+  grid-template-columns: 70% 10% 20%;
+  background-color: #ffffff00;  
+  border: 1.5px solid #a7a7a7;
+  border-radius: 8px;
+  min-width: 9vw;
+  max-width: 12vw;
+  height: 7vh;
+  cursor: pointer;
+  align-items: center;
+  color: unset;
+  opacity: 0.8;
+  outline: none;
+  transition: border-color 0.3s ease-in-out,  box-shadow 0.3s ease-in-out;
+  margin-top: 10%;
+}
+
+.calendaryButton:hover {
+  border-color: #007BFF;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
+}
+  
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(60, 58, 68, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.modalContent {
+  /* background-color: #0f0e4a; */
+  border-radius: 5px;
+  width: 20vw;
+  height: 45vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+}
+  
+.customHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;    
+}
+
+
+/* ---------------------------------------------------------------------------------------------------------------- */
+
+/* Calendario.css */
+
+.containerCalendary {
+  position: relative;
+  display: inline-block;
+}
+
+.modalOverlay {
+  position: fixed; /* Fija la posición del overlay */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+  display: flex; /* Flexbox para centrar el modal */
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+}
+
+.modalContent {
+  background-color: white; /* Fondo blanco para el modal */
+  border-radius: 10px; /* Bordes redondeados */
+  padding: 20px; /* Espaciado interno */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para el modal */
+  width: 300px; /* Ancho del modal */
+}
+
+.customHeader {
+  display: flex; /* Flexbox para el encabezado */
+  justify-content: space-around; /* Espaciado entre los botones */
+  align-items: center; /* Centrar verticalmente */
+  margin-bottom: 10px; /* Espacio inferior */
+}
+
+.customHeader button {
+  background-color: transparent; /* Fondo transparente para los botones */
+  cursor: pointer; /* Cambia el cursor al pasar el mouse */
+  font-size: 16px; /* Tamaño de fuente */ /* Color del texto */
+  border-radius: 7px;
+  border: none;
+}
+
+.customHeader button:hover {
+  background-color: #319e34;
+}
+
+/* Estilo adicional para el DatePicker */
+.react-datepicker {
+  border: 1px solid #ddd; /* Borde del calendario */
+  border-radius: 5px; /* Bordes redondeados */
+}
+
+.react-datepicker__header {
+  background-color: #4caf4c; /* Color de fondo del encabezado del calendario */
+  color: white; /* Color del texto del encabezado */
+}
+
+.react-datepicker__day {
+  font-size: 14px; /* Tamaño de fuente de los días */
+}
+
+.react-datepicker__day:hover {
+  background-color: #f0f0f0; /* Color de fondo al pasar el mouse sobre los días */
+  border-radius: 50%; /* Bordes redondeados al pasar el mouse */
+}
+
+.react-datepicker__day--selected {
+  background-color: #4caf4c; /* Color de fondo para el día seleccionado */
+  color: white; /* Color del texto para el día seleccionado */
+}

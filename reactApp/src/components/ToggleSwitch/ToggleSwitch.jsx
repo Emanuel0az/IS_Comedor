@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import '../ToggleSwitch/ToggleSwitch.css'
 import ModeNightIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 
-const ToggleSwitch = () => {
+
+const ToggleSwitch = () => {  
+
   const [colorState, setColorState] = useState(() => {
     // Inicializa el estado a partir de localStorage
     return localStorage.getItem('colorState') === 'true'; // Convierte a booleano
@@ -24,10 +26,10 @@ const ToggleSwitch = () => {
     <>
       {/*He creado esto para aplicar un displayNone, ya que si no,
       los codigos de color se muestran como texto. */}
-     <div className='oculto'>
-      {document.body.style.backgroundColor = colorState ? '#ffffff' : '#262428'}
-      {document.body.style.color = colorState ? 'black' : 'white'}
-    </div>
+      <div className='oculto'>
+        {document.body.style.backgroundColor = colorState ? '#ffffff' : '#262428'}
+        {document.body.style.color = colorState ? 'black' : 'white'}
+      </div>
 
       <div onClick={(() => handleColorState())} className={`toggle_switch_container_${colorState ? 'day' : 'night'}`}>
           <div className={`circleSwitch${colorState ? 'Day' : 'Night'}`} >

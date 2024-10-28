@@ -8,6 +8,45 @@
     padding: calc(1 * var(--template-spacing));
 }
 
+.selected {
+    height: 100%;
+    width: 85%;
+    padding-left: 5%;
+    /* color: rgb(255, 255, 255);    */
+    border-radius: 9px;
+
+    display: grid;
+    grid-template-columns: 15% 30%;
+    align-items: center;
+    margin-left: 5%;
+
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 1.1vw;
+    letter-spacing: 0.5px;
+    line-height: 1.43;
+    background-color: rgba(88, 88, 88, 0.674);
+}
+
+.sideBarTop > .inselected:hover {
+    height: 100%;
+    width: 85%;
+    padding-left: 5%;
+    border-radius: 9px;
+
+    display: grid;
+    grid-template-columns: 15% 30%;
+    align-items: center;
+    margin-left: 5%;
+
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 1.1vw;
+    letter-spacing: 0.5px;
+    line-height: 1.43;
+    background-color: rgba(48, 48, 48, 0.288);
+}
+
 .sideBarContainerDay {
     background-color: #ffffff;
     color: rgba(0, 0, 0, 0.689);
@@ -54,25 +93,7 @@
     line-height: 1.43;
 }
 
-.sideBarTop > div:hover {
-    height: 100%;
-    width: 85%;
-    padding-left: 5%;
-    /* color: rgb(226, 226, 226); */
-    border-radius: 9px;
 
-    display: grid;
-    grid-template-columns: 15% 30%;
-    align-items: center;
-    margin-left: 5%;
-
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    font-size: 1.1vw;
-    letter-spacing: 0.5px;
-    line-height: 1.43;
-    background-color: rgba(48, 48, 48, 0.288);
-}
 
 .sideBarTop > div:active {
     height: 100%;

@@ -102,7 +102,7 @@ FROM api_estudiantes
 WHERE becado = 1;
 
 
--- drop Table `Estudiantes`
+
 
 
 
