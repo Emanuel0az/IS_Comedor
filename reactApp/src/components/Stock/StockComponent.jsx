@@ -4,6 +4,9 @@ import NoMealsIcon from '@mui/icons-material/NoMeals';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import LocalDiningIcon from '@mui/icons-material/LocalDining';
 import { postAsistencia } from '../../server/Asistencia/PostAsistencia';
+import { deleteAsist } from '../../server/Asistencia/deleteAsistencia';
+import CalendarioStudent from '../CalendarioStudent/CalendarioStudent';
+import SessionsChartStudents from '../GraficaStudents/GraficaStudents';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import '../Stock/StockComponent.css';
@@ -19,7 +22,12 @@ const StockComponent = () => {
     const [activeStudentId, setActiveStudentId] = useState(null);
     const studentsPerPage = 50;
     const [selectedDate, setSelectedDate] = useState(new Date(localStorage.getItem('selectedDate') || new Date()).toISOString().split('T')[0]);
+    const [openModalForStudent, setOpenModalForStudent] = useState(null);
+    const [openModalPay, setOpenModalPay] = useState(false);
+    const [payAmount, setPayAmount] = useState(null);
+    const [currentStudentId, setCurrentStudentId] = useState(null); // Nuevo estado para el ID del estudiante actual
     const [OpenModal, setOpenModal] = useState(false);
+
 
     const obtainStudents = async () => {
         try {
@@ -34,62 +42,71 @@ const StockComponent = () => {
     };
 
     function validAlmuerzo(student) {
-        return student.pagos.some(pago => pago.fecha_pago_prueba === selectedDate);
+        return student.pagos.find(pago => pago.fecha_pago_prueba === selectedDate);
     }
 
-    const openingModal = () => {
-        setOpenModal(!OpenModal);
+
+    const openingModal = (studentId) => {
+        setTimeout(() => {
+            setOpenModalForStudent(studentId);
+        }, 1);
     };
 
-    const handleAmountSubmit = async (student) => {
-        const amount = parseFloat(customAmount);
-        if (!isNaN(amount)) {
-            await envAsistencia(student, student.id, amount);
-            setActiveStudentId(null);
-            setCustomAmount('');
-        }
-    };
-
-    const handlePaymentClick = (student) => {
-        if (!student.becado) {
-            setActiveStudentId(student.id);
-        } else {
-            // Si es becado, enviar directamente con monto 0
-            envAsistencia(student, student.id, 0);
-        }
-    };
-
-    const handleAmountKeyDown = (e, student) => {
-        if (e.key === 'Enter') {
-            handleAmountSubmit(student);
-        }
-    };
-
-    const envAsistencia = async (student, estudiante_id_id, customMonto = null) => {
-        let monto;
-        if (student.rol === 'prof') {
-            monto = 1000;
-        } else if (student.becado) {
-            monto = 0;
-        } else {
-            monto = customMonto || 600;
-        }
-
+    const validarAsistencias = async (student, estudiante_id_id) => {
         const fecha = new Date(localStorage.getItem('selectedDate'));
-        const newRegistro = {
-            estudiante_id: estudiante_id_id,
-            fecha_pago_prueba: fecha.toLocaleDateString('en-CA'),
-            monto: monto
-        };
+        const fechaFormato = fecha.toLocaleDateString('en-CA');
+        const pagoExistente = student.pagos.find(pago => pago.fecha_pago_prueba === fechaFormato);
+        
+        if (pagoExistente) {
+            await deleteAsist(pagoExistente.id_pago);
+            const updatedStudents = Students.map(s =>
+                s.id === student.id ? {
+                    ...s,
+                    pagos: s.pagos.filter(pago => pago.id_pago !== pagoExistente.id_pago)
+                } : s
+            );
+            setStudents(updatedStudents);
+        } else {
+            if (student.becado) {
+                const monto = student.rol === 'prof' ? 1000 : student.becado ? 0 : 600;
 
-        await postAsistencia(newRegistro);
-        const updatedStudents = Students.map(s =>
-            s.id === student.id ? {
-                ...s,
-                pagos: [...s.pagos, { fecha_pago_prueba: fecha.toLocaleDateString('en-CA') }]
-            } : s
-        );
-        setStudents(updatedStudents);
+                const newRegistro = {
+                    estudiante_id: estudiante_id_id,
+                    fecha_pago_prueba: fechaFormato,
+                    monto: monto
+                };
+
+                await postAsistencia(newRegistro);
+                const updatedStudents = Students.map(s =>
+                    s.id === student.id ? {
+                        ...s,
+                        pagos: [...s.pagos, { id_pago: newRegistro.id_pago, fecha_pago_prueba: fechaFormato }]
+                    } : s
+                );
+                setStudents(updatedStudents);
+                const data = await getStudents();
+                setStudents(data);
+            } else {
+                // Aquí se abre el modal para ingresar el monto
+                setCurrentStudentId(student.id);
+                setOpenModalPay(true);
+            }
+        }
+    };
+
+    const handlePayment = async () => {
+        if (payAmount > 0) {
+            const newRegistro = {
+                estudiante_id: currentStudentId,
+                fecha_pago_prueba: selectedDate,
+                monto: payAmount
+            };
+
+            await postAsistencia(newRegistro);
+            setOpenModalPay(false);
+            setPayAmount(null); // Reiniciar el monto después del pago
+            obtainStudents(); // Volver a cargar los estudiantes
+        }
     };
 
     const filterStudents = () => {
@@ -125,18 +142,25 @@ const StockComponent = () => {
         }
     };
 
+
+    const handlePayEnter = (e) => {
+        if (e.key === 'Enter') {
+            handlePayment();
+        }
+    };
+
     const indexOfLastStudent = currentPage * studentsPerPage;
     const indexOfFirstStudent = indexOfLastStudent - studentsPerPage;
     const currentStudents = Students.slice(indexOfFirstStudent, indexOfLastStudent);
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
     const totalPages = Math.ceil(Students.length / studentsPerPage);
 
     return (
-        <div className="containerAll">
+        <div className='containerAll'>
             <div className="containerFormStock">
-                <input
-                    className="search_input"
-                    type="text"
+                <input 
+                    type="text" 
+                    className='search_input'
+
                     value={InputFiltro}
                     onChange={(e) => setInputFiltro(e.target.value)}
                     onKeyDown={handleKeyDown}
@@ -150,10 +174,11 @@ const StockComponent = () => {
                     <div>Sección</div>
                     <div>Rol</div>
                     <div>Almuerzo</div>
-                    <div>Becado</div>
+                    <div></div>
                     <div>Perfil</div>
                 </div>
-                <div className="students">
+                <div className='students'>
+
                     {loading ? (
                         <div className='loading'>
                             <Box sx={{ display: 'flex' }} >
@@ -170,34 +195,48 @@ const StockComponent = () => {
                                     <div className="name_s">{student.nombre}</div>
                                     <div className="cedula_s">{student.cedula}</div>
                                 </div>
-                                <div className="seccion_s">{student.seccion}</div>
-                                <div>{student.rol}</div>
-                                <div className="almuerzoIcon">
-                                    {activeStudentId === student.id ? (
-                                        <div className="custom-amount-input">
-                                            <input
-                                                type="number"
-                                                value={customAmount}
-                                                onChange={(e) => setCustomAmount(e.target.value)}
-                                                onKeyDown={(e) => handleAmountKeyDown(e, student)}
-                                                placeholder="Monto"
-                                                className="amount-input"
-                                                autoFocus
-                                            />
-                                            
-                                        </div>
-                                    ) : validAlmuerzo(student) ? (
-                                        <div onClick={() => handlePaymentClick(student)}>
-                                            <LocalDiningIcon className="almorzado_S" style={{ fontSize: 27 }} />
-                                        </div>
-                                    ) : (
-                                        <div onClick={() => handlePaymentClick(student)}>
-                                            <NoMealsIcon className="almorzado_N" style={{ fontSize: 27 }} />
-                                        </div>
-                                    )}
+
+                                <div className='seccion_s'>{student.seccion}</div>
+                                <div>{student.rol} Rol</div>
+                                <div className='almuerzoIcon'>
+                                    {validAlmuerzo(student) ?
+                                        <div onClick={() => validarAsistencias(student, student.id)}><LocalDiningIcon className='almorzado_S' style={{ fontSize: 27 }} /></div> :
+                                        <div onClick={() => validarAsistencias(student, student.id)}><NoMealsIcon className='almorzado_N' style={{ fontSize: 27 }} /></div>
+                                    }
                                 </div>
-                                <div></div>
-                                <div><MoreVertIcon style={{ color: 'gray' }} /></div>
+                                <div onClick={() => openingModal(student.id)} className="actionsIcon">
+                                    <div className='contAction'><MoreVertIcon style={{ color: 'gray' }} /></div>
+                                    {openModalForStudent === student.id ? (
+                                        <div className='modalContainer'>
+                                            <div className='modalStudentContainer'>
+                                                <div className='infoStudentM'>
+                                                    <div className='imgStudent'>{/* Aquí va la foto. */}</div>
+                                                    <div className='identityStudentM'>
+                                                        <div className='containerInfoStudentsModal'>
+                                                            <div className='nombreStudentintModal'>{student.nombre}</div>
+                                                            <div className='idStudetIntoModal'>ID: {student.id}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div className='typesStudentM'>
+                                                        <div className='containerInfoStudentsType'>
+                                                            <div className="becadoStudentIntoModal">Becado</div>
+                                                            <div className="rolStudentIntoModal">Estudiante</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className='AsistAndModal'>
+                                                    <div className='asistsTextTittle'>Asistencias</div>
+                                                    <div>
+                                                        <CalendarioStudent />
+                                                    </div>
+                                                </div>
+                                                <div className='graphicStudent'>
+                                                    <SessionsChartStudents />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ) : null}
+                                </div>
                             </div>
                         ))
                     )}
@@ -210,8 +249,27 @@ const StockComponent = () => {
                     ))}
                 </div>
             </div>
+
+            {/* Mini Modal para el pago */}
+            {openModalPay && (
+                <div className='modalPayContainer'>
+                    <div className='modalPay'>
+                        <div>Pago para {currentStudentId}</div>
+                        <input 
+                            type="number" 
+                            placeholder='Monto' 
+                            value={payAmount} 
+                            onChange={(e) => setPayAmount(e.target.value)} 
+                            autoFocus
+                            onKeyDown={handlePayEnter}
+                        />
+                        <button onClick={handlePayment}>Confirmar Pago</button>
+                        <button onClick={() => setOpenModalPay(false)}>Cancelar</button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
 
-export default StockComponent;
+export default stockComponent;

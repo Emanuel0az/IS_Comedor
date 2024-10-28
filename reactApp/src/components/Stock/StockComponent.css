@@ -31,6 +31,120 @@
     border-radius: 50%;
     margin-bottom: 7%;
 }
+
+
+.modalContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.605);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.modalStudentContainer {
+    width: 40vw;
+    height: 90vh;
+    background-color: rgb(56, 55, 55);
+    border-radius: 10px;
+}
+
+.infoStudentM {
+    margin-top: 1%;
+    margin-left: 1%;
+    width: 98%;
+    height: 41%;
+    border-radius: 10px;
+    background-color: #ccc;
+    display: grid;
+    grid-template-columns: 30% 37% 33%;
+    gap: 10px;
+}
+
+.imgStudentM {
+    margin-top: 10%;
+    height: 80%;
+    margin-left: 10%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}.imgStudent {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    background-color: rgba(255, 0, 0, 0.447);
+}
+
+.identityStudentM {
+    margin-top: 8%;
+    height: 80%;
+    margin-left: 5%;
+    width: 90%;
+}.containerInfoStudentsModal {
+    display: grid;
+    grid-template-rows: 40% 20%;
+    row-gap: 10px;
+    margin-top: 25%;
+}.nombreStudentintModal {
+    font-size: 18px;
+    opacity: 0.9;
+}.idStudetIntoModal {
+    font-size: 13px;
+    opacity: 0.7;
+}
+
+
+
+
+.typesStudentM {
+    margin-top: 9%;
+
+    height: 80%;
+    width: 80%;
+}.containerInfoStudentsType {
+    display: grid;
+    grid-template-rows: 42% 20%;
+    row-gap: 20px;
+    margin-top: 30%;
+}
+
+/* imgStudentM */
+/* identityStudentM */
+/* typesStudentM */
+
+.AsistAndModal {
+    margin-top: 1%;
+    margin-left: 1%;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 70% 30%;
+    /* background-color: rgba(255, 0, 0, 0.573); */
+    width: 98%;
+    height: 15%;
+}.AsistAndModal > div {
+    margin-top: 8%;
+    margin-left: 2%;
+}.asistsTextTittle {
+    font-size: 18px;
+    opacity: 0.7;
+}
+
+.graphicStudent {
+    margin-top: 1%;
+    margin-left: 1%;
+    border-radius: 10px;
+    background-color: rgba(0, 128, 0, 0.459);
+    width: 98%;
+    height: 40%;
+}
+
+
+
 .almorzado_S {
     color: #3B82F6;
 }
@@ -42,7 +156,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}.actionsIcon > div:hover {
+}.actionsIcon > .contAction:hover {
     background-color: rgba(117, 117, 117, 0.187);
     width: 50px;
     height: 50px;
@@ -51,7 +165,7 @@
     justify-content: center;
     border-radius: 50%;
     margin-bottom: 7%;
-}.actionsIcon > div {
+}.actionsIcon > .contAction {
     width: 50px;
     height: 50px;
     display: flex;
@@ -178,6 +292,50 @@
 .modalInfoStudent {
 }
 
+.custom-amount-input {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.amount-input {
+    width: 80px;
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.submit-amount {
+    padding: 4px 8px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.submit-amount:hover {
+    background-color: #45a049;
+} 
+
+.modalPayContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalPay {
+    width: 20vw;
+    height: 10vh;
+    background-color: grey;
+    padding: 1%;
+    border-radius: 10px;
+}
+
 .loading {
     display: flex;
     justify-content: center;
@@ -185,3 +343,4 @@
     margin-top: 150px;
 
 }
+
