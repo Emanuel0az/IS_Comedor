@@ -284,3 +284,8 @@ h3.title {
   max-width: 7vw;
   max-height: 7vh;
 }
+
+.list_content {
+  max-height: 50vh;
+  overflow-x: auto;
+}

@@ -272,4 +272,4 @@ const StockComponent = () => {
     );
 };
 
-export default stockComponent;
+export default StockComponent;
