@@ -7,6 +7,8 @@ import { postAsistencia } from '../../server/Asistencia/PostAsistencia';
 import { deleteAsist } from '../../server/Asistencia/deleteAsistencia';
 import CalendarioStudent from '../CalendarioStudent/CalendarioStudent';
 import SessionsChartStudents from '../GraficaStudents/GraficaStudents';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 import '../Stock/StockComponent.css';
 
 const StockComponent = () => {
@@ -16,12 +18,16 @@ const StockComponent = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
+    const [customAmount, setCustomAmount] = useState('');
+    const [activeStudentId, setActiveStudentId] = useState(null);
     const studentsPerPage = 50;
     const [selectedDate, setSelectedDate] = useState(new Date(localStorage.getItem('selectedDate') || new Date()).toISOString().split('T')[0]);
     const [openModalForStudent, setOpenModalForStudent] = useState(null);
     const [openModalPay, setOpenModalPay] = useState(false);
     const [payAmount, setPayAmount] = useState(null);
     const [currentStudentId, setCurrentStudentId] = useState(null); // Nuevo estado para el ID del estudiante actual
+    const [OpenModal, setOpenModal] = useState(false);
+
 
     const obtainStudents = async () => {
         try {
@@ -38,6 +44,7 @@ const StockComponent = () => {
     function validAlmuerzo(student) {
         return student.pagos.find(pago => pago.fecha_pago_prueba === selectedDate);
     }
+
 
     const openingModal = (studentId) => {
         setTimeout(() => {
@@ -106,7 +113,9 @@ const StockComponent = () => {
         if (InputFiltro === '') {
             setStudents(allStudents);
         } else {
-            const filtro = allStudents.filter(student => student.nombre.toLowerCase().includes(InputFiltro.toLowerCase()));
+            const filtro = allStudents.filter(student => 
+                student.nombre.toLowerCase().includes(InputFiltro.toLowerCase())
+            );
             setStudents(filtro);
         }
         setCurrentPage(1);
@@ -133,6 +142,7 @@ const StockComponent = () => {
         }
     };
 
+
     const handlePayEnter = (e) => {
         if (e.key === 'Enter') {
             handlePayment();
@@ -150,9 +160,11 @@ const StockComponent = () => {
                 <input 
                     type="text" 
                     className='search_input'
+
                     value={InputFiltro}
                     onChange={(e) => setInputFiltro(e.target.value)}
                     onKeyDown={handleKeyDown}
+                    placeholder="Buscar Estudiantes ..."
                 />
             </div>
             <div className="containerStock">
@@ -166,8 +178,13 @@ const StockComponent = () => {
                     <div>Perfil</div>
                 </div>
                 <div className='students'>
+
                     {loading ? (
-                        <div>Loading...</div>
+                        <div className='loading'>
+                            <Box sx={{ display: 'flex' }} >
+                            <CircularProgress size="80px"/>
+                            </Box>
+                        </div>
                     ) : error ? (
                         <div>Error: {error}</div>
                     ) : (
@@ -178,6 +195,7 @@ const StockComponent = () => {
                                     <div className="name_s">{student.nombre}</div>
                                     <div className="cedula_s">{student.cedula}</div>
                                 </div>
+
                                 <div className='seccion_s'>{student.seccion}</div>
                                 <div>{student.rol} Rol</div>
                                 <div className='almuerzoIcon'>
@@ -254,4 +272,4 @@ const StockComponent = () => {
     );
 };
 
-export default StockComponent;
+export default stockComponent;

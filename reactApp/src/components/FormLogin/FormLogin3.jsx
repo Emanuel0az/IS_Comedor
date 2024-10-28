@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './FormLogin2.css';
 import axios from 'axios';
-import Cookies from 'js-cookie'; // Importa la librería de cookies
+import Cookies from 'js-cookie';
 
 export default function FormLogin() {
   const [password, setPassword] = useState('');
@@ -20,8 +20,10 @@ export default function FormLogin() {
     const inputErrors = validate();
     if (Object.keys(inputErrors).length === 0) {
       try {
-        const response = await axios.post('http://localhost:8000/api/login/', { password: '1234' });
-        // Guardar el token en una cookie en lugar de localStorage
+        // Enviar la contraseña ingresada por el usuario
+        const response = await axios.post('http://localhost:8000/api/login/', { password });
+
+        // Guardar el token en una cookie
         Cookies.set('token', response.data.access, { expires: 1 }); // Expira en 1 día
         navigate('/asistencias');
       } catch (error) {

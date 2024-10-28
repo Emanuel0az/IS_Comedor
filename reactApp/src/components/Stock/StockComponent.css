@@ -291,6 +291,7 @@
 }
 .modalInfoStudent {
 }
+
 .custom-amount-input {
     display: flex;
     align-items: center;
@@ -334,3 +335,12 @@
     padding: 1%;
     border-radius: 10px;
 }
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 150px;
+
+}
+

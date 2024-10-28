@@ -22,3 +22,16 @@ except FileNotFoundError as e:
     print("Error: El archivo no se encontró:", e)
 except Exception as e:
     print("Se produjo un error:", e)
+
+
+# from django.contrib.auth.models import User
+
+# # Obtener al usuario (por ejemplo, por su nombre de usuario o email)
+# user = User.objects.get(username='root')  # O también puedes usar .get(email='email@example.com')
+
+# # Asignar permisos de administrador
+# user.is_staff = True  # Para darle acceso al panel de administración
+# user.is_superuser = True  # Para hacerlo superusuario con todos los permisos
+
+# # Guardar los cambios
+# user.save()

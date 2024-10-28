@@ -2,6 +2,8 @@
 
 use `django-react`
 
+GRANT ALL PRIVILEGES ON `django-react`.* TO 'root'@'localhost';
+FLUSH PRIVILEGES;
 
 
 

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './FormLogin.css';
 import axios from 'axios';
-import Cookies from 'js-cookie'; // Importa la librería de cookies
+import Cookies from 'js-cookie';
+import './FormLogin.css';
 
 export default function FormLogin() {
   const [email, setEmail] = useState('');
@@ -10,34 +10,23 @@ export default function FormLogin() {
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
-  const validate = () => {
-    let inputErrors = {};
-    if (!email) inputErrors.email = 'Por favor, ingrese su correo electrónico.';
-    if (!password) inputErrors.password = 'Por favor, ingrese su contraseña.';
-    return inputErrors;
-  };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const inputErrors = validate();
-    if (Object.keys(inputErrors).length === 0) {
-      try {
-        // Cambiar la URL de acuerdo a tu API
-        const response = await axios.post('http://localhost:8000/api/login2/', { 
-          email: "admin@gmail.com",
-          password: "1234" 
-        });
 
-        // Guardar el token en una cookie
-        Cookies.set('token2', response.data.access, { expires: 1 }); // Expira en 1 día
-        alert('Inicio de sesión exitoso');
-        navigate('/home');
-      } catch (error) {
-        alert('Credenciales incorrectas');
-      }
-    } else {
-      setErrors(inputErrors);
-      alert('Ingrese datos');
+    try {
+      // Hacer la solicitud de login a la API
+      const response = await axios.post('http://localhost:8000/api/login_admin/', {
+        username: email,
+        password: password,
+      });
+
+      // Guardar el token en una cookie
+      Cookies.set('token2', response.data.access, { expires: 0.0625 });  // Expira en 1 hora y media
+      alert('Inicio de sesión exitoso');
+      navigate('/home');  // Navega a la página de inicio o a la ruta protegida
+    } catch (error) {
+      setErrors({ login: 'Correo o contraseña incorrectos' });
+      alert('Credenciales incorrectas');
     }
   };
 
@@ -47,21 +36,19 @@ export default function FormLogin() {
         <h2 className="login-title">Inicio de Sesión</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="email" className="form-label">Correo electrónico</label>
+            <label htmlFor="email">Correo electrónico</label>
             <input
               id="email"
-              type="email"
+              type=""
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Ingrese su Correo"
               required
-              autoFocus
-              className="form-input"
+              className='form-input'
             />
-            {errors.email && <span className="error-message">{errors.email}</span>}
           </div>
           <div className="form-group">
-            <label htmlFor="password" className="form-label">Contraseña</label>
+            <label htmlFor="password">Contraseña</label>
             <input
               id="password"
               type="password"
@@ -69,16 +56,11 @@ export default function FormLogin() {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Ingrese su Contraseña"
               required
-              className="form-input"
+              className='form-input'
             />
-            {errors.password && <span className="error-message">{errors.password}</span>}
           </div>
-          <button 
-            type="submit"
-            className="submit-button"
-          >
-            Iniciar Sesión
-          </button>
+          <button type="submit" className='submit-button'>Iniciar Sesión</button>
+          {errors.login && <p className="error-message">{errors.login}</p>}
         </form>
       </div>
     </div>

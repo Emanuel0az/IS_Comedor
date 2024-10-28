@@ -4,6 +4,8 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import MailIcon from '@mui/icons-material/Mail';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
+import PeopleIcon from '@mui/icons-material/People';
+import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import { useNavigate } from 'react-router-dom';
 import './SideBar.css';
 import Cookies from 'js-cookie';
@@ -32,6 +34,7 @@ const SideBar = () => {
   const navigate = useNavigate();
 
   return (
+
     <div className={`sideBarContainer${colorState ? 'Day' : 'Night'}`}>
       <div className='sideBarTop'>
         <div className={selectedLink === 'home' ? 'selected' : 'inselected'} onClick={() => { changeSelection('home'); navigate('home/'); Cookies.remove('token'); }}>
@@ -63,3 +66,4 @@ const SideBar = () => {
 };
 
 export default SideBar;
+
