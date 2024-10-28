@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { format, startOfWeek, isSameDay, addDays, differenceInCalendarDays } from 'date-fns';
-import './Grafica.css';
+import './GraficaStudents.css';
 
-const SessionsChart = () => {
+const SessionsChartStudents = () => {
   const [data, setData] = useState([]);
   const [lastUpdate, setLastUpdate] = useState(new Date()); // Última fecha de actualización
 
@@ -12,25 +12,27 @@ const SessionsChart = () => {
       .then(response => response.json())
       .then(asistenciaData => {
         const asistenciaCount = {};
-
-        const today = new Date();  // Esto es lo que hay que cambiar para tomar una fecha. XD
-
+        const today = new Date();
         const startOfThisWeek = startOfWeek(new Date(localStorage.getItem('selectedDate')), { weekStartsOn: 1 }); // Lunes de esta semana
-
-        // Inicializar todos los días de la semana con 0
         const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
-        weekdays.forEach((day) => {
+
+        // Inicializa la cuenta de asistencia para cada día de la semana
+        weekdays.forEach(day => {
           asistenciaCount[day] = 0;
         });
 
-        asistenciaData.forEach(item => {
-          const asistenciaDate = new Date(item.fecha_pago_prueba);  // ITEM              🔴            🔴           🔴            🔴            🔴
-          const asistenciaDatePlusOne = addDays(asistenciaDate, 1);
+        // Filtrar solo los pagos del estudiante con ID 1 (puedes hacer esto dinámico si lo necesitas)
+        const pagosEstudiante = asistenciaData.filter(item => item.estudiante_id === 1);
 
-          // Verificar si la fecha de asistencia pertenece a esta semana
+        // Iterar sobre los pagos filtrados y contar por día
+        pagosEstudiante.forEach(item => {
+          const asistenciaDate = new Date(item.fecha_pago_prueba);  
+          const asistenciaDatePlusOne = addDays(asistenciaDate, 1);  // Si necesitas sumar un día
+
+          // Verifica si la fecha pertenece a la semana actual
           if (differenceInCalendarDays(asistenciaDatePlusOne, startOfThisWeek) >= 0 &&
               differenceInCalendarDays(asistenciaDatePlusOne, startOfThisWeek) < 5) {
-            const localDayOfWeek = format(asistenciaDatePlusOne, 'EEEE'); 
+            const localDayOfWeek = format(asistenciaDatePlusOne, 'EEEE');
 
             if (asistenciaCount.hasOwnProperty(localDayOfWeek)) {
               asistenciaCount[localDayOfWeek] += 1;
@@ -38,6 +40,7 @@ const SessionsChart = () => {
           }
         });
 
+        // Formatea los datos para el gráfico
         const processedData = weekdays.map(day => ({
           date: day,
           asistencia: asistenciaCount[day],
@@ -56,20 +59,19 @@ const SessionsChart = () => {
 
     const checkDayChange = () => {
       const now = new Date();
-      // Verifica si ha cambiado el día comparando la fecha actual con la última fecha de actualización
       if (!isSameDay(now, lastUpdate)) {
-        fetchData(); // Si el día cambió, vuelve a obtener los datos
+        fetchData(); // Si ha cambiado el día, vuelve a obtener los datos
       }
     };
 
-    const interval = setInterval(checkDayChange, 60000); // Verifica cada minuto si ha cambiado el día
+    const interval = setInterval(checkDayChange, 60000); // Verificar cada minuto si el día cambió
 
-    return () => clearInterval(interval); // Limpia el intervalo cuando el componente se desmonta
+    return () => clearInterval(interval); // Limpiar el intervalo al desmontar el componente
   }, [lastUpdate]);
 
   return (
     <div className="sessions-chart">
-      <ResponsiveContainer width="100%" height={240}>
+      <ResponsiveContainer width="100%" height={171}>
         <AreaChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
           <defs>
             <linearGradient id="colorAsistencia" x1="0" y1="0" x2="0" y2="1">
@@ -88,4 +90,4 @@ const SessionsChart = () => {
   );
 };
 
-export default SessionsChart
+export default SessionsChartStudents;
