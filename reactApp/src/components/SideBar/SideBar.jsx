@@ -4,6 +4,8 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import MailIcon from '@mui/icons-material/Mail';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
+import PeopleIcon from '@mui/icons-material/People';
+import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import { useNavigate } from 'react-router-dom';
 import './SideBar.css';
 import Cookies from 'js-cookie'; 
@@ -39,7 +41,7 @@ const SideBar = () => {
             <div>Home</div>
           </div>
           <div onClick={() => {navigate('asistencias/');  Cookies.remove('token');}}>
-            <InventoryIcon style={{ fontSize: 19 }} />
+            <PeopleIcon style={{ fontSize: 19 }} />
             <div>Asistencia</div>
           </div>
           <div onClick={() => {navigate('estadisticas/');  Cookies.remove('token');}}>
@@ -53,6 +55,10 @@ const SideBar = () => {
           <div onClick={() => {navigate('ingredientes/');  Cookies.remove('token');}}>
             <RestaurantIcon style={{ fontSize: 20 }} />
             <div>Ingredientes</div>
+          </div>
+          <div onClick={() => {navigate('add-estudiantes/');  Cookies.remove('token');}}>
+            <PersonAddAlt1Icon style={{ fontSize: 20 }} />
+            <div>Estudiantes</div>
           </div>
         </div>
         <div className='sideBarBottom'>

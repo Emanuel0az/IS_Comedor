@@ -16,7 +16,7 @@ class Estudiantes(models.Model):
     fecha_nacimiento = models.CharField(max_length=70, null=True)
     edad = models.CharField(max_length=50, null=True)
     telefono = models.CharField(max_length=50, null=True, blank=True)
-    rol = models.CharField(max_length=50, choices=[("estu", "Estudiante"), ("prof", "Profesor")], default="estu", null=True)
+    rol = models.CharField(max_length=50, choices=[("Estudiantes", "Estudiantes"), ("Profesor", "Profesor")], default="estu", null=True)
     becado = models.BooleanField(default=False, null=True)
 
     def __str__(self):

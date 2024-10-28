@@ -36,6 +36,7 @@ const App = () => {
             <SideBar />
             <div>
               <div className="structureHeader">
+              
                 <div></div>
                 <CalendarioModal/>
               </div>

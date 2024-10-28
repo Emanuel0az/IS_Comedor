@@ -1,78 +1,286 @@
 .container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-  
-  .title {
-    color: #333;
-    text-align: center;
-  }
-  
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Estilos para los títulos */
+.title {
+  color: #1a365d;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+h1.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+h2.title {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+h3.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* Formulario */
+.form {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+/* Campos de entrada */
+.input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #4299e1;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+}
+
+/* Select */
+.select {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  background-color: white;
+  font-size: 1rem;
+}
+
+/* Checkbox container */
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.checkbox {
+  margin-right: 0.5rem;
+}
+
+/* Botones */
+.button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.button-primary {
+  background-color: #4299e1;
+  color: white;
+}
+
+.button-primary:hover {
+  background-color: #3182ce;
+}
+
+.button-secondary {
+  background-color: #718096;
+  color: white;
+}
+
+.button-secondary:hover {
+  background-color: #4a5568;
+}
+
+.button-danger {
+  background-color: #f56565;
+  color: white;
+}
+
+.button-danger:hover {
+  background-color: #e53e3e;
+}
+
+/* Grupo de botones */
+.button-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Lista de estudiantes */
+.list {
+  list-style: none;
+  padding: 0;
+}
+
+.list-item {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Información del estudiante */
+.item-info {
+  flex: 1;
+}
+
+/* Tabla */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table th,
+.table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.table th {
+  background-color: #f7fafc;
+  font-weight: 600;
+  color: #4a5568;
+}
+
+.table tr:hover {
+  background-color: #f7fafc;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
   .form {
-    background-color: #f5f5f5;
-    padding: 20px;
-    border-radius: 4px;
-    margin-bottom: 20px;
+    padding: 1rem;
   }
-  
-  .input {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-  
+
   .button {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s;
+    padding: 0.5rem 1rem;
   }
-  
-  .button-primary {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  .button-secondary {
-    background-color: #6c757d;
-    color: white;
-  }
-  
-  .button-danger {
-    background-color: #dc3545;
-    color: white;
-  }
-  
-  .list {
-    list-style-type: none;
-    padding: 0;
-    display: grid;
-    justify-content: center;
-  }
-  
+
   .list-item {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 4px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    min-width: 55vw;
+    flex-direction: column;
+    gap: 1rem;
   }
-  
-  .item-info {
-    flex-grow: 1;
-  }
-  
+
   .button-group {
-    display: flex;
-    gap: 5px;
+    width: 100%;
+    justify-content: stretch;
   }
+
+  .button-group button {
+    flex: 1;
+  }
+}
+
+/* Utilidades */
+.text-center {
+  text-align: center;
+}
+
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Estado de carga y errores */
+.loading {
+  text-align: center;
+  padding: 2rem;
+  color: #4a5568;
+}
+
+.error {
+  color: #e53e3e;
+  padding: 1rem;
+  border: 1px solid #feb2b2;
+  border-radius: 4px;
+  background-color: #fff5f5;
+  margin-bottom: 1rem;
+}
+
+/* Tooltips */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltip-text {
+  visibility: hidden;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #2d3748;
+  color: white;
+  text-align: center;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-in;
+}
+
+.title {
+  display: grid;
+  grid-template-columns: 30% 40% 30%;
+}
+
+.student_list {
+  max-width: 7vw;
+  max-height: 7vh;
+}
