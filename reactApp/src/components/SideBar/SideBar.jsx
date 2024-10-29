@@ -52,10 +52,6 @@ const SideBar = () => {
           <MailIcon style={{ fontSize: 20 }} />
           <div>Email</div>
         </div>
-        <div className={selectedLink === 'ingredientes' ? 'selected' : 'inselected'} onClick={() => { changeSelection('ingredientes'); navigate('ingredientes/'); Cookies.remove('token'); }}>
-          <RestaurantIcon style={{ fontSize: 20 }} />
-          <div>Ingredientes</div>
-        </div>
         <div className={selectedLink === 'estudiantes' ? 'selected' : 'inselected'} onClick={() => { changeSelection('estudiantes'); navigate('estudiantes/'); Cookies.remove('token'); }}>
           <PersonAddAlt1Icon style={{ fontSize: 20 }} />
           <div>Estudiantes</div>

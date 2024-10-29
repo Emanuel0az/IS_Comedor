@@ -23,7 +23,7 @@ export default function FormLogin() {
         const response = await axios.post('http://localhost:8000/api/login/', { password });
         // Guardar el token en una cookie en lugar de localStorage
         Cookies.set('token', response.data.access, { expires: 1 }); // Expira en 1 día
-        navigate('/ingredientes');
+        navigate('/estudiantes');
       } catch (error) {
         alert('Contraseña incorrecta');
       }
