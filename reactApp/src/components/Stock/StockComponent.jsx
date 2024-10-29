@@ -174,8 +174,7 @@ const StockComponent = () => {
                     <div>Sección</div>
                     <div>Rol</div>
                     <div>Almuerzo</div>
-                    <div></div>
-                    <div>Perfil</div>
+                    <div className='perfilIcon'>Perfil</div>
                 </div>
                 <div className='students'>
 

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import HomeIcon from '@mui/icons-material/Home';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import MailIcon from '@mui/icons-material/Mail';
-import InventoryIcon from '@mui/icons-material/Inventory';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import PeopleIcon from '@mui/icons-material/People';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
@@ -42,7 +41,7 @@ const SideBar = () => {
           <div>Home</div>
         </div>
         <div className={selectedLink === 'asistencia' ? 'selected' : 'inselected'} onClick={() => { changeSelection('asistencia'); navigate('asistencias/'); Cookies.remove('token'); }}>
-          <InventoryIcon style={{ fontSize: 19 }} />
+          <PeopleIcon style={{ fontSize: 19 }} />
           <div>Asistencia</div>
         </div>
         <div className={selectedLink === 'estadisticas' ? 'selected' : 'inselected'} onClick={() => { changeSelection('estadisticas'); navigate('estadisticas/'); Cookies.remove('token'); }}>
@@ -56,6 +55,10 @@ const SideBar = () => {
         <div className={selectedLink === 'ingredientes' ? 'selected' : 'inselected'} onClick={() => { changeSelection('ingredientes'); navigate('ingredientes/'); Cookies.remove('token'); }}>
           <RestaurantIcon style={{ fontSize: 20 }} />
           <div>Ingredientes</div>
+        </div>
+        <div className={selectedLink === 'estudiantes' ? 'selected' : 'inselected'} onClick={() => { changeSelection('estudiantes'); navigate('estudiantes/'); Cookies.remove('token'); }}>
+          <PersonAddAlt1Icon style={{ fontSize: 20 }} />
+          <div>Estudiantes</div>
         </div>
       </div>
       <div className='sideBarBottom'>
