@@ -19,6 +19,7 @@ const StudentManagement = () => {
   });
   const [editingStudent, setEditingStudent] = useState(null);
   const [currentView, setCurrentView] = useState('add');
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     fetchStudents();
@@ -125,6 +126,12 @@ const StudentManagement = () => {
     }
   };
 
+  const filteredStudents = students.filter((student) =>
+    student.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    student.cedula.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    student.seccion.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="student-management">
       <div className="header">
@@ -226,7 +233,19 @@ const StudentManagement = () => {
 
       {currentView === 'list' && (
         <div className="student-list">
-          <h2 className="list-title">Lista de Estudiantes</h2>
+          <hr />
+          <div className="search-container">
+            <h2 className="list-title">Lista de Estudiantes</h2>
+            <div></div>
+            <input
+              type="text"
+              className="search-input"
+              placeholder="Buscar Estudiantes ..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+          <hr />
           <div className="table-container">
             <table className="student-table">
               <thead>
@@ -241,7 +260,7 @@ const StudentManagement = () => {
                 </tr>
               </thead>
               <tbody>
-                {students.map((student) => (
+                {filteredStudents.map((student) => (
                   <tr key={student.id}>
                     {editingStudent?.id === student.id ? (
                       <td colSpan="7" className="editing-row">
