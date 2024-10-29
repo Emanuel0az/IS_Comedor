@@ -9,26 +9,26 @@ FLUSH PRIVILEGES;
 
 INSERT INTO api_estudiantes (nombre, edad, seccion,becado, rol)
 VALUES 
-('Juan Pérez', 12, '6A', true, 'estu'),
-('Ana Gómez', 11, '5B', false, 'estu'),
-('Luis Martínez', 10, '4C', true, 'estu'),
-('Carla Rodríguez', 12, '6B', false, 'estu'),
-('Pedro López', 11, '5A', true, 'estu'),
-('Lucía Hernández', 12, '6C', true, 'estu'),
-('Jorge García', 10, '4B', false, 'estu'),
-('María González', 9, '3A', true, 'estu'),
-('Sofía Morales', 12, '6A', false, 'estu'),
-('Ricardo Vargas', 11, '5B', true, 'estu'),
-('Valeria Rivera', 12, '6C', false, 'estu'),
-('Tomás Ríos', 10, '4A', true, 'estu'),
-('Mateo Cruz', 11, '5C', false, 'estu'),
-('Diana Fernández', 9, '3B', true, 'estu'),
-('Camila Torres', 12, '6B', false, 'estu'),
-('David Suárez', 10, '4A', true, 'estu'),
-('Emilio Medina', 11, '5A', false, 'estu'),
-('Elena Vega', 12, '6C', true, 'estu'),
-('Álvaro Jiménez', 10, '4C', true, 'estu'),
-('Patricia Salas', 11, '5B', false, 'estu');
+('Juan Pérez', 12, '6A', true, 'Estudiantes'),
+('Ana Gómez', 11, '5B', false, 'Estudiantes'),
+('Luis Martínez', 10, '4C', true, 'Estudiantes'),
+('Carla Rodríguez', 12, '6B', false, 'Estudiantes'),
+('Pedro López', 11, '5A', true, 'Estudiantes'),
+('Lucía Hernández', 12, '6C', true, 'Estudiantes'),
+('Jorge García', 10, '4B', false, 'Profesor'),
+('María González', 9, '3A', true, 'Estudiantes'),
+('Sofía Morales', 12, '6A', false, 'Estudiantes'),
+('Ricardo Vargas', 11, '5B', true, 'Estudiantes'),
+('Valeria Rivera', 12, '6C', false, 'Estudiantes'),
+('Tomás Ríos', 10, '4A', true, 'Estudiantes'),
+('Mateo Cruz', 11, '5C', false, 'Estudiantes'),
+('Diana Fernández', 9, '3B', true, 'Estudiantes'),
+('Camila Torres', 12, '6B', false, 'Estudiantes'),
+('David Suárez', 10, '4A', true, 'Estudiantes'),
+('Emilio Medina', 11, '5A', false, 'Estudiantes'),
+('Elena Vega', 12, '6C', true, 'Estudiantes'),
+('Álvaro Jiménez', 10, '4C', true, 'Estudiantes'),
+('Patricia Salas', 11, '5B', false, 'Estudiantes');
 
 -- -- Inserción de profesores
 -- INSERT INTO api_estudiantes (nombre, edad, seccion, becado, rol)

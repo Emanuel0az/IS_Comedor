@@ -1,7 +1,3 @@
-.mainRight {
-    overflow: auto;
-}
-
 .mainRightDonutGraphics {
     display: flex;
     margin-top: 2vh;

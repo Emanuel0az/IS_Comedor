@@ -223,6 +223,7 @@ const StockComponent = () => {
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div>Perro</div>
                                                 <div className='AsistAndModal'>
                                                     <div className='asistsTextTittle'>Asistencias</div>
                                                     <div>
