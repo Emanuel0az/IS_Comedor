@@ -18,25 +18,23 @@ const StudentManagement = () => {
     becado: false
   });
   const [editingStudent, setEditingStudent] = useState(null);
-  const [currentView, setCurrentView] = useState('both'); // Default view
+  const [currentView, setCurrentView] = useState('add');
 
   useEffect(() => {
     fetchStudents();
-    // Check cookies on component mount
     checkViewCookies();
   }, []);
 
-  // Function to check cookies and set view
   const checkViewCookies = () => {
     const addCookie = Cookies.get('add_student');
     const seeCookie = Cookies.get('see_student');
 
-    if (addCookie && !seeCookie) {
+    if (addCookie) {
       setCurrentView('add');
-    } else if (!addCookie && seeCookie) {
+    } else if (seeCookie) {
       setCurrentView('list');
     } else {
-      setCurrentView('both');
+      setCurrentView('add');
     }
   };
 
@@ -52,13 +50,6 @@ const StudentManagement = () => {
     setCurrentView('list');
   };
 
-  const showBoth = () => {
-    Cookies.remove('add_student');
-    Cookies.remove('see_student');
-    setCurrentView('both');
-  };
-
-  // Rest of the fetch, add, update, and delete functions remain the same
   const fetchStudents = async () => {
     try {
       const response = await fetch('http://localhost:8000/api/estudiantes/');
@@ -135,89 +126,80 @@ const StudentManagement = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold">Sistema de Manejo de Estudiantes</h2>
-        <div className="title">
+    <div className="student-management">
+      <div className="header">
+        <h1 className="title">Sistema de Manejo de Estudiantes</h1>
+        <div className="nav-buttons">
           <button 
-            className={""}
+            className={`nav-button ${currentView === 'add' ? 'active' : ''}`}
             onClick={ver_añadir}
           >
             Añadir Estudiante
           </button>
           <button 
-            className={""}
+            className={`nav-button ${currentView === 'list' ? 'active' : ''}`}
             onClick={ver_students}
           >
             Ver Lista
           </button>
-          <button 
-            className={""}
-            onClick={showBoth}
-          >
-            Ver Ambos
-          </button>
         </div>
       </div>
 
-      {/* Add Student Form */}
-      {(currentView === 'add' || currentView === 'both') && (
-        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-          {/* Add student form content remains the same */}
-          <h3 className="text-xl font-semibold mb-4">Añadir Nuevo Estudiante</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {currentView === 'add' && (
+        <div className="add-student-form">
+          <h2 className="form-title">Añadir Nuevo Estudiante</h2>
+          <div className="form-grid">
             <input
               type="text"
-              className="p-2 border rounded"
+              className="form-input"
               placeholder="Nombre"
               value={newStudent.nombre}
               onChange={(e) => setNewStudent({ ...newStudent, nombre: e.target.value })}
             />
-            {/* Rest of the form inputs remain the same */}
             <input
               type="text"
-              className="p-2 border rounded"
+              className="form-input"
               placeholder="Apellidos"
               value={newStudent.apellidos}
               onChange={(e) => setNewStudent({ ...newStudent, apellidos: e.target.value })}
             />
             <input
               type="text"
-              className="p-2 border rounded"
+              className="form-input"
               placeholder="Numero de Cedula"
               value={newStudent.cedula}
               onChange={(e) => setNewStudent({ ...newStudent, cedula: e.target.value })}
             />
             <input
               type="text"
-              className="p-2 border rounded"
+              className="form-input"
               placeholder="Seccion"
               value={newStudent.seccion}
               onChange={(e) => setNewStudent({ ...newStudent, seccion: e.target.value })}
             />
             <input
               type="date"
-              className="p-2 border rounded"
+              className="form-input"
               placeholder="Fecha de Nacimiento"
               value={newStudent.fecha_nacimiento}
               onChange={(e) => setNewStudent({ ...newStudent, fecha_nacimiento: e.target.value })}
             />
             <input
               type="text"
-              className="p-2 border rounded"
+              className="form-input"
               placeholder="Edad"
               value={newStudent.edad}
               onChange={(e) => setNewStudent({ ...newStudent, edad: e.target.value })}
             />
             <input
               type="tel"
-              className="p-2 border rounded"
+              className="form-input"
               placeholder="Numero de Telefono"
               value={newStudent.telefono}
               onChange={(e) => setNewStudent({ ...newStudent, telefono: e.target.value })}
             />
             <select
-              className="p-2 border rounded"
+              className="form-input"
               value={newStudent.rol}
               onChange={(e) => setNewStudent({ ...newStudent, rol: e.target.value })}
             >
@@ -225,129 +207,126 @@ const StudentManagement = () => {
               <option value="Profesor">Profesor</option>
             </select>
             <select
-              className="p-2 border rounded"
+              className="form-input"
               value={newStudent.becado}
               onChange={(e) => setNewStudent({ ...newStudent, becado: e.target.value === 'true' })}
             >
               <option value="false">No Becado</option>
               <option value="true">Becado</option>
             </select>
-            <button
-              className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
-              onClick={addStudent}
-            >
-              Añadir Estudiante
-            </button>
           </div>
+          <button
+            className="submit-button"
+            onClick={addStudent}
+          >
+            Añadir Estudiante
+          </button>
         </div>
       )}
 
-      {/* Student List */}
-      {(currentView === 'list' || currentView === 'both') && (
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-2xl font-semibold mb-4">Lista de Estudiantes</h2>
-          <div className="list_content">
-            <table className="w-full table-auto">
+      {currentView === 'list' && (
+        <div className="student-list">
+          <h2 className="list-title">Lista de Estudiantes</h2>
+          <div className="table-container">
+            <table className="student-table">
               <thead>
-                <tr className="bg-gray-100">
-                  <th className="p-2 text-left">Cedula</th>
-                  <th className="p-2 text-left">Nombre</th>
-                  <th className="p-2 text-left">Seccion</th>
-                  <th className="p-2 text-left">Telefono</th>
-                  <th className="p-2 text-left">Rol</th>
-                  <th className="p-2 text-left">Becado</th>
-                  <th className="p-2 text-left">Acciones</th>
+                <tr>
+                  <th>Cedula</th>
+                  <th>Nombre</th>
+                  <th>Seccion</th>
+                  <th>Telefono</th>
+                  <th>Rol</th>
+                  <th>Becado</th>
+                  <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
                 {students.map((student) => (
-                  <tr key={student.id} className="border-b">
+                  <tr key={student.id}>
                     {editingStudent?.id === student.id ? (
-                      <>
-                        <td colSpan="7" className="p-2">
-                          <div className="grid grid-cols-2 gap-4">
-                            <input
-                              type="text"
-                              className="p-2 border rounded"
-                              value={editingStudent.cedula}
-                              onChange={(e) => setEditingStudent({ ...editingStudent, cedula: e.target.value })}
-                            />
-                            <input
-                              type="text"
-                              className="p-2 border rounded"
-                              value={editingStudent.apellidos}
-                              onChange={(e) => setEditingStudent({ ...editingStudent, apellidos: e.target.value })}
-                            />
-                            <input
-                              type="text"
-                              className="p-2 border rounded"
-                              value={editingStudent.nombre}
-                              onChange={(e) => setEditingStudent({ ...editingStudent, nombre: e.target.value })}
-                            />
-                            <input
-                              type="text"
-                              className="p-2 border rounded"
-                              value={editingStudent.seccion}
-                              onChange={(e) => setEditingStudent({ ...editingStudent, seccion: e.target.value })}
-                            />
-                            <select
-                              className="p-2 border rounded"
-                              value={editingStudent.rol}
-                              onChange={(e) => setEditingStudent({ ...editingStudent, rol: e.target.value })}
+                      <td colSpan="7" className="editing-row">
+                        <div className="editing-grid">
+                          <input
+                            type="text"
+                            className="edit-input"
+                            value={editingStudent.cedula}
+                            onChange={(e) => setEditingStudent({ ...editingStudent, cedula: e.target.value })}
+                          />
+                          <input
+                            type="text"
+                            className="edit-input"
+                            value={editingStudent.apellidos}
+                            onChange={(e) => setEditingStudent({ ...editingStudent, apellidos: e.target.value })}
+                          />
+                          <input
+                            type="text"
+                            className="edit-input"
+                            value={editingStudent.nombre}
+                            onChange={(e) => setEditingStudent({ ...editingStudent, nombre: e.target.value })}
+                          />
+                          <input
+                            type="text"
+                            className="edit-input"
+                            value={editingStudent.seccion}
+                            onChange={(e) => setEditingStudent({ ...editingStudent, seccion: e.target.value })}
+                          />
+                          <select
+                            className="edit-input"
+                            value={editingStudent.rol}
+                            onChange={(e) => setEditingStudent({ ...editingStudent, rol: e.target.value })}
+                          >
+                            <option value="Estudiantes">Estudiante</option>
+                            <option value="Profesor">Profesor</option>
+                          </select>
+                          <select
+                            className="edit-input"
+                            value={editingStudent.becado.toString()}
+                            onChange={(e) => setEditingStudent({ 
+                              ...editingStudent, 
+                              becado: e.target.value === 'true'
+                            })}
+                          >
+                            <option value="false">No Becado</option>
+                            <option value="true">Becado</option>
+                          </select>
+                          <div className="edit-actions">
+                            <button
+                              className="save-button"
+                              onClick={() => updateStudent(editingStudent)}
                             >
-                              <option value="Estudiantes">Estudiante</option>
-                              <option value="Profesor">Profesor</option>
-                            </select>
-                            <select
-                              className="p-2 border rounded"
-                              value={editingStudent.becado.toString()}
-                              onChange={(e) => setEditingStudent({ 
-                                ...editingStudent, 
-                                becado: e.target.value === 'true'
-                              })}
+                              Guardar
+                            </button>
+                            <button
+                              className="cancel-button"
+                              onClick={() => setEditingStudent(null)}
                             >
-                              <option value="false">No Becado</option>
-                              <option value="true">Becado</option>
-                            </select>
-                            <div className="flex gap-2">
-                              <button
-                                className="bg-green-500 text-white p-2 rounded hover:bg-green-600"
-                                onClick={() => updateStudent(editingStudent)}
-                              >
-                                Guardar
-                              </button>
-                              <button
-                                className="bg-gray-500 text-white p-2 rounded hover:bg-gray-600"
-                                onClick={() => setEditingStudent(null)}
-                              >
-                                Cancelar
-                              </button>
-                            </div>
+                              Cancelar
+                            </button>
                           </div>
-                        </td>
-                      </>
+                        </div>
+                      </td>
                     ) : (
                       <>
-                        <td className="p-2">{student.cedula}</td>
-                        <td className="p-2">{`${student.nombre} ${student.apellidos}`}</td>
-                        <td className="p-2">{student.seccion}</td>
-                        <td className="p-2">{student.telefono}</td>
-                        <td className="p-2">{student.rol === 'Estudiantes' ? 'Estudiante' : 'Profesor'}</td>
-                        <td className="p-2">
-                          <span className={`px-2 py-1 rounded`}>
-                            {student.becado ? '🟢' : '🔴'}
+                        <td>{student.cedula}</td>
+                        <td>{student.nombre}</td>
+                        <td>{student.seccion}</td>
+                        <td>{student.telefono}</td>
+                        <td>{student.rol === 'Estudiantes' ? 'Estudiante' : 'Profesor'}</td>
+                        <td>
+                          <span className={`status-badge ${student.becado ? 'becado' : 'no-becado'}`}>
+                            {student.becado ? 'Si' : 'No '}
                           </span> 
                         </td>
-                        <td className="p-2">
-                          <div className="flex gap-2">
+                        <td>
+                          <div className="action-buttons">
                             <button
-                              className="bg-yellow-500 text-white p-2 rounded hover:bg-yellow-600"
+                              className="edit-button"
                               onClick={() => setEditingStudent({...student, becado: Boolean(student.becado)})}
                             >
                               Editar
                             </button>
                             <button
-                              className="bg-red-500 text-white p-2 rounded hover:bg-red-600"
+                              className="delete-button"
                               onClick={() => deleteStudent(student.id)}
                             >
                               Borrar

@@ -1,291 +1,206 @@
-.container {
+.student-management {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
-}
-
-/* Estilos para los títulos */
-.title {
-  color: #1a365d;
-  margin-bottom: 1.5rem;
-  text-align: center;
-}
-
-h1.title {
-  font-size: 2.5rem;
-  font-weight: 700;
-}
-
-h2.title {
-  font-size: 2rem;
-  font-weight: 600;
-}
-
-h3.title {
-  font-size: 1.5rem;
-  font-weight: 600;
-}
-
-/* Formulario */
-.form {
-  background-color: white;
   padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #f3f4f6;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* margin-bottom: 2rem; */
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1f2937;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  transition: background-color 0.2s, color 0.2s;
+  background-color: #e5e7eb;
+  color: #4b5563;
+}
+
+.nav-button:hover {
+  background-color: #d1d5db;
+}
+
+.nav-button.active {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.add-student-form, .student-list {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  padding: 1rem;
   margin-bottom: 2rem;
 }
 
-/* Campos de entrada */
-.input {
-  width: 100%;
-  padding: 0.75rem;
-  margin-bottom: 1rem;
-  border: 1px solid #e2e8f0;
-  border-radius: 4px;
-  font-size: 1rem;
-  transition: border-color 0.2s ease;
-}
-
-.input:focus {
-  outline: none;
-  border-color: #4299e1;
-  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
-}
-
-/* Select */
-.select {
-  width: 100%;
-  padding: 0.75rem;
-  margin-bottom: 1rem;
-  border: 1px solid #e2e8f0;
-  border-radius: 4px;
-  background-color: white;
-  font-size: 1rem;
-}
-
-/* Checkbox container */
-.checkbox-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.checkbox {
-  margin-right: 0.5rem;
-}
-
-/* Botones */
-.button {
-  padding: 0.75rem 1.5rem;
-  border-radius: 4px;
+.form-title, .list-title {
+  font-size: 1.5rem;
   font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  color: #374151;
+  margin-bottom: 1.5rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.form-input, .edit-input {
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  width: 100%;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  gap: 5px;
+}
+
+.form-input:focus, .edit-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+}
+
+.submit-button {
+  margin-top: 1.5rem;
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #3b82f6;
+  color: white;
   border: none;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  transition: background-color 0.2s;
 }
 
-.button-primary {
-  background-color: #4299e1;
-  color: white;
+.submit-button:hover {
+  background-color: #2563eb;
 }
 
-.button-primary:hover {
-  background-color: #3182ce;
+.table-container {
+  overflow-x: auto;
 }
 
-.button-secondary {
-  background-color: #718096;
-  color: white;
+.student-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
 }
 
-.button-secondary:hover {
-  background-color: #4a5568;
+.student-table th, .student-table td {
+  padding: 0.75rem;
+  
+  text-align: left;
 }
 
-.button-danger {
-  background-color: #f56565;
-  color: white;
+.student-table th {
+  background-color: #f3f4f6;
+  font-weight: 600;
+  color: #374151;
 }
 
-.button-danger:hover {
-  background-color: #e53e3e;
+.student-table tr:nth-child(even) {
+  background-color: #f9fafb;
 }
 
-/* Grupo de botones */
-.button-group {
+.student-table tr:hover {
+  background-color: #e5e7eb;
+}
+
+.status-badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.status-badge.becado {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.status-badge.no-becado {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.action-buttons {
   display: flex;
   gap: 0.5rem;
 }
 
-/* Lista de estudiantes */
-.list {
-  list-style: none;
-  padding: 0;
+.edit-button, .delete-button, .save-button, .cancel-button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  transition: background-color 0.2s;
 }
 
-.list-item {
-  background-color: white;
-  padding: 1rem;
-  border-radius: 4px;
-  margin-bottom: 0.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+.edit-button {
+  background-color: #fbbf24;
+  color: #92400e;
 }
 
-/* Información del estudiante */
-.item-info {
-  flex: 1;
+.edit-button:hover {
+  background-color: #f59e0b;
 }
 
-/* Tabla */
-.table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 1rem;
-  background-color: white;
-  border-radius: 8px;
-  overflow: hidden;
+.delete-button {
+  background-color: #ef4444;
+  color: white;
 }
 
-.table th,
-.table td {
-  padding: 1rem;
-  text-align: left;
-  border-bottom: 1px solid #e2e8f0;
+.delete-button:hover {
+  background-color: #dc2626;
 }
 
-.table th {
-  background-color: #f7fafc;
-  font-weight: 600;
-  color: #4a5568;
+.save-button {
+  background-color: #10b981;
+  color: white;
 }
 
-.table tr:hover {
-  background-color: #f7fafc;
+.save-button:hover {
+  background-color: #059669;
 }
 
-/* Responsividad */
-@media (max-width: 768px) {
-  .form {
-    padding: 1rem;
-  }
-
-  .button {
-    padding: 0.5rem 1rem;
-  }
-
-  .list-item {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .button-group {
-    width: 100%;
-    justify-content: stretch;
-  }
-
-  .button-group button {
-    flex: 1;
-  }
+.cancel-button {
+  background-color: #6b7280;
+  color: white;
 }
 
-/* Utilidades */
-.text-center {
-  text-align: center;
+.cancel-button:hover {
+  background-color: #4b5563;
 }
 
-.mb-1 {
-  margin-bottom: 0.25rem;
+.editing-row {
+  background-color: #f3f4f6;
 }
 
-.mb-2 {
-  margin-bottom: 0.5rem;
-}
-
-.mb-4 {
-  margin-bottom: 1rem;
-}
-
-.grid {
+.editing-grid {
   display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
 }
 
-@media (min-width: 768px) {
-  .grid-cols-2 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Estado de carga y errores */
-.loading {
-  text-align: center;
-  padding: 2rem;
-  color: #4a5568;
-}
-
-.error {
-  color: #e53e3e;
-  padding: 1rem;
-  border: 1px solid #feb2b2;
-  border-radius: 4px;
-  background-color: #fff5f5;
-  margin-bottom: 1rem;
-}
-
-/* Tooltips */
-.tooltip {
-  position: relative;
-  display: inline-block;
-}
-
-.tooltip .tooltip-text {
-  visibility: hidden;
-  position: absolute;
-  z-index: 1;
-  bottom: 125%;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #2d3748;
-  color: white;
-  text-align: center;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  font-size: 0.875rem;
-  white-space: nowrap;
-}
-
-.tooltip:hover .tooltip-text {
-  visibility: visible;
-}
-
-/* Animaciones */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.fade-in {
-  animation: fadeIn 0.3s ease-in;
-}
-
-.title {
-  display: grid;
-  grid-template-columns: 30% 40% 30%;
-}
-
-.student_list {
-  max-width: 7vw;
-  max-height: 7vh;
-}
-
-.list_content {
-  max-height: 50vh;
-  overflow-x: auto;
+.edit-actions {
+  grid-column: span 2;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
 }

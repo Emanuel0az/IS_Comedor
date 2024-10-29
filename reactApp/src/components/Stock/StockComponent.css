@@ -32,7 +32,6 @@
     margin-bottom: 7%;
 }
 
-
 .modalContainer {
     position: fixed;
     top: 0;
@@ -155,7 +154,7 @@
 .actionsIcon {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: right;
 }.actionsIcon > .contAction:hover {
     background-color: rgba(117, 117, 117, 0.187);
     width: 50px;
@@ -174,6 +173,10 @@
     border-radius: 50%;
     margin-bottom: 7%;
 }
+
+.perfilIcon {
+    text-align: right;
+}
 /*  */
 .studentId_stok {
     place-items: center;
@@ -188,7 +191,7 @@
 }
 .tittles {
     display: grid;
-    grid-template-columns: 5% 20% 15% 19% 13% 15% 16% 10%;
+    grid-template-columns: 5% 20% 15% 19% 13% 20%  ;
     border-bottom: 1.2px solid rgba(101, 97, 97, 0.329);
     width: 100%;
     height: 6vh;
@@ -202,7 +205,7 @@
 }
 .student {
     display: grid;
-    grid-template-columns: 5% 20.3% 15.1% 19% 13.3% 15.1% 16.1% 10%;
+    grid-template-columns: 5% 20.3% 15.1% 19% 13.3% 20%;
     width: 100%;
     height: 10vh;
     border-bottom: 1px solid rgba(108, 108, 108, 0.194);
