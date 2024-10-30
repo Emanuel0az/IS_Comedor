@@ -5,7 +5,7 @@ class Users(models.Model):
     name = models.CharField(max_length=255, null=True, blank=True)
     mail = models.EmailField(max_length=255, null=True, blank=True)
     password = models.CharField(max_length=255, null=True, blank=True)
-    rol = models.CharField(max_length=50, choices=[("admin", "Administrador"), ("cook", "Cocinero"), ("vol", "Voluntario")], null=True, blank=True)
+    rol = models.CharField(max_length=255, null=True, blank=True)
     
 class Estudiantes(models.Model):
     id = models.AutoField(primary_key=True)

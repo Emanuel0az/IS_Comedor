@@ -24,25 +24,12 @@ useEffect(() => {
   return () => clearInterval(intervalId);
 }, [horaConCero]);
 
-  function log () {
-    Cookies.remove('token2');
-    localStorage.removeItem('chef');
-  navigate('/login');
-  }
-  function log2 () {
-    localStorage.removeItem('chef');
-  navigate('/access');
-  }
-    
-  
-
-  
     return (
       <>
       <nav>
-        <div onClick={log}>Líceo de Chacarita</div>
+        <div>Líceo de Chacarita</div>
         <div><ToggleSwitch /></div>
-        <div onClick={log2}>{currentTime}</div>
+        <div>{currentTime}</div>
       </nav>
     </>
     );

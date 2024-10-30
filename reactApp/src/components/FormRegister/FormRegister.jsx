@@ -1,31 +1,26 @@
 import React, { useState } from 'react';
-import '../FormRegister/FormRegister.css'
-import { useNavigate } from "react-router-dom";
+import './FormRegister.css';
 
-
-const FormRegister = () => {
+export default function Register() {
   const [formData, setFormData] = useState({
-    nombre: '',
-    email: '',
-    contraseña: '',
-    rol: 'Voluntario',
+    name: '',
+    mail: '',
+    password: '',
+    rol: ''
   });
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
   };
-
-  const navigate = useNavigate()
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      const response = await fetch('http://localhost:3000/usuarios/', {
+      const response = await fetch('http://localhost:8000/api/users/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -35,64 +30,70 @@ const FormRegister = () => {
 
       if (response.ok) {
         alert('Usuario registrado exitosamente');
-        navigate('/login'); // Redirección al login después del registro exitoso
+        setFormData({ name: '', mail: '', password: '', rol: '' });
       } else {
-        alert('Error en el registro');
+        alert('Error al registrar usuario');
       }
     } catch (error) {
-      console.error('Error en el registro:', error);
+      console.error('Error:', error);
+      alert('Error al registrar usuario');
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Registro</h2>
-      <div>
-        <label>Nombre:</label>
-        <input
-          type="text"
-          name="nombre"
-          value={formData.nombre}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label>Email:</label>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label>Contraseña:</label>
-        <input
-          type="password"
-          name="contraseña"
-          value={formData.contraseña}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label>Rol:</label>
-        <select
-          name="rol"
-          value={formData.rol}
-          onChange={handleChange}
-          required
-        >
-          <option value="Administrador">Administrador</option>
-          <option value="Cocinero">Cocinero</option>
-          <option value="Voluntario">Voluntario</option>
-        </select>
-      </div>
-      <button type="submit">Registrar</button>
-    </form>
+    <div className="register-container">
+      <h2>Registro de Usuario</h2>
+      <form onSubmit={handleSubmit} className="register-form">
+        <div className="form-group">
+          <label htmlFor="name">Nombre:</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            placeholder='Ingresa un nombre'
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="mail">Correo electrónico:</label>
+          <input
+            type="email"
+            id="mail"
+            name="mail"
+            value={formData.mail}
+            onChange={handleChange}
+            placeholder='Ingresa un correo'
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Contraseña:</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            placeholder='Ingresa una contraseña'
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="rol">Rol:</label>
+          <input
+            type="text"
+            id="rol"
+            name="rol"
+            value={formData.rol}
+            onChange={handleChange}
+            placeholder='Ingresa un rol'
+            required
+          />
+        </div>
+        <button type="submit" className="submit-btn">Registrar</button>
+      </form>
+    </div>
   );
-};
-
-export default FormRegister;
+}

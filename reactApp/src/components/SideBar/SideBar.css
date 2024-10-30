@@ -65,7 +65,20 @@
 
 .sideBarBottom {
     min-height: 9vh;
-    background-color: aqua;
+    background-color: #1b1a66;
+    display: flex;
+    justify-content: left;
+    padding: 6%;
+    
+}
+
+.sideBarBottom2 {
+    display: grid;
+    cursor: pointer;
+    place-content: center;
+    max-width: 3vw;
+    max-height: 5vh;
+
 }
 
 .sideBarTop {
