@@ -126,11 +126,14 @@ const StudentManagement = () => {
     }
   };
 
-  const filteredStudents = students.filter((student) =>
-    student.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    student.cedula.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    student.seccion.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredStudents = students.filter((student) => {
+    const lowerCaseSearchTerm = searchTerm.toLowerCase();
+    return (
+      (student.nombre && student.nombre.toLowerCase().includes(lowerCaseSearchTerm)) ||
+      (student.cedula && student.cedula.toLowerCase().includes(lowerCaseSearchTerm)) ||
+      (student.seccion && student.seccion.toLowerCase().includes(lowerCaseSearchTerm))
+    );
+  });
 
   return (
     <div className="student-management">
@@ -223,7 +226,7 @@ const StudentManagement = () => {
             </select>
           </div>
           <button
-            className="submit-button"
+            className="submit-button2"
             onClick={addStudent}
           >
             Añadir Estudiante

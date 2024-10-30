@@ -10,7 +10,8 @@ import { Login } from '../Pages/Login/Login'
 import { Login2 } from '../Pages/Login/Login2'
 import { Login3 } from '../Pages/Login/Login3'
 import { ColorProvider } from '../components/UsinngContext'
-import { PrivateRoutes, PrivateRoutes2, PrivateRoutes3 } from "./privateRoutes"
+import { Register2 } from '../Pages/Register/Register' 
+import { PrivateRoutes, PrivateRoutes2, PrivateRoutes3, PrivateRoutess } from "./privateRoutes"
 import ToggleSwitch from '../components/ToggleSwitch/ToggleSwitch'
 
 
@@ -67,6 +68,11 @@ const Routing = () => {
                 <PrivateRoutes2>
                   <Add_Students />
                 </PrivateRoutes2>
+              } />
+              <Route path='usuarios/' element={
+                <PrivateRoutess>
+                  <Register2/>
+                </PrivateRoutess>
               } />
 
         </Routes>

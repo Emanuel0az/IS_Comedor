@@ -299,35 +299,25 @@ class LoginView(APIView):
         
         
         
-# class AdminLoginView(APIView):
-#     permission_classes = [AllowAny]  # Permitir acceso a cualquier usuario
 
-#     def post(self, request, *args, **kwargs):
-#         # Obtener el "identificador" (correo o nombre de usuario) y la contraseña
-#         identifier = request.data.get('email')
-#         password = request.data.get('password')
-
-#         # Intentar autenticación con nombre de usuario
-#         user = authenticate(request, username=identifier, password=password)
-
-#         # Si falla, intentamos buscar por email y autenticamos con nombre de usuario
-#         if user is None:
-#             try:
-#                 user_instance = User.objects.get(email=identifier)
-#                 user = authenticate(request, username=user_instance.username, password=password)
-#             except User.DoesNotExist:
-#                 return Response({"error": "Usuario no encontrado"}, status=status.HTTP_404_NOT_FOUND)
-
-#         # Generar tokens si el usuario fue autenticado
-#         if user is not None:
-#             refresh = RefreshToken.for_user(user)
-#             return Response({
-#                 'refresh': str(refresh),
-#                 'access': str(refresh.access_token),
-#             })
-#         else:
-#             return Response({"error": "Credenciales incorrectas"}, status=status.HTTP_401_UNAUTHORIZED)
+def login_user(request):
+    mail = request.data.get("mail")
+    password = request.data.get("password")
+    
+    # Autenticar usuario
+    user = authenticate(request, mail=mail, password=password)
+    
+    if user is not None:
+        # Generar tokens de acceso y refresco
+        refresh = RefreshToken.for_user(user)
+        return Response({
+            "refresh": str(refresh),
+            "access": str(refresh.access_token),
+            "message": "Login exitoso"
+        })
+    else:
+        return Response({"error": "Credenciales inválidas"}, status=400)
     
     
-# //////////////////////////////////////////////////////////////////////////
+
 

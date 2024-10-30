@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import HomeIcon from '@mui/icons-material/Home';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import MailIcon from '@mui/icons-material/Mail';
-import RestaurantIcon from '@mui/icons-material/Restaurant';
 import PeopleIcon from '@mui/icons-material/People';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import LogoutIcon from '@mui/icons-material/Logout';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import { useNavigate } from 'react-router-dom';
 import './SideBar.css';
 import Cookies from 'js-cookie';
@@ -15,6 +16,7 @@ const SideBar = () => {
   });
 
   const [selectedLink, setSelectedLink] = useState('');
+  const [hasToken2, setHasToken2] = useState(false);
 
   useEffect(() => {
     const checkColorState = () => {
@@ -22,7 +24,16 @@ const SideBar = () => {
       setColorState(storedColorState);
     };
 
-    const intervalId = setInterval(checkColorState, 10);
+    const checkToken2 = () => {
+      const token2Exists = !!Cookies.get('token2');
+      setHasToken2(token2Exists);
+    };
+
+    const intervalId = setInterval(() => {
+      checkColorState();
+      checkToken2();
+    }, 10);
+
     return () => clearInterval(intervalId);
   }, []);
 
@@ -32,8 +43,14 @@ const SideBar = () => {
 
   const navigate = useNavigate();
 
-  return (
+  function log () {
+    Cookies.remove('token2');
+    Cookies.remove('token3');
+    localStorage.removeItem('chef');
+  navigate('/login');
+  }
 
+  return (
     <div className={`sideBarContainer${colorState ? 'Day' : 'Night'}`}>
       <div className='sideBarTop'>
         <div className={selectedLink === 'home' ? 'selected' : 'inselected'} onClick={() => { changeSelection('home'); navigate('home/'); Cookies.remove('token'); }}>
@@ -53,16 +70,22 @@ const SideBar = () => {
           <div>Email</div>
         </div>
         <div className={selectedLink === 'estudiantes' ? 'selected' : 'inselected'} onClick={() => { changeSelection('estudiantes'); navigate('estudiantes/'); Cookies.remove('token'); }}>
-          <PersonAddAlt1Icon style={{ fontSize: 20 }} />
+          <GroupAddIcon style={{ fontSize: 20 }} />
           <div>Estudiantes</div>
         </div>
+
+        {hasToken2 && (
+          <div className={selectedLink === 'usuarios' ? 'selected' : 'inselected'} onClick={() => { changeSelection('usuarios'); navigate('usuarios/'); Cookies.remove('token'); }}>
+            <PersonAddAlt1Icon style={{ fontSize: 20 }} />
+            <div>Usuarios</div>
+          </div>
+        )}
       </div>
-      <div className='sideBarBottom'>
-        <div className="sideBarBottom"></div>
+      <div className='sideBarBottom'> 
+        <div className="sideBarBottom2"  onClick={log}><LogoutIcon style={{ fontSize: 30 }} /></div>
       </div>
     </div>
   );
 };
 
 export default SideBar;
-

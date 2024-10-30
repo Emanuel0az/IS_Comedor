@@ -99,6 +99,9 @@ VALUES
 
 select * from `api_estudiantes` LIMIT 5000
 
+SELECT * FROM api_hist_pagos LIMIT 10000
+
+
 SELECT COUNT(*) 
 FROM api_estudiantes 
 WHERE becado = 1;
