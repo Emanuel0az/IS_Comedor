@@ -20,13 +20,13 @@ const CenterTextPlugin = {
       ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
       ctx.fill();
 
-      ctx.font = options.font || '16px Arial';
+      ctx.font = options.font || '12px Arial';
       ctx.fillStyle = options.color || 'white';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
 
       const lines = text.split('\n');
-      const lineHeight = 20;
+      const lineHeight = 14;
       lines.forEach((line, index) => {
         const yOffset = (index - (lines.length - 1) / 2) * lineHeight;
         ctx.fillText(line, textX, textY + yOffset);
@@ -46,7 +46,7 @@ const coloresPredefinidos = [
   '#1b1a66'  // Rosa
 ];
 
-export default function EstudiantesComedorChartMartes() {
+export default function EstudiantesComedorChartViernes() {
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [chartData, setChartData] = useState(null);
   const [lastUpdate, setLastUpdate] = useState(new Date());
@@ -63,38 +63,38 @@ export default function EstudiantesComedorChartMartes() {
       .then(data => {
         const selectedDate = new Date(localStorage.getItem('selectedDate') || new Date());
         const mondayOfSelectedWeek = startOfWeek(selectedDate, { weekStartsOn: 1 });
-        const tuesdayOfSelectedWeek = addDays(mondayOfSelectedWeek, 1);
+        const fridayOfSelectedWeek = addDays(mondayOfSelectedWeek, 4);
         
         // console.log('Selected Date:', selectedDate);
-        // console.log('Tuesday of Selected Week:', tuesdayOfSelectedWeek);
+        // console.log('Friday of Selected Week:', fridayOfSelectedWeek);
   
         // Filtra los estudiantes becados y no becados
-        const estudiantesBecadosComieronMartes = data.filter(item => {
+        const estudiantesBecadosComieronViernes = data.filter(item => {
           const fechaPago = addDays(new Date(item.fecha_pago_prueba), 1); // Ajuste de la fecha de pago
         //   console.log('Fecha de pago:', fechaPago);
-        //   console.log('¿Es el mismo día que el martes?', isSameDay(fechaPago, tuesdayOfSelectedWeek));
-          return isSameDay(fechaPago, tuesdayOfSelectedWeek) && item.monto === 0; // Verifica si la fecha coincide y el monto es 0
+        //   console.log('¿Es el mismo día que el viernes?', isSameDay(fechaPago, fridayOfSelectedWeek));
+          return isSameDay(fechaPago, fridayOfSelectedWeek) && item.monto === 0; // Verifica si la fecha coincide y el monto es 0
         }).length;
   
-        const estudiantesNoBecadosComieronMartes = data.filter(item => {
+        const estudiantesNoBecadosComieronViernes = data.filter(item => {
           const fechaPago = addDays(new Date(item.fecha_pago_prueba), 1); // Ajuste de la fecha de pago
-          return isSameDay(fechaPago, tuesdayOfSelectedWeek) && item.monto !== 0; // Verifica si la fecha coincide y el monto es diferente de 0
+          return isSameDay(fechaPago, fridayOfSelectedWeek) && item.monto !== 0; // Verifica si la fecha coincide y el monto es diferente de 0
         }).length;
   
-        const totalComieronMartes = estudiantesBecadosComieronMartes + estudiantesNoBecadosComieronMartes;
-        const estudiantesNoComieronMartes = totalEstudiantes - totalComieronMartes;
+        const totalComieronViernes = estudiantesBecadosComieronViernes + estudiantesNoBecadosComieronViernes;
+        const estudiantesNoComieronViernes = totalEstudiantes - totalComieronViernes;
   
-        // console.log('Estudiantes becados que comieron el martes:', estudiantesBecadosComieronMartes);
-        // console.log('Estudiantes no becados que comieron el martes:', estudiantesNoBecadosComieronMartes);
-        // console.log('Total de estudiantes que comieron el martes:', totalComieronMartes);
-        // console.log('Estudiantes que no comieron el martes:', estudiantesNoComieronMartes);
+        // console.log('Estudiantes becados que comieron el viernes:', estudiantesBecadosComieronViernes);
+        // console.log('Estudiantes no becados que comieron el viernes:', estudiantesNoBecadosComieronViernes);
+        // console.log('Total de estudiantes que comieron el viernes:', totalComieronViernes);
+        // console.log('Estudiantes que no comieron el viernes:', estudiantesNoComieronViernes);
 
         setEstudiantes({
-          comieron: totalComieronMartes,
-          noComieron: estudiantesNoComieronMartes
+          comieron: totalComieronViernes,
+          noComieron: estudiantesNoComieronViernes
         });
   
-        setLastUpdate(tuesdayOfSelectedWeek);
+        setLastUpdate(fridayOfSelectedWeek);
         setIsLoading(false);
       })
       .catch(error => {
@@ -160,9 +160,9 @@ export default function EstudiantesComedorChartMartes() {
   const chartOptions = {
     responsive: true,
     plugins: {
-        legend: {
-            display: false,
-          },
+      legend: {
+        display: false,
+      },
       tooltip: {
         enabled: true,
         position: 'nearest',
@@ -187,8 +187,8 @@ export default function EstudiantesComedorChartMartes() {
       },
       centerText: {
         text: selectedIndex !== null
-          ? `${estudiantes[selectedIndex === 0 ? 'comieron' : 'noComieron']} / ${totalEstudiantes}\n${((estudiantes[selectedIndex === 0 ? 'comieron' : 'noComieron'] / totalEstudiantes) * 100).toFixed(2)}%`
-          : `${calcularPorcentajeComieron()}%`,
+            ? `${estudiantes[selectedIndex === 0 ? 'comieron' : 'noComieron']} / ${totalEstudiantes}\n${((estudiantes[selectedIndex === 0 ? 'comieron' : 'noComieron'] / totalEstudiantes) * 100).toFixed(2)}%`
+            : `${calcularPorcentajeComieron()}%`,
         color: 'white',
         font: '12px Arial',
       },
@@ -205,12 +205,10 @@ export default function EstudiantesComedorChartMartes() {
   }
 
   return (
-    <div className="w-full max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-md">
-      <div className="flex items-center justify-center mb-4" style={{ width: '110px', height: '110px' }}>
-        <div className="w-[200px] h-[200px] relative">
-          {chartData && <Doughnut data={chartData} options={chartOptions} />}
-        </div>
+    <div className="w-full max-w-xs mx-auto p-2 bg-white rounded-lg shadow-md">
+      <div className="flex items-center justify-center" style={{ width: '110px', height: '110px' }}>
+        {chartData && <Doughnut data={chartData} options={chartOptions} />}
       </div>
     </div>
-  )
+  );
 }

@@ -39,7 +39,7 @@ const CenterTextPlugin = {
 ChartJS.register(ArcElement, Tooltip, Legend, Title);
 ChartJS.register(CenterTextPlugin);
 
-const totalEstudiantes = 550;
+const totalEstudiantes = 966;
 
 const coloresPredefinidos = [
   'gray', // Azul
@@ -64,14 +64,14 @@ export default function EstudiantesComedorChart() {
         const selectedDate = new Date(localStorage.getItem('selectedDate') || new Date());
         const mondayOfSelectedWeek = startOfWeek(selectedDate, { weekStartsOn: 1 });
         
-        console.log('Selected Date:', selectedDate);
-        console.log('Monday of Selected Week:', mondayOfSelectedWeek);
+        // console.log('Selected Date:', selectedDate);
+        // console.log('Monday of Selected Week:', mondayOfSelectedWeek);
   
         // Filtra los estudiantes becados y no becados
         const estudiantesBecadosComieronDiaSeleccionado = data.filter(item => {
           const fechaPago = addDays(new Date(item.fecha_pago_prueba), 1); // Ajuste de la fecha de pago
-          console.log('Fecha de pago:', fechaPago);
-          console.log('¿Es el mismo día que el lunes?', isSameDay(fechaPago, mondayOfSelectedWeek));
+          // console.log('Fecha de pago:', fechaPago);
+          // console.log('¿Es el mismo día que el lunes?', isSameDay(fechaPago, mondayOfSelectedWeek));
           return isSameDay(fechaPago, mondayOfSelectedWeek) && item.monto === 0; // Verifica si la fecha coincide y el monto es 0
         }).length;
   
@@ -83,10 +83,10 @@ export default function EstudiantesComedorChart() {
         const totalBecados = estudiantesBecadosComieronDiaSeleccionado + estudiantesNoBecadosComieronDiaSeleccionado;
         const estudiantesNoComieronDiaSeleccionado = totalEstudiantes - totalBecados;
   
-        console.log('Estudiantes becados que comieron:', estudiantesBecadosComieronDiaSeleccionado);
-        console.log('Estudiantes no becados que comieron:', estudiantesNoBecadosComieronDiaSeleccionado);
-        console.log('Total de estudiantes que comieron:', totalBecados);
-        console.log('Estudiantes que no comieron:', estudiantesNoComieronDiaSeleccionado);
+        // console.log('Estudiantes becados que comieron:', estudiantesBecadosComieronDiaSeleccionado);
+        // console.log('Estudiantes no becados que comieron:', estudiantesNoBecadosComieronDiaSeleccionado);
+        // console.log('Total de estudiantes que comieron:', totalBecados);
+        // console.log('Estudiantes que no comieron:', estudiantesNoComieronDiaSeleccionado);
 
         setEstudiantes({
           comieron: totalBecados,
@@ -160,8 +160,7 @@ export default function EstudiantesComedorChart() {
     responsive: true,
     plugins: {
       legend: {
-        display: true,
-        position: 'bottom',
+        display: false,
       },
       tooltip: {
         enabled: true,
@@ -190,7 +189,7 @@ export default function EstudiantesComedorChart() {
           ? `${estudiantes[selectedIndex === 0 ? 'comieron' : 'noComieron']} / ${totalEstudiantes}\n${((estudiantes[selectedIndex === 0 ? 'comieron' : 'noComieron'] / totalEstudiantes) * 100).toFixed(2)}%`
           : `${calcularPorcentajeComieron()}%`,
         color: 'white',
-        font: '16px Arial',
+        font: '12px Arial',
       },
     },
     onClick: handleClick,
@@ -206,7 +205,7 @@ export default function EstudiantesComedorChart() {
 
   return (
     <div className="w-full max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-md">
-      <div className="flex items-center justify-center mb-4" style={{ display: 'flex', alignItems: 'center', width: '22vw' }}>
+      <div className="tamaño_dona" style={{ width: '110px', height: '110px' }}>
         <div className="w-[200px] h-[200px] relative">
           {chartData && <Doughnut data={chartData} options={chartOptions} />}
         </div>

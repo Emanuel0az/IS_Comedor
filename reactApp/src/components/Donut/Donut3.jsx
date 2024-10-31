@@ -46,7 +46,7 @@ const coloresPredefinidos = [
   '#1b1a66'  // Rosa
 ];
 
-export default function EstudiantesComedorChartMartes() {
+export default function EstudiantesComedorChartMiercoles() {
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [chartData, setChartData] = useState(null);
   const [lastUpdate, setLastUpdate] = useState(new Date());
@@ -63,38 +63,38 @@ export default function EstudiantesComedorChartMartes() {
       .then(data => {
         const selectedDate = new Date(localStorage.getItem('selectedDate') || new Date());
         const mondayOfSelectedWeek = startOfWeek(selectedDate, { weekStartsOn: 1 });
-        const tuesdayOfSelectedWeek = addDays(mondayOfSelectedWeek, 1);
+        const wednesdayOfSelectedWeek = addDays(mondayOfSelectedWeek, 2);
         
         // console.log('Selected Date:', selectedDate);
-        // console.log('Tuesday of Selected Week:', tuesdayOfSelectedWeek);
+        // console.log('Wednesday of Selected Week:', wednesdayOfSelectedWeek);
   
         // Filtra los estudiantes becados y no becados
-        const estudiantesBecadosComieronMartes = data.filter(item => {
+        const estudiantesBecadosComieronMiercoles = data.filter(item => {
           const fechaPago = addDays(new Date(item.fecha_pago_prueba), 1); // Ajuste de la fecha de pago
         //   console.log('Fecha de pago:', fechaPago);
-        //   console.log('¿Es el mismo día que el martes?', isSameDay(fechaPago, tuesdayOfSelectedWeek));
-          return isSameDay(fechaPago, tuesdayOfSelectedWeek) && item.monto === 0; // Verifica si la fecha coincide y el monto es 0
+        //   console.log('¿Es el mismo día que el miércoles?', isSameDay(fechaPago, wednesdayOfSelectedWeek));
+          return isSameDay(fechaPago, wednesdayOfSelectedWeek) && item.monto === 0; // Verifica si la fecha coincide y el monto es 0
         }).length;
   
-        const estudiantesNoBecadosComieronMartes = data.filter(item => {
+        const estudiantesNoBecadosComieronMiercoles = data.filter(item => {
           const fechaPago = addDays(new Date(item.fecha_pago_prueba), 1); // Ajuste de la fecha de pago
-          return isSameDay(fechaPago, tuesdayOfSelectedWeek) && item.monto !== 0; // Verifica si la fecha coincide y el monto es diferente de 0
+          return isSameDay(fechaPago, wednesdayOfSelectedWeek) && item.monto !== 0; // Verifica si la fecha coincide y el monto es diferente de 0
         }).length;
   
-        const totalComieronMartes = estudiantesBecadosComieronMartes + estudiantesNoBecadosComieronMartes;
-        const estudiantesNoComieronMartes = totalEstudiantes - totalComieronMartes;
+        const totalComieronMiercoles = estudiantesBecadosComieronMiercoles + estudiantesNoBecadosComieronMiercoles;
+        const estudiantesNoComieronMiercoles = totalEstudiantes - totalComieronMiercoles;
   
-        // console.log('Estudiantes becados que comieron el martes:', estudiantesBecadosComieronMartes);
-        // console.log('Estudiantes no becados que comieron el martes:', estudiantesNoBecadosComieronMartes);
-        // console.log('Total de estudiantes que comieron el martes:', totalComieronMartes);
-        // console.log('Estudiantes que no comieron el martes:', estudiantesNoComieronMartes);
+        // console.log('Estudiantes becados que comieron el miércoles:', estudiantesBecadosComieronMiercoles);
+        // console.log('Estudiantes no becados que comieron el miércoles:', estudiantesNoBecadosComieronMiercoles);
+        // console.log('Total de estudiantes que comieron el miércoles:', totalComieronMiercoles);
+        // console.log('Estudiantes que no comieron el miércoles:', estudiantesNoComieronMiercoles);
 
         setEstudiantes({
-          comieron: totalComieronMartes,
-          noComieron: estudiantesNoComieronMartes
+          comieron: totalComieronMiercoles,
+          noComieron: estudiantesNoComieronMiercoles
         });
   
-        setLastUpdate(tuesdayOfSelectedWeek);
+        setLastUpdate(wednesdayOfSelectedWeek);
         setIsLoading(false);
       })
       .catch(error => {

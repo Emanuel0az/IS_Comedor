@@ -1,7 +1,7 @@
 /* Contenedor principal */
 .donut-container {
-    width: 100%;
-    max-width: 36rem; /* max-w-xl */
+    width: 70%;
+    max-width: 18rem; /* max-w-xl */
     margin-left: auto;
     margin-right: auto;
     padding: 1rem;
@@ -56,4 +56,8 @@
     font-family: Arial, sans-serif;
     font-weight: bold;
     color: #333;
+  }
+
+  .tamaño_dona {
+    width: 10vw;
   }
