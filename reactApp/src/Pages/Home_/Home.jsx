@@ -9,9 +9,7 @@ const Home = () => {
     <div className='mainRight'></div>
     <div className='mainRightDonutGraphics'>
           <Donut/>
-          <Donut/>
-          <Donut/>
-          <Donut/>
+          
           
       </div>
       <div></div>

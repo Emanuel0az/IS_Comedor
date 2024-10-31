@@ -1,104 +1,59 @@
-.main {
-    display: grid;
-    grid-template-columns: 17% 83%;
-}
-.mainLeft {
-    background-color: rgba(130, 91, 167, 0.507);
-    min-height: 92vh;
-    display: flex;
-    flex-direction: column;
-}
-.mainLeftTop {
-    min-height: 81vh;
-}
-.mainLeftBottom {
-    min-height: 11vh;
-    background-color: aqua;
-}
-.mainRightDonutGraphics {
-    display: flex;
-    margin-top: 2vh;
-    flex-wrap: wrap;
-}
-.containerDonut {
-    min-height: 25vh;
-    min-height: 25vh;
-    min-width: 16.66vw;
-    max-width: 16.66vw;
-    margin-left: 3%;    
-    margin-top: 3%;
-    display: grid;
-    grid-template-rows: 80% 20%;
-    background-color: rgba(98, 98, 98, 0.443);
-    border-radius: 7px;
-    font-size: 10px;
-    padding: 0.6%;
-    color: unset;
-}
-.containerTopDonut {
-    display: grid;
-    grid-template-columns: 30% 70%;
-}
-
-.donutLeft {
-    display: grid;
-    grid-template-rows: 20% 80%;
-}.tittleDonut {
-    border-bottom: 1px rgba(255, 255, 255, 0.354) solid;
-}.imgDonut {
-    display: grid;
-    place-items: center;
-}
-
-.donutRight {
-    border-left: 1px rgba(255, 255, 255, 0.434) solid;
-}.donutRight > div > div > div > div > div{
-    height: 100%;
+/* Contenedor principal */
+.donut-container {
     width: 100%;
-    margin-left: 19%;
-    margin-top: 5%;
-    
-}
-
-.containerButtomDonut {
-    display: grid;
-    grid-template-columns: 85% 15%;
-}
-.textoDonut {
+    max-width: 36rem; /* max-w-xl */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+  
+  /* Contenedor flexible para centrado */
+  .donut-flex-container {
     display: flex;
     align-items: center;
-}
-.estadoStock {
-    border-left: 1px rgba(255, 255, 255, 0.434) solid;
-    display: grid;
-    place-items: center;
-}
-.containerBarChart {
-    margin-top: 8vh;
-    margin-left: 3%;
-    min-width: 94%;
-    max-width: 80%;
-    min-height: 46vh;
-    max-height: 46vh;
-    background-color: rgb(210, 30, 30);
-    border-radius: 10px;
-}
-
-.estadoStock {
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+  
+  /* Contenedor del gráfico */
+  .donut-chart-container {
+    width: 200px;
+    height: 200px;
+    position: relative;
+  }
+  
+  /* Estilos para pantallas más grandes */
+  @media (min-width: 1024px) {
+    .donut-chart-container {
+      width: 250px;
+      height: 250px;
+    }
+  }
+  
+  /* Estados de carga y error */
+  .donut-loading {
+    text-align: center;
+  }
+  
+  .donut-error {
+    text-align: center;
+    color: #ef4444;
+  }
+  
+  /* Estilos para la leyenda */
+  .donut-legend {
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+  
+  /* Estilos para el texto central */
+  .donut-center-text {
+    font-size: 14px;
+    font-family: Arial, sans-serif;
     font-weight: bold;
-    padding: 10px;
+    color: #333;
   }
-  
-  .estadoAlto {
-    color: rgba(19, 192, 19, 0.74);
-  }
-  
-  .estadoMedio {
-    color: rgba(255, 255, 0, 0.785);
-    margin-left: -20%;
-  }
-  
-  .estadoBajo {
-    color: rgba(255, 0, 0, 0.856);
-  }
-  

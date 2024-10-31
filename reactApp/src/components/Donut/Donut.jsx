@@ -1,165 +1,167 @@
-"use client"
-
-import React, { useState, useEffect } from 'react'
-import { Doughnut } from 'react-chartjs-2'
-import { Chart as ChartJS, ArcElement, Tooltip, Legend, Title } from "chart.js"
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, Title } from "chart.js";
+import React, { useState, useEffect } from 'react';
+import { Doughnut } from 'react-chartjs-2';
+import { format, startOfWeek, isSameDay, addDays, differenceInCalendarDays } from 'date-fns';
 import './Donut.css'
-
-ChartJS.register(ArcElement, Tooltip, Legend, Title)
-
-const maxDaysPerWeek = 5 // Monday to Friday
-
-const predefinedColors = [
-  'rgb(255, 99, 132)',
-  'rgb(54, 162, 235)',
-  'rgb(255, 206, 86)',
-  'rgb(75, 192, 192)',
-  'rgb(153, 102, 255)',
-  'rgb(255, 159, 64)',
-  'rgb(231, 233, 237)',
-  'rgb(255, 0, 255)'
-]
 
 const CenterTextPlugin = {
   id: 'centerText',
   afterDraw(chart, args, options) {
-    const { ctx, chartArea: { top, right, bottom, left, width, height } } = chart
+    const { ctx, chartArea: { top, right, bottom, left, width, height } } = chart;
 
-    ctx.save()
+    ctx.save();
     if (options.text) {
-      const text = options.text
-      const textX = left + width / 2
-      const textY = top + height / 2
+      const text = options.text;
+      const textX = left + width / 2;
+      const textY = top + height / 2;
 
-      ctx.beginPath()
-      ctx.arc(textX, textY, Math.min(width, height) / 4, 0, Math.PI * 2)
-      ctx.fillStyle = "rgba(0, 0, 0, 0.1)"
-      ctx.fill()
+      ctx.beginPath();
+      ctx.arc(textX, textY, Math.min(width, height) / 4, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
+      ctx.fill();
 
-      ctx.font = options.font || '16px Arial'
-      ctx.fillStyle = options.color || 'white'
-      ctx.textAlign = 'center'
-      ctx.textBaseline = 'middle'
+      ctx.font = options.font || '16px Arial';
+      ctx.fillStyle = options.color || 'white';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
 
-      const lines = text.split('\n')
-      const lineHeight = 20
+      const lines = text.split('\n');
+      const lineHeight = 20;
       lines.forEach((line, index) => {
-        const yOffset = (index - (lines.length - 1) / 2) * lineHeight
-        ctx.fillText(line, textX, textY + yOffset)
+        const yOffset = (index - (lines.length - 1) / 2) * lineHeight;
+        ctx.fillText(line, textX, textY + yOffset);
+      });
+    }
+    ctx.restore();
+  }
+};
+
+ChartJS.register(ArcElement, Tooltip, Legend, Title);
+ChartJS.register(CenterTextPlugin);
+
+const totalEstudiantes = 550;
+
+const coloresPredefinidos = [
+  'gray', // Azul
+  '#1b1a66'  // Rosa
+];
+
+export default function EstudiantesComedorChart() {
+  const [selectedIndex, setSelectedIndex] = useState(null);
+  const [chartData, setChartData] = useState(null);
+  const [lastUpdate, setLastUpdate] = useState(new Date());
+  const [estudiantes, setEstudiantes] = useState({
+    comieron: 0,
+    noComieron: 0
+  });
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const fetchEstudiantes = () => {
+    fetch('http://localhost:8000/api/hist_pagos/')
+      .then(response => response.json())
+      .then(data => {
+        const selectedDate = new Date(localStorage.getItem('selectedDate') || new Date());
+        const mondayOfSelectedWeek = startOfWeek(selectedDate, { weekStartsOn: 1 });
+        
+        console.log('Selected Date:', selectedDate);
+        console.log('Monday of Selected Week:', mondayOfSelectedWeek);
+  
+        // Filtra los estudiantes becados y no becados
+        const estudiantesBecadosComieronDiaSeleccionado = data.filter(item => {
+          const fechaPago = addDays(new Date(item.fecha_pago_prueba), 1); // Ajuste de la fecha de pago
+          console.log('Fecha de pago:', fechaPago);
+          console.log('¿Es el mismo día que el lunes?', isSameDay(fechaPago, mondayOfSelectedWeek));
+          return isSameDay(fechaPago, mondayOfSelectedWeek) && item.monto === 0; // Verifica si la fecha coincide y el monto es 0
+        }).length;
+  
+        const estudiantesNoBecadosComieronDiaSeleccionado = data.filter(item => {
+          const fechaPago = addDays(new Date(item.fecha_pago_prueba), 1); // Ajuste de la fecha de pago
+          return isSameDay(fechaPago, mondayOfSelectedWeek) && item.monto !== 0; // Verifica si la fecha coincide y el monto es diferente de 0
+        }).length;
+  
+        const totalBecados = estudiantesBecadosComieronDiaSeleccionado + estudiantesNoBecadosComieronDiaSeleccionado;
+        const estudiantesNoComieronDiaSeleccionado = totalEstudiantes - totalBecados;
+  
+        console.log('Estudiantes becados que comieron:', estudiantesBecadosComieronDiaSeleccionado);
+        console.log('Estudiantes no becados que comieron:', estudiantesNoBecadosComieronDiaSeleccionado);
+        console.log('Total de estudiantes que comieron:', totalBecados);
+        console.log('Estudiantes que no comieron:', estudiantesNoComieronDiaSeleccionado);
+
+        setEstudiantes({
+          comieron: totalBecados,
+          noComieron: estudiantesNoComieronDiaSeleccionado
+        });
+  
+        setLastUpdate(mondayOfSelectedWeek);
+        setIsLoading(false);
       })
-    }
-    ctx.restore()
-  }
-}
-
-ChartJS.register(CenterTextPlugin)
-
-export default function StudentAttendanceChart() {
-  const [selectedIndex, setSelectedIndex] = useState(null)
-  const [chartData, setChartData] = useState(null)
-  const [students, setStudents] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState(null)
+      .catch(error => {
+        console.error('Error fetching data:', error);
+        setError(error.message);
+        setIsLoading(false);
+      });
+  };
+  
+  // UseEffect para que el gráfico cambie cada vez que cambia la fecha seleccionada
+  useEffect(() => {
+    fetchEstudiantes();
+  }, [localStorage.getItem('selectedDate')]);
 
   useEffect(() => {
-    fetchStudents()
-  }, [])
+    fetchEstudiantes(); // Cargar los datos inicialmente
 
-  useEffect(() => {
-    if (students.length > 0) {
-      updateChart()
-
-      // Set up interval for random student selection
-      const intervalId = setInterval(() => {
-        const randomIndex = Math.floor(Math.random() * students.length)
-        setSelectedIndex(randomIndex)
-      }, 10000) // 10 seconds
-
-      // Clean up interval on component unmount
-      return () => clearInterval(intervalId)
-    }
-  }, [students])
-
-  useEffect(() => {
-    if (students.length > 0) {
-      updateChart()
-    }
-  }, [selectedIndex, students])
-
-  const fetchStudents = async () => {
-    try {
-      const response = await fetch('http://localhost:8000/api/estudiantes/')
-      if (!response.ok) {
-        throw new Error('Failed to fetch student data')
+    const checkDayChange = () => {
+      const now = new Date();
+      // Verifica si ha cambiado el día comparando la fecha actual con la última fecha de actualización
+      if (!isSameDay(now, lastUpdate)) {
+        fetchEstudiantes(); // Si el día cambió, vuelve a obtener los datos
       }
-      const data = await response.json()
-      const studentsWithAttendance = await Promise.all(data.map(async (student) => {
-        const attendanceResponse = await fetch(`http://localhost:8000/api/hist_pagos/${student.id}/`)
-        if (attendanceResponse.ok) {
-          const attendanceData = await attendanceResponse.json()
-          return {
-            ...student,
-            attendance: attendanceData.days_attended || 0,
-            color: student.color || predefinedColors[Math.floor(Math.random() * predefinedColors.length)]
-          }
-        } else {
-          return {
-            ...student,
-            attendance: 0,
-            color: student.color || predefinedColors[Math.floor(Math.random() * predefinedColors.length)]
-          }
-        }
-      }))
-      setStudents(studentsWithAttendance)
-      setIsLoading(false)
-    } catch (error) {
-      setError(error.message)
-      setIsLoading(false)
+    };
+
+    const interval = setInterval(checkDayChange, 60000); // Verifica cada minuto si ha cambiado el día
+
+    return () => clearInterval(interval); // Limpia el intervalo cuando el componente se desmonta
+  }, [lastUpdate]);
+
+  useEffect(() => {
+    if (estudiantes.comieron !== 0 || estudiantes.noComieron !== 0) {
+      const labels = ['Comieron', 'No Comieron'];
+      const data = [estudiantes.comieron, estudiantes.noComieron];
+      const colors = coloresPredefinidos;
+      const borderColors = ['black', 'black'];
+
+      setChartData({
+        labels: labels,
+        datasets: [{
+          data: data,
+          backgroundColor: colors,
+          borderColor: borderColors,
+          borderWidth: 0.5,
+        }]
+      });
     }
-  }
+  }, [estudiantes]);
 
-  const updateChart = () => {
-    let labels = []
-    let data = []
-    let colors = []
-    let borderColors = []
-
-    labels = students.map(s => s.name)
-    data = students.map(s => s.attendance)
-    colors = students.map(s => s.color)
-    borderColors = students.map(() => 'black')
-
-    setChartData({
-      labels: labels,
-      datasets: [{
-        data: data,
-        backgroundColor: colors,
-        borderColor: borderColors,
-        borderWidth: 2,
-      }]
-    })
-  }
-
-  const calculateTotalAttendancePercentage = () => {
-    const totalAttendance = students.reduce((sum, student) => sum + student.attendance, 0)
-    const maxPossibleAttendance = students.length * maxDaysPerWeek
-    return ((totalAttendance / maxPossibleAttendance) * 100).toFixed(2)
-  }
+  const calcularPorcentajeComieron = () => {
+    return ((estudiantes.comieron / totalEstudiantes) * 100).toFixed(2);
+  };
 
   const handleClick = (event, elements) => {
     if (elements.length > 0) {
-      const clickedIndex = elements[0].index
-      setSelectedIndex(prevIndex => prevIndex === clickedIndex ? null : clickedIndex)
+      const clickedIndex = elements[0].index;
+      setSelectedIndex(prevIndex => prevIndex === clickedIndex ? null : clickedIndex);
     } else {
-      setSelectedIndex(null)
+      setSelectedIndex(null);
     }
-  }
+  };
 
   const chartOptions = {
     responsive: true,
     plugins: {
       legend: {
-        display: false,
+        display: true,
+        position: 'bottom',
       },
       tooltip: {
         enabled: true,
@@ -172,10 +174,11 @@ export default function StudentAttendanceChart() {
         displayColors: false,
         callbacks: {
           label: (context) => {
-            const label = context.label || ''
-            const value = context.parsed || 0
-            const percentage = ((value / maxDaysPerWeek) * 100).toFixed(2)
-            return `${label}: ${value} days (${percentage}%)`
+            const label = context.label || '';
+            const value = context.parsed || 0;
+            const total = context.dataset.data.reduce((a, b) => a + b, 0);
+            const percentage = ((value / total) * 100).toFixed(2);
+            return `${label}: ${value} (${percentage}%)`;
           }
         },
       },
@@ -183,30 +186,30 @@ export default function StudentAttendanceChart() {
         display: false,
       },
       centerText: {
-        text: selectedIndex !== null && students[selectedIndex]
-          ? `${students[selectedIndex].name}\n${students[selectedIndex].attendance} / ${maxDaysPerWeek}\n${((students[selectedIndex].attendance / maxDaysPerWeek) * 100).toFixed(2)}%`
-          : `Total\n${calculateTotalAttendancePercentage()}%`,
+        text: selectedIndex !== null
+          ? `${estudiantes[selectedIndex === 0 ? 'comieron' : 'noComieron']} / ${totalEstudiantes}\n${((estudiantes[selectedIndex === 0 ? 'comieron' : 'noComieron'] / totalEstudiantes) * 100).toFixed(2)}%`
+          : `${calcularPorcentajeComieron()}%`,
         color: 'white',
         font: '16px Arial',
       },
     },
     onClick: handleClick,
-  }
+  };
 
   if (isLoading) {
-    return <div>Loading data...</div>
+    return <div className="text-center">Cargando datos...</div>;
   }
 
   if (error) {
-    return <div>Error: {error}</div>
+    return <div className="text-center text-red-500">Error: {error}</div>;
   }
 
   return (
-    <div className="w-full max-w-3xl mx-auto p-6">
-      <h2 className="text-2xl font-bold mb-4">Student Attendance Chart</h2>
-      <p className="mb-4">Weekly attendance (Monday to Friday)</p>
-      <div className="w-[400px] h-[400px] mx-auto">
-        {chartData && <Doughnut data={chartData} options={chartOptions} />}
+    <div className="w-full max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-md">
+      <div className="flex items-center justify-center mb-4" style={{ display: 'flex', alignItems: 'center', width: '22vw' }}>
+        <div className="w-[200px] h-[200px] relative">
+          {chartData && <Doughnut data={chartData} options={chartOptions} />}
+        </div>
       </div>
     </div>
   )
