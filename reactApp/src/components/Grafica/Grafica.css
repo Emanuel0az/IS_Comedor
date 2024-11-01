@@ -1,5 +1,5 @@
 .sessions-chart {
-    background-color: #000000;
+    background-color: unset !important;;
     color: #ffffff;
     padding: 20px;
     border-radius: 10px;
