@@ -27,7 +27,7 @@ useEffect(() => {
     return (
       <>
       <nav className='navPC'>
-        <div onClick={log}>Líceo de Chacarita</div>
+        <div>Líceo de Chacarita</div>
         <div><ToggleSwitch /></div>
         <div>{currentTime}</div>
       </nav>
