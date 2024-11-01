@@ -6,7 +6,7 @@ export const ColorContext = createContext();
 
 // Creamos el proveedor de contexto
 export const ColorProvider = ({ children }) => {
-    const [ContextColorState, setContextColorState] = useState(false);
+    const [ContextColorState, setContextColorState] = useState([]);
 
     return (
         <ColorContext.Provider value={{ ContextColorState, setContextColorState }}>

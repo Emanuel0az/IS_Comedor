@@ -1,19 +1,20 @@
 .toggle_switch_container_night {
-    width: 5vw;
-    height: 5vh;
-    border-radius: 3vw;
+    width: 14vw;
+    height: 3.6vh;
+    border-radius: 20px;
     border: 1px solid white;
-    background-color: rgb(34, 34, 34);
     transition: all 0.3s ease-in-out;
+    background-color: rgb(81, 81, 81);
     display: flex;
     align-items: center;
 }
+
 .toggle_switch_container_day {
-    width: 5vw;
-    height: 5vh;
-    border-radius: 3vw;
+    width: 14vw;
+    height: 3.6vh;
+    border-radius: 20px;
     border: 1px solid white;
-    background-color: rgb(92, 92, 92);
+    background-color: rgb(81, 81, 81);
     transition: all 0.3s ease-in-out;
     display: flex;
     align-items: center;
@@ -34,14 +35,16 @@
     width: 22px;
     background-color: white;
     border-radius: 50%;
-    margin-left: 60%;
+    margin-left: 58%;
     transition: all 0.3s ease-in-out;
 }
+
 .imgDay {
     color: black;
     margin-top: 16%;
     margin-left: 18%;
 }
+
 .imgNight {
     color: white;
     margin-top: 30%;
@@ -50,13 +53,13 @@
 
 @media (min-width: 220px) and (max-width: 374px) {
     .toggle_switch_container_night {
-        min-width: 60px;
-        height: 30px;
+        min-width: 56px;
+        height: 26px;
         border-radius: 16px;
     }
     .toggle_switch_container_day {
-        min-width: 60px;
-        height: 30px;
+        min-width: 56px;
+        height: 26px;
         border-radius: 16px;
     }
     .circleSwitchNight {
@@ -67,19 +70,19 @@
     .circleSwitchDay {
         height: 20px;
         width: 20px;
-        margin-left: 62%;
+        margin-left: 59%;
     }
 }
 
 @media (min-width: 375px) and (max-width: 424px) { 
     .toggle_switch_container_night {
-        min-width: 60px;
-        height: 30px;
+        min-width: 56px;
+        height: 28px;
         border-radius: 16px;
     }
     .toggle_switch_container_day {
-        min-width: 60px;
-        height: 30px;
+        min-width: 56px;
+        height: 28px;
         border-radius: 16px;
     }
     .circleSwitchNight {
@@ -90,64 +93,67 @@
     .circleSwitchDay {
         height: 20px;
         width: 20px;
-        margin-left: 62%;
+        margin-left: 59%;
     }
 }
 
 @media (min-width: 425px) and (max-width: 767px) {
     .toggle_switch_container_night {
-        min-width: 62px;
-        height: 31px;
+        max-width: 60px;
+        height: 30px;
         border-radius: 18px;
     }
     .toggle_switch_container_day {
-        min-width: 62px;
-        height: 31px;
+        max-width: 60px;
+        height: 30px;
         border-radius: 18px;
+        
     }
     .circleSwitchNight {
         height: 23px;
         width: 23px;
         margin-left: 4%;
+        
     }
     .circleSwitchDay {
         height: 23px;
         width: 23px;
         margin-left: 57%;
+        
     }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
     .toggle_switch_container_night {
-        min-width: 62px;
+        max-width: 62px;
         height: 31px;
         border-radius: 18px;
     }
     .toggle_switch_container_day {
-        min-width: 62px;
+        max-width: 62px;
         height: 31px;
         border-radius: 18px;
     }
     .circleSwitchNight {
         height: 23px;
         width: 23px;
-        margin-left: 4%;
+        margin-left: 6%;
     }
     .circleSwitchDay {
         height: 23px;
         width: 23px;
-        margin-left: 57%;
+        margin-left: 58%;
     }
 }
 
 @media (min-width: 1024px) and (max-width: 1439px) {
     .toggle_switch_container_night {
-        min-width: 62px;
+        max-width: 62px;
         height: 31px;
         border-radius: 18px;
     }
     .toggle_switch_container_day {
-        min-width: 62px;
+        max-width: 62px;
         height: 31px;
         border-radius: 18px;
     }
@@ -165,12 +171,12 @@
 
 @media (min-width: 1440px) and (max-width: 3000px) {
     .toggle_switch_container_night {
-        min-width: 62px;
+        max-width: 62px;
         height: 31px;
         border-radius: 18px;
     }
     .toggle_switch_container_day {
-        min-width: 62px;
+        max-width: 62px;
         height: 31px;
         border-radius: 18px;
     }
@@ -185,7 +191,6 @@
         margin-left: 57%;
     }
 }
-
 
 
 /* 

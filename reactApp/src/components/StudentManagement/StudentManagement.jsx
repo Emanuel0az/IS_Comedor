@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
-import './Ingredientes.css';
-
-
-
+import './StudentManagement.css';
 const StudentManagement = () => {
   const [students, setStudents] = useState([]);
   const [newStudent, setNewStudent] = useState({
@@ -25,11 +22,9 @@ const StudentManagement = () => {
     fetchStudents();
     checkViewCookies();
   }, []);
-
   const checkViewCookies = () => {
     const addCookie = Cookies.get('add_student');
     const seeCookie = Cookies.get('see_student');
-
     if (addCookie) {
       setCurrentView('add');
     } else if (seeCookie) {
@@ -38,19 +33,16 @@ const StudentManagement = () => {
       setCurrentView('add');
     }
   };
-
   const ver_añadir = () => {
     Cookies.set('add_student', 'true');
     Cookies.remove('see_student');
     setCurrentView('add');
   };
-
   const ver_students = () => {
     Cookies.set('see_student', 'true');
     Cookies.remove('add_student');
     setCurrentView('list');
   };
-
   const fetchStudents = async () => {
     try {
       const response = await fetch('http://localhost:8000/api/estudiantes/');
@@ -64,7 +56,6 @@ const StudentManagement = () => {
       console.error('Error fetching students:', error);
     }
   };
-
   const addStudent = async () => {
     try {
       const studentToAdd = {
@@ -94,7 +85,6 @@ const StudentManagement = () => {
       console.error('Error adding student:', error);
     }
   };
-
   const updateStudent = async (student) => {
     try {
       const studentToUpdate = {
@@ -114,7 +104,6 @@ const StudentManagement = () => {
       console.error('Error updating student:', error);
     }
   };
-
   const deleteStudent = async (id) => {
     try {
       await fetch(`http://localhost:8000/api/estudiantes/${id}/`, {
@@ -126,6 +115,7 @@ const StudentManagement = () => {
     }
   };
 
+
   const filteredStudents = students.filter((student) => {
     const lowerCaseSearchTerm = searchTerm.toLowerCase();
     return (
@@ -135,18 +125,19 @@ const StudentManagement = () => {
     );
   });
 
+
   return (
     <div className="student-management">
       <div className="header">
         <h1 className="title">Sistema de Manejo de Estudiantes</h1>
         <div className="nav-buttons">
-          <button 
+          <button
             className={`nav-button ${currentView === 'add' ? 'active' : ''}`}
             onClick={ver_añadir}
           >
             Añadir Estudiante
           </button>
-          <button 
+          <button
             className={`nav-button ${currentView === 'list' ? 'active' : ''}`}
             onClick={ver_students}
           >
@@ -154,7 +145,6 @@ const StudentManagement = () => {
           </button>
         </div>
       </div>
-
       {currentView === 'add' && (
         <div className="add-student-form">
           <h2 className="form-title">Añadir Nuevo Estudiante</h2>
@@ -233,7 +223,6 @@ const StudentManagement = () => {
           </button>
         </div>
       )}
-
       {currentView === 'list' && (
         <div className="student-list">
           <hr />
@@ -303,8 +292,8 @@ const StudentManagement = () => {
                           <select
                             className="edit-input"
                             value={editingStudent.becado.toString()}
-                            onChange={(e) => setEditingStudent({ 
-                              ...editingStudent, 
+                            onChange={(e) => setEditingStudent({
+                              ...editingStudent,
                               becado: e.target.value === 'true'
                             })}
                           >
@@ -337,7 +326,7 @@ const StudentManagement = () => {
                         <td>
                           <span className={`status-badge ${student.becado ? 'becado' : 'no-becado'}`}>
                             {student.becado ? 'Si' : 'No '}
-                          </span> 
+                          </span>
                         </td>
                         <td>
                           <div className="action-buttons">
@@ -367,5 +356,4 @@ const StudentManagement = () => {
     </div>
   );
 };
-
 export default StudentManagement;

@@ -3,7 +3,6 @@ import { Route, Routes } from 'react-router-dom'
 import Home from '../Pages/Home_/Home'
 import Stock from '../Pages/Stock/Stock'
 import Email from '../Pages/Email_/Email'
-import { Ingredientes } from '../Pages/Ingredientes/Ingredientes'
 import { Add_Students } from '../Pages/Add_Students/Add_Students'
 import { Login } from '../Pages/Login/Login'
 import { Login2 } from '../Pages/Login/Login2'
@@ -52,11 +51,6 @@ const Routing = () => {
                 <PrivateRoutes>
                   <Email />
                 </PrivateRoutes>
-              } />
-            <Route path='ingredientes/' element={
-                <PrivateRoutes2>
-                  <Ingredientes />
-                </PrivateRoutes2>
               } />
             <Route path='estudiantes/' element={
                 <PrivateRoutes2>
