@@ -17,6 +17,7 @@ const StudentManagement = () => {
   const [editingStudent, setEditingStudent] = useState(null);
   const [currentView, setCurrentView] = useState('add');
   const [searchTerm, setSearchTerm] = useState('');
+
   useEffect(() => {
     fetchStudents();
     checkViewCookies();
@@ -113,6 +114,8 @@ const StudentManagement = () => {
       console.error('Error deleting student:', error);
     }
   };
+
+
   const filteredStudents = students.filter((student) => {
     const lowerCaseSearchTerm = searchTerm.toLowerCase();
     return (
@@ -121,6 +124,8 @@ const StudentManagement = () => {
       (student.seccion && student.seccion.toLowerCase().includes(lowerCaseSearchTerm))
     );
   });
+
+
   return (
     <div className="student-management">
       <div className="header">

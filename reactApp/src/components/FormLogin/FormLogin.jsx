@@ -12,21 +12,35 @@ export default function FormLogin() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    
     try {
-      // Hacer la solicitud de login a la API
-      const response = await axios.post('http://localhost:8000/api/login_admin/', {
-        username: email,
+      // Intentar primero la validación en la ruta 'users'
+      const usersResponse = await axios.post('http://localhost:8000/api/users/', {
+        mail: email,
         password: password,
       });
 
-      // Guardar el token en una cookie
-      Cookies.set('token2', response.data.access, { expires: 0.0625 });  // Expira en 1 hora y media
+      // Si la respuesta es exitosa, guardar el token y navegar
+      Cookies.set('token3', usersResponse.data.access, { expires: 0.0625 });  // Expira en 1.5 horas
       alert('Inicio de sesión exitoso');
-      navigate('/home');  // Navega a la página de inicio o a la ruta protegida
+      navigate('/home');
     } catch (error) {
-      setErrors({ login: 'Correo o contraseña incorrectos' });
-      alert('Credenciales incorrectas');
+      // Si la validación en 'users' falla, intenta la validación en 'login_admin'
+      try {
+        const adminResponse = await axios.post('http://localhost:8000/api/login_admin/', {
+          username: email, // Usar 'username' en lugar de 'email' para 'login_admin'
+          password: password,
+        });
+
+        // Guardar el token y navegar
+        Cookies.set('token2', adminResponse.data.access, { expires: 0.0625 });
+        alert('Inicio de sesión exitoso');
+        navigate('/home');
+      } catch (adminError) {
+        // Mostrar error si ambos intentos fallan
+        setErrors({ login: 'Correo o contraseña incorrectos' });
+        alert('Credenciales incorrectas');
+      }
     }
   };
 
@@ -39,7 +53,7 @@ export default function FormLogin() {
             <label htmlFor="email">Correo electrónico</label>
             <input
               id="email"
-              type=""
+              type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Ingrese su Correo"

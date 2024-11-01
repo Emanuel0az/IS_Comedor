@@ -201,7 +201,7 @@ const StockComponent = () => {
                                 </div>
 
                                 <div className='seccion_s'>{student.seccion}</div>
-                                <div>{student.rol} Rol</div>
+                                <div>{student.rol}</div>
                                 <div className='almuerzoIcon'>
                                     {validAlmuerzo(student) ?
                                         <div onClick={() => validarAsistencias(student, student.id)}><LocalDiningIcon className='almorzado_S' style={{ fontSize: 27 }} /></div> :
@@ -238,8 +238,12 @@ const StockComponent = () => {
                                                             <CalendarioStudent />
                                                         </div>
                                                     </div>
-                                                    <div className='graphicStudent'>
-                                                        <SessionsChartStudents />
+                                                </div>
+                                                <div></div>
+                                                <div className='AsistAndModal'>
+                                                    <div className='asistsTextTittle'>Asistencias</div>
+                                                    <div>
+                                                        <CalendarioStudent />
                                                     </div>
                                                 </div>
                                             </div>

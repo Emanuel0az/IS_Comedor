@@ -15,7 +15,8 @@ const App = () => {
 
   useEffect(() => {
     const checkUsersState = () => {
-      const storedUsers = Cookies.get('token2');
+      // Función que actualiza el estado basado en el localStorage
+      const storedUsers = Cookies.get('token2') || Cookies.get('token3');
       if (storedUsers !== users) {
         setUsers(storedUsers);
       }
