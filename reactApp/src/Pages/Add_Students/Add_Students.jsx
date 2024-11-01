@@ -1,12 +1,11 @@
 import React from 'react'
-import IngredientComponent from '../../components/Ingredientes/Ingredientes'
+import StudentManagement from '../../components/StudentManagement/StudentManagement'
 
 
 export const Add_Students = () => {
   return (
     <div>
-      xd
-       <IngredientComponent/>
+      <StudentManagement/>
     </div>
   )
 }

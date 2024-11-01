@@ -1,6 +1,7 @@
 import Routing from "./Routes/Routing.jsx"
 import NavPC from "./components/NavPC/NavPC"
 import SideBar from "./components/SideBar/SideBar"
+import NavMobile from "./components/DownBar/DownBar.jsx"
 import { useState, useEffect } from "react"
 import CalendarioModal from "./components/Calendario/Calendario.jsx"
 import Cookies from 'js-cookie';
@@ -11,9 +12,9 @@ const App = () => {
     return Cookies.get('token2');
   });
 
+
   useEffect(() => {
     const checkUsersState = () => {
-      // Función que actualiza el estado basado en el localStorage
       const storedUsers = Cookies.get('token2');
       if (storedUsers !== users) {
         setUsers(storedUsers);
@@ -31,17 +32,24 @@ const App = () => {
     <>
       {users ? (
         <>
-          <NavPC />
+          <div className="NavPC">
+            <NavPC />
+          </div>
           <main>
-            <SideBar />
+            <div className="SideBar">
+              <SideBar/>
+            </div>
             <div>
               <div className="structureHeader">
                 <div></div>
                 <CalendarioModal/>
               </div>
               <div className="Routing">
-                <Routing className='ll'/> 
+                <Routing/> 
               </div>
+            </div>
+            <div className="NavMobileResponsive">
+              <NavMobile/>
             </div>
           </main>
         </>

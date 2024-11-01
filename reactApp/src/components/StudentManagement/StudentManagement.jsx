@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
-import './Ingredientes.css';
-
-
-
+import './StudentManagement.css';
 const StudentManagement = () => {
   const [students, setStudents] = useState([]);
   const [newStudent, setNewStudent] = useState({
@@ -19,16 +16,14 @@ const StudentManagement = () => {
   });
   const [editingStudent, setEditingStudent] = useState(null);
   const [currentView, setCurrentView] = useState('add');
-
+  const [searchTerm, setSearchTerm] = useState('');
   useEffect(() => {
     fetchStudents();
     checkViewCookies();
   }, []);
-
   const checkViewCookies = () => {
     const addCookie = Cookies.get('add_student');
     const seeCookie = Cookies.get('see_student');
-
     if (addCookie) {
       setCurrentView('add');
     } else if (seeCookie) {
@@ -37,19 +32,16 @@ const StudentManagement = () => {
       setCurrentView('add');
     }
   };
-
   const ver_añadir = () => {
     Cookies.set('add_student', 'true');
     Cookies.remove('see_student');
     setCurrentView('add');
   };
-
   const ver_students = () => {
     Cookies.set('see_student', 'true');
     Cookies.remove('add_student');
     setCurrentView('list');
   };
-
   const fetchStudents = async () => {
     try {
       const response = await fetch('http://localhost:8000/api/estudiantes/');
@@ -63,7 +55,6 @@ const StudentManagement = () => {
       console.error('Error fetching students:', error);
     }
   };
-
   const addStudent = async () => {
     try {
       const studentToAdd = {
@@ -93,7 +84,6 @@ const StudentManagement = () => {
       console.error('Error adding student:', error);
     }
   };
-
   const updateStudent = async (student) => {
     try {
       const studentToUpdate = {
@@ -113,7 +103,6 @@ const StudentManagement = () => {
       console.error('Error updating student:', error);
     }
   };
-
   const deleteStudent = async (id) => {
     try {
       await fetch(`http://localhost:8000/api/estudiantes/${id}/`, {
@@ -124,19 +113,26 @@ const StudentManagement = () => {
       console.error('Error deleting student:', error);
     }
   };
-
+  const filteredStudents = students.filter((student) => {
+    const lowerCaseSearchTerm = searchTerm.toLowerCase();
+    return (
+      (student.nombre && student.nombre.toLowerCase().includes(lowerCaseSearchTerm)) ||
+      (student.cedula && student.cedula.toLowerCase().includes(lowerCaseSearchTerm)) ||
+      (student.seccion && student.seccion.toLowerCase().includes(lowerCaseSearchTerm))
+    );
+  });
   return (
     <div className="student-management">
       <div className="header">
         <h1 className="title">Sistema de Manejo de Estudiantes</h1>
         <div className="nav-buttons">
-          <button 
+          <button
             className={`nav-button ${currentView === 'add' ? 'active' : ''}`}
             onClick={ver_añadir}
           >
             Añadir Estudiante
           </button>
-          <button 
+          <button
             className={`nav-button ${currentView === 'list' ? 'active' : ''}`}
             onClick={ver_students}
           >
@@ -144,7 +140,6 @@ const StudentManagement = () => {
           </button>
         </div>
       </div>
-
       {currentView === 'add' && (
         <div className="add-student-form">
           <h2 className="form-title">Añadir Nuevo Estudiante</h2>
@@ -216,17 +211,28 @@ const StudentManagement = () => {
             </select>
           </div>
           <button
-            className="submit-button"
+            className="submit-button2"
             onClick={addStudent}
           >
             Añadir Estudiante
           </button>
         </div>
       )}
-
       {currentView === 'list' && (
         <div className="student-list">
-          <h2 className="list-title">Lista de Estudiantes</h2>
+          <hr />
+          <div className="search-container">
+            <h2 className="list-title">Lista de Estudiantes</h2>
+            <div></div>
+            <input
+              type="text"
+              className="search-input"
+              placeholder="Buscar Estudiantes ..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+          <hr />
           <div className="table-container">
             <table className="student-table">
               <thead>
@@ -241,7 +247,7 @@ const StudentManagement = () => {
                 </tr>
               </thead>
               <tbody>
-                {students.map((student) => (
+                {filteredStudents.map((student) => (
                   <tr key={student.id}>
                     {editingStudent?.id === student.id ? (
                       <td colSpan="7" className="editing-row">
@@ -281,8 +287,8 @@ const StudentManagement = () => {
                           <select
                             className="edit-input"
                             value={editingStudent.becado.toString()}
-                            onChange={(e) => setEditingStudent({ 
-                              ...editingStudent, 
+                            onChange={(e) => setEditingStudent({
+                              ...editingStudent,
                               becado: e.target.value === 'true'
                             })}
                           >
@@ -315,7 +321,7 @@ const StudentManagement = () => {
                         <td>
                           <span className={`status-badge ${student.becado ? 'becado' : 'no-becado'}`}>
                             {student.becado ? 'Si' : 'No '}
-                          </span> 
+                          </span>
                         </td>
                         <td>
                           <div className="action-buttons">
@@ -345,5 +351,4 @@ const StudentManagement = () => {
     </div>
   );
 };
-
 export default StudentManagement;
