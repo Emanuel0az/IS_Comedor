@@ -142,6 +142,11 @@ const StockComponent = () => {
         }
     };
 
+    const aaja = () => {
+        setOpenModalForStudent(null); // Cerrar el modal
+    };
+    
+
 
     const handlePayEnter = (e) => {
         if (e.key === 'Enter') {
@@ -206,20 +211,31 @@ const StockComponent = () => {
                                 <div onClick={() => openingModal(student.id)} className="actionsIcon">
                                     <div className='contAction'><MoreVertIcon style={{ color: 'gray' }} /></div>
                                     {openModalForStudent === student.id ? (
-                                        <div className='modalContainer'>
-                                            <div className='modalStudentContainer'>
-                                                <div className='infoStudentM'>
-                                                    <div className='imgStudent'>{/* Aquí va la foto. */}</div>
-                                                    <div className='identityStudentM'>
-                                                        <div className='containerInfoStudentsModal'>
-                                                            <div className='nombreStudentintModal'>{student.nombre}</div>
-                                                            <div className='idStudetIntoModal'>ID: {student.id}</div>
+                                        <>
+                                        <div className="modal"></div>
+                                            <div className='modalContainer'>
+                                                <div onClick={() => aaja()}>X</div>
+                                                <div className='modalStudentContainer'>
+                                                    <div className='infoStudentM'>
+                                                        <div className='imgStudent'>{/* Aquí va la foto. */}</div>
+                                                        <div className='identityStudentM'>
+                                                            <div className='containerInfoStudentsModal'>
+                                                                <div className='nombreStudentintModal'>{student.nombre}</div>
+                                                                <div className='idStudetIntoModal'>ID: {student.id}</div>
+                                                            </div>
+                                                        </div>
+                                                        <div className='typesStudentM'>
+                                                            <div className='containerInfoStudentsType'>
+                                                                <div className="becadoStudentIntoModal">Becado</div>
+                                                                <div className="rolStudentIntoModal">Estudiante</div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div className='typesStudentM'>
-                                                        <div className='containerInfoStudentsType'>
-                                                            <div className="becadoStudentIntoModal">Becado</div>
-                                                            <div className="rolStudentIntoModal">Estudiante</div>
+                                                    <div>Perro</div>
+                                                    <div className='AsistAndModal'>
+                                                        <div className='asistsTextTittle'>Asistencias</div>
+                                                        <div>
+                                                            <CalendarioStudent />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -230,11 +246,8 @@ const StockComponent = () => {
                                                         <CalendarioStudent />
                                                     </div>
                                                 </div>
-                                                <div className='graphicStudent'>
-                                                    <SessionsChartStudents />
-                                                </div>
                                             </div>
-                                        </div>
+                                        </>
                                     ) : null}
                                 </div>
                             </div>

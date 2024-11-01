@@ -12,7 +12,6 @@
     height: 100%;
     width: 85%;
     padding-left: 5%;
-    /* color: rgb(255, 255, 255);    */
     border-radius: 9px;
 
     display: grid;
@@ -78,7 +77,6 @@
     place-content: center;
     max-width: 3vw;
     max-height: 5vh;
-
 }
 
 .sideBarTop {
@@ -91,20 +89,20 @@
 .sideBarTop > div {
     height: 100%;
     width: 85%;
-    padding-left: 5%;
-    /* color: rgb(154, 153, 153); */
+    padding-left: 4%;
     border-radius: 9px;
 
     display: grid;
     grid-template-columns: 15% 30%;
     align-items: center;
-    margin-left: 5%;
+    margin-left: 4%;
 
     font-family: 'Inter', sans-serif;
     font-weight: 500;
     font-size: 1.1vw;
     letter-spacing: 0.5px;
     line-height: 1.43;
+    column-gap: 0.6vw;
 }
 
 
@@ -128,3 +126,33 @@
     line-height: 1.43;
     background-color: rgba(88, 88, 88, 0.399);
 }
+
+
+@media (min-width: 320px) and (max-width: 374px) {
+
+}
+  
+  
+@media (min-width: 375px) and (max-width: 424px) { 
+
+}
+  
+@media (min-width: 425px) and (max-width: 600px) {
+
+}
+  
+@media (min-width: 601px) and (max-width: 780px) {
+
+}
+  
+  
+@media (min-width: 1024px) and (max-width: 1439px) {
+
+}
+  
+  
+  media (min-width: 1440px) and (max-width: 1920px) {
+
+}
+  
+  
