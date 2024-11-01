@@ -1,7 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 
 import Home from '../Pages/Home_/Home'
-import Estadisticas from '../Pages/Estadisticas/Estadisticas'
 import Stock from '../Pages/Stock/Stock'
 import Email from '../Pages/Email_/Email'
 import { Ingredientes } from '../Pages/Ingredientes/Ingredientes'
@@ -42,11 +41,6 @@ const Routing = () => {
             <Route path='home/' element={
                 <PrivateRoutes>
                   <Home />
-                </PrivateRoutes>
-              } />
-            <Route path='estadisticas/' element={
-                <PrivateRoutes>
-                  <Estadisticas />
                 </PrivateRoutes>
               } />
             <Route path='asistencias/' element={
