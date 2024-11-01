@@ -189,7 +189,7 @@ export default function EstudiantesComedorChartMiercoles() {
         text: selectedIndex !== null
           ? `${estudiantes[selectedIndex === 0 ? 'comieron' : 'noComieron']} / ${totalEstudiantes}\n${((estudiantes[selectedIndex === 0 ? 'comieron' : 'noComieron'] / totalEstudiantes) * 100).toFixed(2)}%`
           : `${calcularPorcentajeComieron()}%`,
-        color: 'white',
+        color: 'black',
         font: '12px Arial',
       },
     },
@@ -205,7 +205,7 @@ export default function EstudiantesComedorChartMiercoles() {
   }
 
   return (
-    <div className="w-full max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-md">
+    <div className="Title_donut">Miercoles
       <div className="flex items-center justify-center mb-4" style={{ width: '110px', height: '110px' }}>
         <div className="w-[200px] h-[200px] relative">
           {chartData && <Doughnut data={chartData} options={chartOptions} />}

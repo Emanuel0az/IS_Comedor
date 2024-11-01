@@ -72,12 +72,12 @@ export default function EstudiantesComedorChart() {
           const fechaPago = addDays(new Date(item.fecha_pago_prueba), 1); // Ajuste de la fecha de pago
           // console.log('Fecha de pago:', fechaPago);
           // console.log('¿Es el mismo día que el lunes?', isSameDay(fechaPago, mondayOfSelectedWeek));
-          return isSameDay(fechaPago, mondayOfSelectedWeek) && item.monto === 0; // Verifica si la fecha coincide y el monto es 0
+          return isSameDay(fechaPago, mondayOfSelectedWeek) && item.monto === false; // Verifica si la fecha coincide y el monto es 0
         }).length;
   
         const estudiantesNoBecadosComieronDiaSeleccionado = data.filter(item => {
           const fechaPago = addDays(new Date(item.fecha_pago_prueba), 1); // Ajuste de la fecha de pago
-          return isSameDay(fechaPago, mondayOfSelectedWeek) && item.monto !== 0; // Verifica si la fecha coincide y el monto es diferente de 0
+          return isSameDay(fechaPago, mondayOfSelectedWeek) && item.monto !== false; // Verifica si la fecha coincide y el monto es diferente de 0
         }).length;
   
         const totalBecados = estudiantesBecadosComieronDiaSeleccionado + estudiantesNoBecadosComieronDiaSeleccionado;
@@ -188,7 +188,7 @@ export default function EstudiantesComedorChart() {
         text: selectedIndex !== null
           ? `${estudiantes[selectedIndex === 0 ? 'comieron' : 'noComieron']} / ${totalEstudiantes}\n${((estudiantes[selectedIndex === 0 ? 'comieron' : 'noComieron'] / totalEstudiantes) * 100).toFixed(2)}%`
           : `${calcularPorcentajeComieron()}%`,
-        color: 'white',
+        color: 'black',
         font: '12px Arial',
       },
     },
@@ -204,7 +204,7 @@ export default function EstudiantesComedorChart() {
   }
 
   return (
-    <div className="w-full max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-md">
+    <div className="Title_donut">Lunes
       <div className="tamaño_dona" style={{ width: '110px', height: '110px' }}>
         <div className="w-[200px] h-[200px] relative">
           {chartData && <Doughnut data={chartData} options={chartOptions} />}

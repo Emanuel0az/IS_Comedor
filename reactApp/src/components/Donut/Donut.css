@@ -61,3 +61,15 @@
   .tamaño_dona {
     width: 10vw;
   }
+
+  .Title_donut {
+    font-size: 1.5vw;
+    text-align: center;
+    margin-bottom: 10px;
+    background-color: rgba(128, 128, 128, 0.114);
+    width: 12vw;
+    display: grid;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 5%;
+  }
