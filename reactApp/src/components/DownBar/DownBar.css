@@ -1,0 +1,16 @@
+.navMobile {
+    display: grid;
+    display: flex;
+    justify-content: space-around;
+    place-items: center;
+    background-color: white;
+    color: black;
+    max-width: 100%;
+    border-top: 1px solid grey;
+    min-height: 8vh;
+    border-bottom: 1px solid grey;
+}
+
+.navMobile > div {
+    max-width: 10px;
+}

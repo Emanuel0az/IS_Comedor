@@ -54,23 +54,23 @@ const SideBar = () => {
     <div className={`sideBarContainer${colorState ? 'Day' : 'Night'}`}>
       <div className='sideBarTop'>
         <div className={selectedLink === 'home' ? 'selected' : 'inselected'} onClick={() => { changeSelection('home'); navigate('home/'); Cookies.remove('token'); }}>
-          <HomeIcon style={{ fontSize: 20 }} />
+          <HomeIcon style={{ fontSize: '2vw' }} />
           <div>Home</div>
         </div>
         <div className={selectedLink === 'asistencia' ? 'selected' : 'inselected'} onClick={() => { changeSelection('asistencia'); navigate('asistencias/'); Cookies.remove('token'); }}>
-          <PeopleIcon style={{ fontSize: 19 }} />
+          <PeopleIcon style={{ fontSize: '2vw' }} />
           <div>Asistencia</div>
         </div>
         <div className={selectedLink === 'estadisticas' ? 'selected' : 'inselected'} onClick={() => { changeSelection('estadisticas'); navigate('estadisticas/'); Cookies.remove('token'); }}>
-          <BarChartIcon style={{ fontSize: 21 }} />
+          <BarChartIcon style={{ fontSize: '2vw' }} />
           <div>Estadísticas</div>
         </div>
         <div className={selectedLink === 'email' ? 'selected' : 'inselected'} onClick={() => { changeSelection('email'); navigate('email/'); Cookies.remove('token'); }}>
-          <MailIcon style={{ fontSize: 20 }} />
+          <MailIcon style={{ fontSize: '2vw' }} />
           <div>Email</div>
         </div>
         <div className={selectedLink === 'estudiantes' ? 'selected' : 'inselected'} onClick={() => { changeSelection('estudiantes'); navigate('estudiantes/'); Cookies.remove('token'); }}>
-          <GroupAddIcon style={{ fontSize: 20 }} />
+          <PersonAddAlt1Icon style={{ fontSize: '2vw' }} />
           <div>Estudiantes</div>
         </div>
 
