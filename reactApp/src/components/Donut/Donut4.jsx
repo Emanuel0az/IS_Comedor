@@ -46,7 +46,7 @@ const coloresPredefinidos = [
   '#1b1a66'  // Rosa
 ];
 
-export default function EstudiantesComedorChart() {
+export default function EstudiantesComedorChartJueves() {
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [chartData, setChartData] = useState(null);
   const [lastUpdate, setLastUpdate] = useState(new Date());
@@ -63,37 +63,38 @@ export default function EstudiantesComedorChart() {
       .then(data => {
         const selectedDate = new Date(localStorage.getItem('selectedDate') || new Date());
         const mondayOfSelectedWeek = startOfWeek(selectedDate, { weekStartsOn: 1 });
+        const thursdayOfSelectedWeek = addDays(mondayOfSelectedWeek, 3);
         
         // console.log('Selected Date:', selectedDate);
-        // console.log('Monday of Selected Week:', mondayOfSelectedWeek);
+        // console.log('Thursday of Selected Week:', thursdayOfSelectedWeek);
   
         // Filtra los estudiantes becados y no becados
-        const estudiantesBecadosComieronDiaSeleccionado = data.filter(item => {
+        const estudiantesBecadosComieronJueves = data.filter(item => {
           const fechaPago = addDays(new Date(item.fecha_pago_prueba), 1); // Ajuste de la fecha de pago
-          // console.log('Fecha de pago:', fechaPago);
-          // console.log('¿Es el mismo día que el lunes?', isSameDay(fechaPago, mondayOfSelectedWeek));
-          return isSameDay(fechaPago, mondayOfSelectedWeek) && item.monto === false; // Verifica si la fecha coincide y el monto es 0
+        //   console.log('Fecha de pago:', fechaPago);
+        //   console.log('¿Es el mismo día que el jueves?', isSameDay(fechaPago, thursdayOfSelectedWeek));
+          return isSameDay(fechaPago, thursdayOfSelectedWeek) && item.monto === 0; // Verifica si la fecha coincide y el monto es 0
         }).length;
   
-        const estudiantesNoBecadosComieronDiaSeleccionado = data.filter(item => {
+        const estudiantesNoBecadosComieronJueves = data.filter(item => {
           const fechaPago = addDays(new Date(item.fecha_pago_prueba), 1); // Ajuste de la fecha de pago
-          return isSameDay(fechaPago, mondayOfSelectedWeek) && item.monto !== false; // Verifica si la fecha coincide y el monto es diferente de 0
+          return isSameDay(fechaPago, thursdayOfSelectedWeek) && item.monto !== 0; // Verifica si la fecha coincide y el monto es diferente de 0
         }).length;
   
-        const totalBecados = estudiantesBecadosComieronDiaSeleccionado + estudiantesNoBecadosComieronDiaSeleccionado;
-        const estudiantesNoComieronDiaSeleccionado = totalEstudiantes - totalBecados;
+        const totalComieronJueves = estudiantesBecadosComieronJueves + estudiantesNoBecadosComieronJueves;
+        const estudiantesNoComieronJueves = totalEstudiantes - totalComieronJueves;
   
-        // console.log('Estudiantes becados que comieron:', estudiantesBecadosComieronDiaSeleccionado);
-        // console.log('Estudiantes no becados que comieron:', estudiantesNoBecadosComieronDiaSeleccionado);
-        // console.log('Total de estudiantes que comieron:', totalBecados);
-        // console.log('Estudiantes que no comieron:', estudiantesNoComieronDiaSeleccionado);
+        // console.log('Estudiantes becados que comieron el jueves:', estudiantesBecadosComieronJueves);
+        // console.log('Estudiantes no becados que comieron el jueves:', estudiantesNoBecadosComieronJueves);
+        // console.log('Total de estudiantes que comieron el jueves:', totalComieronJueves);
+        // console.log('Estudiantes que no comieron el jueves:', estudiantesNoComieronJueves);
 
         setEstudiantes({
-          comieron: totalBecados,
-          noComieron: estudiantesNoComieronDiaSeleccionado
+          comieron: totalComieronJueves,
+          noComieron: estudiantesNoComieronJueves
         });
   
-        setLastUpdate(mondayOfSelectedWeek);
+        setLastUpdate(thursdayOfSelectedWeek);
         setIsLoading(false);
       })
       .catch(error => {
@@ -204,8 +205,8 @@ export default function EstudiantesComedorChart() {
   }
 
   return (
-    <div className="Title_donut">Lunes
-      <div className="tamaño_dona" style={{ width: '110px', height: '110px' }}>
+    <div className="Title_donut">Jueves
+      <div className="flex items-center justify-center mb-4" style={{ width: '110px', height: '110px' }}>
         <div className="w-[200px] h-[200px] relative">
           {chartData && <Doughnut data={chartData} options={chartOptions} />}
         </div>

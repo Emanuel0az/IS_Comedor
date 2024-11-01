@@ -4,6 +4,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import './FormLogin.css';
 
+
 export default function FormLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -59,6 +60,7 @@ export default function FormLogin() {
               placeholder="Ingrese su Correo"
               required
               className='form-input'
+              autoFocus
             />
           </div>
           <div className="form-group">

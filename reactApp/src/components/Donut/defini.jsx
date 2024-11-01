@@ -1,7 +1,7 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, Title } from "chart.js";
 import React, { useState, useEffect } from 'react';
 import { Doughnut } from 'react-chartjs-2';
-
+import './Donut.css'
 
 const CenterTextPlugin = {
   id: 'centerText',
