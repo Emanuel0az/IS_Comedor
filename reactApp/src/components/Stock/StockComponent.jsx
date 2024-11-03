@@ -18,16 +18,31 @@ const StockComponent = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
-    const [customAmount, setCustomAmount] = useState('');
-    const [activeStudentId, setActiveStudentId] = useState(null);
     const studentsPerPage = 50;
     const [selectedDate, setSelectedDate] = useState(new Date(localStorage.getItem('selectedDate') || new Date()).toISOString().split('T')[0]);
     const [openModalForStudent, setOpenModalForStudent] = useState(null);
     const [openModalPay, setOpenModalPay] = useState(false);
     const [payAmount, setPayAmount] = useState(null);
     const [currentStudentId, setCurrentStudentId] = useState(null); // Nuevo estado para el ID del estudiante actual
-    const [OpenModal, setOpenModal] = useState(false);
+    const [MontoDebe, setMontoDebe] = useState()
 
+    const debeDinero = async () => {
+        const cantidadPagos = currentStudentId.pagos.length;
+        const sumaDeTodosLosPagos = currentStudentId.pagos.reduce((total, pago) => total + parseFloat(pago.monto), 0)
+        if (currentStudentId.rol == 'Estudiantes') {
+            const montoDebe = (cantidadPagos * 600) - sumaDeTodosLosPagos;
+            setMontoDebe(montoDebe)
+        } else {
+            const montoDebe = (cantidadPagos * 1000) - sumaDeTodosLosPagos;
+
+            setMontoDebe(montoDebe)
+        }
+        console.log(MontoDebe);
+    }
+
+    useEffect(() => {
+        debeDinero()
+    }, [currentStudentId]) // Cuando el estudiante selecconado cambia, se vuelve a poner un valor al monto que se debe, esto fue inteligencia pura :)
 
     const obtainStudents = async () => {
         try {
@@ -88,16 +103,16 @@ const StockComponent = () => {
                 setStudents(data);
             } else {
                 // Aquí se abre el modal para ingresar el monto
-                setCurrentStudentId(student.id);
+                setCurrentStudentId(student);
                 setOpenModalPay(true);
             }
         }
     };
 
     const handlePayment = async () => {
-        if (payAmount > 0) {
+        if (payAmount >= 0) {
             const newRegistro = {
-                estudiante_id: currentStudentId,
+                estudiante_id: currentStudentId.id,
                 fecha_pago_prueba: selectedDate,
                 monto: payAmount
             };
@@ -107,6 +122,9 @@ const StockComponent = () => {
             setPayAmount(null); // Reiniciar el monto después del pago
             obtainStudents(); // Volver a cargar los estudiantes
         }
+        setTimeout(() => {
+            debeDinero()
+        }, 1);
     };
 
     const filterStudents = () => {
@@ -141,12 +159,6 @@ const StockComponent = () => {
             filterStudents();
         }
     };
-
-    const aaja = () => {
-        setOpenModalForStudent(null); // Cerrar el modal
-    };
-    
-
 
     const handlePayEnter = (e) => {
         if (e.key === 'Enter') {
@@ -194,12 +206,11 @@ const StockComponent = () => {
                     ) : (
                         currentStudents.map((student) => (
                             <div key={student.id} className="student">
-                                <div>{student.id}</div>
+                                <div className='TableStudentsID'>{student.id}</div>
                                 <div>
                                     <div className="name_s">{student.nombre}</div>
                                     <div className="cedula_s">{student.cedula}</div>
                                 </div>
-
                                 <div className='seccion_s'>{student.seccion}</div>
                                 <div>{student.rol}</div>
                                 <div className='almuerzoIcon'>
@@ -214,7 +225,7 @@ const StockComponent = () => {
                                         <>
                                         <div className="modal"></div>
                                             <div className='modalContainer'>
-                                                <div onClick={() => aaja()}>X</div>
+                                            {/* <button onClick={() => setOpenModalForStudent(false)}>Cancelar</button> 🔴 */}
                                                 <div className='modalStudentContainer'>
                                                     <div className='infoStudentM'>
                                                         <div className='imgStudent'>{/* Aquí va la foto. */}</div>
@@ -254,33 +265,45 @@ const StockComponent = () => {
                         ))
                     )}
                 </div>
-                <div className="pagination">
-                    {Array.from({ length: totalPages }, (_, index) => (
-                        <button key={index + 1} onClick={() => paginate(index + 1)}>
-                            {index + 1}
-                        </button>
-                    ))}
-                </div>
+                
             </div>
-
+            
             {/* Mini Modal para el pago */}
             {openModalPay && (
                 <div className='modalPayContainer'>
                     <div className='modalPay'>
-                        <div>Pago para {currentStudentId}</div>
+                        <div className='buttonCancelModalPay' onClick={() => (setOpenModalPay(false))}>X</div>
+                        <div className='nameModalPay'>{currentStudentId.nombre}</div>
+                        <div className='rolModalPay'>{currentStudentId.rol ==  'Estudiantes' ? 'Estudiante' : 'Profesor'}</div>
+                        <div className='infoDebePagosModalPay'>
+                            <div>
+                                <div className='debeModalPay'>{MontoDebe < 0 ? 'Saldo:' : 'Debe:'}</div>
+                                <div className='montoModalPay'>{Math.abs(MontoDebe)} </div>
+                            </div>
+                            <div>
+                                <div className='debeModalPay'>Pago necesario: </div>
+                                <div className='montoModalPay'>{(MontoDebe + (currentStudentId.rol  === 'Estudiantes' ? 600 : 1000)) < 0 ? 0 : MontoDebe + (currentStudentId.rol  === 'Estudiantes' ? 600 : 1000)}</div>   
+                            </div>
+                        </div>
                         <input 
+                            className='inputModalPay'
                             type="number" 
                             placeholder='Monto' 
                             value={payAmount} 
-                            onChange={(e) => setPayAmount(e.target.value)} 
+                            onChange={(e) => setPayAmount(e.target.value)}
                             autoFocus
                             onKeyDown={handlePayEnter}
                         />
-                        <button onClick={handlePayment}>Confirmar Pago</button>
-                        <button onClick={() => setOpenModalPay(false)}>Cancelar</button>
                     </div>
                 </div>
             )}
+            <div className="pagination">
+                {Array.from({ length: totalPages }, (_, index) => (
+                    <button key={index + 1} onClick={() => paginate(index + 1)}>
+                        {index + 1}
+                        </button>
+                ))}
+            </div>
         </div>
     );
 };

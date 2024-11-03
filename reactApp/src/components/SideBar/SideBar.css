@@ -25,18 +25,18 @@
     letter-spacing: 0.5px;
     line-height: 1.43;
     background-color: rgba(97, 97, 97, 0.458);
+    cursor: pointer;
 }
 
 .sideBarTop > .inselected:hover {
     height: 100%;
     width: 85%;
-    padding-left: 5%;
+
     border-radius: 9px;
 
     display: grid;
     grid-template-columns: 15% 30%;
     align-items: center;
-    margin-left: 5%;
 
     font-family: 'Inter', sans-serif;
     font-weight: 500;
@@ -44,6 +44,8 @@
     letter-spacing: 0.5px;
     line-height: 1.43;
     background-color: rgba(74, 73, 73, 0.144);
+    cursor: pointer;
+
 }
 
 .sideBarContainerDay {
@@ -77,6 +79,7 @@
     place-content: center;
     max-width: 3vw;
     max-height: 5vh;
+    color: white;
 }
 
 .sideBarTop {
@@ -110,14 +113,12 @@
 .sideBarTop > .inselected:active {
     height: 100%;
     width: 85%;
-    padding-left: 5%;
     /* color: rgb(255, 255, 255);    */
     border-radius: 9px;
 
     display: grid;
     grid-template-columns: 15% 30%;
     align-items: center;
-    margin-left: 5%;
 
     font-family: 'Inter', sans-serif;
     font-weight: 500;
