@@ -316,3 +316,55 @@
     border-top: 1px solid grey;
     margin-top: 6%;
 }
+
+.containerModalReporte {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} 
+
+.modalReporte {
+    background-color: #13133c;
+    padding: 2%;
+    border-radius: 8px;
+    width: 300px;
+    height: 270px;
+    color: rgba(255, 255, 255, 0.589);
+}
+
+.closeModalReporte {
+    width: 30px;
+    height: 30px;
+    border: grey 1px solid;
+    display: grid;
+    place-items: center;
+    border-radius: 5px;
+    color: grey;
+    transition: all 0.2s ease-in-out;
+    margin-left: 90%;
+}
+
+.closeModalReporte:hover {
+    border: white 1px solid;
+    color: white;
+}
+
+.containerAdvertenciaReporte {
+    display: grid;
+    grid-template-columns: 15% 70%;
+}
+
+.inputModalReporte {
+    border-radius: 10px;
+    padding: 3%;
+    width: 92%;
+    color: white;
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
