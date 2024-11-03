@@ -33,6 +33,10 @@ urlpatterns = [
     path('hist_pagos/', views.pagos_list, name='pagos_list'),
     path('hist_pagos/<int:pk>/', views.pagos_list, name='pagos_list'),
     
+    # Lista Hechos
+    path('hist_hechos/', views.hechos_list, name='hechos_list'),
+    path('hist_hechos/<int:pk>/', views.hechos_list, name='hechos_list'),
+    
     path('login/', LoginView.as_view(), name='login'),
     # path('admin-login/', AdminLoginView.as_view(), name='admin'),
     
@@ -40,4 +44,3 @@ urlpatterns = [
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('token/blacklist/', TokenBlacklistView.as_view(), name='token_blacklist'),
 ]
-

@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from django.db.models import Count
-from .models import Estudiantes, Users, Recetas, Ingredientes, Hist_ingredientes, Hist_pagos
+from .models import Estudiantes, Users, Recetas, Ingredientes, Hist_ingredientes, Hist_pagos, Hist_hechos
 from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -11,7 +11,7 @@ from rest_framework.permissions import AllowAny
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 
-from .serializers import UsersSerializer, RecetasSerializer, IngredientesSerializer, Hist_ingredientesSerializer, EstudiantesSerializer, Hist_pagos_Serializer
+from .serializers import UsersSerializer, RecetasSerializer, IngredientesSerializer, Hist_ingredientesSerializer, EstudiantesSerializer, Hist_pagos_Serializer, Hist_hechosSerializer
 
 
 
@@ -318,6 +318,37 @@ def login_user(request):
     else:
         return Response({"error": "Credenciales inválidas"}, status=400)
     
-    
+@api_view(['GET', 'POST', 'PUT', 'DELETE'])
+def hechos_list(request, pk=None):
+    if pk:
+        try:
+            var = Hist_pagos.objects.get(pk=pk)
+        except Hist_pagos.DoesNotExist:
+            return Response({"error": "Pago no encontrado"}, status=status.HTTP_404_NOT_FOUND)
 
+    if request.method == 'GET':
+        if pk:
+            serializer = Hist_pagos_Serializer(var)
+            return Response(serializer.data)
+        else:
+            var = Hist_pagos.objects.all()
+            serializer = Hist_pagos_Serializer(var, many=True)
+            return Response(serializer.data)
 
+    elif request.method == 'POST':
+        serializer = Hist_pagos_Serializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'PUT':
+        serializer = Hist_pagos_Serializer(var, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        var.delete()
+        return Response({"message": "Pago eliminado exitosamente"}, status=status.HTTP_204_NO_CONTENT)

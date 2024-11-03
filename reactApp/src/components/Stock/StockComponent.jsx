@@ -20,15 +20,16 @@ const StockComponent = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const studentsPerPage = 50;
     const [selectedDate, setSelectedDate] = useState(new Date(localStorage.getItem('selectedDate') || new Date()).toISOString().split('T')[0]);
-    const [openModalForStudent, setOpenModalForStudent] = useState(null);
     const [openModalPay, setOpenModalPay] = useState(false);
     const [payAmount, setPayAmount] = useState(null);
-    const [currentStudentId, setCurrentStudentId] = useState(null); // Nuevo estado para el ID del estudiante actual
+    const [currentStudentId, setCurrentStudentId] = useState(''); // Nuevo estado para el ID del estudiante actual
     const [MontoDebe, setMontoDebe] = useState()
+    const [ModalStudent, setModalStudent] = useState(false)
 
     const debeDinero = async () => {
-        const cantidadPagos = currentStudentId.pagos.length;
-        const sumaDeTodosLosPagos = currentStudentId.pagos.reduce((total, pago) => total + parseFloat(pago.monto), 0)
+        const pagosActivos = currentStudentId.pagos.filter(pago => pago.activo === true); // Esto es lo único que se ocupa para filtrar por los que están activos.
+        const cantidadPagos = pagosActivos.length;    
+        const sumaDeTodosLosPagos = pagosActivos.reduce((total, pago) => total + parseFloat(pago.monto), 0)
         if (currentStudentId.rol == 'Estudiantes') {
             const montoDebe = (cantidadPagos * 600) - sumaDeTodosLosPagos;
             setMontoDebe(montoDebe)
@@ -39,6 +40,10 @@ const StockComponent = () => {
         }
         console.log(MontoDebe);
     }
+
+    // useEffect(() => {
+
+    // }, [])
 
     useEffect(() => {
         debeDinero()
@@ -60,12 +65,6 @@ const StockComponent = () => {
         return student.pagos.find(pago => pago.fecha_pago_prueba === selectedDate);
     }
 
-
-    const openingModal = (studentId) => {
-        setTimeout(() => {
-            setOpenModalForStudent(studentId);
-        }, 1);
-    };
 
     const validarAsistencias = async (student, estudiante_id_id) => {
         const fecha = new Date(localStorage.getItem('selectedDate'));
@@ -219,47 +218,8 @@ const StockComponent = () => {
                                         <div onClick={() => validarAsistencias(student, student.id)}><NoMealsIcon className='almorzado_N' style={{ fontSize: 27 }} /></div>
                                     }
                                 </div>
-                                <div onClick={() => openingModal(student.id)} className="actionsIcon">
-                                    <div className='contAction'><MoreVertIcon style={{ color: 'gray' }} /></div>
-                                    {openModalForStudent === student.id ? (
-                                        <>
-                                        <div className="modal"></div>
-                                            <div className='modalContainer'>
-                                            {/* <button onClick={() => setOpenModalForStudent(false)}>Cancelar</button> 🔴 */}
-                                                <div className='modalStudentContainer'>
-                                                    <div className='infoStudentM'>
-                                                        <div className='imgStudent'>{/* Aquí va la foto. */}</div>
-                                                        <div className='identityStudentM'>
-                                                            <div className='containerInfoStudentsModal'>
-                                                                <div className='nombreStudentintModal'>{student.nombre}</div>
-                                                                <div className='idStudetIntoModal'>ID: {student.id}</div>
-                                                            </div>
-                                                        </div>
-                                                        <div className='typesStudentM'>
-                                                            <div className='containerInfoStudentsType'>
-                                                                <div className="becadoStudentIntoModal">Becado</div>
-                                                                <div className="rolStudentIntoModal">Estudiante</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div>Perro</div>
-                                                    <div className='AsistAndModal'>
-                                                        <div className='asistsTextTittle'>Asistencias</div>
-                                                        <div>
-                                                            <CalendarioStudent />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div></div>
-                                                <div className='AsistAndModal'>
-                                                    <div className='asistsTextTittle'>Asistencias</div>
-                                                    <div>
-                                                        <CalendarioStudent />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </>
-                                    ) : null}
+                                <div className="actionsIcon">
+                                    <div onClick={() => (setModalStudent(true), setCurrentStudentId(student))} className='contAction'><MoreVertIcon style={{ color: 'gray' }} /></div>
                                 </div>
                             </div>
                         ))
@@ -304,6 +264,43 @@ const StockComponent = () => {
                         </button>
                 ))}
             </div>
+            {ModalStudent && (
+                currentStudentId.rol == 'Estudiantes' ? 
+                <div className="containerModalStudent">
+                    <div className="modalStudent">
+                        <div className='closeModalStudent' onClick={() => setModalStudent(false)}>X</div>
+                        <div className="modalStudent_nombre_seccion">
+                            <div className='ModalStudent_name'>{currentStudentId.nombre}</div>
+                            <div>{currentStudentId.seccion}</div>
+                        </div>
+                        <div className="modalStudent_rol_becado">
+                            <div className='ModalStudent_rol'>Estudiante</div> 
+                            <div>{currentStudentId.becado ? 'Becado' : 'No becado'}</div>
+                        </div>
+                        <div className='ModalStudent_calendario'>
+                            <div style={{ marginTop: '10%'}}>Asist. semanal:</div>
+                            <CalendarioStudent/>
+                        </div>
+                        <div className='ModalStudentChart'>
+                            <SessionsChartStudents/>
+                        </div>
+                    </div>
+                </div> :
+                <div className="containerModalStudent">
+                    <div className="modalStudent">
+                        <div className='closeModalStudent' onClick={() => setModalStudent(false)}>X</div>
+                        <div className='ModalStudent_name'>{currentStudentId.nombre}</div>
+                        <div>Profesor</div>
+                        <div className='ModalStudent_calendario'>
+                            <div style={{ marginTop: '10%'}}>Asist. semanal:</div>
+                            <CalendarioStudent/>
+                        </div>
+                        <div className='ModalStudentChart'>
+                            <SessionsChartStudents/>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
