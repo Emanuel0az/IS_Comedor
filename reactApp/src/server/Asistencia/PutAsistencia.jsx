@@ -7,7 +7,9 @@ const putAsistencia = async (id, updatedToy) => {
       headers: {
         'Content-Type': 'application/json',
       },
+      
       body: JSON.stringify(updatedToy),  // Enviar los datos actualizados
+      
     });
 
     if (!response.ok) {
@@ -19,6 +21,7 @@ const putAsistencia = async (id, updatedToy) => {
   } catch (error) {
     console.error('ERROR PUT:', error);
   }
+  console.log('Cuerpo de la solicitud:', JSON.stringify(updatedToy))
 };
 
 

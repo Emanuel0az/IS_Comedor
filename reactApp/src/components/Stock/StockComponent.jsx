@@ -4,9 +4,10 @@ import NoMealsIcon from '@mui/icons-material/NoMeals';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import LocalDiningIcon from '@mui/icons-material/LocalDining';
 import { postAsistencia } from '../../server/Asistencia/PostAsistencia';
-import { updateStateStudents } from '../../server/S_Stock/S_Stock';
+import putAsistencia from '../../server/Asistencia/PutAsistencia';
 import CalendarioStudent from '../CalendarioStudent/CalendarioStudent';
 import SessionsChartStudents from '../GraficaStudents/GraficaStudents';
+import ReportGmailerrorredIcon from '@mui/icons-material/ReportGmailerrorred';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import '../Stock/StockComponent.css';
@@ -22,34 +23,56 @@ const StockComponent = () => {
     const [selectedDate, setSelectedDate] = useState(new Date(localStorage.getItem('selectedDate') || new Date()).toISOString().split('T')[0]);
     const [openModalPay, setOpenModalPay] = useState(false);
     const [payAmount, setPayAmount] = useState(null);
-    const [currentStudentId, setCurrentStudentId] = useState(''); // Nuevo estado para el ID del estudiante actual
-    const [MontoDebe, setMontoDebe] = useState()
-    const [ModalStudent, setModalStudent] = useState(false)
-    const [ModalReporte, setModalReporte] = useState(second)
-    const [InputReport, setInputReport] = useState('')
+    const [currentStudentId, setCurrentStudentId] = useState(null); // Initialize as null
+    const [MontoDebe, setMontoDebe] = useState();
+    const [ModalStudent, setModalStudent] = useState(false);
+    const [ModalReporte, setModalReporte] = useState(false);
+    const [InputReporte, setInputReporte] = useState('');
 
     const debeDinero = async () => {
-        const pagosActivos = currentStudentId.pagos.filter(pago => pago.activo === true); // Esto es lo único que se ocupa para filtrar por los que están activos.
-        const cantidadPagos = pagosActivos.length;    
-        const sumaDeTodosLosPagos = pagosActivos.reduce((total, pago) => total + parseFloat(pago.monto), 0)
-        if (currentStudentId.rol == 'Estudiantes') {
-            const montoDebe = (cantidadPagos * 600) - sumaDeTodosLosPagos;
-            setMontoDebe(montoDebe)
-        } else {
-            const montoDebe = (cantidadPagos * 1000) - sumaDeTodosLosPagos;
+        if (!currentStudentId) return; // Check if currentStudentId is set
+        const pagosActivos = currentStudentId.pagos.filter(pago => pago.activo === true);
+        const cantidadPagos = pagosActivos.length;
+        const sumaDeTodosLosPagos = pagosActivos.reduce((total, pago) => total + parseFloat(pago.monto), 0);
+        const montoBase = currentStudentId.rol === 'Estudiantes' ? 600 : 1000;
+        const montoDebe = (cantidadPagos * montoBase) - sumaDeTodosLosPagos;
+        setMontoDebe(montoDebe);
+    };
 
-            setMontoDebe(montoDebe)
+    const handlePutWithReport = async () => {
+        if (!currentStudentId) return; // Verifica que currentStudentId esté configurado
+        const fecha = new Date(localStorage.getItem('selectedDate'));
+        const fechaFormato = fecha.toLocaleDateString('en-CA');
+        const hora = new Date(); // Obtiene la hora actual
+        const horaFormato = hora.toISOString(); // Formato completo de fecha y hora
+    
+        const pagoExistente = currentStudentId.pagos.find(pago => pago.fecha_pago_prueba === fechaFormato);
+    
+        console.log('current', currentStudentId.id);
+        console.log('pago', pagoExistente.id_pago);
+    
+        if (pagoExistente) {
+            await putAsistencia(pagoExistente.id_pago, {
+                reporte: InputReporte,
+                fecha_desactivado: fechaFormato,
+                hora: horaFormato, // Agrega aquí la hora formateada
+                activo: false
+            });
+    
+            const updatedStudents = Students.map(s =>
+                s.id === currentStudentId.id ? {
+                    ...s,
+                    pagos: s.pagos.filter(pago => pago.id_pago !== pagoExistente.id_pago)
+                } : s
+            );
+            setStudents(updatedStudents);
+            setModalReporte(false)
         }
-        console.log(MontoDebe);
-    }
-
-    // useEffect(() => {
-
-    // }, [])
+    };
 
     useEffect(() => {
-        debeDinero()
-    }, [currentStudentId]) // Cuando el estudiante selecconado cambia, se vuelve a poner un valor al monto que se debe, esto fue inteligencia pura :)
+        debeDinero();
+    }, [currentStudentId]); // When the selected student changes
 
     const obtainStudents = async () => {
         try {
@@ -63,31 +86,24 @@ const StockComponent = () => {
         }
     };
 
-    function validAlmuerzo(student) {
+    const validAlmuerzo = (student) => {
         return student.pagos.find(pago => pago.fecha_pago_prueba === selectedDate);
-    }
+    };
 
-
-    const validarAsistencias = async (student, estudiante_id_id) => {
+    const validarAsistencias = async (student) => {
         const fecha = new Date(localStorage.getItem('selectedDate'));
         const fechaFormato = fecha.toLocaleDateString('en-CA');
         const pagoExistente = student.pagos.find(pago => pago.fecha_pago_prueba === fechaFormato);
-        
+
         if (pagoExistente) {
-            await updateStateStudents(pagoExistente.id_pago, {reporte: 🔴});
-            const updatedStudents = Students.map(s =>
-                s.id === student.id ? {
-                    ...s,
-                    pagos: s.pagos.filter(pago => pago.id_pago !== pagoExistente.id_pago)
-                } : s
-            );
-            setStudents(updatedStudents);
+            setModalReporte(true);
+            setCurrentStudentId(student);
         } else {
             if (student.becado) {
                 const monto = student.rol === 'prof' ? 1000 : student.becado ? 0 : 600;
 
                 const newRegistro = {
-                    estudiante_id: estudiante_id_id,
+                    estudiante_id: student.id,
                     fecha_pago_prueba: fechaFormato,
                     monto: monto
                 };
@@ -100,10 +116,8 @@ const StockComponent = () => {
                     } : s
                 );
                 setStudents(updatedStudents);
-                const data = await getStudents();
-                setStudents(data);
+                obtainStudents();
             } else {
-                // Aquí se abre el modal para ingresar el monto
                 setCurrentStudentId(student);
                 setOpenModalPay(true);
             }
@@ -111,7 +125,7 @@ const StockComponent = () => {
     };
 
     const handlePayment = async () => {
-        if (payAmount >= 0) {
+        if (payAmount >= 0 && currentStudentId) {
             const newRegistro = {
                 estudiante_id: currentStudentId.id,
                 fecha_pago_prueba: selectedDate,
@@ -120,19 +134,17 @@ const StockComponent = () => {
 
             await postAsistencia(newRegistro);
             setOpenModalPay(false);
-            setPayAmount(null); // Reiniciar el monto después del pago
-            obtainStudents(); // Volver a cargar los estudiantes
+            setPayAmount(null);
+            obtainStudents();
         }
-        setTimeout(() => {
-            debeDinero()
-        }, 1);
+        debeDinero();
     };
 
     const filterStudents = () => {
         if (InputFiltro === '') {
             setStudents(allStudents);
         } else {
-            const filtro = allStudents.filter(student => 
+            const filtro = allStudents.filter(student =>
                 student.nombre.toLowerCase().includes(InputFiltro.toLowerCase())
             );
             setStudents(filtro);
@@ -167,6 +179,12 @@ const StockComponent = () => {
         }
     };
 
+    const handleSendReport = (e) => {
+        if (e.key === 'Enter') {
+            handlePutWithReport();
+        }
+    };
+
     const indexOfLastStudent = currentPage * studentsPerPage;
     const indexOfFirstStudent = indexOfLastStudent - studentsPerPage;
     const currentStudents = Students.slice(indexOfFirstStudent, indexOfLastStudent);
@@ -175,10 +193,9 @@ const StockComponent = () => {
     return (
         <div className='containerAll'>
             <div className="containerFormStock">
-                <input 
-                    type="text" 
+                <input
+                    type="text"
                     className='search_input'
-
                     value={InputFiltro}
                     onChange={(e) => setInputFiltro(e.target.value)}
                     onKeyDown={handleKeyDown}
@@ -195,11 +212,10 @@ const StockComponent = () => {
                     <div className='perfilIcon'>Perfil</div>
                 </div>
                 <div className='students'>
-
                     {loading ? (
                         <div className='loading'>
-                            <Box sx={{ display: 'flex' }} >
-                            <CircularProgress size="80px"/>
+                            <Box sx={{ display: 'flex' }}>
+                                <CircularProgress size="80px" />
                             </Box>
                         </div>
                     ) : error ? (
@@ -216,8 +232,8 @@ const StockComponent = () => {
                                 <div>{student.rol}</div>
                                 <div className='almuerzoIcon'>
                                     {validAlmuerzo(student) ?
-                                        <div onClick={() => validarAsistencias(student, student.id)}><LocalDiningIcon className='almorzado_S' style={{ fontSize: 27 }} /></div> :
-                                        <div onClick={() => validarAsistencias(student, student.id)}><NoMealsIcon className='almorzado_N' style={{ fontSize: 27 }} /></div>
+                                        <div onClick={() => validarAsistencias(student)}><LocalDiningIcon className='almorzado_S' style={{ fontSize: 27 }} /></div> :
+                                        <div onClick={() => validarAsistencias(student)}><NoMealsIcon className='almorzado_N' style={{ fontSize: 27 }} /></div>
                                     }
                                 </div>
                                 <div className="actionsIcon">
@@ -227,16 +243,15 @@ const StockComponent = () => {
                         ))
                     )}
                 </div>
-                
             </div>
-            
+
             {/* Mini Modal para el pago */}
             {openModalPay && (
                 <div className='modalPayContainer'>
                     <div className='modalPay'>
-                        <div className='buttonCancelModalPay' onClick={() => (setOpenModalPay(false))}>X</div>
+                        <div className='buttonCancelModalPay' onClick={() => setOpenModalPay(false)}>X</div>
                         <div className='nameModalPay'>{currentStudentId.nombre}</div>
-                        <div className='rolModalPay'>{currentStudentId.rol ==  'Estudiantes' ? 'Estudiante' : 'Profesor'}</div>
+                        <div className='rolModalPay'>{currentStudentId.rol === 'Estudiantes' ? 'Estudiante' : 'Profesor'}</div>
                         <div className='infoDebePagosModalPay'>
                             <div>
                                 <div className='debeModalPay'>{MontoDebe < 0 ? 'Saldo:' : 'Debe:'}</div>
@@ -244,14 +259,14 @@ const StockComponent = () => {
                             </div>
                             <div>
                                 <div className='debeModalPay'>Pago necesario: </div>
-                                <div className='montoModalPay'>{(MontoDebe + (currentStudentId.rol  === 'Estudiantes' ? 600 : 1000)) < 0 ? 0 : MontoDebe + (currentStudentId.rol  === 'Estudiantes' ? 600 : 1000)}</div>   
+                                <div className='montoModalPay'>{(MontoDebe + (currentStudentId.rol === 'Estudiantes' ? 600 : 1000)) < 0 ? 0 : MontoDebe + (currentStudentId.rol === 'Estudiantes' ? 600 : 1000)}</div>
                             </div>
                         </div>
-                        <input 
+                        <input
                             className='inputModalPay'
-                            type="number" 
-                            placeholder='Monto' 
-                            value={payAmount} 
+                            type="number"
+                            placeholder='Monto'
+                            value={payAmount}
                             onChange={(e) => setPayAmount(e.target.value)}
                             autoFocus
                             onKeyDown={handlePayEnter}
@@ -261,13 +276,12 @@ const StockComponent = () => {
             )}
             <div className="pagination">
                 {Array.from({ length: totalPages }, (_, index) => (
-                    <button key={index + 1} onClick={() => paginate(index + 1)}>
+                    <button key={index + 1} onClick={() => setCurrentPage(index + 1)}>
                         {index + 1}
-                        </button>
+                    </button>
                 ))}
             </div>
             {ModalStudent && (
-                currentStudentId.rol == 'Estudiantes' ? 
                 <div className="containerModalStudent">
                     <div className="modalStudent">
                         <div className='closeModalStudent' onClick={() => setModalStudent(false)}>X</div>
@@ -276,37 +290,41 @@ const StockComponent = () => {
                             <div>{currentStudentId.seccion}</div>
                         </div>
                         <div className="modalStudent_rol_becado">
-                            <div className='ModalStudent_rol'>Estudiante</div> 
+                            <div className='ModalStudent_rol'>Estudiante</div>
                             <div>{currentStudentId.becado ? 'Becado' : 'No becado'}</div>
                         </div>
                         <div className='ModalStudent_calendario'>
-                            <div style={{ marginTop: '10%'}}>Asist. semanal:</div>
-                            <CalendarioStudent/>
+                            <div style={{ marginTop: '10%' }}>Asist. semanal:</div>
+                            <CalendarioStudent />
                         </div>
                         <div className='ModalStudentChart'>
-                            <SessionsChartStudents/>
-                        </div>
-                    </div>
-                </div> :
-                <div className="containerModalStudent">
-                    <div className="modalStudent">
-                        <div className='closeModalStudent' onClick={() => setModalStudent(false)}>X</div>
-                        <div className='ModalStudent_name'>{currentStudentId.nombre}</div>
-                        <div>Profesor</div>
-                        <div className='ModalStudent_calendario'>
-                            <div style={{ marginTop: '10%'}}>Asist. semanal:</div>
-                            <CalendarioStudent/>
-                        </div>
-                        <div className='ModalStudentChart'>
-                            <SessionsChartStudents/>
+                            <SessionsChartStudents />
                         </div>
                     </div>
                 </div>
             )}
-            {ModalStudent && (
-                currentStudentId.rol == 'Estudiantes' ? 
-                null  //🔴
-                : null
+            {ModalReporte && (
+                <div className="containerModalReporte">
+                    <div className="modalReporte">
+                        <div className='closeModalReporte' onClick={() => setModalReporte(false)}>X</div>
+                        <div className="containerAdvertenciaReporte">
+                            <div style={{fontSize: 45}}><ReportGmailerrorredIcon/></div>
+                            <div>Cuando se elimina un pago, es necesario hacer un reporte explicando la razón.</div>
+                        </div>
+                        <input 
+                            className='inputModalReporte'
+                            type="text"
+                            value={InputReporte}
+                            onChange={(e) => setInputReporte(e.target.value)}
+                            required
+                            autoFocus
+                            placeholder='Reporte'
+                            onKeyDown={handleSendReport}
+                        />
+                        <div style={{fontSize: 12}}>Razones comunes: Toque accidental, Error de pago, Confusión de persona.</div>
+
+                    </div>
+                </div>
             )}
         </div>
     );

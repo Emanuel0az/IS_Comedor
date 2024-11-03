@@ -25,6 +25,12 @@ class Hist_pagos_Serializer(serializers.ModelSerializer):
     class Meta:
         model = Hist_pagos
         fields = '__all__'
+        
+        def update(self, instance, validated_data):
+            for attr, value in validated_data.items():
+                setattr(instance, attr, value)
+            instance.save()
+            return instance
 
 class EstudiantesSerializer(serializers.ModelSerializer):
     class Meta:
