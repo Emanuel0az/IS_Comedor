@@ -75,14 +75,16 @@
 }
 
 .modalContent {
-  background-color: white; /* Fondo blanco para el modal */
+  background-color: rgba(255, 255, 255, 0); /* Fondo blanco para el modal */
   border-radius: 10px; /* Bordes redondeados */
   padding: 20px; /* Espaciado interno */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para el modal */
   width: 300px; /* Ancho del modal */
+  height: 300px;
 }
 
-.customHeader {
+
+.customHeder {
   display: flex; /* Flexbox para el encabezado */
   justify-content: space-around; /* Espaciado entre los botones */
   align-items: center; /* Centrar verticalmente */
@@ -97,19 +99,59 @@
   border: none;
 }
 
+.react-datepicker__month-container {
+  width: 260px;
+  height: 250px;
+}
+
+.react-datepicker__month-wrapper {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-left: 5%;
+}
+
+
+.react-datepicker {
+  width: 260px;
+  height: 250px;
+  border: none;
+  padding: 0;
+}
+
+.react-datepicker__year-wrapper {
+  margin-top: 15px;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  margin-left: 16%;
+  row-gap: 10px;
+}
+
 .customHeader button:hover {
-  background-color: #319e34;
+  background-color: #155499;
+}
+
+button {
+  outline: 0;
 }
 
 /* Estilo adicional para el DatePicker */
 .react-datepicker {
-  border: 1px solid #ddd; /* Borde del calendario */
-  border-radius: 5px; /* Bordes redondeados */
+  background-color: rgb(202, 202, 202);
+}
+
+
+.upperCase {
+  text-transform: capitalize;
+}
+
+ 
+.react-datepicker__day-name {
+  color: white;
 }
 
 .react-datepicker__header {
-  background-color: #4caf4c; /* Color de fondo del encabezado del calendario */
-  color: white; /* Color del texto del encabezado */
+  background-color: #155499; /* Color de fondo del encabezado del calendario */
 }
 
 .react-datepicker__day {
@@ -122,6 +164,6 @@
 }
 
 .react-datepicker__day--selected {
-  background-color: #4caf4c; /* Color de fondo para el día seleccionado */
+  background-color: #155499; /* Color de fondo para el día seleccionado */
   color: white; /* Color del texto para el día seleccionado */
 }

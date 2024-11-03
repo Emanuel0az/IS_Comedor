@@ -27,7 +27,7 @@ const ToggleSwitch = () => {
       {/*He creado esto para aplicar un displayNone, ya que si no,
       los codigos de color se muestran como texto. */}
       <div className='oculto'>
-        {document.body.style.backgroundColor = colorState ? '#ffffff' : '#262428'}
+        {document.body.style.backgroundColor = colorState ? '#ffffff' : '#02070b'}
         {document.body.style.color = colorState ? 'black' : 'white'}
       </div>
 

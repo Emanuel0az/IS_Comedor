@@ -5,7 +5,7 @@ import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
 import Cookies from 'js-cookie';
 
 const NavPC = () => {
-    const horaConCero = ['1:', '2:', '3:', '4:', '5:', '6:', '7:', '8:', '9:'];
+    const horaConCero = ['0:', '1:', '2:', '3:', '4:', '5:', '6:', '7:', '8:', '9:'];
     const [currentTime, setCurrentTime] = useState('');
 
     const navigate = useNavigate();
@@ -27,7 +27,7 @@ useEffect(() => {
     return (
       <>
       <nav className='navPC'>
-        <div onClick={log}>Líceo de Chacarita</div>
+        <div>Líceo de Chacarita</div>
         <div><ToggleSwitch /></div>
         <div>{currentTime}</div>
       </nav>

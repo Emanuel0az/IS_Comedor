@@ -39,6 +39,9 @@
 
 input {
   transition: border-color 0.3s ease-in-out,  box-shadow 0.3s ease-in-out;
+  background-color: unset;
+  color: unset;
+  outline: #007BFF;
 }
 
 input:hover, input:focus {
@@ -46,6 +49,8 @@ input:hover, input:focus {
   box-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
   transition: all 0.3s ease-in-out;
 }
+
+
 
 body {
   padding: 0;

@@ -61,10 +61,6 @@ const SideBar = () => {
           <PeopleIcon style={{ fontSize: '2vw' }} />
           <div>Asistencia</div>
         </div>
-        <div className={selectedLink === 'estadisticas' ? 'selected' : 'inselected'} onClick={() => { changeSelection('estadisticas'); navigate('estadisticas/'); Cookies.remove('token'); }}>
-          <BarChartIcon style={{ fontSize: '2vw' }} />
-          <div>Estadísticas</div>
-        </div>
         <div className={selectedLink === 'email' ? 'selected' : 'inselected'} onClick={() => { changeSelection('email'); navigate('email/'); Cookies.remove('token'); }}>
           <MailIcon style={{ fontSize: '2vw' }} />
           <div>Email</div>
