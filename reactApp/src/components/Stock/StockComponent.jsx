@@ -4,7 +4,7 @@ import NoMealsIcon from '@mui/icons-material/NoMeals';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import LocalDiningIcon from '@mui/icons-material/LocalDining';
 import { postAsistencia } from '../../server/Asistencia/PostAsistencia';
-import { deleteAsist } from '../../server/Asistencia/deleteAsistencia';
+import { updateStateStudents } from '../../server/S_Stock/S_Stock';
 import CalendarioStudent from '../CalendarioStudent/CalendarioStudent';
 import SessionsChartStudents from '../GraficaStudents/GraficaStudents';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -25,6 +25,8 @@ const StockComponent = () => {
     const [currentStudentId, setCurrentStudentId] = useState(''); // Nuevo estado para el ID del estudiante actual
     const [MontoDebe, setMontoDebe] = useState()
     const [ModalStudent, setModalStudent] = useState(false)
+    const [ModalReporte, setModalReporte] = useState(second)
+    const [InputReport, setInputReport] = useState('')
 
     const debeDinero = async () => {
         const pagosActivos = currentStudentId.pagos.filter(pago => pago.activo === true); // Esto es lo único que se ocupa para filtrar por los que están activos.
@@ -72,7 +74,7 @@ const StockComponent = () => {
         const pagoExistente = student.pagos.find(pago => pago.fecha_pago_prueba === fechaFormato);
         
         if (pagoExistente) {
-            await deleteAsist(pagoExistente.id_pago);
+            await updateStateStudents(pagoExistente.id_pago, {reporte: 🔴});
             const updatedStudents = Students.map(s =>
                 s.id === student.id ? {
                     ...s,
@@ -300,6 +302,11 @@ const StockComponent = () => {
                         </div>
                     </div>
                 </div>
+            )}
+            {ModalStudent && (
+                currentStudentId.rol == 'Estudiantes' ? 
+                null  //🔴
+                : null
             )}
         </div>
     );

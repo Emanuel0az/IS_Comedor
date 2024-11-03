@@ -29,9 +29,13 @@ class Hist_pagos(models.Model):
     fecha_pago_prueba = models.DateField(null=True, blank=True)
     monto = models.DecimalField(max_digits=10, decimal_places=2)
     activo =  models.BooleanField(default=True)
-
+    reporte = models.TextField(null=True, blank=True)
+    hora = models.DateTimeField(null=True, blank=True)
+    fecha_desactivado = models.DateField(null=True, blank=True)
+    
     def __str__(self):
         return f'Pago {self.id_pago} - {self.estudiante_id.nombre}'
+
 
 class Ingredientes(models.Model):
     ingredientes_id = models.AutoField(primary_key=True)
@@ -55,11 +59,3 @@ class Hist_ingredientes(models.Model):
     users_id = models.ForeignKey(Users, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=255, null=True, blank=True)
     cantidad = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-
-class Hist_hechos(models.Model):
-    id = models.AutoField(primary_key=True)
-    reporte = models.TextField(null=True, blank=True)
-    fecha_hecho = models.DateField(auto_now_add=True)
-    users_id = models.ForeignKey(Users, on_delete=models.CASCADE)
-    pago = models.ForeignKey(Hist_pagos, on_delete=models.CASCADE, related_name='hechos')
-    
