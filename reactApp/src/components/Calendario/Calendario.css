@@ -78,7 +78,6 @@
   background-color: rgba(255, 255, 255, 0); /* Fondo blanco para el modal */
   border-radius: 10px; /* Bordes redondeados */
   padding: 20px; /* Espaciado interno */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para el modal */
   width: 300px; /* Ancho del modal */
   height: 300px;
 }

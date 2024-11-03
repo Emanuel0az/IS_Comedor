@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Users, Recetas, Ingredientes, Hist_ingredientes, Estudiantes, Hist_pagos
+from .models import Users, Recetas, Ingredientes, Hist_ingredientes, Estudiantes, Hist_pagos, Hist_hechos
 
 class UsersSerializer(serializers.ModelSerializer):
     class Meta:
@@ -31,3 +31,12 @@ class EstudiantesSerializer(serializers.ModelSerializer):
         model = Estudiantes
         fields = '__all__'
     pagos = Hist_pagos_Serializer(many=True, read_only=True)
+
+class  Hist_hechosSerializer(serializers.ModelSerializer):
+    class Meta:
+        model =  Hist_hechos
+        fields =  '__all__'
+    hechos = Hist_pagos_Serializer(many=True, read_only=True)
+
+
+        

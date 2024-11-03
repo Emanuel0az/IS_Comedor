@@ -1,66 +1,79 @@
-/* styles.css */
-.form-container {
-    /* min-width: 500px; */
-    max-width: 500px;
-    padding: 30px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
+.EmailPageContainer {
+
+}
+
+.mapContainer {
+  max-width: 90%;
+  height: 500px;
+  margin-left: 5%;
+}
+
+.info_mapContainer {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  max-height: 500px;
+  margin-top: 3%;
+  margin-left: 1%;
+}
+
+.formContainer {
+  max-width: 400px;
+  background-color: unset !important;
+  border-radius: 8px;
+  margin-bottom: 40px;
+  margin-left: 30%;
+}
+
+.formEmailTittle {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  color: #155499;
+  opacity: 0.9;
+}
   
-  .form-title {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 1.5em;
-    color: #333;
-  }
+.form-label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: unset;
+  opacity: 0.8;
+}
   
-  .form-label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #555;
-  }
+.form-input,.form-textarea {
+  width: 96%;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  font-size: 1em;
+  background-color: unset !important;
+  color: unset;
+}
   
-  .form-input,.form-textarea {
-    width: 96%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1em;
-    color: #333;
-  }
+.form-textarea {
+  height: 100px;
+  width: 100%;
+  padding-left: 2.5%;
+}
   
-  .form-textarea {
-    height: 100px;
-  }
+.form-button {
+  width: 100%;
+  padding: 14px;
+  background-color: unset !important;
+  border: #007BFF 1px solid;
+  border-radius: 4px;
+  color: unset;
+  font-size: 1.2em;
+  cursor: pointer;
+  margin-left: 1%;
+  transition: all 0.2s ease-in-out;
+}.form-button:hover {
+  background-color: #007BFF !important;
+}
+
   
-  .form-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #28a745;
-    border: none;
-    border-radius: 4px;
-    color: white;
-    font-size: 1.2em;
-    cursor: pointer;
-  }
-  
-  .form-button:hover {
-    background-color: #218838;
-  }
-  
-  .form-status {
-    text-align: center;
-    margin-top: 10px;
-    font-size: 1.1em;
-    color: #d9534f;
-  }
-  
-  .division {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 55px;
-  }
+.form-status {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 1.1em;
+  color: #b9211b;
+}

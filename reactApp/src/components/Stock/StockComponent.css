@@ -1,19 +1,21 @@
 .containerStock {
     min-width: 94%;
     max-width: 94%;
-    max-height: 70vh;
-    min-height: 70vh;
+    max-height: 60vh;
+    min-height: 60vh;
     margin-left: 3%;
     border-radius: 5px;
     font-family: sans-serif;
 }
-/*  */
+
 .almuerzoIcon {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 2%;
-}.almuerzoIcon > div:hover {
+}
+
+.almuerzoIcon > div:hover {
     background-color: rgba(117, 117, 117, 0.187);
     width: 50px;
     height: 50px;
@@ -22,7 +24,9 @@
     justify-content: center;
     border-radius: 50%;
     margin-bottom: 7%;
-}.almuerzoIcon > div {
+}
+
+.almuerzoIcon > div {
     width: 50px;
     height: 50px;
     display: flex;
@@ -31,295 +35,6 @@
     border-radius: 50%;
     margin-bottom: 7%;
 }
-
-.modalContainer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.605);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-
-.modalStudentContainer {
-    width: 40vw;
-    height: 90vh;
-    background-color: rgb(56, 55, 55);
-    border-radius: 10px;
-}
-
-.infoStudentM {
-    margin-top: 1%;
-    margin-left: 1%;
-    width: 98%;
-    height: 41%;
-    border-radius: 10px;
-    background-color: #ccc;
-    display: grid;
-    grid-template-columns: 30% 37% 33%;
-    gap: 10px;
-}
-
-.imgStudentM {
-    margin-top: 10%;
-    height: 80%;
-    margin-left: 10%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}.imgStudent {
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    background-color: rgba(255, 0, 0, 0.447);
-}
-
-.identityStudentM {
-    margin-top: 8%;
-    height: 80%;
-    margin-left: 5%;
-    width: 90%;
-}.containerInfoStudentsModal {
-    display: grid;
-    grid-template-rows: 40% 20%;
-    row-gap: 10px;
-    margin-top: 25%;
-}.nombreStudentintModal {
-    font-size: 18px;
-    opacity: 0.9;
-}.idStudetIntoModal {
-    font-size: 13px;
-    opacity: 0.7;
-}
-
-
-
-
-.typesStudentM {
-    margin-top: 9%;
-
-    height: 80%;
-    width: 80%;
-}.containerInfoStudentsType {
-    display: grid;
-    grid-template-rows: 42% 20%;
-    row-gap: 20px;
-    margin-top: 30%;
-}
-
-/* imgStudentM */
-/* identityStudentM */
-/* typesStudentM */
-
-.AsistAndModal {
-    margin-top: 1%;
-    margin-left: 1%;
-    border-radius: 10px;
-    display: grid;
-    grid-template-columns: 70% 30%;
-    /* background-color: rgba(255, 0, 0, 0.573); */
-    width: 98%;
-    height: 15%;
-}.AsistAndModal > div {
-    margin-top: 8%;
-    margin-left: 2%;
-}.asistsTextTittle {
-    font-size: 18px;
-    opacity: 0.7;
-}
-
-.graphicStudent {
-    margin-top: 1%;
-    margin-left: 1%;
-    border-radius: 10px;
-    background-color: rgba(0, 128, 0, 0.459);
-    width: 98%;
-    height: 40%;
-}
-
-
-
-.almorzado_S {
-    color: #3B82F6;
-}
-.almorzado_N {
-    color: grey;
-}
-/*  */
-.actionsIcon {
-    display: flex;
-    align-items: center;
-    justify-content: right;
-}.actionsIcon > .contAction:hover {
-    background-color: rgba(117, 117, 117, 0.187);
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    margin-bottom: 7%;
-}.actionsIcon > .contAction {
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    margin-bottom: 7%;
-}
-
-.perfilIcon {
-    text-align: right;
-}
-/*  */
-.studentId_stok {
-    place-items: center;
-    opacity: 0.8;
-    padding-right: 30%;
-}
-/*  */
-.containerAll {
-    display: grid;
-    grid-template-rows: 12% 88%;  /* 12% + 88% */
-
-}
-
-.tittles {
-    display: grid;
-    grid-template-columns: 5% 20% 15% 19% 13% 20%  ;
-    border-bottom: 1.2px solid rgba(101, 97, 97, 0.329);
-    width: 100%;
-    height: 6vh;
-    font-size: 14px;
-    opacity: 0.6;
-}.tittles > div {
-    border-right: 1px solid rgba(0, 0, 0, 0.13);
-    border-left: 1px solid rgba(0, 0, 0, 0.169);
-    display: grid;
-    place-items: center;
-}
-.student {
-    display: grid;
-    grid-template-columns: 5% 20.3% 15.1% 19% 13.3% 20%;
-    width: 100%;
-    height: 10vh;
-    border-bottom: 1px solid rgba(108, 108, 108, 0.194);
-    transition: background-color 0.2s ease;
-}.student:hover {
-    background-color: #7d7d7d11;
-}
-.student > div {
-    /* border-right: 1px solid red;
-    border-left: 1px solid red; */
-    /* padding-left: 30%; */
-}
-/* Tengo que poner id y almuerzo en text align center. */
-.students {
-    max-height: 75vh;
-    overflow: auto;
-    overflow: transparent;
-}
-.aprobarAsistencia {
-    cursor: pointer;
-}
-.student > div {
-    height: 100%;
-    display: grid;
-    align-items: center;
-    font-size: 14px;
-}
-.search-container {
-    display: flex;
-    width: 40vw;
-    justify-content: space-around;
-}
-  .search_input {
-    border-radius: 20px;
-    height: 4.5vh;
-    width: 14vw;
-    padding: 7px 30px; /* Aumenté el padding a la derecha para hacer espacio para la lupa */
-    font-size: 13px;
-    border: 1px solid #ccc;
-    outline: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background-color: rgba(0, 0, 0, 0);
-    color: unset;
-  }
-  .search_input:hover {
-    border-color: #007BFF;
-    box-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
-  }
-  .search_input::placeholder {
-    color: #aaa;
-    font-style: italic;
-  }
-  .lupa {
-    color: #007bffb3;
-    cursor: pointer;
-    transition: color 0.3s ease, transform 0.3s ease;
-  }
-  .lupa:hover {
-    color: #0056B3;
-  }
-.containerFormStock {
-    display: flex;
-    align-items: center;
-    background-color: rgba(32, 29, 35, 0);
-    border-bottom: 1px solid #68727D;
-    padding: 8px 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0);
-}
-.selectBeca {
-    width: 9vw;
-    height: 7vh;
-    padding: 10px 7px;
-    border-radius: 20px;
-    border: 1px solid #ccc;
-    outline: none;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    background-color: unset;
-    color: unset;
-    cursor: pointer;
-}.selectBeca:hover {
-    border-color: #007BFF;
-    box-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
-}option {
-    color: black;
-}
-.modalInfoStudent {
-}
-
-.custom-amount-input {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-.amount-input {
-    width: 80px;
-    padding: 4px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.submit-amount {
-    padding: 4px 8px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.submit-amount:hover {
-    background-color: #45a049;
-} 
 
 .modalPayContainer {
     position: fixed;
@@ -339,36 +54,43 @@
     border-radius: 8px;
     width: 300px;
 }
+
 .nameModalPay {
     color: rgba(255, 255, 255, 0.926);
     font-size: 30px;
     margin-bottom: 2px;
 }
+
 .rolModalPay {
     font-size: 15px;
     color: rgb(192, 192, 192);
     margin-bottom: 25px;
 }
+
 .debeModalPay {
     color: rgb(205, 204, 204);
     padding-right: 5px;
     padding-bottom: 2px;
 }
+
 .montoModalPay {
     font-size: 20px;
     color: white;
     margin-bottom: 30px;
 }
+
 .infoDebePagosModalPay {
     display: grid;
     grid-template-columns: 50% 50%;
 }
+
 .inputModalPay {
     border-radius: 10px;
     padding: 3%;
     width: 92%;
     color: white;
 }
+
 .buttonCancelModalPay {
     background-color: transparent;
     max-width: 30px;
@@ -384,6 +106,7 @@
     margin-left: 90%;
     transition: all 0.2s ease-in-out;
 }
+
 .buttonCancelModalPay:hover {
     border: white 1px solid;
     color: white;
@@ -396,3 +119,200 @@
     margin-top: 150px;
 }
 
+.pagination > button {
+    background-color: #13133c;
+    border: 1px solid grey;
+    color: white;
+    border-radius: 3px;
+}
+
+.containerAll {
+    display: grid;
+    grid-template-rows: 12% 88%; /* 12% + 88% */
+}
+
+.tittles {
+    display: grid;
+    grid-template-columns: 5% 20% 15% 19% 13% 20%;
+    border-bottom: 1.2px solid rgba(101, 97, 97, 0.329);
+    width: 100%;
+    height: 6vh;
+    font-size: 14px;
+    opacity: 0.6;
+}
+
+.tittles > div {
+    border-right: 1px solid rgba(0, 0, 0, 0.13);
+    border-left: 1px solid rgba(0, 0, 0, 0.169);
+    display: grid;
+    place-items: center;
+}
+
+.student {
+    display: grid;
+    grid-template-columns: 5% 20.3% 15.1% 19% 13.3% 20%;
+    width: 100%;
+    height: 10vh;
+    border-bottom: 1px solid rgba(108, 108, 108, 0.194);
+    transition: background-color 0.2s ease;
+}
+
+.student:hover {
+    background-color: #7d7d7d11;
+}
+
+.students {
+    max-height: 58vh;
+    min-height: 58vh;
+    overflow: auto;
+}
+
+.student > div {
+    height: 100%;
+    display: grid;
+    align-items: center;
+    font-size: 14px;
+}
+
+.search_input {
+    border-radius: 20px;
+    height: 4.5vh;
+    width: 14vw;
+    padding: 7px 30px; /* Aumenté el padding a la derecha para hacer espacio para la lupa */
+    font-size: 13px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0);
+    color: unset;
+}
+
+.search_input:hover {
+    border-color: #007BFF;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
+}
+
+.search_input::placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+
+.containerFormStock {
+    display: flex;
+    align-items: center;
+    background-color: rgba(32, 29, 35, 0);
+    border-bottom: 1px solid #68727D;
+    padding: 8px 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0);
+}
+
+.almorzado_S {
+    color: #3B82F6;
+}
+
+.almorzado_N {
+    color: grey;
+}
+
+.actionsIcon {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+.actionsIcon > .contAction:hover {
+    background-color: rgba(117, 117, 117, 0.187);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-bottom: 7%;
+}
+
+.actionsIcon > .contAction {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-bottom: 7%;
+}
+
+.perfilIcon {
+    text-align: right;
+}
+
+.containerModalStudent {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modalStudent {
+    background-color: #13133c;
+    padding: 2%;
+    border-radius: 8px;
+    width: 300px;
+    height: 270px;
+    color: rgba(255, 255, 255, 0.589);
+}
+
+.closeModalStudent {
+    width: 30px;
+    height: 30px;
+    border: grey 1px solid;
+    display: grid;
+    place-items: center;
+    border-radius: 5px;
+    color: grey;
+    transition: all 0.2s ease-in-out;
+    margin-left: 90%;
+}
+
+.closeModalStudent:hover {
+    border: white 1px solid;
+    color: white;
+}
+
+.modalStudent_nombre_seccion {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    align-items: center;
+}
+
+.modalStudent_rol_becado {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    align-items: center;   
+}
+
+.ModalStudent_name {
+    color: white;
+    font-size: 24px;
+    margin-bottom: 3px;
+}
+
+.ModalStudent_calendario{
+    margin-top: 10px;
+    border-top: 1px solid grey;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    margin-bottom: 11px;
+    color: white;
+    align-items: center;
+}
+
+.ModalStudentChart {
+    border-top: 1px solid grey;
+    margin-top: 6%;
+}
