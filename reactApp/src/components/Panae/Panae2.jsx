@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { startOfWeek, differenceInCalendarDays, addDays, format, isSameDay } from 'date-fns';
-import './Panae.css'
-
+import Cookies from 'js-cookie';
+import './Panae.css';
 
 export const Panae2 = () => {
   const [totalPagos, setTotalPagos] = useState(0);
   const [lastUpdate, setLastUpdate] = useState(new Date());
+  const [hasAccess, setHasAccess] = useState(false);
+
+  useEffect(() => {
+    // Check for token2 cookie on component mount
+    const token2 = Cookies.get('token2');
+    setHasAccess(!!token2);
+  }, []);
 
   const fetchTotalPagos = () => {
     axios.get('http://localhost:8000/api/hist_pagos/')
@@ -38,19 +45,26 @@ export const Panae2 = () => {
   };
 
   useEffect(() => {
-    fetchTotalPagos();
+    if (hasAccess) {
+      fetchTotalPagos();
 
-    const checkDayChange = () => {
-      const now = new Date();
-      if (!isSameDay(now, lastUpdate)) {
-        fetchTotalPagos();
-      }
-    };
+      const checkDayChange = () => {
+        const now = new Date();
+        if (!isSameDay(now, lastUpdate)) {
+          fetchTotalPagos();
+        }
+      };
 
-    const interval = setInterval(checkDayChange, 60000);
+      const interval = setInterval(checkDayChange, 60000);
 
-    return () => clearInterval(interval);
-  }, [lastUpdate]);
+      return () => clearInterval(interval);
+    }
+  }, [lastUpdate, hasAccess]);
+
+  // If no access, return null or an unauthorized message
+  if (!hasAccess) {
+    return null; // Or return an unauthorized message if preferred
+  }
 
   return (
     <div className='Panae_content_center'>
@@ -60,4 +74,4 @@ export const Panae2 = () => {
   );
 };
 
-
+export default Panae2;
