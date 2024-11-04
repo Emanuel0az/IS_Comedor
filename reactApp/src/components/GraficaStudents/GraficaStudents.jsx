@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { format, startOfWeek, isSameDay, addDays, differenceInCalendarDays } from 'date-fns';
 import './GraficaStudents.css';
+import StockComponent from '../Stock/StockComponent';
+import { useIdContext } from '../UsinngContext';
 
 export default function SessionsChartStudents() {
   const [data, setData] = useState([]);
   const [lastUpdate, setLastUpdate] = useState(new Date());
+  const {contextId, setContextId} = useIdContext()
+  
 
   const fetchData = () => {
     fetch('http://localhost:8000/api/hist_pagos/')
@@ -19,7 +23,7 @@ export default function SessionsChartStudents() {
           asistenciaCount[day] = 0;
         });
 
-        const pagosEstudiante = asistenciaData.filter(item => item.estudiante_id === 1);
+        const pagosEstudiante = asistenciaData.filter(item => item.estudiante_id === contextId);
 
         pagosEstudiante.forEach(item => {
           const asistenciaDate = new Date(item.fecha_pago_prueba);

@@ -11,6 +11,7 @@ import ReportGmailerrorredIcon from '@mui/icons-material/ReportGmailerrorred';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import '../Stock/StockComponent.css';
+import { useIdContext } from '../UsinngContext';
 
 const StockComponent = () => {
     const [Students, setStudents] = useState([]);
@@ -28,6 +29,7 @@ const StockComponent = () => {
     const [ModalStudent, setModalStudent] = useState(false);
     const [ModalReporte, setModalReporte] = useState(false);
     const [InputReporte, setInputReporte] = useState('');
+    const {contextId, setContextId} = useIdContext()
 
     const debeDinero = async () => {
         if (!currentStudentId) return;
@@ -92,6 +94,7 @@ const StockComponent = () => {
         if (pagoExistente) {
             setModalReporte(true);
             setCurrentStudentId(student);
+            setContextId(student.id)
         } else {
             if (student.becado) {
                 const monto = student.rol === 'prof' ? 1000 : student.becado ? 0 : 600;
@@ -113,6 +116,7 @@ const StockComponent = () => {
                 obtainStudents();
             } else {
                 setCurrentStudentId(student);
+                setContextId(student.id)
                 setOpenModalPay(true);
             }
         }
@@ -232,7 +236,7 @@ const StockComponent = () => {
                                     }
                                 </div>
                                 <div className="actionsIcon">
-                                    <div onClick={() => (setModalStudent(true), setCurrentStudentId(student))} className='contAction'><MoreVertIcon style={{ color: 'gray' }} /></div>
+                                    <div onClick={() => (setModalStudent(true), setCurrentStudentId(student), setContextId(student.id))} className='contAction'><MoreVertIcon style={{ color: 'gray' }} /></div>
                                 </div>
                             </div>
                         ))
