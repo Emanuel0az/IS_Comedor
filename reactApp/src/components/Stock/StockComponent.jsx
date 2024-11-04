@@ -29,7 +29,7 @@ const StockComponent = () => {
     const [ModalStudent, setModalStudent] = useState(false);
     const [ModalReporte, setModalReporte] = useState(false);
     const [InputReporte, setInputReporte] = useState('');
-    const {contextId, setContextId} = useIdContext()
+    const {contextId, setContextId, user, setUser} = useIdContext()
 
     const debeDinero = async () => {
         if (!currentStudentId) return;
@@ -281,6 +281,7 @@ const StockComponent = () => {
                 ))}
             </div>
             {ModalStudent && (
+                currentStudentId.rol == 'Estudiantes' ? 
                 <div className="containerModalStudent">
                     <div className="modalStudent">
                         <div className='closeModalStudent' onClick={() => setModalStudent(false)}>X</div>
@@ -289,15 +290,29 @@ const StockComponent = () => {
                             <div>{currentStudentId.seccion}</div>
                         </div>
                         <div className="modalStudent_rol_becado">
-                            <div className='ModalStudent_rol'>Estudiante</div>
+                            <div className='ModalStudent_rol'>Estudiante</div> 
                             <div>{currentStudentId.becado ? 'Becado' : 'No becado'}</div>
                         </div>
                         <div className='ModalStudent_calendario'>
-                            <div style={{ marginTop: '10%' }}>Asist. semanal:</div>
-                            <CalendarioStudent />
+                            <div style={{ marginTop: '10%'}}>Asist. semanal:</div>
+                            <CalendarioStudent/>
                         </div>
                         <div className='ModalStudentChart'>
-                            <SessionsChartStudents />
+                            <SessionsChartStudents/>
+                        </div>
+                    </div>
+                </div> :
+                <div className="containerModalStudent">
+                    <div className="modalStudent">
+                        <div className='closeModalStudent' onClick={() => setModalStudent(false)}>X</div>
+                        <div className='ModalStudent_name'>{currentStudentId.nombre}</div>
+                        <div>Profesor</div>
+                        <div className='ModalStudent_calendario'>
+                            <div style={{ marginTop: '10%'}}>Asist. semanal:</div>
+                            <CalendarioStudent/>
+                        </div>
+                        <div className='ModalStudentChart'>
+                            <SessionsChartStudents/>
                         </div>
                     </div>
                 </div>

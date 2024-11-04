@@ -228,7 +228,6 @@ const StudentManagement = () => {
           <hr />
           <div className="search-container">
             <h2 className="list-title">Lista de Estudiantes</h2>
-            <div></div>
             <input
               type="text"
               className="search-input"

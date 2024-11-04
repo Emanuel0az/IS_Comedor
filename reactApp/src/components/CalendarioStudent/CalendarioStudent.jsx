@@ -33,7 +33,7 @@ export default function CalendarioStudent() {
 
   return (
     <div className='containerCalendary'>
-      <button onClick={() => setIsOpen(true)} className='calendaryButton'>
+      <button onClick={() => setIsOpen(true)} className='calendaryButtonStudent'>
       {selectedDate.toLocaleString('default', { month: 'short', day: 'numeric', year: 'numeric' }).replace(',', ' de')}
       <div> </div>
       <CalendarTodayIcon style={{fontSize: 17}}/>

@@ -189,7 +189,7 @@ export default function EstudiantesComedorChartMartes() {
         text: selectedIndex !== null
           ? `${estudiantes[selectedIndex === 0 ? 'comieron' : 'noComieron']} / ${totalEstudiantes}\n${((estudiantes[selectedIndex === 0 ? 'comieron' : 'noComieron'] / totalEstudiantes) * 100).toFixed(2)}%`
           : `${calcularPorcentajeComieron()}%`,
-        color: 'black',
+        color: 'unset',
         font: '12px Arial',
       },
     },
