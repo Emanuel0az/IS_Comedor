@@ -1,7 +1,7 @@
 .sessions-chart {
     background-color: unset !important;;
     color: #ffffff;
-    padding: 20px;
+    width: 100%;
     border-radius: 10px;
     font-family: Arial, sans-serif;
   }

@@ -1,13 +1,17 @@
 .register-container {
   max-width: 70vw;
   margin: 0 auto;
+
   padding: 15px;
+
+
 }
 
 .register-container h2 {
   text-align: center;
-  color: #333;
-  margin-bottom: 20px;
+  color: unset;
+  opacity: 0.8;
+  margin-bottom: 6vh;
 }
 
 .register-form {
@@ -15,14 +19,11 @@
   flex-direction: column;
 }
 
-.form-group {
-  margin-bottom: 15px;
-}
-
 .form-group label {
   display: block;
   margin-bottom: 5px;
-  color: #666;
+  color: unset;
+  opacity: 0.8;
 }
 
 .form-group input {

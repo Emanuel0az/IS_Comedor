@@ -35,7 +35,6 @@
 }
 
 .modalContent {
-  /* background-color: #0f0e4a; */
   border-radius: 5px;
   width: 20vw;
   height: 45vh;
@@ -78,7 +77,6 @@
   background-color: white; /* Fondo blanco para el modal */
   border-radius: 10px; /* Bordes redondeados */
   padding: 20px; /* Espaciado interno */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para el modal */
   width: 300px; /* Ancho del modal */
 }
 

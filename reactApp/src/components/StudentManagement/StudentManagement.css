@@ -4,7 +4,7 @@
   /* padding: 2rem; */
   padding-left: 2rem;
   padding-right: 2rem;
-  background-color: #f3f4f6;
+  background-color: unset !important;
 }
 .header {
   display: flex;
@@ -29,11 +29,12 @@
   background-color: #1B65B9;
   color: white;
   opacity: 0.9;
+  color: #02070b;
 }
 
 .add-student-form{
 
-  background-color: white;
+  background-color: unset !important;
   border-radius: 0.5rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   padding: 1rem;

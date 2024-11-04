@@ -58,14 +58,14 @@ export default function CalendarioModal() {
                 nextMonthButtonDisabled,
               }) => (
                 <div className='customHeader'>
-                  <button onClick={decreaseMonth} disabled={prevMonthButtonDisabled}>
+                  <button style={{color: 'white'}} onClick={decreaseMonth} disabled={prevMonthButtonDisabled}>
                     {"<"}
                   </button>
-                  <button onClick={toggleMonthYearView}>
+                  <button className='upperCase' style={{color: 'white'}} onClick={toggleMonthYearView}>
                     {date.toLocaleString('default', { month: 'long' })}
                   </button>
-                  <button onClick={toggleYearView}>{date.getFullYear()}</button>
-                  <button onClick={increaseMonth} disabled={nextMonthButtonDisabled}>
+                  <button style={{color: 'white'}} onClick={toggleYearView}>{date.getFullYear()}</button>
+                  <button style={{color: 'white'}} onClick={increaseMonth} disabled={nextMonthButtonDisabled}>
                     {">"}
                   </button>
                 </div>

@@ -267,8 +267,8 @@ def pagos_list(request, pk=None):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    elif request.method == 'PUT':
-        serializer = Hist_pagos_Serializer(var, data=request.data)
+    if request.method == 'PUT':
+        serializer = Hist_pagos_Serializer(var, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
@@ -318,6 +318,3 @@ def login_user(request):
     else:
         return Response({"error": "Credenciales inválidas"}, status=400)
     
-    
-
-

@@ -22,6 +22,7 @@
     letter-spacing: 0.5px;
     line-height: 1.43;
     background-color: rgba(97, 97, 97, 0.458);
+    cursor: pointer;
 }
 .sideBarTop > .inselected:hover {
     height: 100%;
@@ -36,6 +37,8 @@
     letter-spacing: 0.5px;
     line-height: 1.43;
     background-color: rgba(74, 73, 73, 0.144);
+    cursor: pointer;
+
 }
 .sideBarContainerDay {
     background-color: #FFFFFF;
@@ -63,6 +66,7 @@
     place-content: center;
     max-width: 3vw;
     max-height: 5vh;
+    color: white;
 }
 .sideBarTop {
     display: grid;
