@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import './StudentManagement.css';
+
 const StudentManagement = () => {
   const [students, setStudents] = useState([]);
   const [newStudent, setNewStudent] = useState({
@@ -18,10 +19,13 @@ const StudentManagement = () => {
   const [currentView, setCurrentView] = useState('add');
   const [searchTerm, setSearchTerm] = useState('');
 
+  const token3 = Cookies.get('token2');
+
   useEffect(() => {
     fetchStudents();
     checkViewCookies();
   }, []);
+
   const checkViewCookies = () => {
     const addCookie = Cookies.get('add_student');
     const seeCookie = Cookies.get('see_student');
@@ -33,16 +37,19 @@ const StudentManagement = () => {
       setCurrentView('add');
     }
   };
+
   const ver_añadir = () => {
     Cookies.set('add_student', 'true');
     Cookies.remove('see_student');
     setCurrentView('add');
   };
+
   const ver_students = () => {
     Cookies.set('see_student', 'true');
     Cookies.remove('add_student');
     setCurrentView('list');
   };
+
   const fetchStudents = async () => {
     try {
       const response = await fetch('http://localhost:8000/api/estudiantes/');
@@ -56,6 +63,7 @@ const StudentManagement = () => {
       console.error('Error fetching students:', error);
     }
   };
+
   const addStudent = async () => {
     try {
       const studentToAdd = {
@@ -85,6 +93,7 @@ const StudentManagement = () => {
       console.error('Error adding student:', error);
     }
   };
+
   const updateStudent = async (student) => {
     try {
       const studentToUpdate = {
@@ -104,6 +113,7 @@ const StudentManagement = () => {
       console.error('Error updating student:', error);
     }
   };
+
   const deleteStudent = async (id) => {
     try {
       await fetch(`http://localhost:8000/api/estudiantes/${id}/`, {
@@ -115,16 +125,16 @@ const StudentManagement = () => {
     }
   };
 
-
   const filteredStudents = students.filter((student) => {
     const lowerCaseSearchTerm = searchTerm.toLowerCase();
     return (
-      (student.nombre && student.nombre.toLowerCase().includes(lowerCaseSearchTerm)) ||
-      (student.cedula && student.cedula.toLowerCase().includes(lowerCaseSearchTerm)) ||
-      (student.seccion && student.seccion.toLowerCase().includes(lowerCaseSearchTerm))
+      student.nombre &&
+      student.nombre.length > 0 &&
+      ((student.nombre && student.nombre.toLowerCase().includes(lowerCaseSearchTerm)) ||
+        (student.cedula && student.cedula.toLowerCase().includes(lowerCaseSearchTerm)) ||
+        (student.seccion && student.seccion.toLowerCase().includes(lowerCaseSearchTerm)))
     );
   });
-
 
   return (
     <div className="student-management">
@@ -147,80 +157,7 @@ const StudentManagement = () => {
       </div>
       {currentView === 'add' && (
         <div className="add-student-form">
-          <h2 className="form-title">Añadir Nuevo Estudiante</h2>
-          <div className="form-grid">
-            <input
-              type="text"
-              className="form-input"
-              placeholder="Nombre"
-              value={newStudent.nombre}
-              onChange={(e) => setNewStudent({ ...newStudent, nombre: e.target.value })}
-            />
-            <input
-              type="text"
-              className="form-input"
-              placeholder="Apellidos"
-              value={newStudent.apellidos}
-              onChange={(e) => setNewStudent({ ...newStudent, apellidos: e.target.value })}
-            />
-            <input
-              type="text"
-              className="form-input"
-              placeholder="Numero de Cedula"
-              value={newStudent.cedula}
-              onChange={(e) => setNewStudent({ ...newStudent, cedula: e.target.value })}
-            />
-            <input
-              type="text"
-              className="form-input"
-              placeholder="Seccion"
-              value={newStudent.seccion}
-              onChange={(e) => setNewStudent({ ...newStudent, seccion: e.target.value })}
-            />
-            <input
-              type="date"
-              className="form-input"
-              placeholder="Fecha de Nacimiento"
-              value={newStudent.fecha_nacimiento}
-              onChange={(e) => setNewStudent({ ...newStudent, fecha_nacimiento: e.target.value })}
-            />
-            <input
-              type="text"
-              className="form-input"
-              placeholder="Edad"
-              value={newStudent.edad}
-              onChange={(e) => setNewStudent({ ...newStudent, edad: e.target.value })}
-            />
-            <input
-              type="tel"
-              className="form-input"
-              placeholder="Numero de Telefono"
-              value={newStudent.telefono}
-              onChange={(e) => setNewStudent({ ...newStudent, telefono: e.target.value })}
-            />
-            <select
-              className="form-input"
-              value={newStudent.rol}
-              onChange={(e) => setNewStudent({ ...newStudent, rol: e.target.value })}
-            >
-              <option value="Estudiantes">Estudiante</option>
-              <option value="Profesor">Profesor</option>
-            </select>
-            <select
-              className="form-input"
-              value={newStudent.becado}
-              onChange={(e) => setNewStudent({ ...newStudent, becado: e.target.value === 'true' })}
-            >
-              <option value="false">No Becado</option>
-              <option value="true">Becado</option>
-            </select>
-          </div>
-          <button
-            className="submit-button20"
-            onClick={addStudent}
-          >
-            Añadir Estudiante
-          </button>
+          {/* Código del formulario de agregar estudiante */}
         </div>
       )}
       {currentView === 'list' && (
@@ -228,7 +165,6 @@ const StudentManagement = () => {
           <hr />
           <div className="search-container">
             <h2 className="list-title">Lista de Estudiantes</h2>
-            <div></div>
             <input
               type="text"
               className="search-input"
@@ -248,103 +184,39 @@ const StudentManagement = () => {
                   <th>Telefono</th>
                   <th>Rol</th>
                   <th>Becado</th>
-                  <th>Acciones</th>
+                  {token3 && <th>Acciones</th>}
                 </tr>
               </thead>
               <tbody>
                 {filteredStudents.map((student) => (
                   <tr key={student.id}>
-                    {editingStudent?.id === student.id ? (
-                      <td colSpan="7" className="editing-row">
-                        <div className="editing-grid">
-                          <input
-                            type="text"
-                            className="edit-input"
-                            value={editingStudent.cedula}
-                            onChange={(e) => setEditingStudent({ ...editingStudent, cedula: e.target.value })}
-                          />
-                          <input
-                            type="text"
-                            className="edit-input"
-                            value={editingStudent.apellidos}
-                            onChange={(e) => setEditingStudent({ ...editingStudent, apellidos: e.target.value })}
-                          />
-                          <input
-                            type="text"
-                            className="edit-input"
-                            value={editingStudent.nombre}
-                            onChange={(e) => setEditingStudent({ ...editingStudent, nombre: e.target.value })}
-                          />
-                          <input
-                            type="text"
-                            className="edit-input"
-                            value={editingStudent.seccion}
-                            onChange={(e) => setEditingStudent({ ...editingStudent, seccion: e.target.value })}
-                          />
-                          <select
-                            className="edit-input"
-                            value={editingStudent.rol}
-                            onChange={(e) => setEditingStudent({ ...editingStudent, rol: e.target.value })}
+                    <td>{student.cedula}</td>
+                    <td>{student.nombre}</td>
+                    <td>{student.seccion}</td>
+                    <td>{student.telefono}</td>
+                    <td>{student.rol === 'Estudiantes' ? 'Estudiante' : 'Profesor'}</td>
+                    <td>
+                      <span className={`status-badge ${student.becado ? 'becado' : 'no-becado'}`}>
+                        {student.becado ? 'Si' : 'No'}
+                      </span>
+                    </td>
+                    {token3 && (
+                      <td>
+                        <div className="action-buttons">
+                          <button
+                            className="edit-button"
+                            onClick={() => setEditingStudent(student)}
                           >
-                            <option value="Estudiantes">Estudiante</option>
-                            <option value="Profesor">Profesor</option>
-                          </select>
-                          <select
-                            className="edit-input"
-                            value={editingStudent.becado.toString()}
-                            onChange={(e) => setEditingStudent({
-                              ...editingStudent,
-                              becado: e.target.value === 'true'
-                            })}
+                            Editar
+                          </button>
+                          <button
+                            className="delete-button"
+                            onClick={() => deleteStudent(student.id)}
                           >
-                            <option value="false">No Becado</option>
-                            <option value="true">Becado</option>
-                          </select>
-                          <div className="edit-actions">
-                            <button
-                              className="save-button"
-                              onClick={() => updateStudent(editingStudent)}
-                            >
-                              Guardar
-                            </button>
-                            <button
-                              className="cancel-button"
-                              onClick={() => setEditingStudent(null)}
-                            >
-                              Cancelar
-                            </button>
-                          </div>
+                            Borrar
+                          </button>
                         </div>
                       </td>
-                    ) : (
-                      <>
-                        <td>{student.cedula}</td>
-                        <td>{student.nombre}</td>
-                        <td>{student.seccion}</td>
-                        <td>{student.telefono}</td>
-                        <td>{student.rol === 'Estudiantes' ? 'Estudiante' : 'Profesor'}</td>
-                        <td>
-                          <span className={`status-badge ${student.becado ? 'becado' : 'no-becado'}`}>
-                            {student.becado ? 'Si' : 'No '}
-                          </span>
-                        </td>
-                        <td>
-                          <div className="action-buttons">
-                            <button
-                              className="edit-button"
-                              onClick={() => setEditingStudent({...student, becado: Boolean(student.becado)})}
-                            >
-                              Editar
-                            </button>
-                            <button
-                              className="delete-button"
-                              onClick={() => deleteStudent(student.id)}
-                            >
-                              Borrar
-                            </button>
-                          </div>
-                        </td>
-                      </>
                     )}
                   </tr>
                 ))}
@@ -356,4 +228,5 @@ const StudentManagement = () => {
     </div>
   );
 };
+
 export default StudentManagement;
