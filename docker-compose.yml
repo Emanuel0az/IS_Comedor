@@ -1,19 +1,19 @@
 version: '3'
 services:
   react:
-    container_name: react_app
-    image: react_app
+    container_name: react-production
+    image: react-production:prod
     build:
       context: ./reactApp
-    volumes:
-      - ./reactApp:/app
-      - /app/node_modules
+      target: production  # Asegúrate de tener esta etapa 'production' en tu Dockerfile
+      args:
+        - NODE_ENV=production
+      dockerfile: Dockerfile.prod  # Asegúrate de tener un Dockerfile.prod en ./reactApp
     ports:
-      - "5173:5173"
-    environment:
-      - CHOKIDAR_USEPOLLING=true
+      - "80:80"
     depends_on:
-      - node
+      - django
+
   django:
     image: django_app
     container_name: django_app
@@ -26,6 +26,7 @@ services:
     command: ["./wait-for-it.sh", "-t", "30", "mysql:3306", "--", "python", "manage.py", "runserver", "0.0.0.0:8000"]
     depends_on:
       - mysql
+
   node:
     container_name: node_app
     image: node_app
@@ -37,7 +38,7 @@ services:
       - "3000:3000"
     depends_on:
       - django
-    command: ["node", "NodeMailer2.js"] 
+    command: ["node", "NodeMailer2.js"]
 
   mysql:
     image: mysql:latest
@@ -48,9 +49,8 @@ services:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=django-react
     volumes:
-      - django_react_data:/var/lib/mysql  # Cambia a /var/lib/mysql para que persista los datos correctamente
+      - django_react_data:/var/lib/mysql
       - ./dumps:/docker-entrypoint-initdb.d:ro
 
 volumes:
   django_react_data:
-
