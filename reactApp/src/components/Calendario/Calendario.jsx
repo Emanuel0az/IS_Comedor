@@ -3,7 +3,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './Calendario.css';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
-
+import { useIdContext } from '../UsinngContext';
 
 export default function CalendarioModal() {
   const [fechaLocaltorage, setFechaLocaltorage] = useState()

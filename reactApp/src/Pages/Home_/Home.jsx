@@ -20,16 +20,16 @@ const Home = () => {
           <Panae/>
         </div>
         <div>
-            <Panae2/>
+          <Panae2/>
         </div>
         <div>
-            <Panae3/>
+          <Panae3/>
         </div>
       </div>
 
       <div className='faffa'>
         <div>
-            <Donut/>
+          <Donut/>
         </div>
         <div>
             <Donut2/>

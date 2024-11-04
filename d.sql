@@ -107,10 +107,6 @@ FROM api_estudiantes
 WHERE becado = 1;
 
 
-
-
-
-
 LOAD DATA INFILE '/var/lib/mysql-files/Estudiantes_dev.csv'
 INTO TABLE api_estudiantes
 CHARACTER SET utf8mb4

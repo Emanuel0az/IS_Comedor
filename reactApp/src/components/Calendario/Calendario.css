@@ -2,10 +2,10 @@
   display: grid;
   grid-template-columns: 70% 10% 20%;
   background-color: #ffffff00;  
-  border: 1px solid #a7a7a7;
+  border: 1.5px solid #a7a7a7;
   border-radius: 8px;
-  min-width: 9vw;
-  max-width: 12vw;
+  min-width: 100px;
+  max-width: 200px;
   height: 7vh;
   cursor: pointer;
   align-items: center;
