@@ -12,7 +12,7 @@ export const Panae2 = () => {
     axios.get('http://localhost:8000/api/hist_pagos/')
       .then(response => {
         const pagosData = response.data;
-        const total = calculateWeeklyTotal(pagosData);
+        const total = calculateWeeklyTotal(pagosData.filter(pago => pago.activo === true)); // Se utilizan solo pagos activos. x2
         setTotalPagos(total);
         setLastUpdate(new Date());
       })

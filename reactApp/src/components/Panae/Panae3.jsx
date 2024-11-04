@@ -12,7 +12,8 @@ export const Panae3 = () => {
     axios.get('http://localhost:8000/api/hist_pagos/')
       .then(response => {
         const pagosData = response.data;
-        const total = calculateMonthlyTotal(pagosData);
+        
+        const total = calculateMonthlyTotal(pagosData.filter(pago => pago.activo === true)); // Se utilizan solo pagos activos.
         setTotalPagos(total);
         setLastUpdate(new Date());
       })

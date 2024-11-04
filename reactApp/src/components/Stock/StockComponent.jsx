@@ -30,7 +30,7 @@ const StockComponent = () => {
     const [InputReporte, setInputReporte] = useState('');
 
     const debeDinero = async () => {
-        if (!currentStudentId) return; // Check if currentStudentId is set
+        if (!currentStudentId) return;
         const pagosActivos = currentStudentId.pagos.filter(pago => pago.activo === true);
         const cantidadPagos = pagosActivos.length;
         const sumaDeTodosLosPagos = pagosActivos.reduce((total, pago) => total + parseFloat(pago.monto), 0);
@@ -40,25 +40,20 @@ const StockComponent = () => {
     };
 
     const handlePutWithReport = async () => {
-        if (!currentStudentId) return; // Verifica que currentStudentId esté configurado
         const fecha = new Date(localStorage.getItem('selectedDate'));
         const fechaFormato = fecha.toLocaleDateString('en-CA');
-        const hora = new Date(); // Obtiene la hora actual
-        const horaFormato = hora.toISOString(); // Formato completo de fecha y hora
-    
-        const pagoExistente = currentStudentId.pagos.find(pago => pago.fecha_pago_prueba === fechaFormato);
-    
-        console.log('current', currentStudentId.id);
-        console.log('pago', pagoExistente.id_pago);
-    
+        const hora = new Date().toISOString();
+
+        const pagoExistente = currentStudentId.pagos.find(pago => pago.fecha_pago_prueba === selectedDate && pago.activo);
+
         if (pagoExistente) {
             await putAsistencia(pagoExistente.id_pago, {
                 reporte: InputReporte,
                 fecha_desactivado: fechaFormato,
-                hora: horaFormato, // Agrega aquí la hora formateada
+                hora: hora,
                 activo: false
             });
-    
+
             const updatedStudents = Students.map(s =>
                 s.id === currentStudentId.id ? {
                     ...s,
@@ -66,13 +61,13 @@ const StockComponent = () => {
                 } : s
             );
             setStudents(updatedStudents);
-            setModalReporte(false)
+            setModalReporte(false);
         }
     };
 
     useEffect(() => {
         debeDinero();
-    }, [currentStudentId]); // When the selected student changes
+    }, [currentStudentId]);
 
     const obtainStudents = async () => {
         try {
@@ -87,13 +82,12 @@ const StockComponent = () => {
     };
 
     const validAlmuerzo = (student) => {
-        return student.pagos.find(pago => pago.fecha_pago_prueba === selectedDate);
+        return student.pagos.some(pago => pago.fecha_pago_prueba === selectedDate && pago.activo);
     };
 
     const validarAsistencias = async (student) => {
-        const fecha = new Date(localStorage.getItem('selectedDate'));
-        const fechaFormato = fecha.toLocaleDateString('en-CA');
-        const pagoExistente = student.pagos.find(pago => pago.fecha_pago_prueba === fechaFormato);
+        const fecha = new Date(localStorage.getItem('selectedDate')).toLocaleDateString('en-CA');
+        const pagoExistente = student.pagos.find(pago => pago.fecha_pago_prueba === selectedDate && pago.activo);
 
         if (pagoExistente) {
             setModalReporte(true);
@@ -104,7 +98,7 @@ const StockComponent = () => {
 
                 const newRegistro = {
                     estudiante_id: student.id,
-                    fecha_pago_prueba: fechaFormato,
+                    fecha_pago_prueba: fecha,
                     monto: monto
                 };
 
@@ -112,7 +106,7 @@ const StockComponent = () => {
                 const updatedStudents = Students.map(s =>
                     s.id === student.id ? {
                         ...s,
-                        pagos: [...s.pagos, { id_pago: newRegistro.id_pago, fecha_pago_prueba: fechaFormato }]
+                        pagos: [...s.pagos, { id_pago: newRegistro.id_pago, fecha_pago_prueba: fecha }]
                     } : s
                 );
                 setStudents(updatedStudents);
@@ -182,6 +176,7 @@ const StockComponent = () => {
     const handleSendReport = (e) => {
         if (e.key === 'Enter') {
             handlePutWithReport();
+            setInputReporte('')
         }
     };
 
