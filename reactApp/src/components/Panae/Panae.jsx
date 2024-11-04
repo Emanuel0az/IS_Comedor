@@ -29,7 +29,7 @@ export const Panae = () => {
     axios.get('http://localhost:8000/api/hist_pagos/')
       .then(response => {
         const pagosData = response.data;
-        const incomeForSelectedDay = calculateIncomeForDay(pagosData, new Date(selectedDate));
+        const incomeForSelectedDay = calculateIncomeForDay(pagosData.filter(pago => pago.activo === true), new Date(selectedDate)); // Se utilizan solo pagos activos. x3
         setDailyIncome(incomeForSelectedDay);
         setLastUpdate(new Date());
       })

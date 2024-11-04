@@ -11,38 +11,39 @@ const SessionsChart = () => {
     fetch('http://localhost:8000/api/hist_pagos/')
       .then(response => response.json())
       .then(asistenciaData => {
+        // Filtrar solo los pagos activos
+        const pagosActivos = asistenciaData.filter(pago => pago.activo === true);
+  
         const asistenciaCount = {};
-
-        const today = new Date();  // Esto es lo que hay que cambiar para tomar una fecha. XD
-
-        const startOfThisWeek = startOfWeek(new Date(localStorage.getItem('selectedDate')), { weekStartsOn: 1 }); // Lunes de esta semana
-
+        const today = new Date();
+        const startOfThisWeek = startOfWeek(new Date(localStorage.getItem('selectedDate')), { weekStartsOn: 1 });
+  
         // Inicializar todos los días de la semana con 0
         const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
         weekdays.forEach((day) => {
           asistenciaCount[day] = 0;
         });
-
-        asistenciaData.forEach(item => {
-          const asistenciaDate = new Date(item.fecha_pago_prueba);  // ITEM              🔴            🔴           🔴            🔴            🔴
+  
+        pagosActivos.forEach(item => {
+          const asistenciaDate = new Date(item.fecha_pago_prueba);
           const asistenciaDatePlusOne = addDays(asistenciaDate, 1);
-
+  
           // Verificar si la fecha de asistencia pertenece a esta semana
           if (differenceInCalendarDays(asistenciaDatePlusOne, startOfThisWeek) >= 0 &&
               differenceInCalendarDays(asistenciaDatePlusOne, startOfThisWeek) < 5) {
             const localDayOfWeek = format(asistenciaDatePlusOne, 'EEEE'); 
-
+  
             if (asistenciaCount.hasOwnProperty(localDayOfWeek)) {
               asistenciaCount[localDayOfWeek] += 1;
             }
           }
         });
-
+  
         const processedData = weekdays.map(day => ({
           date: day,
           asistencia: asistenciaCount[day],
         }));
-
+  
         setData(processedData);
         setLastUpdate(today); // Actualiza la última fecha de actualización
       })
