@@ -55,8 +55,6 @@ const NodeMailer = () => {
 
   return (
     <div className="EmailPageContainer">
-      
-
       <div className='info_mapContainer'>
         <div>
           <h1 style={{color: '#155499'}}>Ubicación:</h1> <br /><br />

@@ -10,14 +10,24 @@
 /* Hacer esta vara del tamaño por medio de media queries */
 /* Es que no encontré otra manera, y ni se ponga a buscar pedazo de perro */
 
-.navPC > div {
-    color: white;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    margin-left: 2vh;
+.tiempo {
+    width: 260px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 10px;
+    letter-spacing: 1px;
+    /* border: 1px grey solid; */
+    padding: 1%;
+    border-radius: 5px;
+    opacity: 0.9;
+}.tiempo > div {
+    width: 100px;
 }
 
+.currenTime {
+    border-right: 2px solid grey;
+    padding-right: 2%;
+}
 /* Dejé también estilos por predeterminado, porque al parecer, algunos dispositivos no toman los estilos hechos en mediaQueries. 🔴 */ 
 
 
@@ -102,7 +112,7 @@
 @media (min-width: 769px) and (max-width: 1023px) {
     .navPC {
         display: grid;
-        grid-template-columns: 49% 21% 10%;
+        grid-template-columns: 69% 21% 10%;
         background-color: #1b1a66;
         min-height: 50px;
         min-width: 100vw;
@@ -121,7 +131,7 @@
 @media (min-width: 1024px) and (max-width: 1439px) {
     .navPC {
         display: grid;
-        grid-template-columns: 49% 21% 10%;
+        grid-template-columns: 60% 15% 15%;
         background-color: #1b1a66;
         min-height: 50px;
         min-width: 100vw;
@@ -130,7 +140,7 @@
 
     .navPC > div {
         color: white;
-        font-size: 26px;
+        font-size: 20px;
         display: flex;
         align-items: center;
         margin-left: 4vh;
@@ -140,7 +150,7 @@
 @media (min-width: 1440px) and (max-width: 1920px) {
     .navPC {
         display: grid;
-        grid-template-columns: 49% 21% 10%;
+        grid-template-columns: 70% 15% 15%;
         background-color: #1b1a66;
         min-height: 50px;
         min-width: 100vw;
