@@ -1,11 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { format, isSameDay, parseISO } from 'date-fns';
-import './Panae.css'
+import './Panae.css';
 
 export const Panae = () => {
   const [dailyIncome, setDailyIncome] = useState(0);
   const [lastUpdate, setLastUpdate] = useState(new Date());
+  const [hasAccess, setHasAccess] = useState(false);
+
+  // Función para obtener el valor de una cookie por su nombre
+  const getCookie = (name) => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
+  };
+
+  // Verificar la cookie al montar el componente
+  useEffect(() => {
+    const token2 = getCookie('token2');
+    setHasAccess(!!token2);
+  }, []);
 
   const fetchDailyIncome = () => {
     const selectedDate = localStorage.getItem('selectedDate');
@@ -30,19 +45,25 @@ export const Panae = () => {
   };
 
   useEffect(() => {
-    fetchDailyIncome();
+    if (hasAccess) {
+      fetchDailyIncome();
 
-    const checkDayChange = () => {
-      const now = new Date();
-      if (!isSameDay(now, lastUpdate)) {
-        fetchDailyIncome();
-      }
-    };
+      const checkDayChange = () => {
+        const now = new Date();
+        if (!isSameDay(now, lastUpdate)) {
+          fetchDailyIncome();
+        }
+      };
 
-    const interval = setInterval(checkDayChange, 60000);
+      const interval = setInterval(checkDayChange, 60000);
+      return () => clearInterval(interval);
+    }
+  }, [lastUpdate, hasAccess]);
 
-    return () => clearInterval(interval);
-  }, [lastUpdate]);
+  // Si no tiene acceso, no renderizar nada
+  if (!hasAccess) {
+    return null;
+  }
 
   return (
     <div className='Panae_content_left'>
@@ -51,5 +72,3 @@ export const Panae = () => {
     </div>
   );
 };
-
-

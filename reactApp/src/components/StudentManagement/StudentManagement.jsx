@@ -216,7 +216,7 @@ const StudentManagement = () => {
             </select>
           </div>
           <button
-            className="submit-button2"
+            className="submit-button20"
             onClick={addStudent}
           >
             Añadir Estudiante
