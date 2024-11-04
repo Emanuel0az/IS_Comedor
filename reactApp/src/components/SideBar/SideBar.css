@@ -1,5 +1,5 @@
 .sideBarContainerNight {
-    background-color: #0c1017;
+    background-color: #0C1017;
     min-height: 92vh;
     max-height: 92vh;
     display: flex;
@@ -7,18 +7,15 @@
     border-right: 1px solid rgb(73, 73, 73);
     padding: calc(1 * var(--template-spacing));
 }
-
 .selected {
     height: 100%;
     width: 85%;
     padding-left: 5%;
     border-radius: 9px;
-
     display: grid;
     grid-template-columns: 15% 30%;
     align-items: center;
     margin-left: 5%;
-
     font-family: 'Inter', sans-serif;
     font-weight: 500;
     font-size: 1.1vw;
@@ -26,18 +23,13 @@
     line-height: 1.43;
     background-color: rgba(97, 97, 97, 0.458);
 }
-
 .sideBarTop > .inselected:hover {
     height: 100%;
     width: 85%;
-    padding-left: 5%;
     border-radius: 9px;
-
     display: grid;
     grid-template-columns: 15% 30%;
     align-items: center;
-    margin-left: 5%;
-
     font-family: 'Inter', sans-serif;
     font-weight: 500;
     font-size: 1.1vw;
@@ -45,9 +37,8 @@
     line-height: 1.43;
     background-color: rgba(74, 73, 73, 0.144);
 }
-
 .sideBarContainerDay {
-    background-color: #ffffff;
+    background-color: #FFFFFF;
     color: rgba(0, 0, 0, 0.689);
     min-height: 92vh;
     max-height: 92vh;
@@ -56,21 +47,16 @@
     border-right: 1px solid rgb(73, 73, 73);
     padding: calc(1 * var(--template-spacing));
 }
-
-
 .sideBarTop {
     min-height: 81vh;
 }
-
 .sideBarBottom {
     min-height: 9vh;
-    background-color: #1b1a66;
+    background-color: #1B1A66;
     display: flex;
     justify-content: left;
     padding: 6%;
-    
 }
-
 .sideBarBottom2 {
     display: grid;
     cursor: pointer;
@@ -78,25 +64,21 @@
     max-width: 3vw;
     max-height: 5vh;
 }
-
 .sideBarTop {
     display: grid;
     grid-template-rows: 7% 7% 7% 7% 7% 7%;
     gap: 3px;
     margin-top: 5%;
 }
-
 .sideBarTop > div {
     height: 100%;
     width: 85%;
     padding-left: 4%;
     border-radius: 9px;
-
     display: grid;
     grid-template-columns: 15% 30%;
     align-items: center;
     margin-left: 4%;
-
     font-family: 'Inter', sans-serif;
     font-weight: 500;
     font-size: 1.1vw;
@@ -104,21 +86,14 @@
     line-height: 1.43;
     column-gap: 0.6vw;
 }
-
-
-
 .sideBarTop > .inselected:active {
     height: 100%;
     width: 85%;
-    padding-left: 5%;
     /* color: rgb(255, 255, 255);    */
     border-radius: 9px;
-
     display: grid;
     grid-template-columns: 15% 30%;
     align-items: center;
-    margin-left: 5%;
-
     font-family: 'Inter', sans-serif;
     font-weight: 500;
     font-size: 1.1vw;
@@ -126,33 +101,15 @@
     line-height: 1.43;
     background-color: rgba(88, 88, 88, 0.399);
 }
-
-
 @media (min-width: 320px) and (max-width: 374px) {
-
 }
-  
-  
-@media (min-width: 375px) and (max-width: 424px) { 
-
+@media (min-width: 375px) and (max-width: 424px) {
 }
-  
 @media (min-width: 425px) and (max-width: 600px) {
-
 }
-  
 @media (min-width: 601px) and (max-width: 780px) {
-
 }
-  
-  
 @media (min-width: 1024px) and (max-width: 1439px) {
-
 }
-  
-  
   media (min-width: 1440px) and (max-width: 1920px) {
-
 }
-  
-  
