@@ -24,7 +24,7 @@ const StockComponent = () => {
     const [selectedDate, setSelectedDate] = useState(new Date(localStorage.getItem('selectedDate') || new Date()).toISOString().split('T')[0]);
     const [openModalPay, setOpenModalPay] = useState(false);
     const [payAmount, setPayAmount] = useState(null);
-    const [currentStudentId, setCurrentStudentId] = useState(null); // Initialize as null
+    const [currentStudentId, setCurrentStudentId] = useState(null);
     const [MontoDebe, setMontoDebe] = useState();
     const [ModalStudent, setModalStudent] = useState(false);
     const [ModalReporte, setModalReporte] = useState(false);
