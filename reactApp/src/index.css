@@ -16,7 +16,6 @@
   display: grid;
   grid-template-columns: 86% 10%;
   border-bottom: 1px solid grey;
-  height: 11vh;
   max-width: 100vw;
 }
 .oculto {
@@ -65,7 +64,11 @@ body {
     display: block;
   }
   .structureHeader {
-    min-width: 100vw;
+    min-width: 100vw;  
+    display: grid;
+    grid-template-columns: 61% 20%;
+    height: 7vh;
+    align-items: center;
   }
   .NavPC {
     min-width: 100vw;
@@ -97,7 +100,11 @@ body {
     display: block;
   }
   .structureHeader {
-    min-width: 100vw;
+    min-width: 100vw;  
+    display: grid;
+    grid-template-columns: 68% 20%;
+    height: 7vh;
+    align-items: center;
   }
   .NavPC {
     min-width: 100vw;
@@ -114,7 +121,7 @@ body {
   }
 }
 /*  */
-@media (min-width: 425px) and (max-width: 600px) {
+@media (min-width: 425px) and (max-width: 499px) {
   body {
     padding: 0;
     margin: 0;
@@ -129,7 +136,46 @@ body {
     display: block;
   }
   .structureHeader {
+    min-width: 100vw;  
+    display: grid;
+    grid-template-columns: 70% 20%;
+    height: 7.5vh;
+    align-items: center;
+  }
+  .NavPC {
     min-width: 100vw;
+  }
+  .Routing {
+    overflow: auto;
+    height: 74vh;
+    max-width: 100vw;
+    min-width: 100vw;
+  }
+  main {
+    display: grid;
+    grid-template-rows: 91% 9%;
+  }
+}
+@media (min-width: 500px) and (max-width: 600px) {
+  body {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    min-width: 100vw;
+    min-height: 100vh;
+  }
+  .SideBar {
+    display: none;
+  }
+  .NavMobileResponsive {
+    display: block;
+  }
+  .structureHeader {
+    min-width: 100vw;  
+    display: grid;
+    grid-template-columns: 75% 20%;
+    height: 7.5vh;
+    align-items: center;
   }
   .NavPC {
     min-width: 100vw;
@@ -163,7 +209,11 @@ body {
     min-width: 100vw;
   }
   .structureHeader {
-    min-width: 100%;
+    min-width: 100vw;  
+    display: grid;
+    grid-template-columns: 79% 15%;
+    height: 8vh;
+    align-items: center;
   }
   .Routing {
     overflow: auto;
@@ -177,7 +227,7 @@ body {
     max-height: 100vh;
   }
 }
-@media (min-width: 781px) and (max-width: 1023px) {
+@media (min-width: 781px) and (max-width: 1024px) {
   body {
     padding: 0;
     margin: 0;
@@ -186,32 +236,35 @@ body {
     min-height: 100vh;
   }
   .SideBar {
-    display: block;
+    display: none;
   }
   .NavMobileResponsive {
-    display: none;
+    display: block;
   }
   .NavPC {
     min-width: 100vw;
   }
   .structureHeader {
-    min-width: 100%;
+    min-width: 100vw;  
+    display: grid;
+    grid-template-columns: 81% 10%;
+    height: 8.5vh;
+    align-items: center;
   }
   .Routing {
-    min-width: 100%;
-    max-height: 82vh;
-    min-height: 82vh;
     overflow: auto;
+    height: 74vh;
+    max-width: 100vw;
+    min-width: 100vw;
   }
-  /* ________________ */
   main {
     display: grid;
-    grid-template-columns: 17% 83%;
+    grid-template-rows: repeat(4, 1fr);
     max-height: 100vh;
   }
 }
 /*  */
-@media (min-width: 1024px) and (max-width: 1439px) {
+@media (min-width: 1024px) and (max-width: 1239px) {
   body {
     padding: 0;
     margin: 0;
@@ -229,7 +282,11 @@ body {
     min-width: 100vw;
   }
   .structureHeader {
-    min-width: 100%;
+    min-width: 100vw;  
+    display: grid;
+    grid-template-columns: 70% 10%;
+    height: 9vh;  
+    align-items: center;
   }
   .Routing {
     min-width: 100%;
@@ -244,6 +301,45 @@ body {
     max-height: 100vh;
   }
 }
+
+@media (min-width: 1240px) and (max-width: 1439px) {
+  body {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    min-width: 100vw;
+    min-height: 100vh;
+  }
+  .SideBar {
+    display: block;
+  }
+  .NavMobileResponsive {
+    display: none;
+  }
+  .NavPC {
+    min-width: 100vw;
+  }
+  .structureHeader {
+    min-width: 100vw;  
+    display: grid;
+    grid-template-columns: 72% 13%;
+    height: 10vh;
+    align-items: center;
+  }
+  .Routing {
+    min-width: 100%;
+    max-height: 82vh;
+    min-height: 82vh;
+    overflow: auto;
+  }
+  /* ________________ */
+  main {
+    display: grid;
+    grid-template-columns: 17% 83%;
+    max-height: 100vh;
+  }
+}
+
 /*  */
 @media (min-width: 1440px) and (max-width: 2920px) {
   body {
@@ -263,7 +359,11 @@ body {
     min-width: 100vw;
   }
   .structureHeader {
-    min-width: 100%;
+    min-width: 100vw;  
+    display: grid;
+    grid-template-columns: 73% 13%;
+    height: 10vh;
+    align-items: center;
   }
   .Routing {
     min-width: 100%;
