@@ -1,9 +1,9 @@
-import Routing from "./Routes/Routing.jsx"
+import Routing from "./Routes/routing"
 import NavPC from "./components/NavPC/NavPC"
 import SideBar from "./components/SideBar/SideBar"
-import NavMobile from "./components/DownBar/DownBar.jsx"
+import NavMobile from "./components/DownBar/DownBar"
 import { useState, useEffect } from "react"
-import CalendarioModal from "./components/Calendario/Calendario.jsx"
+import CalendarioModal from "./components/Calendario/Calendario"
 import Cookies from 'js-cookie';
 
 const App = () => {

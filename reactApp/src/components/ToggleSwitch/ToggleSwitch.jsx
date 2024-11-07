@@ -7,8 +7,7 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 const ToggleSwitch = () => {  
 
   const [colorState, setColorState] = useState(() => {
-    // Inicializa el estado a partir de localStorage
-    return localStorage.getItem('colorState') === 'true'; // Convierte a booleano
+    return localStorage.getItem('colorState') === 'true';
   });
 
   const handleColorState = () => {

@@ -1,6 +1,43 @@
+-- Active: 1727766106156@@127.0.0.1@3306
 
+CREATE DATABASE `django-react`
 
 use `django-react`
+
+CREATE TABLE Users (
+    users_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) DEFAULT NULL,
+    mail VARCHAR(255) DEFAULT NULL,
+    password VARCHAR(255) DEFAULT NULL,
+    rol VARCHAR(255) DEFAULT NULL
+);
+
+CREATE TABLE Estudiantes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    cedula VARCHAR(50) UNIQUE DEFAULT NULL,
+    apellidos VARCHAR(70) DEFAULT NULL,
+    nombre VARCHAR(70) DEFAULT NULL,
+    seccion VARCHAR(50) DEFAULT NULL,
+    fecha_nacimiento VARCHAR(70) DEFAULT NULL,
+    edad VARCHAR(50) DEFAULT NULL,
+    telefono VARCHAR(50) DEFAULT NULL,
+    rol ENUM('Estudiantes', 'Profesor') DEFAULT 'Estudiantes',
+    becado BOOLEAN DEFAULT FALSE
+);
+
+CREATE TABLE Hist_pagos (
+    id_pago INT AUTO_INCREMENT PRIMARY KEY,
+    estudiante_id INT,
+    fecha_pago DATE DEFAULT NULL,  -- Cambiado para permitir NULL y manejar la fecha en la inserción.
+    fecha_pago_prueba DATE DEFAULT NULL,
+    monto DECIMAL(10, 2) NOT NULL,
+    activo BOOLEAN DEFAULT TRUE,
+    reporte TEXT DEFAULT NULL,
+    hora DATETIME DEFAULT NULL,
+    fecha_desactivado DATE DEFAULT NULL,
+    FOREIGN KEY (estudiante_id) REFERENCES Estudiantes(id) ON DELETE CASCADE
+);
+
 
 GRANT ALL PRIVILEGES ON `django-react`.* TO 'root'@'localhost';
 FLUSH PRIVILEGES;
@@ -105,10 +142,6 @@ SELECT * FROM api_hist_pagos LIMIT 10000
 SELECT COUNT(*) 
 FROM api_estudiantes 
 WHERE becado = 1;
-
-
-
-
 
 
 LOAD DATA INFILE '/var/lib/mysql-files/Estudiantes_dev.csv'

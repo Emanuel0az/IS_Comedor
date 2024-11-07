@@ -11,6 +11,7 @@ import ReportGmailerrorredIcon from '@mui/icons-material/ReportGmailerrorred';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import '../Stock/StockComponent.css';
+import { useIdContext } from '../UsinngContext';
 
 const StockComponent = () => {
     const [Students, setStudents] = useState([]);
@@ -23,14 +24,15 @@ const StockComponent = () => {
     const [selectedDate, setSelectedDate] = useState(new Date(localStorage.getItem('selectedDate') || new Date()).toISOString().split('T')[0]);
     const [openModalPay, setOpenModalPay] = useState(false);
     const [payAmount, setPayAmount] = useState(null);
-    const [currentStudentId, setCurrentStudentId] = useState(null); // Initialize as null
+    const [currentStudentId, setCurrentStudentId] = useState(null);
     const [MontoDebe, setMontoDebe] = useState();
     const [ModalStudent, setModalStudent] = useState(false);
     const [ModalReporte, setModalReporte] = useState(false);
     const [InputReporte, setInputReporte] = useState('');
+    const {contextId, setContextId, user, setUser} = useIdContext()
 
     const debeDinero = async () => {
-        if (!currentStudentId) return; // Check if currentStudentId is set
+        if (!currentStudentId) return;
         const pagosActivos = currentStudentId.pagos.filter(pago => pago.activo === true);
         const cantidadPagos = pagosActivos.length;
         const sumaDeTodosLosPagos = pagosActivos.reduce((total, pago) => total + parseFloat(pago.monto), 0);
@@ -40,25 +42,20 @@ const StockComponent = () => {
     };
 
     const handlePutWithReport = async () => {
-        if (!currentStudentId) return; // Verifica que currentStudentId esté configurado
         const fecha = new Date(localStorage.getItem('selectedDate'));
         const fechaFormato = fecha.toLocaleDateString('en-CA');
-        const hora = new Date(); // Obtiene la hora actual
-        const horaFormato = hora.toISOString(); // Formato completo de fecha y hora
-    
-        const pagoExistente = currentStudentId.pagos.find(pago => pago.fecha_pago_prueba === fechaFormato);
-    
-        console.log('current', currentStudentId.id);
-        console.log('pago', pagoExistente.id_pago);
-    
+        const hora = new Date().toISOString();
+
+        const pagoExistente = currentStudentId.pagos.find(pago => pago.fecha_pago_prueba === selectedDate && pago.activo);
+
         if (pagoExistente) {
             await putAsistencia(pagoExistente.id_pago, {
                 reporte: InputReporte,
                 fecha_desactivado: fechaFormato,
-                hora: horaFormato, // Agrega aquí la hora formateada
+                hora: hora,
                 activo: false
             });
-    
+
             const updatedStudents = Students.map(s =>
                 s.id === currentStudentId.id ? {
                     ...s,
@@ -66,13 +63,13 @@ const StockComponent = () => {
                 } : s
             );
             setStudents(updatedStudents);
-            setModalReporte(false)
+            setModalReporte(false);
         }
     };
 
     useEffect(() => {
         debeDinero();
-    }, [currentStudentId]); // When the selected student changes
+    }, [currentStudentId]);
 
     const obtainStudents = async () => {
         try {
@@ -87,24 +84,24 @@ const StockComponent = () => {
     };
 
     const validAlmuerzo = (student) => {
-        return student.pagos.find(pago => pago.fecha_pago_prueba === selectedDate);
+        return student.pagos.some(pago => pago.fecha_pago_prueba === selectedDate && pago.activo);
     };
 
     const validarAsistencias = async (student) => {
-        const fecha = new Date(localStorage.getItem('selectedDate'));
-        const fechaFormato = fecha.toLocaleDateString('en-CA');
-        const pagoExistente = student.pagos.find(pago => pago.fecha_pago_prueba === fechaFormato);
+        const fecha = new Date(localStorage.getItem('selectedDate')).toLocaleDateString('en-CA');
+        const pagoExistente = student.pagos.find(pago => pago.fecha_pago_prueba === selectedDate && pago.activo);
 
         if (pagoExistente) {
             setModalReporte(true);
             setCurrentStudentId(student);
+            setContextId(student.id)
         } else {
             if (student.becado) {
                 const monto = student.rol === 'prof' ? 1000 : student.becado ? 0 : 600;
 
                 const newRegistro = {
                     estudiante_id: student.id,
-                    fecha_pago_prueba: fechaFormato,
+                    fecha_pago_prueba: fecha,
                     monto: monto
                 };
 
@@ -112,13 +109,14 @@ const StockComponent = () => {
                 const updatedStudents = Students.map(s =>
                     s.id === student.id ? {
                         ...s,
-                        pagos: [...s.pagos, { id_pago: newRegistro.id_pago, fecha_pago_prueba: fechaFormato }]
+                        pagos: [...s.pagos, { id_pago: newRegistro.id_pago, fecha_pago_prueba: fecha }]
                     } : s
                 );
                 setStudents(updatedStudents);
                 obtainStudents();
             } else {
                 setCurrentStudentId(student);
+                setContextId(student.id)
                 setOpenModalPay(true);
             }
         }
@@ -182,6 +180,7 @@ const StockComponent = () => {
     const handleSendReport = (e) => {
         if (e.key === 'Enter') {
             handlePutWithReport();
+            setInputReporte('')
         }
     };
 
@@ -237,7 +236,7 @@ const StockComponent = () => {
                                     }
                                 </div>
                                 <div className="actionsIcon">
-                                    <div onClick={() => (setModalStudent(true), setCurrentStudentId(student))} className='contAction'><MoreVertIcon style={{ color: 'gray' }} /></div>
+                                    <div onClick={() => (setModalStudent(true), setCurrentStudentId(student), setContextId(student.id))} className='contAction'><MoreVertIcon style={{ color: 'gray' }} /></div>
                                 </div>
                             </div>
                         ))
@@ -282,6 +281,7 @@ const StockComponent = () => {
                 ))}
             </div>
             {ModalStudent && (
+                currentStudentId.rol == 'Estudiantes' ? 
                 <div className="containerModalStudent">
                     <div className="modalStudent">
                         <div className='closeModalStudent' onClick={() => setModalStudent(false)}>X</div>
@@ -290,15 +290,29 @@ const StockComponent = () => {
                             <div>{currentStudentId.seccion}</div>
                         </div>
                         <div className="modalStudent_rol_becado">
-                            <div className='ModalStudent_rol'>Estudiante</div>
+                            <div className='ModalStudent_rol'>Estudiante</div> 
                             <div>{currentStudentId.becado ? 'Becado' : 'No becado'}</div>
                         </div>
                         <div className='ModalStudent_calendario'>
-                            <div style={{ marginTop: '10%' }}>Asist. semanal:</div>
-                            <CalendarioStudent />
+                            <div style={{ marginTop: '10%'}}>Asist. semanal:</div>
+                            <CalendarioStudent/>
                         </div>
                         <div className='ModalStudentChart'>
-                            <SessionsChartStudents />
+                            <SessionsChartStudents/>
+                        </div>
+                    </div>
+                </div> :
+                <div className="containerModalStudent">
+                    <div className="modalStudent">
+                        <div className='closeModalStudent' onClick={() => setModalStudent(false)}>X</div>
+                        <div className='ModalStudent_name'>{currentStudentId.nombre}</div>
+                        <div>Profesor</div>
+                        <div className='ModalStudent_calendario'>
+                            <div style={{ marginTop: '10%'}}>Asist. semanal:</div>
+                            <CalendarioStudent/>
+                        </div>
+                        <div className='ModalStudentChart'>
+                            <SessionsChartStudents/>
                         </div>
                     </div>
                 </div>

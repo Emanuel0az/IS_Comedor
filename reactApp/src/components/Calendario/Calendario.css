@@ -2,10 +2,10 @@
   display: grid;
   grid-template-columns: 70% 10% 20%;
   background-color: #ffffff00;  
-  border: 1px solid #a7a7a7;
+  border: 1.5px solid #a7a7a7;
   border-radius: 8px;
-  min-width: 9vw;
-  max-width: 12vw;
+  min-width: 100px;
+  max-width: 200px;
   height: 7vh;
   cursor: pointer;
   align-items: center;
@@ -13,7 +13,6 @@
   opacity: 0.8;
   outline: none;
   transition: border-color 0.3s ease-in-out,  box-shadow 0.3s ease-in-out;
-  margin-top: 10%;
 }
 
 .calendaryButton:hover {
@@ -165,4 +164,133 @@ button {
 .react-datepicker__day--selected {
   background-color: #155499; /* Color de fondo para el día seleccionado */
   color: white; /* Color del texto para el día seleccionado */
+}
+
+
+@media (min-width: 200px) and (max-width: 374px) {
+  .calendaryButton {
+    display: grid;
+    grid-template-columns: 70% 10% 20%;
+    background-color: #ffffff00;  
+    border: 1.5px solid #a7a7a7;
+    border-radius: 8px;
+    width: 120px;
+    height: 5.0vh;
+    cursor: pointer;
+    align-items: center;
+    color: unset;
+    opacity: 0.8;
+    outline: none;
+    transition: border-color 0.3s ease-in-out,  box-shadow 0.3s ease-in-out;
+  }
+}
+
+
+@media (min-width: 375px) and (max-width: 424px) { 
+  .calendaryButton {
+    display: grid;
+    grid-template-columns: 70% 10% 20%;
+    background-color: #ffffff00;  
+    border: 1.5px solid #a7a7a7;
+    border-radius: 8px;
+    width: 120px;
+    height: 5.4vh;
+    cursor: pointer;
+    align-items: center;
+    color: unset;
+    opacity: 0.8;
+    outline: none;
+    transition: border-color 0.3s ease-in-out,  box-shadow 0.3s ease-in-out;
+  }
+}
+
+
+@media (min-width: 425px) and (max-width: 600px) {
+  .calendaryButton {
+    display: grid;
+    grid-template-columns: 70% 10% 20%;
+    background-color: #ffffff00;  
+    border: 1.5px solid #a7a7a7;
+    border-radius: 8px;
+    width: 120px;
+    height: 5.6vh;
+    cursor: pointer;
+    align-items: center;
+    color: unset;
+    opacity: 0.8;
+    outline: none;
+    transition: border-color 0.3s ease-in-out,  box-shadow 0.3s ease-in-out;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 768px) {
+  .calendaryButton {
+    display: grid;
+    grid-template-columns: 70% 10% 20%;
+    background-color: #ffffff00;  
+    border: 1.5px solid #a7a7a7;
+    border-radius: 8px;
+    width: 120px;
+    height: 6.2vh;
+    cursor: pointer;
+    align-items: center;
+    color: unset;
+    opacity: 0.8;
+    outline: none;
+    transition: border-color 0.3s ease-in-out,  box-shadow 0.3s ease-in-out;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1023px) {
+  .calendaryButton {
+    display: grid;
+    grid-template-columns: 70% 10% 20%;
+    background-color: #ffffff00;  
+    border: 1.5px solid #a7a7a7;
+    border-radius: 8px;
+    width: 120px;
+    height: 6.6vh;
+    cursor: pointer;
+    align-items: center;
+    color: unset;
+    opacity: 0.8;
+    outline: none;
+    transition: border-color 0.3s ease-in-out,  box-shadow 0.3s ease-in-out;
+  }
+}  
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .calendaryButton {
+    display: grid;
+    grid-template-columns: 70% 10% 20%;
+    background-color: #ffffff00;  
+    border: 1.5px solid #a7a7a7;
+    border-radius: 8px;
+    width: 125px;
+    height: 7vh;
+    cursor: pointer;
+    align-items: center;
+    color: unset;
+    opacity: 0.8;
+    outline: none;
+    transition: border-color 0.3s ease-in-out,  box-shadow 0.3s ease-in-out;
+  }
+} 
+
+@media (min-width: 1440px) and (max-width: 1920px) {
+  .calendaryButton {
+    display: grid;
+    grid-template-columns: 70% 10% 20%;
+    background-color: #ffffff00;  
+    border: 1.5px solid #a7a7a7;
+    border-radius: 8px;
+    width: 140px;
+    height: 7vh;
+    cursor: pointer;
+    align-items: center;
+    color: unset;
+    opacity: 0.8;
+    outline: none;
+    transition: border-color 0.3s ease-in-out,  box-shadow 0.3s ease-in-out;
+  }
 }

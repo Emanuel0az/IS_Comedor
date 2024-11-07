@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import './StudentManagement.css';
-
 const StudentManagement = () => {
   const [students, setStudents] = useState([]);
   const [newStudent, setNewStudent] = useState({
@@ -18,14 +17,10 @@ const StudentManagement = () => {
   const [editingStudent, setEditingStudent] = useState(null);
   const [currentView, setCurrentView] = useState('add');
   const [searchTerm, setSearchTerm] = useState('');
-
-  const token3 = Cookies.get('token2');
-
   useEffect(() => {
     fetchStudents();
     checkViewCookies();
   }, []);
-
   const checkViewCookies = () => {
     const addCookie = Cookies.get('add_student');
     const seeCookie = Cookies.get('see_student');
@@ -37,19 +32,16 @@ const StudentManagement = () => {
       setCurrentView('add');
     }
   };
-
   const ver_añadir = () => {
     Cookies.set('add_student', 'true');
     Cookies.remove('see_student');
     setCurrentView('add');
   };
-
   const ver_students = () => {
     Cookies.set('see_student', 'true');
     Cookies.remove('add_student');
     setCurrentView('list');
   };
-
   const fetchStudents = async () => {
     try {
       const response = await fetch('http://localhost:8000/api/estudiantes/');
@@ -63,7 +55,6 @@ const StudentManagement = () => {
       console.error('Error fetching students:', error);
     }
   };
-
   const addStudent = async () => {
     try {
       const studentToAdd = {
@@ -93,7 +84,6 @@ const StudentManagement = () => {
       console.error('Error adding student:', error);
     }
   };
-
   const updateStudent = async (student) => {
     try {
       const studentToUpdate = {
@@ -113,7 +103,6 @@ const StudentManagement = () => {
       console.error('Error updating student:', error);
     }
   };
-
   const deleteStudent = async (id) => {
     try {
       await fetch(`http://localhost:8000/api/estudiantes/${id}/`, {
@@ -124,18 +113,14 @@ const StudentManagement = () => {
       console.error('Error deleting student:', error);
     }
   };
-
   const filteredStudents = students.filter((student) => {
     const lowerCaseSearchTerm = searchTerm.toLowerCase();
     return (
-      student.nombre &&
-      student.nombre.length > 0 &&
-      ((student.nombre && student.nombre.toLowerCase().includes(lowerCaseSearchTerm)) ||
-        (student.cedula && student.cedula.toLowerCase().includes(lowerCaseSearchTerm)) ||
-        (student.seccion && student.seccion.toLowerCase().includes(lowerCaseSearchTerm)))
+      (student.nombre && student.nombre.toLowerCase().includes(lowerCaseSearchTerm)) ||
+      (student.cedula && student.cedula.toLowerCase().includes(lowerCaseSearchTerm)) ||
+      (student.seccion && student.seccion.toLowerCase().includes(lowerCaseSearchTerm))
     );
   });
-
   return (
     <div className="student-management">
       <div className="header">
@@ -238,6 +223,7 @@ const StudentManagement = () => {
           <hr />
           <div className="search-container">
             <h2 className="list-title">Lista de Estudiantes</h2>
+            <div></div>
             <input
               type="text"
               className="search-input"
@@ -257,88 +243,86 @@ const StudentManagement = () => {
                   <th>Telefono</th>
                   <th>Rol</th>
                   <th>Becado</th>
-                  {token3 && <th>Acciones</th>}
+                  <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
-              {filteredStudents.map((student) => (
-                <tr key={student.id}>
-                  {editingStudent?.id === student.id ? (
-                    <td colSpan="7" className="editing-row">
-                      <div className="editing-grid">
-                        {/* Campos de edición */}
-                        <input
-                          type="text"
-                          className="edit-input"
-                          value={editingStudent.cedula}
-                          onChange={(e) => setEditingStudent({ ...editingStudent, cedula: e.target.value })}
-                        />
-                        <input
-                          type="text"
-                          className="edit-input"
-                          value={editingStudent.apellidos}
-                          onChange={(e) => setEditingStudent({ ...editingStudent, apellidos: e.target.value })}
-                        />
-                        <input
-                          type="text"
-                          className="edit-input"
-                          value={editingStudent.nombre}
-                          onChange={(e) => setEditingStudent({ ...editingStudent, nombre: e.target.value })}
-                        />
-                        <input
-                          type="text"
-                          className="edit-input"
-                          value={editingStudent.seccion}
-                          onChange={(e) => setEditingStudent({ ...editingStudent, seccion: e.target.value })}
-                        />
-                        <select
-                          className="edit-input"
-                          value={editingStudent.rol}
-                          onChange={(e) => setEditingStudent({ ...editingStudent, rol: e.target.value })}
-                        >
-                          <option value="Estudiantes">Estudiante</option>
-                          <option value="Profesor">Profesor</option>
-                        </select>
-                        <select
-                          className="edit-input"
-                          value={editingStudent.becado.toString()}
-                          onChange={(e) => setEditingStudent({
-                            ...editingStudent,
-                            becado: e.target.value === 'true'
-                          })}
-                        >
-                          <option value="false">No Becado</option>
-                          <option value="true">Becado</option>
-                        </select>
-                        <div className="edit-actions">
-                          <button
-                            className="save-button"
-                            onClick={() => updateStudent(editingStudent)}
+                {filteredStudents.map((student) => (
+                  <tr key={student.id}>
+                    {editingStudent?.id === student.id ? (
+                      <td colSpan="7" className="editing-row">
+                        <div className="editing-grid">
+                          <input
+                            type="text"
+                            className="edit-input"
+                            value={editingStudent.cedula}
+                            onChange={(e) => setEditingStudent({ ...editingStudent, cedula: e.target.value })}
+                          />
+                          <input
+                            type="text"
+                            className="edit-input"
+                            value={editingStudent.apellidos}
+                            onChange={(e) => setEditingStudent({ ...editingStudent, apellidos: e.target.value })}
+                          />
+                          <input
+                            type="text"
+                            className="edit-input"
+                            value={editingStudent.nombre}
+                            onChange={(e) => setEditingStudent({ ...editingStudent, nombre: e.target.value })}
+                          />
+                          <input
+                            type="text"
+                            className="edit-input"
+                            value={editingStudent.seccion}
+                            onChange={(e) => setEditingStudent({ ...editingStudent, seccion: e.target.value })}
+                          />
+                          <select
+                            className="edit-input"
+                            value={editingStudent.rol}
+                            onChange={(e) => setEditingStudent({ ...editingStudent, rol: e.target.value })}
                           >
-                            Guardar
-                          </button>
-                          <button
-                            className="cancel-button"
-                            onClick={() => setEditingStudent(null)}
+                            <option value="Estudiantes">Estudiante</option>
+                            <option value="Profesor">Profesor</option>
+                          </select>
+                          <select
+                            className="edit-input"
+                            value={editingStudent.becado.toString()}
+                            onChange={(e) => setEditingStudent({
+                              ...editingStudent,
+                              becado: e.target.value === 'true'
+                            })}
                           >
-                            Cancelar
-                          </button>
+                            <option value="false">No Becado</option>
+                            <option value="true">Becado</option>
+                          </select>
+                          <div className="edit-actions">
+                            <button
+                              className="save-button"
+                              onClick={() => updateStudent(editingStudent)}
+                            >
+                              Guardar
+                            </button>
+                            <button
+                              className="cancel-button"
+                              onClick={() => setEditingStudent(null)}
+                            >
+                              Cancelar
+                            </button>
+                          </div>
                         </div>
-                      </div>
-                    </td>
-                  ) : (
-                    <>
-                      <td>{student.cedula}</td>
-                      <td>{student.nombre}</td>
-                      <td>{student.seccion}</td>
-                      <td>{student.telefono}</td>
-                      <td>{student.rol === 'Estudiantes' ? 'Estudiante' : 'Profesor'}</td>
-                      <td>
-                        <span className={`status-badge ${student.becado ? 'becado' : 'no-becado'}`}>
-                          {student.becado ? 'Si' : 'No '}
-                        </span>
                       </td>
-                      {token3 && (
+                    ) : (
+                      <>
+                        <td>{student.cedula}</td>
+                        <td>{student.nombre}</td>
+                        <td>{student.seccion}</td>
+                        <td>{student.telefono}</td>
+                        <td>{student.rol === 'Estudiantes' ? 'Estudiante' : 'Profesor'}</td>
+                        <td>
+                          <span className={`status-badge ${student.becado ? 'becado' : 'no-becado'}`}>
+                            {student.becado ? 'Si' : 'No '}
+                          </span>
+                        </td>
                         <td>
                           <div className="action-buttons">
                             <button
@@ -355,11 +339,10 @@ const StudentManagement = () => {
                             </button>
                           </div>
                         </td>
-                      )}
-                    </>
-                  )}
-                </tr>
-              ))}
+                      </>
+                    )}
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
@@ -368,5 +351,4 @@ const StudentManagement = () => {
     </div>
   );
 };
-
 export default StudentManagement;
