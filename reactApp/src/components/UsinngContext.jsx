@@ -7,12 +7,10 @@ export const IdProvider = ({ children }) => {
 
     const [contextId, setContextId] = useState();
     const [user, setUser] = useState();
-    const [colorState, setColorState] = useState();
-
+    const [colorStateGlobal, setColorStateGlobal] = useState();
 
     return (
-
-        <IdContext.Provider value={{ contextId, setContextId, user, setUser, colorState, setColorState }}>
+        <IdContext.Provider value={{ contextId, setContextId, user, setUser, colorStateGlobal, setColorStateGlobal }}>
             {children}
         </IdContext.Provider>
     );

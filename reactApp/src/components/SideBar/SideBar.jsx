@@ -9,33 +9,33 @@ import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import { useNavigate } from 'react-router-dom';
 import './SideBar.css';
 import Cookies from 'js-cookie';
+import { useIdContext } from '../UsinngContext';
 
 const SideBar = () => {
   const [colorState, setColorState] = useState(() => {
     return localStorage.getItem('colorState') === 'true';
   });
 
+  const {colorStateGlobal, setColorStateGlobal} = useIdContext()
+
   const [selectedLink, setSelectedLink] = useState('');
   const [hasToken2, setHasToken2] = useState(false);
 
   useEffect(() => {
-    const checkColorState = () => {
-      const storedColorState = localStorage.getItem('colorState') === 'true';
-      setColorState(storedColorState);
-    };
 
     const checkToken2 = () => {
       const token2Exists = !!Cookies.get('token2');
       setHasToken2(token2Exists);
     };
 
+    setColorStateGlobal(colorState)
+
     const intervalId = setInterval(() => {
-      checkColorState();
       checkToken2();
     }, 10);
 
     return () => clearInterval(intervalId);
-  }, []);
+  }, [colorState]);
 
   const changeSelection = (link) => {
     setSelectedLink(link);
@@ -43,7 +43,7 @@ const SideBar = () => {
 
   const navigate = useNavigate();
 
-  function log () {
+  function log () {     // 🔴🔴🔴🔴🔴🔴
     Cookies.remove('token2');
     Cookies.remove('token3');
     localStorage.removeItem('chef');
@@ -51,7 +51,7 @@ const SideBar = () => {
   }
 
   return (
-    <div className={`sideBarContainer${colorState ? 'Day' : 'Night'}`}>
+    <div className={`sideBarContainer${colorStateGlobal ? 'Day' : 'Night'}`}>
       <div className='sideBarTop'>
         <div className={selectedLink === 'home' ? 'selected' : 'inselected'} onClick={() => { changeSelection('home'); navigate('home/'); Cookies.remove('token'); }}>
           <HomeIcon style={{ fontSize: '2vw' }} />
