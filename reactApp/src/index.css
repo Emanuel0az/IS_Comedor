@@ -81,7 +81,7 @@ body {
   }
   main {
     display: grid;
-    grid-template-rows: 91% 9%;
+    grid-template-rows: 81vh 9vh;
   }
 }
 /*  */
@@ -98,6 +98,7 @@ body {
   }
   .NavMobileResponsive {
     display: block;
+    min-height: 7vh;
   }
   .structureHeader {
     min-width: 100vw;  
@@ -117,7 +118,7 @@ body {
   }
   main {
     display: grid;
-    grid-template-rows: 91% 9%;
+    grid-template-rows: 86vh 9vh;
   }
 }
 /*  */
@@ -153,7 +154,7 @@ body {
   }
   main {
     display: grid;
-    grid-template-rows: 91% 9%;
+    grid-template-rows: 86vh 9vh;
   }
 }
 @media (min-width: 500px) and (max-width: 600px) {
@@ -188,7 +189,7 @@ body {
   }
   main {
     display: grid;
-    grid-template-rows: 91% 9%;
+    grid-template-rows: 86vh 9vh;
   }
 }
 @media (min-width: 601px) and (max-width: 780px) {
@@ -223,8 +224,7 @@ body {
   }
   main {
     display: grid;
-    grid-template-rows: repeat(4, 1fr);
-    max-height: 100vh;
+    grid-template-rows: 86vh 9vh;
   }
 }
 @media (min-width: 781px) and (max-width: 1024px) {
@@ -259,8 +259,7 @@ body {
   }
   main {
     display: grid;
-    grid-template-rows: repeat(4, 1fr);
-    max-height: 100vh;
+    grid-template-rows: 86vh 9vh;
   }
 }
 /*  */

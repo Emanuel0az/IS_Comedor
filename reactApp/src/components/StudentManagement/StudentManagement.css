@@ -61,6 +61,7 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
 }
+
 .form-input, .edit-input {
   padding: 0.75rem;
   border: 1px solid #D1D5DB;
@@ -71,6 +72,7 @@
   background-color: unset;
   color: unset;
 }
+
 .form-input:focus, .edit-input:focus {
   outline: none;
   border-color: #3B82F6;

@@ -29,7 +29,7 @@ const StockComponent = () => {
     const [ModalStudent, setModalStudent] = useState(false);
     const [ModalReporte, setModalReporte] = useState(false);
     const [InputReporte, setInputReporte] = useState('');
-    const {contextId, setContextId, user, setUser} = useIdContext()
+    const {setContextId} = useIdContext()
 
     const debeDinero = async () => {
         if (!currentStudentId) return;
@@ -80,6 +80,7 @@ const StockComponent = () => {
         } catch (error) {
             setError(error.message);
             setLoading(false);
+
         }
     };
 
@@ -95,6 +96,7 @@ const StockComponent = () => {
             setModalReporte(true);
             setCurrentStudentId(student);
             setContextId(student.id)
+            validAlmuerzo()
         } else {
             if (student.becado) {
                 const monto = student.rol === 'prof' ? 1000 : student.becado ? 0 : 600;
@@ -118,6 +120,7 @@ const StockComponent = () => {
                 setCurrentStudentId(student);
                 setContextId(student.id)
                 setOpenModalPay(true);
+                validAlmuerzo() 
             }
         }
     };
@@ -136,6 +139,7 @@ const StockComponent = () => {
             obtainStudents();
         }
         debeDinero();
+        validAlmuerzo()
     };
 
     const filterStudents = () => {

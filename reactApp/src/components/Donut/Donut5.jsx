@@ -39,11 +39,11 @@ const CenterTextPlugin = {
 ChartJS.register(ArcElement, Tooltip, Legend, Title);
 ChartJS.register(CenterTextPlugin);
 
-const totalEstudiantes = 966;
+const totalEstudiantes = 100;
 
 const coloresPredefinidos = [
-  'gray', // Azul
-  '#1b1a66'  // Rosa
+  '#1f67b5',
+  '#9e9e9ec0' 
 ];
 
 export default function EstudiantesComedorChartViernes() {
@@ -163,34 +163,14 @@ export default function EstudiantesComedorChartViernes() {
       legend: {
         display: false,
       },
-      tooltip: {
-        enabled: true,
-        position: 'nearest',
-        backgroundColor: 'rgba(0,0,0,0.8)',
-        titleColor: 'white',
-        bodyColor: 'white',
-        padding: 10,
-        cornerRadius: 5,
-        displayColors: false,
-        callbacks: {
-          label: (context) => {
-            const label = context.label || '';
-            const value = context.parsed || 0;
-            const total = context.dataset.data.reduce((a, b) => a + b, 0);
-            const percentage = ((value / total) * 100).toFixed(2);
-            return `${label}: ${value} (${percentage}%)`;
-          }
-        },
-      },
+
       title: {
         display: false,
       },
       centerText: {
         text: selectedIndex !== null
-            ? `${estudiantes[selectedIndex === 0 ? 'comieron' : 'noComieron']} / ${totalEstudiantes}\n${((estudiantes[selectedIndex === 0 ? 'comieron' : 'noComieron'] / totalEstudiantes) * 100).toFixed(2)}%`
-            : `${calcularPorcentajeComieron()}%`,
-        color: 'black',
-        font: '12px Arial',
+          ? `${estudiantes[selectedIndex === 0 ? 'comieron' : 'noComieron']} / ${totalEstudiantes}\n${((estudiantes[selectedIndex === 0 ? 'comieron' : 'noComieron'] / totalEstudiantes) * 100).toFixed(2)}%`
+          : `${calcularPorcentajeComieron()}%`,
       },
     },
     onClick: handleClick,
@@ -205,10 +185,12 @@ export default function EstudiantesComedorChartViernes() {
   }
 
   return (
-    <div className="Title_donut">Viernes
-      <div className="flex items-center justify-center" style={{ width: '110px', height: '110px' }}>
+    <div className="Title_donut">Vie.
+      <div className="singleDonut">
+      <div className="unsetColor">
         {chartData && <Doughnut data={chartData} options={chartOptions} />}
       </div>
+      </div>
     </div>
-  );
+  )
 }

@@ -5,6 +5,7 @@ import NavMobile from "./components/DownBar/DownBar"
 import { useState, useEffect } from "react"
 import CalendarioModal from "./components/Calendario/Calendario"
 import Cookies from 'js-cookie';
+import { IdProvider } from "./components/UsinngContext.jsx"
 
 const App = () => {
   const [users, setUsers] = useState(() => {
@@ -31,6 +32,7 @@ const App = () => {
 
   return (
     <>
+    <IdProvider>
       {users ? (
         <>
           <div className="NavPC">
@@ -60,6 +62,7 @@ const App = () => {
           <Routing />
         </>
       )}
+    </IdProvider>
     </>
   )
 }
