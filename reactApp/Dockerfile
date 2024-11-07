@@ -9,6 +9,8 @@ COPY package*.json ./
 # Instala las dependencias
 RUN npm install
 RUN npm install chart.js recharts
+RUN npm install @mui/icons-material @mui/material @emotion/styled @emotion/react
+RUN npm install js-cookie
 
 # Configuración para entornos de desarrollo que utilizan polling de archivos
 ENV CHOKIDAR_USEPOLLING=true

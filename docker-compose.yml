@@ -1,14 +1,13 @@
-version: '3'
 services:
   react:
     container_name: react-production
     image: react-production:prod
     build:
       context: ./reactApp
-      target: production  # Asegúrate de tener esta etapa 'production' en tu Dockerfile
+      target: production  # Ensure you have a 'production' stage in your Dockerfile
       args:
         - NODE_ENV=production
-      dockerfile: Dockerfile.prod  # Asegúrate de tener un Dockerfile.prod en ./reactApp
+      dockerfile: Dockerfile.prod  # Ensure Dockerfile.prod is in ./reactApp
     ports:
       - "80:80"
     depends_on:
