@@ -20,7 +20,7 @@ const CenterTextPlugin = {
       ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
       ctx.fill();
 
-      ctx.font = options.font || '12px Arial';
+
       ctx.fillStyle = options.color || 'white';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
