@@ -7,7 +7,7 @@ import { useIdContext } from '../UsinngContext';
 export default function SessionsChartStudents() {
   const [data, setData] = useState([]);
   const [lastUpdate, setLastUpdate] = useState(new Date());
-  const {contextId, setContextId} = useIdContext()
+  const {contextId} = useIdContext()
   
 
   const fetchData = () => {

@@ -283,7 +283,7 @@ def pagos_list(request, pk=None):
 class LoginView(APIView):
     def post(self, request, *args, **kwargs):
         # Aquí defines la contraseña predefinida
-        predefinida = "1234"
+        predefinida = "101010"
         password = request.data.get('password')
 
         # Verificar si la contraseña es correcta
@@ -296,7 +296,7 @@ class LoginView(APIView):
             })
         else:
             return Response({"error": "Invalid password"}, status=status.HTTP_401_UNAUTHORIZED)
-        
+
         
         
 

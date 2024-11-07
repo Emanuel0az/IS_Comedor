@@ -7,11 +7,13 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import MailIcon from '@mui/icons-material/Mail';
 import PeopleIcon from '@mui/icons-material/People';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import { useIdContext } from '../UsinngContext';
 
 const DownBar = () => {
   const [colorState, setColorState] = useState(() => {
     return localStorage.getItem('colorState') === 'true';
   });
+  const {colorStateGlobal} = useIdContext()
 
   const [selectedLink, setSelectedLink] = useState('');
 
@@ -34,22 +36,24 @@ const DownBar = () => {
 
   return (
     <>
-      <div className='navMobile'>
-        <div className={selectedLink === 'home' ? 'selected' : 'inselected'} onClick={() => { changeSelection('home'); navigate('home/'); Cookies.remove('token'); }}>
-          <HomeIcon style={{ fontSize: 25 }} />
+      <div className={`navMobile${colorStateGlobal ? 'White' : 'Dark'}`}>
+        <div className={selectedLink === 'home' ? 'selectedDown' : 'inselectedDown'} onClick={() => { changeSelection('home'); navigate('home/'); Cookies.remove('token'); }}>
+          <div><HomeIcon style={{ fontSize: 25 }} /></div>
         </div>
-        <div className={selectedLink === 'asistencia' ? 'selected' : 'inselected'} onClick={() => { changeSelection('asistencia'); navigate('asistencias/'); Cookies.remove('token'); }}>
-          <PeopleIcon style={{ fontSize: 25 }} />
+        <div className={selectedLink === 'asistencia' ? 'selectedDown' : 'inselectedDown'} onClick={() => { changeSelection('asistencia'); navigate('asistencias/'); Cookies.remove('token'); }}>
+        <div><PeopleIcon style={{ fontSize: 25 }} /></div>
         </div>
-        <div className={selectedLink === 'estadisticas' ? 'selected' : 'inselected'} onClick={() => { changeSelection('estadisticas'); navigate('estadisticas/'); Cookies.remove('token'); }}>
-          <BarChartIcon style={{ fontSize: 25 }} />
+        <div className={selectedLink === 'email' ? 'selectedDown' : 'inselectedDown'} onClick={() => { changeSelection('email'); navigate('email/'); Cookies.remove('token'); }}>
+        <div><MailIcon style={{ fontSize: 25 }} /></div>
         </div>
-        <div className={selectedLink === 'email' ? 'selected' : 'inselected'} onClick={() => { changeSelection('email'); navigate('email/'); Cookies.remove('token'); }}>
-          <MailIcon style={{ fontSize: 25 }} />
+        <div className={selectedLink === 'estudiantes' ? 'selectedDown' : 'inselectedDown'} onClick={() => { changeSelection('estudiantes'); navigate('estudiantes/'); Cookies.remove('token'); }}>
+          <div><PersonAddAlt1Icon style={{ fontSize: 25 }} /></div>
         </div>
-        <div className={selectedLink === 'estudiantes' ? 'selected' : 'inselected'} onClick={() => { changeSelection('estudiantes'); navigate('estudiantes/'); Cookies.remove('token'); }}>
-          <PersonAddAlt1Icon style={{ fontSize: 25 }} />
-        </div>
+        {/* {hasToken2 && (
+          <div className={selectedLink === 'usuarios' ? 'selected' : 'inselectedDown'} onClick={() => { changeSelection('usuarios'); navigate('usuarios/'); Cookies.remove('token'); }}>
+            <PersonAddAlt1Icon style={{ fontSize: 25 }} />
+          </div>
+        )} */}
       </div>
     </>
   );

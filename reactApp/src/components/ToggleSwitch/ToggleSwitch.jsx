@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import '../ToggleSwitch/ToggleSwitch.css'
 import ModeNightIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
+import { useIdContext } from '../UsinngContext';
 
 
 const ToggleSwitch = () => {  
@@ -9,6 +10,7 @@ const ToggleSwitch = () => {
   const [colorState, setColorState] = useState(() => {
     return localStorage.getItem('colorState') === 'true';
   });
+  const {setColorStateGlobal} = useIdContext()
 
   const handleColorState = () => {
     const newColorState = !colorState; // Calcula el nuevo estado.
@@ -19,6 +21,7 @@ const ToggleSwitch = () => {
   useEffect(() => {
     // Actualiza el localStorage cuando colorState cambie.
     localStorage.setItem('colorState', colorState);
+    setColorStateGlobal(colorState)
   }, [colorState]);
 
   return (
@@ -32,9 +35,9 @@ const ToggleSwitch = () => {
 
       <div onClick={(() => handleColorState())} className={`toggle_switch_container_${colorState ? 'day' : 'night'}`}>
           <div className={`circleSwitch${colorState ? 'Day' : 'Night'}`} >
-              {colorState ? 
-              <div><LightModeIcon style={{ fontSize: 15 }} className='imgDay'/></div> :
-              <div><ModeNightIcon style={{ fontSize: 18 }} className='imgNight' /></div>
+              {colorState ?
+                <div><LightModeIcon style={{ fontSize: 17 }} className='imgDay'/></div> :
+                <div><ModeNightIcon style={{ fontSize: 18 }} className='imgNight' /></div>
               }
           </div>
       </div>

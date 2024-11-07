@@ -7,6 +7,7 @@
     border-right: 1px solid rgb(73, 73, 73);
     padding: calc(1 * var(--template-spacing));
 }
+
 .selected {
     height: 100%;
     width: 85%;
@@ -24,6 +25,7 @@
     background-color: rgba(97, 97, 97, 0.458);
     cursor: pointer;
 }
+
 .sideBarTop > .inselected:hover {
     height: 100%;
     width: 85%;
@@ -38,8 +40,8 @@
     line-height: 1.43;
     background-color: rgba(74, 73, 73, 0.144);
     cursor: pointer;
-
 }
+
 .sideBarContainerDay {
     background-color: #FFFFFF;
     color: rgba(0, 0, 0, 0.689);
@@ -105,7 +107,12 @@
     line-height: 1.43;
     background-color: rgba(88, 88, 88, 0.399);
 }
-@media (min-width: 320px) and (max-width: 374px) {
+
+
+
+
+
+/* @media (min-width: 320px) and (max-width: 374px) {
 }
 @media (min-width: 375px) and (max-width: 424px) {
 }
@@ -116,4 +123,4 @@
 @media (min-width: 1024px) and (max-width: 1439px) {
 }
   media (min-width: 1440px) and (max-width: 1920px) {
-}
+} */

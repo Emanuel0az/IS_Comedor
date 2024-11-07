@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './Calendario.css';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
-import { useIdContext } from '../UsinngContext';
+
 
 export default function CalendarioModal() {
   const [fechaLocaltorage, setFechaLocaltorage] = useState()
@@ -13,6 +13,7 @@ export default function CalendarioModal() {
   );
   const [showMonthYear, setShowMonthYear] = useState(false);
   const [showYear, setShowYear] = useState(false);
+
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
