@@ -68,7 +68,7 @@ export const Panae2 = () => {
 
   return (
     <div className='Panae_content_center'>
-      <h2>Saldo de esta semana</h2>
+      <h3>Semana</h3>
       <p>₡{totalPagos.toFixed(2)}</p>
     </div>
   );
