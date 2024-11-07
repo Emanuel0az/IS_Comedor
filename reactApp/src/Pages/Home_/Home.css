@@ -1,11 +1,24 @@
-.faffa {
+.containerDonuts {
     display: flex;
     justify-content: space-around;
     padding: 2%;
+    margin-bottom: 4%;
+}
+
+.containerDonuts > div {
+    width: 100px;
+    height: 100px;
+    padding: 1% 2% 3% 2%;
+    border-radius: 10px;
+    background-color: #c9c9c93e;
+    color: #1f67b5;
 }
 
 .Panae_container {
     display: flex;
     justify-content: space-between;
-    gap: 5px;
+}
+
+.Panae_container > div {
+    background-color: red;
 }

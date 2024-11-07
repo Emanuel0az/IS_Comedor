@@ -27,7 +27,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className='faffa'>
+      <div className='containerDonuts'>
         <div>
           <Donut/>
         </div>

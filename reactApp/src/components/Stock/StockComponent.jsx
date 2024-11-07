@@ -84,7 +84,6 @@ const StockComponent = () => {
         }
     };
 
-
     const validAlmuerzo = (student) => {
         return student.pagos.some(pago => pago.fecha_pago_prueba === selectedDate && pago.activo);
     };
